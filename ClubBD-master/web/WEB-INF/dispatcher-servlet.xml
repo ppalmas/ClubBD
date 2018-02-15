@@ -19,7 +19,8 @@
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <props>
-                <prop key="index.htm">indexController</prop>
+                <prop key="index.htm">IndexController</prop>
+                <prop key="inscription.htm">InscriptionController</prop>
             </props>
         </property>
     </bean>
@@ -35,5 +36,15 @@
     <bean name="indexController"
           class="org.springframework.web.servlet.mvc.ParameterizableViewController"
           p:viewName="index" />
+    
+    <bean
+        name="IndexController"
+        class="Controllers.IndexController"
+    />
+    
+    <bean
+        name="InscriptionController"
+        class="Controllers.InscriptionController"
+    />
 
 </beans>
