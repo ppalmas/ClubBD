@@ -25,14 +25,14 @@ function getInscription(){
 function inscription() {
 
     //On récupère les infos
-    var name = document.getElementById("inscription_name").value;
-    var firstname = document.getElementById("inscription_firstname").value;
-    var email = document.getElementById("inscription_email").value;
-    var mdp = document.getElementById("inscription_password").value;
-    var mdp2 = document.getElementById("inscription_password2").value;
+    var name = document.getElementById("nom_inscri").value;
+    var firstname = document.getElementById("prenom_inscri").value;
+    var email = document.getElementById("email_inscri").value;
+    var mdp = document.getElementById("mdp_inscri").value;
+    var mdp2 = document.getElementById("mdp_confirm_inscri").value;
 
     //Si la saisie est valide
-    if (valid_form(name, firstname, mdp, mdp2, email)) {
+    if (valid_form(mdp, mdp2, email)) {
 
         //On envoie le mail à une servlet pour voir si celui-ci est déjà utilisé ou non
         xhttp = new XMLHttpRequest();
@@ -74,7 +74,7 @@ function inscription() {
                     //Si l'addresse email est déjà prise   
                 } else {
                     //Message d'erreur
-                    document.getElementById("inscription_error").innerHTML = error_email_already_taken_fr;
+                    document.getElementById("inscription_error").innerHTML = "L'email entré est déjà utilisé";
                 }
 
             }
@@ -100,36 +100,6 @@ function valid_email(email) {
         //Message d'erreur
         document.getElementById("inscription_error").innerHTML = error_email_fr;
         return false;
-    }
-}
-
-/**
- * Vérifier que le nom n'est pas vide
- * @param {String} name
- * @returns {Boolean}
- */
-function valid_name(name) {
-    if (name == "") {
-        //Message d'erreur
-        document.getElementById("inscription_error").innerHTML = error_name_fr;
-        return false;
-    } else {
-        return true;
-    }
-}
-
-/**
- * Vérifier que le prénom n'est pas vide
- * @param {String} firstname
- * @returns {Boolean}
- */
-function valid_firstname(firstname) {
-    if (firstname == "") {
-        //Message d'erreur
-        document.getElementById("inscription_error").innerHTML = error_firstname_fr;
-        return false;
-    } else {
-        return true;
     }
 }
 
@@ -164,6 +134,6 @@ function valid_password(mdp1, mdp2) {
  * @param {String} email
  * @returns {Boolean}
  */
-function valid_form(name, firstname, mdp, mdp2, email) {
-    return valid_name(name) && valid_firstname(firstname) && valid_email(email) && valid_password(mdp, mdp2)
+function valid_form(mdp, mdp2, email) {
+    return valid_email(email) && valid_password(mdp, mdp2)
 }
