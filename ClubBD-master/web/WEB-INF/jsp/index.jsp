@@ -26,7 +26,7 @@
 
         <!-- SCRIPTS -->
         <script src="Scripts/navigation.js"></script>
-        <script src="Scripts/inscription.js"></script>
+        <script src="Scripts/index.js"></script>
 
 
     </head>
@@ -51,8 +51,8 @@
                         <button id ="valid_connexion" type="button" class="button small_button" onclick="">Ok</button>
                         <!-- Lien pour réinitialiser son mot de passe -->
 
-                        <p id="mdp_oublie" onclick=""><i>Mot de passe oublié ?</i>
-                            <a id="inscription" href="#" onclick="pop_inscription()"><i>S'inscrire ?</i></a>
+                        <p id="mdp_oublie" href="#" onclick="pop_mdpoublie()"><i>Mot de passe oublié ?</i>
+                            <a id="inscription" href="#" onclick="getInscription()"><i>S'inscrire ?</i></a>
                             <br>
                     </center>
                     <!-- Différents onglets -->
@@ -88,8 +88,8 @@
         </div>
     </div>
 
-    <!--POPUP : inscription-->
-    <div class="modal fade" id="inscription_form" role="dialog">
+    <!--POPUP : mot de passe oublié-->
+    <div class="modal fade" id="oubli_form" role="dialog">
         <div class="modal-dialog modal-sm medium_modal">
             <div class="modal-content modal_form">
                 <!-- Croix de fermeture -->
