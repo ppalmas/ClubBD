@@ -36,11 +36,16 @@
     <!-- CONTENU PRINCIPAL -->
 
     <div class="container">    
-        <div  class="row content">          
-            <p>Inscription</p>
-            <input id="email" placeholder="Email">
-            <input id="mdp" placeholder="Mot de passe">
-            <input id="mdp_confirm" placeholder="Confirmation de Mot de passe">
+        <div  class="row content"> 
+            <center>
+            <p style="margin-top:30px">Inscription</p>
+            <p><input id="email_inscri" placeholder="Email"></p>
+            <p><input id="mdp_inscri" placeholder="Mot de passe"></p>
+            <p><input id="mdp_confirm_inscri" placeholder="Confirmation de Mot de passe"></p>
+            <p><input id="nom_inscri" placeholder="Nom"></p>
+            <p><input id="prenom_inscri" placeholder="Prénom"></p>
+            <button >Valider</button>
+            </center>
         </div>
     </div>
 

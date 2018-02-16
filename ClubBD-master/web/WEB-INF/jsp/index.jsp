@@ -51,7 +51,7 @@
                         <button id ="valid_connexion" type="button" class="button small_button" onclick="">Ok</button>
                         <!-- Lien pour réinitialiser son mot de passe -->
 
-                        <p id="mdp_oublie" href="#" onclick="pop_mdpoublie()"><i>Mot de passe oublié ?</i>
+                        <p id="mdp_oublie" href="#" onclick="pop_mdpoublie()"><i>Mot de passe oublié ?</i></p>
                             <a id="inscription" href="#" onclick="getInscription()"><i>S'inscrire ?</i></a>
                             <br>
                     </center>
@@ -95,26 +95,16 @@
                 <!-- Croix de fermeture -->
                 <button class="close" data-dismiss="modal">&times;</button>
                 <!-- Titre -->
-                <p class= "title"  style="margin-top: 40px">Inscription</p> 
+                <p class= "title"  style="margin-top: 40px">Mot de passe oublié ?</p> 
                 <!-- Zone pour les messages d'erreur -->
                 <p id="inscription_error" class="error_message"></p>
                 <!-- Formulaire d'inscription -->
                 <div class="modal-body">  
-                    <!-- Champ pour le nom-->
-                    
-                    <input  type="text" name="name" id="inscription_name">
-                    <!-- Champ pour le prénom-->
-                    <input  type="text" name="firstname" id="inscription_firstname">
-                    <!-- Champ pour l'email -->
-                    <input type="text" name ="email" id="inscription_email">  
-                    <!-- Champ pour le mot de passe-->
-                    <input  type="password" name="password" id="inscription_password">
-                    <!-- Champ pour la confirmation du mot de passe-->
-                    <input  type="password" name="password" id="inscription_password2" style="margin-bottom:7px">
-                    <!-- Message d'information pour les champs obligatoires-->
-                    <!-- Bouton pour soumettre le formulaire d'inscription-->
+                    <!-- Champ pour l'email du compte associé-->
+                    <left><p>Email du compte :</p></left>
+                    <input  type="text" name="name" id="email_password_forgotten">
                     <center>
-                        <button id ="valid_inscription" type="button" class="button small_button" onclick="inscription()" style="margin-top: 20px"></button>
+                        <button id ="valid_password_forgotten" type="button" onclick="" style="margin-top: 20px;">Ok</button>
                     </center>
                 </div>
             </div>
