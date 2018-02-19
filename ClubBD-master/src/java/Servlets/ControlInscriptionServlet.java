@@ -6,6 +6,7 @@
 package Servlets;
 
 import Database.Membre;
+import Database.Statut;
 import Managers.MembreManager;
 import Managers.MembreManagerImpl;
 import java.io.IOException;
@@ -36,10 +37,10 @@ public class ControlInscriptionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //Paramètres
-        String email = request.getParameter("email_inscri");
-        String mdp = request.getParameter("mdp_inscri");
-        String name = request.getParameter("nom_inscri");
-        String firstname = request.getParameter("prenom_inscri");
+        String email = request.getParameter("email");
+        String mdp = request.getParameter("mdp");
+        String name = request.getParameter("name");
+        String firstname = request.getParameter("firstname");
 
         //Personne
         MembreManager mm = MembreManagerImpl.getInstance();
@@ -47,8 +48,9 @@ public class ControlInscriptionServlet extends HttpServlet {
         Boolean b = (m == null); // Booléen vrai si aucune personne ne correspond à l'email donné
 
         //Inscription si aucune personne ne correspond à l'email donné
+        Statut s = new Statut(3);
         if (b) {
-            mm.insert(email, mdp, name, firstname);
+            mm.insert(email, mdp, name, firstname, s);
         }
 
         //Envoi de la réponse

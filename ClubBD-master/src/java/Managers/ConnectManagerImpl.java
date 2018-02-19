@@ -72,7 +72,7 @@ public class ConnectManagerImpl implements ConnectManager {
     @Override
     public Connect getByConnectId(String id) {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("SELECT c FROM Connect c WHERE c.id_connect =:id");
+        Query q = em.createQuery("SELECT c FROM Connect c WHERE c.idConnect =:id");
         q.setParameter("id", id);
         List l = q.getResultList();
         return l.isEmpty() ? null : (Connect) l.get(0);
@@ -86,7 +86,7 @@ public class ConnectManagerImpl implements ConnectManager {
     @Override
     public void deconnect(Membre m) {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("SELECT c FROM Connect c WHERE c.id_membre =:membre");
+        Query q = em.createQuery("SELECT c FROM Connect c WHERE c.idMembre =:membre");
         q.setParameter("membre", m);
         List l = q.getResultList();
         //Delete de la connexion
@@ -146,7 +146,7 @@ public class ConnectManagerImpl implements ConnectManager {
     public String connect(Membre m) {
         //On récupère la connexion de la personne
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("SELECT c FROM Connect c WHERE c.id_membre =:membre");
+        Query q = em.createQuery("SELECT c FROM Connect c WHERE c.idMembre =:membre");
         q.setParameter("membre", m);
         List l = q.getResultList();
 

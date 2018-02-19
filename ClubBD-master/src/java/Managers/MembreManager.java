@@ -6,6 +6,7 @@
 package Managers;
 
 import Database.Membre;
+import Database.Statut;
 
 /**
  *
@@ -25,8 +26,9 @@ public interface MembreManager {
      * @param mdp
      * @param name
      * @param firstname 
+     * @param idStatut
      */
-    public void insert(String email, String mdp, String name, String firstname);
+    public void insert(String email, String mdp, String name, String firstname, Statut idStatut);
     
     /**
      * Modification des infos d'un membre

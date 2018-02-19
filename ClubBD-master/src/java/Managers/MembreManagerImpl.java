@@ -8,6 +8,7 @@
 package Managers;
 
 import Database.Membre;
+import Database.Statut;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -49,7 +50,7 @@ public class MembreManagerImpl implements MembreManager {
     @Override
     public Membre findMembre(String id) {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("SELECT c.idPerson FROM Connect c WHERE  c.idConnect=:id");
+        Query q = em.createQuery("SELECT c.idMembre FROM Connect c WHERE  c.idConnect=:id");
         q.setParameter("id", id);
         List l = q.getResultList();
         return l.isEmpty() ? null : (Membre) l.get(0);
@@ -78,15 +79,17 @@ public class MembreManagerImpl implements MembreManager {
      * @param mdp Mot de passe
      * @param name Nom
      * @param firstname Prénom
+     * @param idStatut Statut
      */
     @Override
-    public void insert(String email, String mdp, String name, String firstname) {
+    public void insert(String email, String mdp, String name, String firstname, Statut idStatut) {
         //Création de l'objet personne
         Membre m = new Membre();
         m.setEmail(email);
         m.setPrenom(firstname);
         m.setNom(name);
         m.setMdp(mdp);//TODO        p.setPersonPassword(PasswordHash.hash(mdp));
+        m.setIdStatut(idStatut);
         //Insertion
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

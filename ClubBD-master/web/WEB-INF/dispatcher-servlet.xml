@@ -21,7 +21,7 @@
             <props>
                 <prop key="index.htm">IndexController</prop>
                 <prop key="inscription.htm">InscriptionController</prop>
-                <prop key="index_membre.htm">IndexMembreController</prop>
+                <prop key="index_membre.htm">ConnectController</prop>
             </props>
         </property>
     </bean>
@@ -47,10 +47,7 @@
         name="InscriptionController"
         class="Controllers.InscriptionController"
     />
-    <bean
-        name="IndexMembreController"
-        class="Controllers.IndexMembreController"
-    />
+    
      <bean
         name="ConnectController"
         class="Controllers.ConnectController"
