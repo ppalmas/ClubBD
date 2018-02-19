@@ -9,8 +9,8 @@ function pop_mdpoublie() {
     $('#oubli_form').modal('show');
 }
 
-function getInscription(){
-    
+function getInscription() {
+
     var form = document.createElement('form');
     form.method = "GET";
     form.action = "inscription.htm";
@@ -48,7 +48,7 @@ function inscription() {
                     //Appel du controller pour effuectuer la connexion via un formulaire (en Post)
                     var form = document.createElement('form');
                     form.method = "POST";
-                    form.action = "globalMap.htm";
+                    form.action = "index_membre.htm";
 
                     var c1 = document.createElement('input');
                     c1.type = "hidden";
@@ -61,7 +61,7 @@ function inscription() {
                     c2.name = "mdp";
                     c2.value = mdp;
                     form.appendChild(c2);
-                      
+
                     var c3 = document.createElement('input');
                     c3.type = "hidden";
                     c3.name = "up";
@@ -77,13 +77,18 @@ function inscription() {
                     document.getElementById("inscription_error").innerHTML = "L'email entré est déjà utilisé";
                 }
 
+            } else {
+                document.getElementById("inscription_error").innerHTML = xhttp.readyState.toString() + " " + xhttp.status.toString() + " erreur";
             }
         };
         var data = "email=" + email + "&" + "mdp=" + mdp + "&" + "name=" + name + "&" + "firstname=" + firstname;
         xhttp.open("GET", "ControlInscriptionServlet?" + data, true);
         xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
         xhttp.send();
+
     }
+
+
 }
 
 /**
@@ -98,7 +103,7 @@ function valid_email(email) {
         return true;
     } else {
         //Message d'erreur
-        document.getElementById("inscription_error").innerHTML = error_email_fr;
+        document.getElementById("inscription_error").innerHTML = "L'email n'est pas valide.";
         return false;
     }
 }
@@ -112,12 +117,12 @@ function valid_email(email) {
 function valid_password(mdp1, mdp2) {
     if (mdp1.length < 6) {
         //Message d'erreur
-        document.getElementById("inscription_error").innerHTML = error_password_fr;
+        document.getElementById("inscription_error").innerHTML = "Veuillez entrer un mot de passe de plus de 6 caractères.";
         return false
     } else {
         if (mdp1 != mdp2) {
             //Message d'erreur
-            document.getElementById("inscription_error").innerHTML = error_passwords_fr;
+            document.getElementById("inscription_error").innerHTML = "Les deux mots de passe ne sont pas identiques.";
             return false;
         } else {
             return true;
