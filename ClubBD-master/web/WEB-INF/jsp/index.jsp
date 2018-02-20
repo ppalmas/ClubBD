@@ -51,7 +51,7 @@
                         <button id ="valid_connexion" type="button" class="button small_button" onclick="">Ok</button>
                         <!-- Lien pour réinitialiser son mot de passe -->
 
-                        <p id="mdp_oublie" href="#" onclick="pop_mdpoublie()"><i>Mot de passe oublié ?</i></p>
+                        <a id="mdp_oublie" href="#" onclick="pop_mdpoublie()"><i>Mot de passe oublié ?</i></a>
                             <a id="inscription" href="#" onclick="getInscription()"><i>S'inscrire ?</i></a>
                             <br>
                     </center>
