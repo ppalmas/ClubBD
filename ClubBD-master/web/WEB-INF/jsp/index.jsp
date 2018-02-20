@@ -27,6 +27,7 @@
         <!-- SCRIPTS -->
         <script src="Scripts/navigation.js"></script>
         <script src="Scripts/index.js"></script>
+        <script src="Scripts/connecter.js"></script>
 
 
     </head>
@@ -48,9 +49,10 @@
                         <!-- Champ pour le mot de passe -->
                         <input  type="password" name="password" id="password"  style="margin-left:5px; margin-bottom:7px" placeholder="Mot de passe">
                         <!-- Bouton pour soumettre le formulaire de connexion -->
-                        <button id ="valid_connexion" type="button" class="button small_button" onclick="">Ok</button>
+                        <button id ="valid_connexion" type="button" class="button small_button" onclick="connect()">Ok</button>
                         <!-- Lien pour réinitialiser son mot de passe -->
 
+                        <br>
                         <a id="mdp_oublie" href="#" onclick="pop_mdpoublie()"><i>Mot de passe oublié ?</i></a>
                             <a id="inscription" href="#" onclick="getInscription()"><i>S'inscrire ?</i></a>
                             <br>

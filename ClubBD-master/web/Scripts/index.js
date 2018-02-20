@@ -12,6 +12,7 @@ function pop_mdpoublie() {
 
 /**
  * Méthode permettant d'afficher la page d'inscription
+ * (Appel au controleur IndexController en méthode GET)
  */
 function getInscription() {
 

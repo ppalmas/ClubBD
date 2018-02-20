@@ -4,6 +4,7 @@
 
 /**
  * Inscription d'un utilisateur 
+ * Se fait grâce à la Servlet ControlInscriptionServlet, et renvoie la page index_membre si l'inscription réussit
  */
 function inscription() {
 
@@ -15,7 +16,7 @@ function inscription() {
     var mdp2 = document.getElementById("mdp_confirm_inscri").value;
 
     //Si la saisie est valide
-    if (valid_form(mdp, mdp2, email)) {
+    if (valid_form(name, firstname, mdp, mdp2, email)) {
 
         //On envoie le mail à une servlet pour voir si celui-ci est déjà utilisé ou non
         xhttp = new XMLHttpRequest();
@@ -92,6 +93,21 @@ function valid_email(email) {
 }
 
 /**
+ * Retourne vrai si word est non vide. Retourne un message d'erreur sinon
+ * @param {String} email
+ * @returns {Boolean} 
+ */
+function valid_word(word) {
+    if (word == "") {
+        //Message d'erreur
+        document.getElementById("inscription_error").innerHTML = "Veuillez remplir tous les champs.";
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/**
  * Vérification que le mot de passe contient plus de 6 caractères et que les 2 mdp sont égaux
  * @param {String} mdp1
  * @param {String} mdp2
@@ -122,6 +138,6 @@ function valid_password(mdp1, mdp2) {
  * @param {String} email
  * @returns {Boolean}
  */
-function valid_form(mdp, mdp2, email) {
-    return valid_email(email) && valid_password(mdp, mdp2)
+function valid_form(name, firstname, mdp, mdp2, email) {
+    return valid_email(email) && valid_password(mdp, mdp2) && valid_word(name) && valid_word(firstname)
 }

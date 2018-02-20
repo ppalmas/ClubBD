@@ -1,7 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+
+/**
+ * ********************************************************************
+ * Controller Connection
+ * --------------------------------------------------------------------
+ * Gère la connexion et renvoie vers la page index_membre liée 
+ * au niveau d'accès de l'utilisateur connecté
+ *********************************************************************
  */
 package Controllers;
 
@@ -20,8 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 /**
- *
- * @author Paola
+ * Controller permettant de gérer la connexion d'un utilisateur à l'application.
+ * Renvoie la page index_membre si la connexion réussit.
  */
 public class ConnectController {
     

@@ -8,6 +8,7 @@ package Managers;
 
 import Database.Connect;
 import Database.Membre;
+import Util.PasswordHash;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -210,14 +211,14 @@ public class ConnectManagerImpl implements ConnectManager {
     }
 
     /**
-     * Vérifier si une personne de la base de données correspond aux paramètres
+     * Vérifier si un membre de la base de données correspond aux paramètres
      * donnés : email et mot de passe
      *
      * @param email Adresse email de la personne
      * @param mdp Mot de passe de la personne
-     * @return Booléen : est-ce que cette personne existe ou non?
+     * @return Booléen : est-ce que cette personne existe ou non? Vrai si oui, faux sinon
      */
-    /**
+    
     @Override
     public boolean identifierValidation(String email, String mdp) {
         EntityManager em = emf.createEntityManager();
@@ -228,7 +229,7 @@ public class ConnectManagerImpl implements ConnectManager {
         if (l.isEmpty()) {
             return false;
         } else {
-            return PasswordHash.match(mdp, ((Person) l.get(0)).getPersonPassword());
+            return PasswordHash.match(mdp, ((Membre) l.get(0)).getMdp());
         }
-    }**/
+    }
 }
