@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+
             <file>file:/C:/Users/centrale/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Managers/ConnectManager.java</file>
             <file>file:/C:/Users/centrale/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/Scripts/index.js</file>
             <file>file:/C:/Users/centrale/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/WEB-INF/jsp/index.jsp</file>
@@ -15,9 +16,63 @@
             <file>file:/C:/Users/centrale/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/redirect.jsp</file>
             <file>file:/C:/Users/centrale/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Controllers/ConnectController.java</file>
             <file>file:/C:/Users/centrale/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Managers/MembreManager.java</file>
+        
+        
+            <file>file:/C:/Users/centrale/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Managers/MembreManager.java</file>
+		</group>
+		<group>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/WEB-INF/jsp/index.jsp</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/WEB-INF/jsp/inscription.jsp</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/Scripts/index.js</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/WEB-INF/jsp/index_membre.jsp</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Controllers/InscriptionController.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Controllers/IndexController.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Controllers/IndexMembreController.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Servlets/ControlInscriptionServlet.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Managers/ConnectManagerImpl.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/WEB-INF/applicationContext.xml</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/nbproject/build-impl.xml~</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Database/Membre.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/Stylesheets/index.css</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Managers/ConnectManager.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/WEB-INF/dispatcher-servlet.xml</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Controllers/ConnectController.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/redirect.jsp</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/Stylesheets/navigation.css</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Utilities/utilities.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/conf/persistence.xml</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Managers/MembreManagerImpl.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Managers/MembreManager.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Database/Connect.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/Scripts/navigation.js</file>
+
         </group>
         <group>
-            <file>file:/C:/Users/centrale/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Managers/MembreManager.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/WEB-INF/jsp/index.jsp</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/WEB-INF/jsp/inscription.jsp</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Managers/ConnectManager.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/Scripts/index.js</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/WEB-INF/jsp/index_membre.jsp</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/WEB-INF/dispatcher-servlet.xml</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Controllers/ConnectController.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/redirect.jsp</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Controllers/InscriptionController.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Controllers/IndexController.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/Stylesheets/navigation.css</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Controllers/IndexMembreController.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Servlets/ControlInscriptionServlet.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Managers/ConnectManagerImpl.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/conf/persistence.xml</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Managers/MembreManagerImpl.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Managers/MembreManager.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Database/Connect.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/WEB-INF/applicationContext.xml</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/Scripts/navigation.js</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Database/Statut.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/src/java/Database/Membre.java</file>
+            <file>file:/C:/Users/Paola/Documents/NetBeansProjects/ClubBD/ClubBD-master/web/Stylesheets/index.css</file>
         </group>
     </open-files>
 </project-private>

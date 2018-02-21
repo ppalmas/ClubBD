@@ -64,6 +64,6 @@ public interface ConnectManager {
      * @param mdp Mot de passe de la personne
      * @return Booléen : est-ce que cette personne existe ou non?
      */
-   // public boolean identifierValidation(String email, String mdp);
+    public boolean identifierValidation(String email, String mdp);
 
 }

@@ -1,11 +1,8 @@
 /**
- * Fonctionnalités de la barre de navigation
+ * Fonction permettant de gérer les
+ * différentes fonctionnalités de la barre de navigation
  */
 
-/**
- * Onglet A la une
- * @returns {void}
- */
 /**
  * Afficher le contenu d'un nouvel onglet et cacher l'actuel
  * @param {type} thingShow to Show

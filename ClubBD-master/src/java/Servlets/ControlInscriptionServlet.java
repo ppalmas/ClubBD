@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Servlet Control Inscription
+ * --------------------------------------------------------------------
+ * Servlet pour gérer l'inscriptin d'un utilisateur
+ *********************************************************************
  */
 package Servlets;
 
@@ -10,21 +12,15 @@ import Database.Statut;
 import Managers.MembreManager;
 import Managers.MembreManagerImpl;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Paola
- */
 @WebServlet(name = "ControlInscriptionServlet", urlPatterns = {"/ControlInscriptionServlet"})
 public class ControlInscriptionServlet extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -36,13 +32,13 @@ public class ControlInscriptionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Paramètres
+        // Récupération des paramètres via le javascript inscription.js
         String email = request.getParameter("email");
         String mdp = request.getParameter("mdp");
         String name = request.getParameter("name");
         String firstname = request.getParameter("firstname");
 
-        //Personne
+        //Création d'une entité Membre
         MembreManager mm = MembreManagerImpl.getInstance();
         Membre m = mm.findMembreByEmail(email);
         Boolean b = (m == null); // Booléen vrai si aucune personne ne correspond à l'email donné
@@ -53,7 +49,7 @@ public class ControlInscriptionServlet extends HttpServlet {
             mm.insert(email, mdp, name, firstname, s);
         }
 
-        //Envoi de la réponse
+        // Envoi de la réponse
         response.setContentType("text/html; charset=UTF-8");
         response.getWriter().write(b + ""); // Réponse : true si l'inscription a été effectuée et false si l'email était déjà dans la base
     }

@@ -9,6 +9,7 @@ package Managers;
 
 import Database.Membre;
 import Database.Statut;
+import Util.PasswordHash;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -88,7 +89,7 @@ public class MembreManagerImpl implements MembreManager {
         m.setEmail(email);
         m.setPrenom(firstname);
         m.setNom(name);
-        m.setMdp(mdp);//TODO        p.setPersonPassword(PasswordHash.hash(mdp));
+        m.setMdp(PasswordHash.hash(mdp));
         m.setIdStatut(idStatut);
         //Insertion
         EntityManager em = emf.createEntityManager();

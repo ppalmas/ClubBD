@@ -26,7 +26,7 @@
 
         <!-- SCRIPTS -->
         <script src="Scripts/navigation.js"></script>
-        <script src="Scripts/index.js"></script>
+        <script src="Scripts/inscription.js"></script>
 
 
     </head>
