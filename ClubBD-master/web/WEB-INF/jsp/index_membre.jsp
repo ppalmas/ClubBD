@@ -65,12 +65,12 @@
                     </center>
                     <!-- Différents onglets -->
                     <center><div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('news_content', 'search_content', 'suggestions_content')">A la une</a>
+                        <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content'])">A la une</a>
                         <div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('search_content', 'news_content', 'suggestions_content')">Rechercher...</a>
+                        <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content'])">Rechercher...</a>
 
                         <div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('suggestions_content', 'news_content', 'search_content')">Suggestions de lecture</a>
+                        <a class="onglets" href="#" onclick="getNewContent('suggestions_content',['news_content', 'search_content'])">Suggestions de lecture</a>
                     </center>
 
                 </div>

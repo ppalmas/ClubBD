@@ -54,6 +54,12 @@ public class Connect implements Serializable {
         this.connectLastAction = connectLastAction;
     }
 
+    public Connect(String idco, String lastAction, Membre m) {
+        this.idConnect = idco;
+        this.connectLastAction = lastAction;
+        this.idMembre=m;
+    }
+
     public String getIdConnect() {
         return idConnect;
     }

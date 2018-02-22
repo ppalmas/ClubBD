@@ -10,10 +10,12 @@
  * @param {type} thingHide2 to Hide
  * @returns {undefined}
  */
-function getNewContent(thingShow, thingHide, thingHide2) {
+function getNewContent(thingShow, thingHide) {
     setVisible(thingShow);
-    setInvisible(thingHide);
-    setInvisible(thingHide2);
+    for (i = 0; i < thingHide.length; i++) {
+        setInvisible(thingHide[i]);
+        
+    }
 }
 
 /**
@@ -32,7 +34,7 @@ function setVisible(thingId) {
  * @param {type} thingId
  * @returns {undefined}
  */
-function setInvisible(thingId){
+function setInvisible(thingId) {
     var targetElement;
     targetElement = document.getElementById(thingId);
     targetElement.style.display = "none";
