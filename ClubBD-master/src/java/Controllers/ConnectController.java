@@ -44,8 +44,9 @@ public class ConnectController {
 
         //Connexion de l'utilisateur 
         String idco = cm.connect(m);
-        r.addObject("idco", idco);
         
+        
+        r.addObject("idco", idco);
 
         return r;
     }
@@ -66,6 +67,7 @@ public class ConnectController {
             result.addObject("nom", m.getNom());
             result.addObject("prenom", m.getPrenom());
             result.addObject("id", m.getIdMembre());
+            result.addObject("idstat", m.getIdStatut().getIdStatut());
 
             //Connexion de l'utilisateur 
             result.addObject("idco", idco);

@@ -10,19 +10,21 @@ function connect() {
     //On récupère les données saisies dans la page html
     var email = document.getElementById("email").value;
     var mdp = document.getElementById("password").value;
+    
 
-    //Si la saisie est valide : appel à la servlet de connexion (ControlConnexionServlet)
+    
     if (verif_saisie(email, mdp)) {
-
+        //Si la saisie est valide : appel à la servlet de connexion (ControlConnexionServlet)
+        //via le protocole http
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
                 //Réponse de la servlet
                 var answer = xhttp.responseText;
-                //Si la connexion est valide
+                //Si la connexion à la servlet est valide
                 if (answer == "true") {
 
-                    //Appel du controller pour effuectuer la connexion via un formulaire (en Post)
+                    //Appel en POST du controller
                     var form = document.createElement('form');
                     form.method = "POST";
                     form.action = "index_membre.htm";
@@ -39,12 +41,15 @@ function connect() {
                     c2.value = mdp;
                     form.appendChild(c2);
                     
+                    
+                    
                     var c3 = document.createElement('input');
                     c3.type = "hidden";
                     c3.name = "up";
                     c3.value = 0;
                     form.appendChild(c3);
-
+                    
+                    
                     document.body.appendChild(form);
                     form.submit();
 

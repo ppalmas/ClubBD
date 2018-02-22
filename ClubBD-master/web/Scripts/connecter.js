@@ -10,6 +10,7 @@ function connect() {
     //On récupère les données saisies dans la page html
     var email = document.getElementById("email").value;
     var mdp = document.getElementById("password").value;
+    
 
     
     if (verif_saisie(email, mdp)) {
@@ -40,12 +41,15 @@ function connect() {
                     c2.value = mdp;
                     form.appendChild(c2);
                     
+                    
+                    
                     var c3 = document.createElement('input');
                     c3.type = "hidden";
                     c3.name = "up";
                     c3.value = 0;
                     form.appendChild(c3);
-
+                    
+                    
                     document.body.appendChild(form);
                     form.submit();
 

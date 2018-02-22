@@ -32,14 +32,16 @@
 
     </head>
     <!-- CHARGEMENT DES DONNEES LIEES A L'UTILISATEUR CONNECTE -->
-        <div style="display:none;">
-            <!-- Données personnelles-->
-            <input type="hidden" id="idMembre" value="<c:out value="${id}"/>"/>
-            <input type="hidden" id="nom" value="<c:out value="${nom}"/>"/> 
-            <input type="hidden" id="prenom" value="<c:out value="${prenom}"/>"/> 
-            <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
-            <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/> 
-        </div>
+    <div style="display:none;">
+        <!-- Données personnelles-->
+        <input type="hidden" id="idMembre" value="<c:out value="${id}"/>"/>
+        <input type="hidden" id="nom" value="<c:out value="${nom}"/>"/> 
+        <input type="hidden" id="prenom" value="<c:out value="${prenom}"/>"/> 
+        <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
+        <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/>
+        <input type="hidden" id="idstat" value="<c:out value="${idstat}"/>"/>
+
+    </div>
 
 
 
@@ -60,19 +62,30 @@
                         <!-- lien de modification -->
                         <a id="modification_link" href="#" onclick="pop_info();">Modifier les informations personnelles</a>
                         <button href="#" onclick="deconnect()">Se déconnecter</button>
-                        
-                        
-                    </center>
+
+
+                    
                     <!-- Différents onglets -->
-                    <center><div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content'])">A la une</a>
-                        <div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content'])">Rechercher...</a>
+                    <div class="onglet_separator"></div>
+                    <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content', 'stats_content', 'membres_content', 'gestion_inv_content'])">A la une</a>
+                    <div class="onglet_separator"></div>
+                    <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content', 'stats_content', 'membres_content', 'gestion_inv_content'])">Rechercher...</a>
 
+                    <div class="onglet_separator"></div>
+                    <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content', 'stats_content', 'membres_content', 'gestion_inv_content'])">Suggestions de lecture</a>
+                    <div class="onglet_separator"></div>
+
+                    <!--onglets réservés admin -->
+
+                    <c:if test="${idstat==2}">
+                        <a class="onglets" href="#" onclick="getNewContent('gestion_inv_content', ['news_content', 'search_content', 'stats_content', 'membres_content', 'suggestions_content'])">Gestion inventaire</a>
                         <div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('suggestions_content',['news_content', 'search_content'])">Suggestions de lecture</a>
+                        <a class="onglets" href="#" onclick="getNewContent('membres_content', ['news_content', 'search_content', 'stats_content', 'gestion_inv_content', 'suggestions_content'])">Gestion membres</a>
+                        <div class="onglet_separator"></div>
+                        <a class="onglets" href="#" onclick="getNewContent('stats_content', ['news_content', 'search_content', 'membres_content', 'gestion_inv_content', 'suggestions_content'])">Statistiques</a>
+                    </c:if>
+
                     </center>
-
                 </div>
             </div>
             <!-- Volet de droite -->
@@ -91,6 +104,21 @@
                 <!-- Bloc des suggestions-->
                 <div id ="suggestions_content" class="bloc_home" style="display:none">
                     <p>Suggestion</p>
+                </div>
+                <!--BLOC ADMIN-->
+                <!-- Bloc gestion inventaire-->
+                <div id ="gestion_inv_content" class="bloc_home" style="display:none">
+                    <p>Gestion de l'inventaire</p>
+                </div>
+
+                <!-- Bloc gestion membres-->
+                <div id ="membres_content" class="bloc_home" style="display:none">
+                    <p>Gestion des membres</p>
+                </div>
+
+                <!-- Bloc des stats-->
+                <div id ="stats_content" class="bloc_home" style="display:none">
+                    <p>Statistiques</p>
                 </div>
             </div>
         </div>
