@@ -65,18 +65,20 @@
                     </center>
                     <!-- Différents onglets -->
                     <center><div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content','stats_content','membres_content','gestion_inv_content'])">A la une</a>
+                        <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content','stats_content','membres_content','gestion_inv_content', 'retour_emprunt_content'])">A la une</a>
                         <div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content','stats_content','membres_content','gestion_inv_content'])">Rechercher...</a>
+                        <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content','stats_content','membres_content','gestion_inv_content', 'retour_emprunt_content'])">Rechercher...</a>
 
                         <div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content','stats_content','membres_content','gestion_inv_content'])">Suggestions de lecture</a>
+                        <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content','stats_content','membres_content','gestion_inv_content', 'retour_emprunt_content'])">Suggestions de lecture</a>
                         <div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('gestion_inv_content', ['news_content', 'search_content','stats_content','membres_content','suggestions_content'])">Gestion inventaire</a>
+                        <a class="onglets" href="#" onclick="getNewContent('gestion_inv_content', ['news_content', 'search_content','stats_content','membres_content','suggestions_content', 'retour_emprunt_content'])">Gestion inventaire</a>
                         <div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('membres_content', ['news_content', 'search_content','stats_content','gestion_inv_content','suggestions_content'])">Gestion membres</a>
+                        <a class="onglets" href="#" onclick="getNewContent('membres_content', ['news_content', 'search_content','stats_content','gestion_inv_content','suggestions_content', 'retour_emprunt_content'])">Gestion membres</a>
                         <div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('stats_content', ['news_content', 'search_content','membres_content','gestion_inv_content','suggestions_content'])">Statistiques</a>
+                        <a class="onglets" href="#" onclick="getNewContent('stats_content', ['news_content', 'search_content','membres_content','gestion_inv_content','suggestions_content', 'retour_emprunt_content'])">Statistiques</a>
+                        <div class="onglet_separator"></div>
+                        <a class="onglets" href="#" onclick="getNewContent('retour_emprunt_content', ['news_content', 'search_content','membres_content','gestion_inv_content','suggestions_content'])">Retour emprunts</a>
                         
                     </center>
 
@@ -102,6 +104,11 @@
                 
                 
                 <!--BLOC ADMIN-->
+                <!--Bloc retourner un emprunt-->
+                <div id ="retour_emprunt_content" class="bloc_home" style="display:none">
+                    <p>Retourner un emprunt</p>
+                </div>
+                
                 <!-- Bloc gestion inventaire-->
                 <div id ="gestion_inv_content" class="bloc_home" style="display:none">
                     <p>Gestion de l'inventaire</p>

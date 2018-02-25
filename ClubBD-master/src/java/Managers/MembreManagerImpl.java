@@ -135,4 +135,14 @@ public class MembreManagerImpl implements MembreManager {
         em.merge(m);
         em.getTransaction().commit();
     }    
+    
+    /**
+     * Donner l'id du statut d'un membre
+     * @param m
+     * @return 
+     */
+    @Override
+    public Integer findStatusName(Membre m){
+        return (m.getIdStatut().getIdStatut());
+    }
 }

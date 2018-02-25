@@ -81,6 +81,7 @@ public class ConnectManagerImpl implements ConnectManager {
 
     /**
      * Déconnexion d'un utilisateur
+     * Suppression de sa présence dans la table Connect
      *
      * @param m Membre à connecter
      */
@@ -187,6 +188,8 @@ public class ConnectManagerImpl implements ConnectManager {
 
     /**
      * Test si une connexion est obsolète ou non
+     * Si au bout d'une heure l'utilisateur n'a effectué aucune action,
+     * par sécurité il sera déconnecté automatiquement
      *
      * @param Connect Connexion
      * @return Booleen : lastAction > now - 1h
@@ -232,4 +235,14 @@ public class ConnectManagerImpl implements ConnectManager {
             return PasswordHash.match(mdp, ((Membre) l.get(0)).getMdp());
         }
     }
+    
+    /**
+     * Méthode permettant de renvoyer l'id du statut du membre m
+     * @param m
+     * @return 
+     */
+    public int identifierStatut(Membre m){
+        return (m.getIdStatut().getIdStatut());
+    }
+    
 }

@@ -50,7 +50,7 @@
                             <input  type="password" name="password" id="password"  style="margin-left:5px; margin-bottom:7px" placeholder="Mot de passe">
                             <!-- Bouton pour soumettre le formulaire de connexion -->
                             <button id ="valid_connexion" type="button" class="button small_button" onclick="connect()">Ok</button>
-                            
+
                             <!-- si erreur à la connexion -->
                             <p id="error_connect"></p>
                             <!-- Lien pour réinitialiser son mot de passe -->
@@ -81,7 +81,18 @@
                     <!--Bloc de recherche d'ouvrages-->
                     <div id="search_content" class="bloc_home" style="display:none;">
                         <div class="row">
-                            <p>Recherche</p>
+                            <p>Recherche de documents</p>
+                            <input id="recherche_doc" placeholder="Entrez votre recherche...">
+                            <p id="critere">Rechercher par critère</p>
+                            <p>Titre</p>
+                            <input id="critere_titre">
+
+                            <p>Auteur</p>
+                            <input id="critere_auteur">
+                            <p>
+                                <button onclick="recherche_doc()">Rechercher</button>
+                            <div id="recherche_resultat">
+                            </div>
                         </div>
 
                     </div>

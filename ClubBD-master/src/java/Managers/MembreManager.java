@@ -52,4 +52,11 @@ public interface MembreManager {
      * @return 
      */
     public Membre findMembre(String id) ;
+    
+    /**
+     * Donner l'id du statut d'un membre
+     * @param m
+     * @return 
+     */
+    public Integer findStatusName(Membre m);
 }

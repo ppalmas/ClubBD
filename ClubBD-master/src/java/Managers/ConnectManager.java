@@ -66,4 +66,10 @@ public interface ConnectManager {
      */
     public boolean identifierValidation(String email, String mdp);
 
+    /**
+     * Méthode permettant de renvoyer l'id du statut du membre m
+     * @param m
+     * @return 
+     */
+    public int identifierStatut(Membre m);
 }

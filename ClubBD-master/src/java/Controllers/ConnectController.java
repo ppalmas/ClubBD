@@ -32,7 +32,7 @@ public class ConnectController {
     
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView post(@RequestParam("email") String email, @RequestParam("mdp") String mdp) {
-        ModelAndView r = new ModelAndView("redirect:index_membre.htm");
+        
 
         //Mise à jour des connexions dans la base de données
         ConnectManager cm = ConnectManagerImpl.getInstance();
@@ -44,6 +44,10 @@ public class ConnectController {
 
         //Connexion de l'utilisateur 
         String idco = cm.connect(m);
+       /** if (pm.findStatusName(m)==1){
+            
+        }**/ // si on fait une page par niveau d'accès
+        ModelAndView r = new ModelAndView("redirect:index_membre.htm");
         r.addObject("idco", idco);
         
 
@@ -66,6 +70,7 @@ public class ConnectController {
             result.addObject("nom", m.getNom());
             result.addObject("prenom", m.getPrenom());
             result.addObject("id", m.getIdMembre());
+            result.addObject("idStatut", m.getIdStatut().getIdStatut());
 
             //Connexion de l'utilisateur 
             result.addObject("idco", idco);
