@@ -10,6 +10,7 @@ package Managers;
 import Database.Membre;
 import Database.Statut;
 import Util.PasswordHash;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -73,6 +74,77 @@ public class MembreManagerImpl implements MembreManager {
         return l.isEmpty() ? null : (Membre) l.get(0);
     }
 
+     /**
+     * Renvoyer la liste de tous les membres
+     *
+     * @return liste de Personnes
+     */
+    @Override
+    public List<Membre> listMembre(){
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT m FROM Membre m");
+        List l = q.getResultList();
+        return l;
+    }
+    
+    /**
+     * Renvoyer la liste de tous les membres ayant cette adresse mail
+     * @param email recherché
+     * @return liste de Personnes
+     */
+    @Override
+    public List<Membre> listMembreByEmail(String email) {
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT m FROM Membre m WHERE  m.email=:email");
+        q.setParameter("email", email);
+        List l = q.getResultList();
+        return l;
+    }
+    
+    /**
+     * Renvoyer la liste de tous les membres ayant ce nom
+     * @param nom recherché
+     * @return liste de Personnes
+     */
+    @Override
+    public List<Membre> listMembreByNom(String nom) {
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT m FROM Membre m WHERE  m.nom=:nom");
+        q.setParameter("nom", nom);
+        List l = q.getResultList();
+        return l;
+    }
+    
+    /**
+     * Renvoyer la liste de tous les membres ayant ce prenom
+     * @param prenom recherché
+     * @return liste de Personnes
+     */
+    @Override
+    public List<Membre> listMembreByPrenom(String prenom) {
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT m FROM Membre m WHERE  m.prenom=:prenom");
+        q.setParameter("prenom", prenom);
+        List l = q.getResultList();
+        return l;
+    }
+    
+    /**
+     * Renvoyer la liste de tous les membres ayant ce prenom et ce nom
+     * @param prenom recherché
+     * @param nom recherché
+     * @return liste de Personnes
+     */
+    @Override
+    public List<Membre> listMembreByPrenomNom(String prenom, String nom) {
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT m FROM Membre m WHERE  m.prenom=:prenom AND m.nom=:nom");
+        q.setParameter("prenom", prenom);
+        q.setParameter("nom", nom);
+        List l = q.getResultList();
+        return l;
+    }
+    
     /**
      * Inscription d'un membre
      *
@@ -135,14 +207,4 @@ public class MembreManagerImpl implements MembreManager {
         em.merge(m);
         em.getTransaction().commit();
     }    
-    
-    /**
-     * Donner l'id du statut d'un membre
-     * @param m
-     * @return 
-     */
-    @Override
-    public Integer findStatusName(Membre m){
-        return (m.getIdStatut().getIdStatut());
-    }
 }
