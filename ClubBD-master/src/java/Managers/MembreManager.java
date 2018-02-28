@@ -7,6 +7,9 @@ package Managers;
 
 import Database.Membre;
 import Database.Statut;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -21,6 +24,34 @@ public interface MembreManager {
     public Membre findMembreByEmail(String email) ;
     
     /**
+     * Renvoyer la liste de tous les membres ayant cette adresse mail
+     * @param email recherché
+     * @return liste de Personnes
+     */
+    public List<Membre> listMembreByEmail(String email);
+    
+    /**
+     * Renvoyer la liste de tous les membres ayant ce nom
+     * @param nom recherché
+     * @return liste de Personnes
+     */
+    public List<Membre> listMembreByNom(String nom);
+    
+    /**
+     * Renvoyer la liste de tous les membres ayant ce prenom
+     * @param prenom recherché
+     * @return liste de Personnes
+     */
+    public List<Membre> listMembreByPrenom(String prenom);
+    
+    /**
+     * Renvoyer la liste de tous les membres ayant ce prenom et ce nom
+     * @param prenom recherché
+     * @param nom recherché
+     * @return liste de Personnes
+     */
+    public List<Membre> listMembreByPrenomNom(String prenom, String nom);
+    /**
      * Insertion d'un nouveau membre
      * @param email
      * @param mdp
@@ -29,6 +60,14 @@ public interface MembreManager {
      * @param idStatut
      */
     public void insert(String email, String mdp, String name, String firstname, Statut idStatut);
+    
+     /**
+     * Renvoyer la liste de tous les membres
+     *
+     * @return liste de Personnes
+     */
+    public List<Membre> listMembre();
+    
     
     /**
      * Modification des infos d'un membre

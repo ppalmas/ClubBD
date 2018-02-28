@@ -1,0 +1,26 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24 févr. 2018, 20:49:08
+    Author     : Victouf
+    CSS de base pour tout le site
+*/
+
+/* PARAGRAPHE */
+p{
+    width:100%;
+    text-align: center;
+    color : black;
+    font-weight: 200;
+}
+
+/* TITRE */
+#title{
+    color:#778899;
+    font-weight:500;
+    padding:4%;
+}
+
