@@ -21,7 +21,8 @@ function recherche_doc() {
             }
         }
     }
+    
     //Affichage
-    displaySource(sources);
+    displaySources(sources);
     return sources;
 }

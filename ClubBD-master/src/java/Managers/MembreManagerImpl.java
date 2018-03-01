@@ -10,7 +10,6 @@ package Managers;
 import Database.Membre;
 import Database.Statut;
 import Util.PasswordHash;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

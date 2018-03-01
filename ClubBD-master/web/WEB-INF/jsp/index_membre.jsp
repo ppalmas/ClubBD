@@ -108,6 +108,8 @@
                 <!-- Bloc gestion inventaire-->
                 <div id ="gestion_inv_content" class="bloc_home" style="display:none">
                     <p>Gestion de l'inventaire</p>
+                    
+                    
                 </div>
 
                 <!-- Bloc gestion membres-->

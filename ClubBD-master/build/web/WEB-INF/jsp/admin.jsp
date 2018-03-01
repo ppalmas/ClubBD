@@ -26,6 +26,7 @@
 
         <!-- SCRIPTS -->
         <script src="Scripts/navigation.js"></script>
+        <script src="Scripts/recherche2.js"></script>
         <script src="Scripts/index.js"></script>
         <script src="Scripts/deconnecter.js"></script>
 
@@ -112,6 +113,26 @@
                 <!-- Bloc gestion inventaire-->
                 <div id ="gestion_inv_content" class="bloc_home" style="display:none">
                     <p>Gestion de l'inventaire</p>
+                    <div id="selection">
+                        <p>Sélection</p>
+                     
+                        <label for="Titre">Titre</label>
+                        <input type="text" id="Titre" name="Titre"/><br>
+                        <label for="Serie">Série</label>
+                        <input type="text" id="Serie" name="Serie"/><br>
+                        <label for="Cote">Côte</label>
+                        <input type="text" id="Cote" name="Cote"/><br>
+                        <button onclick="recherche2_doc()">Rechercher</button>
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                    <div id="recherche_resultat">
+                        
+                    </div>
+                    
                 </div>
                 
                 <!-- Bloc gestion membres-->

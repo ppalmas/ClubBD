@@ -12,9 +12,8 @@ package Managers;
 
 
 import Database.Document;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 
 public interface DocumentManager {
@@ -25,4 +24,5 @@ public interface DocumentManager {
      * @return liste de documents
      */
     public List<Document> findDocumentBy1WordTitle(String mot) ;
-}
+    public List<Document> findDocument(ArrayList<String> criteres);}
+

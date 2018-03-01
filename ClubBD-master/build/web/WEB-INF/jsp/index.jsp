@@ -27,6 +27,7 @@
         <script src="Scripts/navigation.js"></script>
         <script src="Scripts/index.js"></script>
         <script src="Scripts/connecter.js"></script>
+        <script src="Scripts/recherche.js"></script>
 
 
 
@@ -89,9 +90,11 @@
 
                             <p>Auteur</p>
                             <input id="critere_auteur">
-                            <p>
-                                <button onclick="recherche_doc()">Rechercher</button>
+
+                            <button onclick="recherche_doc()">Rechercher</button>
+
                             <div id="recherche_resultat">
+                                
                             </div>
                         </div>
 
