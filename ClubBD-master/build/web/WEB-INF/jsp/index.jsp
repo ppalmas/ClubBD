@@ -28,7 +28,7 @@
         <script src="Scripts/navigation.js"></script>
         <script src="Scripts/index.js"></script>
         <script src="Scripts/connecter.js"></script>
-        <script src="Scripts/recherche.js"></script>
+        <script src="Scripts/recherche2.js"></script>
 
 
 
@@ -79,21 +79,24 @@
                 </div>
                 <!--Bloc de recherche d'ouvrages-->
                 <div id="search_content" class="bloc_home" style="display:none;">
-                    <div class="row">
-                        <p>Recherche de documents</p>
-                        <input id="recherche_doc" placeholder="Entrez votre recherche...">
-                        <p id="critere">Rechercher par critère</p>
-                        <p>Titre</p>
-                        <input id="critere_titre">
-
-                        <p>Auteur</p>
-                        <input id="critere_auteur">
-
-                        <button onclick="recherche_doc()">Rechercher</button>
-
-                        <div id="recherche_resultat">
-
+                    <div class="row_content" style="width: 95%;">
+                        <p style="text-align:left;">Recherche de documents
+                            <input id="recherche_doc" style="width:500px; margin-left:30px;" placeholder="Titre, Auteur/Illustrateur, Serie"></p>
+                        <p style="text-align:left;" id="critere" style="margin-top:10px;" onclick="setVisible('search_critere')">Rechercher par critère</p>
+                        <div id="search_critere" style="display:none; text-align:left">
+                            <input id="search_titre" style="width:300px; margin:10px;" placeholder="Titre">
+                            <br>
+                            <input id="critere_auteur" style="width:300px; margin:10px;" placeholder="Auteur, Illustrateur">
+                            <br>
+                            <input id="search_serie" style="width:300px; margin:10px;" placeholder="Serie">
+                            <br>
+                            <input id="search_sujet" style="width:300px; margin:10px;" placeholder="Sujet">
                         </div>
+                        <button style="margin-top:10px;" onclick="recherche_doc()">Rechercher</button>
+
+                    </div>
+                    <div id="recherche_resultat">
+
                     </div>
 
                 </div>

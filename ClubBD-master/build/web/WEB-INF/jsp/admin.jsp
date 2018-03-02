@@ -34,119 +34,106 @@
 
     </head>
     <!-- CHARGEMENT DES DONNEES LIEES A L'UTILISATEUR CONNECTE -->
-        <div style="display:none;">
-            <!-- Données personnelles-->
-            <input type="hidden" id="idMembre" value="<c:out value="${id}"/>"/>
-            <input type="hidden" id="nom" value="<c:out value="${nom}"/>"/> 
-            <input type="hidden" id="prenom" value="<c:out value="${prenom}"/>"/> 
-            <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
-            <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/> 
-        </div>
+    <div style="display:none;">
+        <!-- Données personnelles-->
+        <input type="hidden" id="idMembre" value="<c:out value="${id}"/>"/>
+        <input type="hidden" id="nom" value="<c:out value="${nom}"/>"/> 
+        <input type="hidden" id="prenom" value="<c:out value="${prenom}"/>"/> 
+        <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
+        <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/> 
+    </div>
 
 
 
     <!-- CONTENU PRINCIPAL -->
-    <div class="container">    
-        <div  class="row content">          
-            <!-- Volet de gauche -->
-            <div id="left_div" class="col-md-4">
-                <p id="title">Bienvenue sur le site du club BD</p>
-                <!-- Formulaire de connexion -->
-                <div class="modal-body" width="100%">  
-                    <center>
-                        <p></p>
-                        <!-- affichage nom prénom-->
-                        <p class="info_perso" id="info_name" style="margin-top:10px;font-weight:bold;"><c:out value="${prenom}"/> <c:out value="${nom}"/></p>
-                        <!-- affichage email-->
-                        <p class="info_perso"id="info_email" ><c:out value="${email}"/></p>
-                        <!-- lien de modification -->
-                        <a id="modification_link" href="#" onclick="pop_info();">Modifier les informations personnelles</a>
-                        <button href="#" onclick="deconnect()">Se déconnecter</button>
-                        
-                        
-                    </center>
-                    <!-- Différents onglets -->
-                    <center><div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content','stats_content','membres_content','gestion_inv_content', 'retour_emprunt_content'])">A la une</a>
-                        <div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content','stats_content','membres_content','gestion_inv_content', 'retour_emprunt_content'])">Rechercher...</a>
-
-                        <div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content','stats_content','membres_content','gestion_inv_content', 'retour_emprunt_content'])">Suggestions de lecture</a>
-                        <div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('gestion_inv_content', ['news_content', 'search_content','stats_content','membres_content','suggestions_content', 'retour_emprunt_content'])">Gestion inventaire</a>
-                        <div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('membres_content', ['news_content', 'search_content','stats_content','gestion_inv_content','suggestions_content', 'retour_emprunt_content'])">Gestion membres</a>
-                        <div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('stats_content', ['news_content', 'search_content','membres_content','gestion_inv_content','suggestions_content', 'retour_emprunt_content'])">Statistiques</a>
-                        <div class="onglet_separator"></div>
-                        <a class="onglets" href="#" onclick="getNewContent('retour_emprunt_content', ['news_content', 'search_content','membres_content','gestion_inv_content','suggestions_content'])">Retour emprunts</a>
-                        
-                    </center>
-
-                </div>
+    <div class="container">             
+        <!-- Volet de gauche -->
+        <div id="left_div" class="col-md-4">
+            <!--Informations du compte-->
+            <center>
+                <p></p>
+                <!-- affichage nom prénom-->
+                <p class="info_perso" id="title" style="margin-top:5px;font-weight:bold;padding:1%;"><c:out value="${prenom}"/> <c:out value="${nom}"/></p>
+                <!-- affichage email-->
+                <p class="info_perso"id="info_email" ><c:out value="${email}"/></p>
+                <!-- lien de modification -->
+                <a style="margin-bottom:5px;" id="modification_link" href="#" onclick="pop_info();">Modifier les informations personnelles</a>
+                <p><button style="margin-bottom:10px;" href="#" onclick="deconnect()">Se déconnecter</button></p>
+            </center>
+            <!-- Différents onglets -->
+            <center><div class="onglet_separator"></div>
+                <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content', 'stats_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">A la une</a>
+                <div class="onglet_separator"></div>
+                <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content', 'stats_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Rechercher...</a>
+                <div class="onglet_separator"></div>
+                <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content', 'stats_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Suggestions de lecture</a>
+                <div class="onglet_separator"></div>
+                <a class="onglets" href="#" onclick="getMonCompte()" id="gestion_compte">Mon compte</a>
+                <div class="onglet_separator"></div>
+                <a class="onglets" href="#" onclick="getNewContent('gestion_inv_content', ['news_content', 'search_content', 'stats_content', 'membres_content', 'suggestions_content', 'retour_emprunt_content'])">Gestion inventaire</a>
+                <div class="onglet_separator"></div>
+                <a class="onglets" href="#" onclick="getNewContent('membres_content', ['news_content', 'search_content', 'stats_content', 'gestion_inv_content', 'suggestions_content', 'retour_emprunt_content'])">Gestion membres</a>
+                <div class="onglet_separator"></div>
+                <a class="onglets" href="#" onclick="getNewContent('stats_content', ['news_content', 'search_content', 'membres_content', 'gestion_inv_content', 'suggestions_content', 'retour_emprunt_content'])">Statistiques</a>
+                <div class="onglet_separator"></div>
+                <a class="onglets" href="#" onclick="getNewContent('retour_emprunt_content', ['news_content', 'search_content', 'membres_content', 'gestion_inv_content', 'suggestions_content'])">Retour emprunts</a>
+            </center>
+        </div>
+        <!-- Volet de droite -->
+        <div id="right_div" class="col-md-8"> 
+            <!-- Bloc des news-->
+            <div id="news_content" class="bloc_home">
+                <p> News</p>
             </div>
-            <!-- Volet de droite -->
-            <div id="right_div" class="col-md-8"> 
-                <!-- Bloc des news-->
-                <div id="news_content" class="bloc_home">
-                    <p> News</p>
+            <!--Bloc de recherche d'ouvrages-->
+            <div id="search_content" class="bloc_home" style="display:none;">
+                <div class="row">
+                    <p>Recherche</p>
                 </div>
-                <!--Bloc de recherche d'ouvrages-->
-                <div id="search_content" class="bloc_home" style="display:none;">
-                    <div class="row">
-                        <p>Recherche</p>
-                    </div>
+
+            </div>
+            <!-- Bloc des suggestions-->
+            <div id ="suggestions_content" class="bloc_home" style="display:none">
+                <p>Suggestion</p>
+            </div>
+
+
+            <!--BLOC ADMIN-->
+            <!--Bloc retourner un emprunt-->
+            <div id ="retour_emprunt_content" class="bloc_home" style="display:none">
+                <p>Retourner un emprunt</p>
+            </div>
+
+            <!-- Bloc gestion inventaire-->
+            <div id ="gestion_inv_content" class="bloc_home" style="display:none">
+                <p>Gestion de l'inventaire</p>
+                <div id="selection">
+                    <p>Sélection</p>
+                    <label for="Titre">Titre</label>
+                    <input type="text" id="Titre" name="Titre"/><br>
+                    <label for="Serie">Série</label>
+                    <input type="text" id="Serie" name="Serie"/><br>
+                    <label for="Cote">Côte</label>
+                    <input type="text" id="Cote" name="Cote"/><br>
+                    <button onclick="recherche2_doc()">Rechercher</button>
+                </div>
+                <div id="recherche_resultat">
 
                 </div>
-                <!-- Bloc des suggestions-->
-                <div id ="suggestions_content" class="bloc_home" style="display:none">
-                    <p>Suggestion</p>
-                </div>
-                
-                
-                <!--BLOC ADMIN-->
-                <!--Bloc retourner un emprunt-->
-                <div id ="retour_emprunt_content" class="bloc_home" style="display:none">
-                    <p>Retourner un emprunt</p>
-                </div>
-                
-                <!-- Bloc gestion inventaire-->
-                <div id ="gestion_inv_content" class="bloc_home" style="display:none">
-                    <p>Gestion de l'inventaire</p>
-                    <div id="selection">
-                        <p>Sélection</p>
-                     
-                        <label for="Titre">Titre</label>
-                        <input type="text" id="Titre" name="Titre"/><br>
-                        <label for="Serie">Série</label>
-                        <input type="text" id="Serie" name="Serie"/><br>
-                        <label for="Cote">Côte</label>
-                        <input type="text" id="Cote" name="Cote"/><br>
-                        <button onclick="recherche2_doc()">Rechercher</button>
-                        
-                        
-                        
-                        
-                        
-                    </div>
-                    <div id="recherche_resultat">
-                        
-                    </div>
-                    
-                </div>
-                
-                <!-- Bloc gestion membres-->
-                <div id ="membres_content" class="bloc_home" style="display:none">
-                    <p>Gestion des membres</p>
-                </div>
-                
-                <!-- Bloc des stats-->
-                <div id ="stats_content" class="bloc_home" style="display:none">
-                    <p>Statistiques</p>
-                </div>
+
+            </div>
+
+            <!-- Bloc gestion membres-->
+            <div id ="membres_content" class="bloc_home" style="display:none">
+                <p>Gestion des membres</p>
+            </div>
+
+            <!-- Bloc des stats-->
+            <div id ="stats_content" class="bloc_home" style="display:none">
+                <p>Statistiques</p>
             </div>
         </div>
+
     </div>
 
     <!--POPUP : mot de passe oublié-->
