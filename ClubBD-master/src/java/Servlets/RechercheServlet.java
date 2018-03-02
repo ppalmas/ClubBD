@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author centrale
  */
-@WebServlet(name = "Recherche", urlPatterns = {"/Recherche"})
-public class Recherche extends HttpServlet {
+@WebServlet(name = "RechercheServlet", urlPatterns = {"/RechercheServlet"})
+public class RechercheServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

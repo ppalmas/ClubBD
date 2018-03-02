@@ -22,6 +22,7 @@
 
         <!-- STYLES -->
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/index.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/base.css">
 
 
         <!-- SCRIPTS -->
@@ -51,38 +52,34 @@
             <div  class="row content">          
                 <!-- Volet de gauche -->
                 <div id="left_div" class="col-md-4">
-                    <p id="title">Bienvenue sur le site du club BD</p>
                     <!-- Formulaire de connexion -->
-                    <div class="modal-body" width="100%">  
-                        <center>
-                            <p></p>
-                            <!-- affichage nom prénom-->
-                            <p class="info_perso" id="info_name" style="margin-top:10px;font-weight:bold;"><c:out value="${prenom}"/> <c:out value="${nom}"/></p>
-                            <!-- affichage email-->
-                            <p class="info_perso"id="info_email" ><c:out value="${email}"/></p>
-                            <!-- lien de modification -->
-                            <a id="modification_link" href="#" onclick="pop_info();">Modifier les informations personnelles</a>
-                            <button href="#" onclick="deconnect()">Se déconnecter</button>
+                    <center>
+                        <p></p>
+                        <!-- affichage nom prénom-->
+                        <p class="info_perso" id="title" style="margin-top:5px;font-weight:bold;padding:1%;"><c:out value="${prenom}"/> <c:out value="${nom}"/></p>
+                        <!-- affichage email-->
+                        <p class="info_perso"id="info_email" ><c:out value="${email}"/></p>
+                        <!-- lien de modification -->
+                        <a style="margin-bottom:5px;" id="modification_link" href="#" onclick="pop_info();">Modifier les informations personnelles</a>
+                        <p><button style="margin-bottom:10px;" href="#" onclick="deconnect()">Se déconnecter</button></p>
 
 
-                        </center>
-                        <!-- Différents onglets -->
-                        <center><div class="onglet_separator"></div>
-                            <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content'])">A la une</a>
-                            <div class="onglet_separator"></div>
-                            <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content'])">Rechercher...</a>
+                    </center>
+                    <!-- Différents onglets -->
+                    <center><div class="onglet_separator"></div>
+                        <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content'])">A la une</a>
+                        <div class="onglet_separator"></div>
+                        <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content'])">Rechercher...</a>
 
-                            <div class="onglet_separator"></div>
-                            <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content'])">Suggestions de lecture</a>
-                            <div class="onglet_separator"></div>
-                            <p class="onglets" onclick="getMonCompte()" id="gestion_compte">Mon compte</p>
-                            <div class="onglet_separator"></div>
-                            <p class="onglets" style="display:none" onclick="getGestion()" id="gestion_inventaire">Gestion admin</p>
-                            <div class="onglet_separator"></div>
-                            <p class="onglets" style="display:none" onclick="" id="gestion_emprunt">Gestion des emprunts</p>
-                        </center>
-
-                    </div>
+                        <div class="onglet_separator"></div>
+                        <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content'])">Suggestions de lecture</a>
+                        <div class="onglet_separator"></div>
+                        <a class="onglets" href="#" onclick="getMonCompte()" id="gestion_compte">Mon compte</a>
+                        <div class="onglet_separator"></div>
+                        <a class="onglets" href="#" style="display:none" onclick="getGestion()" id="gestion_inventaire">Gestion admin</a>
+                        <div class="onglet_separator"></div>
+                        <a class="onglets" href="#" style="display:none" onclick="" id="gestion_emprunt">Gestion des emprunts</a>
+                    </center>
 
                 </div>
                 <!-- Volet de droite -->
@@ -102,14 +99,14 @@
                     <div id ="suggestions_content" class="bloc_home" style="display:none">
                         <p>Suggestion</p>
                     </div>
-                    
+
                 </div>
                 <!--BLOC ADMIN-->
                 <!-- Bloc gestion inventaire-->
                 <div id ="gestion_inv_content" class="bloc_home" style="display:none">
                     <p>Gestion de l'inventaire</p>
-                    
-                    
+
+
                 </div>
 
                 <!-- Bloc gestion membres-->

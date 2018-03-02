@@ -11,8 +11,6 @@ function connect() {
     var email = document.getElementById("email").value;
     var mdp = document.getElementById("password").value;
     
-
-    
     if (verif_saisie(email, mdp)) {
         //Si la saisie est valide : appel à la servlet de connexion (ControlConnexionServlet)
         //via le protocole http
@@ -80,10 +78,10 @@ function verif_saisie(email, mdp) {
 
     if (!v_email) {
         //Erreur email 
-        document.getElementById("error_connect").innerHTML = "error_email_fr";
+        document.getElementById("error_connect").innerHTML = "Veuillez entrer un email.";
     } else if (!v_mdp) {
         //Erreur mot de passe vide
-        document.getElementById("error_connect").innerHTML = "error_empty_password_fr";
+        document.getElementById("error_connect").innerHTML = "Veuillez enter un mot de passe.";
     }
     return v_email && v_mdp;
 

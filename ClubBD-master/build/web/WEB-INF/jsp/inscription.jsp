@@ -22,6 +22,7 @@
 
         <!-- STYLES -->
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/index.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/base.css">
 
 
         <!-- SCRIPTS -->
@@ -35,16 +36,19 @@
 
     <!-- CONTENU PRINCIPAL -->
 
-    <div class="container">    
-        <div  class="row content"> 
+    <div class="container">
+        <div style="float:left;margin:5px;">
+            <a href="#" onclick="goHome()">Retour</a>
+        </div>
+        <div class="row_content"> 
             <center>
             <p style="margin-top:30px">Inscription</p>
             <p id="inscription_error"></p>
-            <p><input id="email_inscri" placeholder="Email"></p>
-            <p><input type="password" id="mdp_inscri" placeholder="Mot de passe"></p>
-            <p><input type="password" id="mdp_confirm_inscri" placeholder="Confirmation de Mot de passe"></p>
-            <p><input id="nom_inscri" placeholder="Nom"></p>
-            <p><input id="prenom_inscri" placeholder="Prénom"></p>
+            <p><input id="email_inscri" style="width:200px;" placeholder="Email"></p>
+            <p><input  type="password" id="mdp_inscri" style="width:200px;" placeholder="Mot de passe"></p>
+            <p><input type="password" id="mdp_confirm_inscri" style="width:200px;" placeholder="Confirmation de Mot de passe"></p>
+            <p><input id="nom_inscri" style="width:200px;" placeholder="Nom"></p>
+            <p><input id="prenom_inscri" style="width:200px;" placeholder="Prénom"></p>
             <button onclick="inscription()">Valider</button>
             </center>
         </div>

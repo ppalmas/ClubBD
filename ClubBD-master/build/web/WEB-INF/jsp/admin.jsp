@@ -22,6 +22,7 @@
 
         <!-- STYLES -->
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/index.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/base.css">
 
 
         <!-- SCRIPTS -->

@@ -22,6 +22,7 @@
 
         <!-- STYLES -->
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/index.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/base.css">
 
         <!-- SCRIPTS -->
         <script src="Scripts/navigation.js"></script>
@@ -37,74 +38,71 @@
 
         <!-- CONTENU PRINCIPAL -->
 
-        <div class="container">    
-            <div  class="row content">          
-                <!-- Volet de gauche -->
-                <div id="left_div" class="col-md-4">
-                    <p id="title">Bienvenue sur le site du club BD</p>
-                    <!-- Formulaire de connexion -->
-                    <div class="modal-body" width="100%">  
-                        <center>
-                            <!-- Champ pour l'email -->
-                            <input type="text" name ="email" id="email" placeholder="Email">    
-                            <!-- Champ pour le mot de passe -->
-                            <input  type="password" name="password" id="password"  style="margin-left:5px; margin-bottom:7px" placeholder="Mot de passe">
-                            <!-- Bouton pour soumettre le formulaire de connexion -->
-                            <button id ="valid_connexion" type="button" class="button small_button" onclick="connect()">Ok</button>
+        <div class="container">            
+            <!-- Volet de gauche -->
+            <div id="left_div" class="col-md-4">
+                <p id="title">Bienvenue sur le site du club BD</p>
+                <!-- Formulaire de connexion -->
+                <center>
+                    <!-- Champ pour l'email -->
+                    <input type="text" name ="email" id="email" placeholder="Email">    
+                    <!-- Champ pour le mot de passe -->
+                    <input  type="password" name="password" id="password"  style="margin-left:5px; margin-bottom:7px" placeholder="Mot de passe">
+                    <!-- Bouton pour soumettre le formulaire de connexion -->
+                    <button id ="valid_connexion" type="button" class="button small_button" onclick="connect()">Ok</button>
 
-                            <!-- si erreur à la connexion -->
-                            <p id="error_connect"></p>
-                            <!-- Lien pour réinitialiser son mot de passe -->
-
-                            <br>
-                            <a id="mdp_oublie" href="#" onclick="pop_mdpoublie()"><i>Mot de passe oublié ?</i></a>
-                            <a id="inscription" href="#" onclick="getInscription()"><i>S'inscrire ?</i></a>
-                            <br>
-                        </center>
-                        <!-- Différents onglets -->
-                        <center><div class="onglet_separator"></div>
-                            <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content'])">A la une</a>
-                            <div class="onglet_separator"></div>
-                            <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content'])">Rechercher...</a>
-
-                            <div class="onglet_separator"></div>
-                            <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content'])">Suggestions de lecture</a>
-                        </center>
-
+                    <!-- si erreur à la connexion -->
+                    <p id="error_connect"></p>
+                    <!-- Lien pour réinitialiser son mot de passe -->
+                    <br>
+                    <div style="margin-bottom:10px;">
+                        <a id="mdp_oublie" href="#" onclick="pop_mdpoublie()"><i>Mot de passe oublié ?</i></a>
+                        <a id="inscription" href="#" onclick="getInscription()"><i>S'inscrire ?</i></a>
                     </div>
+                </center>
+                <!-- Différents onglets -->
+                <center>
+                    <div class="onglet_separator"></div>
+                    <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content'])">A la une</a>
+                    <div class="onglet_separator"></div>
+                    <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content'])">Rechercher...</a>
+                    <div class="onglet_separator"></div>
+                    <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content'])">Suggestions de lecture</a>
+                </center>
+
+            </div>
+            <!-- Volet de droite -->
+            <div id="right_div" class="col-md-8"> 
+                <!-- Bloc des news-->
+                <div id="news_content" class="bloc_home">
+                    <p> News</p>
                 </div>
-                <!-- Volet de droite -->
-                <div id="right_div" class="col-md-8"> 
-                    <!-- Bloc des news-->
-                    <div id="news_content" class="bloc_home">
-                        <p> News</p>
-                    </div>
-                    <!--Bloc de recherche d'ouvrages-->
-                    <div id="search_content" class="bloc_home" style="display:none;">
-                        <div class="row">
-                            <p>Recherche de documents</p>
-                            <input id="recherche_doc" placeholder="Entrez votre recherche...">
-                            <p id="critere">Rechercher par critère</p>
-                            <p>Titre</p>
-                            <input id="critere_titre">
+                <!--Bloc de recherche d'ouvrages-->
+                <div id="search_content" class="bloc_home" style="display:none;">
+                    <div class="row">
+                        <p>Recherche de documents</p>
+                        <input id="recherche_doc" placeholder="Entrez votre recherche...">
+                        <p id="critere">Rechercher par critère</p>
+                        <p>Titre</p>
+                        <input id="critere_titre">
 
-                            <p>Auteur</p>
-                            <input id="critere_auteur">
+                        <p>Auteur</p>
+                        <input id="critere_auteur">
 
-                            <button onclick="recherche_doc()">Rechercher</button>
+                        <button onclick="recherche_doc()">Rechercher</button>
 
-                            <div id="recherche_resultat">
-                                
-                            </div>
+                        <div id="recherche_resultat">
+
                         </div>
+                    </div>
 
-                    </div>
-                    <!-- Bloc des suggestions-->
-                    <div id ="suggestions_content" class="bloc_home" style="display:none">
-                        <p>Suggestion</p>
-                    </div>
+                </div>
+                <!-- Bloc des suggestions-->
+                <div id ="suggestions_content" class="bloc_home" style="display:none">
+                    <p>Suggestion</p>
                 </div>
             </div>
+
         </div>
 
         <!--POPUP : mot de passe oublié-->

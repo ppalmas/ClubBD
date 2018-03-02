@@ -60,3 +60,18 @@ function loadIndexUser(idStatut){
         //message d'erreur ?
     }
 }
+
+function goHome() {
+    var form = document.createElement('form');
+    form.method = "GET";
+    form.action = "index.htm";
+
+    var c1 = document.createElement('input');
+    c1.type = "hidden";
+    c1.name = "idco";
+    c1.value = 0;
+    form.appendChild(c1);
+
+    document.body.appendChild(form);
+    form.submit();
+}

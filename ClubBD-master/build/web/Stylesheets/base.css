@@ -9,18 +9,58 @@ and open the template in the editor.
     CSS de base pour tout le site
 */
 
+.container{
+    text-align: center;
+}
+.row_content{
+    background-color : #F4F4F4;
+    border : 1px solid black;
+    width : 300px;
+    padding:1%;
+    margin : auto;
+    margin-top: 10px!important;
+    text-align: center;
+    border-radius: 10px;
+}
+
 /* PARAGRAPHE */
 p{
     width:100%;
     text-align: center;
     color : black;
     font-weight: 200;
+    font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
 }
 
 /* TITRE */
 #title{
-    color:#778899;
+    color:#3E5250;
     font-weight:500;
+    font-size:26pt;
     padding:4%;
+    font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
+}
+
+a{
+    color : #717474;
+    font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
+}
+
+a:hover{ 
+    color: black;
+}
+
+/* ONGLETS */
+/* Séparateur entre les onglets */
+.onglet_separator{
+    width:100%;
+    height : 1px;
+    background-color: #C0C0C0;
+    margin-bottom: 6px;
+}
+
+
+.onglets {
+    font-size:14pt;
 }
 
