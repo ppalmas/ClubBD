@@ -199,7 +199,7 @@ public class MembreManagerImpl implements MembreManager {
     @Override
     public void updateMdp(Membre m, String mdp) {
         //Mise à jour des infos
-        m.setMdp(mdp); // .setPersonPassword(PasswordHash.hash(mdp));
+        m.setMdp(PasswordHash.hash(mdp)); // .setPersonPassword(PasswordHash.hash(mdp));
         //Update dans la base de données
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

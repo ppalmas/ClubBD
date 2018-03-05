@@ -32,6 +32,10 @@ p{
     font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
 }
 
+.left_p{
+    text-align: left;
+}
+
 /* TITRE */
 #title{
     color:#3E5250;
@@ -40,12 +44,19 @@ p{
     padding:4%;
     font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
 }
-
+/* Subtitle */
+#subtitle{
+    color:#3E5250;
+    font-weight:500;
+    font-size:15pt;
+    padding:1%;
+}
+/* LIENS */
 a{
     color : #717474;
     font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", "Luxi Sans", sans-serif;
 }
-
+/* Lien lorsque le curseur survole */
 a:hover{ 
     color: black;
 }
@@ -62,5 +73,25 @@ a:hover{
 
 .onglets {
     font-size:14pt;
+}
+
+.left{
+    float : left;
+    margin:5px;
+}
+.left_bloc{
+    text-align:left;
+    margin:5px;
+}
+
+
+
+#pop_form{
+    width : 400px;
+    height: 500px!important;
+}
+
+.large_input{
+    width : 300px;
 }
 

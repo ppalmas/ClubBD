@@ -118,7 +118,7 @@
                     <p class= "title"  style="margin-top: 40px">Mot de passe oublié ?</p> 
                     <!-- Zone pour les messages d'erreur -->
                     <p id="inscription_error" class="error_message"></p>
-                    <!-- Formulaire d'inscription -->
+                    <!-- Formulaire -->
                     <div class="modal-body">  
                         <!-- Champ pour l'email du compte associé-->
                         <left><p>Email du compte :</p></left>
@@ -130,6 +130,8 @@
                 </div>
             </div>
         </div>
+        
+        
 
     </body>
 </html>

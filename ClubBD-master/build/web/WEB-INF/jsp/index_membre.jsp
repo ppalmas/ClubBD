@@ -29,11 +29,13 @@
         <script src="Scripts/navigation.js"></script>
         <script src="Scripts/index.js"></script>
         <script src="Scripts/deconnecter.js"></script>        
-        <script src="Scripts/index_membre.js"></script>
+        <script src="Scripts/index_membre.js"></script>      
+        <script src="Scripts/modif_infosperso.js"></script>
 
 
     </head>
-    <!-- CHARGEMENT DES DONNEES LIEES A L'UTILISATEUR CONNECTE -->
+    <!-- CHARGEMENT DES DONNEES LIEES A L'UTILISATEUR CONNECTE /!\ indispensable
+    pour la déconnexion-->
     <div style="display:none;">
         <!-- Données personnelles-->
         <input type="hidden" id="idMembre" value="<c:out value="${id}"/>"/>
@@ -59,8 +61,8 @@
                     <!-- affichage email-->
                     <p class="info_perso"id="info_email" ><c:out value="${email}"/></p>
                     <!-- lien de modification -->
-                    <a style="margin-bottom:5px;" id="modification_link" href="#" onclick="pop_info();">Modifier les informations personnelles</a>
-                    <p><button style="margin-bottom:10px;" href="#" onclick="deconnect()">Se déconnecter</button></p>
+                    <a id="modification_link" href="#" onclick="pop_info();">Modifier les informations personnelles</a>
+                    <p><button style="margin-bottom:10px;margin-top:10px;" href="#" onclick="deconnect()">Se déconnecter</button></p>
 
 
                 </center>
@@ -130,28 +132,38 @@
             <div id ="stats_content" class="bloc_home" style="display:none">
                 <p>Statistiques</p>
             </div>
-
         </div>
 
-        <!--POPUP : mot de passe oublié-->
-        <div class="modal fade" id="oubli_form" role="dialog">
-            <div class="modal-dialog modal-sm medium_modal">
+        <!--POP-UP: modification des données personnelles-->
+        <div class="modal fade" id="modif_form" role="dialog">
+            <div class="modal-dialog modal-sm" id="pop_form">
                 <div class="modal-content modal_form">
                     <!-- Croix de fermeture -->
                     <button class="close" data-dismiss="modal">&times;</button>
                     <!-- Titre -->
-                    <p class= "title"  style="margin-top: 40px">Mot de passe oublié ?</p> 
+                    <p id= "subtitle" style="margin-top: 40px">Modification des informations personnelles</p> 
                     <!-- Zone pour les messages d'erreur -->
-                    <p id="inscription_error" class="error_message"></p>
-                    <!-- Formulaire d'inscription -->
-                    <div class="modal-body">  
-                        <!-- Champ pour l'email du compte associé-->
-                        <left><p>Email du compte :</p></left>
-                        <input  type="text" name="name" id="email_password_forgotten">
-                        <center>
-                            <button id ="valid_password_forgotten" type="button" onclick="" style="margin-top: 20px;">Ok</button>
-                        </center>
+                    <p id="modification_error" class="error_message"></p>
+                    <!-- Formulaire de modification des données -->
+                    <!-- Champ pour l'email du compte associé-->
+                    <div class="left_bloc">
+                            <p class="left_p">Nom</p>
+                            <input class="large_input" type="text" id="nom_modif" value="<c:out value="${nom}"/>">
+                            <p class="left_p">Prénom</p>
+                            <input class="large_input" type="text" id="prenom_modif" value="<c:out value="${prenom}"/>">
+                            <p class="left_p">Email</p>
+                            <input class="large_input" type="text" id="email_modif" value="<c:out value="${email}"/>">
+                            <p class="left_p">Ancien mot de passe</p>
+                            <input class="large_input" type="password" id="mdp_ancien_modif">
+                            <p class="left_p">Nouveau mot de passe</p>
+                            <input class="large_input" type="password" id="mdp1_modif">
+                            <p class="left_p">Confirmation du mot de passe</p>
+                            <input class="large_input" type="password" id="mdp2_modif">
                     </div>
+
+                    <center>
+                        <button id ="valid_password_forgotten" type="button" onclick="modif_infos()" style="margin-top: 20px;">Ok</button>
+                    </center>
                 </div>
             </div>
         </div>

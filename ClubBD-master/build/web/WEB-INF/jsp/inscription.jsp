@@ -37,8 +37,8 @@
     <!-- CONTENU PRINCIPAL -->
 
     <div class="container">
-        <div style="float:left;margin:5px;">
-            <a href="#" onclick="goHome()">Retour</a>
+        <div class="left">
+            <a class="back" href="#" onclick="goHome()">Retour</a>
         </div>
         <div class="row_content"> 
             <center>

@@ -51,57 +51,41 @@
         <div id="left_div" class="col-md-4">
             <!--Informations du compte-->
             <center>
-                <p></p>
+                <div class="left">
+                    <a href="#" onclick="goHomeMember()">Retour</a>
+                </div>
+                <br>
                 <!-- affichage nom prénom-->
                 <p class="info_perso" id="title" style="margin-top:5px;font-weight:bold;padding:1%;"><c:out value="${prenom}"/> <c:out value="${nom}"/></p>
                 <!-- affichage email-->
-                <p class="info_perso"id="info_email" ><c:out value="${email}"/></p>
-                <!-- lien de modification -->
-                <a style="margin-bottom:5px;" id="modification_link" href="#" onclick="pop_info();">Modifier les informations personnelles</a>
+                <p class="info_perso"id="info_email" >Admin</p>
                 <p><button style="margin-bottom:10px;" href="#" onclick="deconnect()">Se déconnecter</button></p>
             </center>
             <!-- Différents onglets -->
             <center><div class="onglet_separator"></div>
-                <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content', 'stats_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">A la une</a>
-                <div class="onglet_separator"></div>
-                <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content', 'stats_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Rechercher...</a>
-                <div class="onglet_separator"></div>
-                <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content', 'stats_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Suggestions de lecture</a>
-                <div class="onglet_separator"></div>
+
                 <a class="onglets" href="#" onclick="getMonCompte()" id="gestion_compte">Mon compte</a>
                 <div class="onglet_separator"></div>
-                <a class="onglets" href="#" onclick="getNewContent('gestion_inv_content', ['news_content', 'search_content', 'stats_content', 'membres_content', 'suggestions_content', 'retour_emprunt_content'])">Gestion inventaire</a>
+                <a class="onglets" href="#" onclick="getNewContent('propositions_content', ['stats_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Propositions d'achat</a>
                 <div class="onglet_separator"></div>
-                <a class="onglets" href="#" onclick="getNewContent('membres_content', ['news_content', 'search_content', 'stats_content', 'gestion_inv_content', 'suggestions_content', 'retour_emprunt_content'])">Gestion membres</a>
+                <a class="onglets" href="#" onclick="getNewContent('gestion_inv_content', ['propositions_content', 'stats_content', 'membres_content', 'retour_emprunt_content'])">Gestion inventaire</a>
                 <div class="onglet_separator"></div>
-                <a class="onglets" href="#" onclick="getNewContent('stats_content', ['news_content', 'search_content', 'membres_content', 'gestion_inv_content', 'suggestions_content', 'retour_emprunt_content'])">Statistiques</a>
+                <a class="onglets" href="#" onclick="getNewContent('membres_content', ['propositions_content', 'stats_content', 'gestion_inv_content', 'retour_emprunt_content'])">Gestion membres</a>
                 <div class="onglet_separator"></div>
-                <a class="onglets" href="#" onclick="getNewContent('retour_emprunt_content', ['news_content', 'search_content', 'membres_content', 'gestion_inv_content', 'suggestions_content'])">Retour emprunts</a>
+                <a class="onglets" href="#" onclick="getNewContent('stats_content', ['propositions_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Statistiques</a>
+                <div class="onglet_separator"></div>
+                <a class="onglets" href="#" onclick="getNewContent('retour_emprunt_content', ['stats_content', 'propositions_content', 'news_content', 'search_content', 'membres_content', 'gestion_inv_content'])">Retour emprunts</a>
             </center>
         </div>
         <!-- Volet de droite -->
         <div id="right_div" class="col-md-8"> 
-            <!-- Bloc des news-->
-            <div id="news_content" class="bloc_home">
-                <p> News</p>
-            </div>
-            <!--Bloc de recherche d'ouvrages-->
-            <div id="search_content" class="bloc_home" style="display:none;">
-                <div class="row">
-                    <p>Recherche</p>
-                </div>
-
-            </div>
-            <!-- Bloc des suggestions-->
-            <div id ="suggestions_content" class="bloc_home" style="display:none">
-                <p>Suggestion</p>
-            </div>
-
-
             <!--BLOC ADMIN-->
             <!--Bloc retourner un emprunt-->
             <div id ="retour_emprunt_content" class="bloc_home" style="display:none">
                 <p>Retourner un emprunt</p>
+            </div>
+            <div id ="propositions_content" class="bloc_home" style="display:none">
+                <p>Propositions d'achat</p>
             </div>
 
             <!-- Bloc gestion inventaire-->

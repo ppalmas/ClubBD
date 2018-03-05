@@ -61,6 +61,10 @@ function loadIndexUser(idStatut){
     }
 }
 
+/**
+ * Retourner à la page d'accueil
+ * @returns {undefined}
+ */
 function goHome() {
     var form = document.createElement('form');
     form.method = "GET";
@@ -70,6 +74,25 @@ function goHome() {
     c1.type = "hidden";
     c1.name = "idco";
     c1.value = 0;
+    form.appendChild(c1);
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+/**
+ * Retourner à la page d'accueil d'utilisateur connecté
+ * @returns {undefined}
+ */
+function goHomeMember() {
+    var form = document.createElement('form');
+    form.method = "GET";
+    form.action = "index_membre.htm";
+
+    var c1 = document.createElement('input');
+    c1.type = "hidden";
+    c1.name = "idco";
+    c1.value = document.getElementById("idco").value;
     form.appendChild(c1);
 
     document.body.appendChild(form);
