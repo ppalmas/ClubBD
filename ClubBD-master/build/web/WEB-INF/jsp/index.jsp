@@ -29,11 +29,12 @@
         <script src="Scripts/index.js"></script>
         <script src="Scripts/connecter.js"></script>
         <script src="Scripts/recherche2.js"></script>
+        <script src="Scripts/event_listener.js"></script>
 
 
 
     </head>
-    <body>
+    <body onload="load_listener(['email','password']);">
 
 
         <!-- CONTENU PRINCIPAL -->
@@ -49,7 +50,7 @@
                     <!-- Champ pour le mot de passe -->
                     <input  type="password" name="password" id="password"  style="margin-left:5px; margin-bottom:7px" placeholder="Mot de passe">
                     <!-- Bouton pour soumettre le formulaire de connexion -->
-                    <button id ="valid_connexion" type="button" class="button small_button" onclick="connect()">Ok</button>
+                    <button id ="validation_button" type="button" class="button small_button" onclick="connect()">Ok</button>
 
                     <!-- si erreur à la connexion -->
                     <p id="error_connect"></p>

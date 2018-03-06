@@ -2,6 +2,8 @@
  * Fonctions pour gérer l'inscription d'un utilisateur 
  * */
 
+
+
 /**
  * Inscription d'un utilisateur 
  * Se fait grâce à la Servlet ControlInscriptionServlet, et renvoie la page index_membre si l'inscription réussit

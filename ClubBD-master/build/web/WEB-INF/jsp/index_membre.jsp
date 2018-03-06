@@ -30,22 +30,24 @@
         <script src="Scripts/index.js"></script>
         <script src="Scripts/deconnecter.js"></script>        
         <script src="Scripts/index_membre.js"></script>      
-        <script src="Scripts/modif_infosperso.js"></script>
+        <script src="Scripts/modif_infosperso.js"></script>  
+        <script src="Scripts/event_listener.js"></script>
 
 
     </head>
-    <!-- CHARGEMENT DES DONNEES LIEES A L'UTILISATEUR CONNECTE /!\ indispensable
-    pour la déconnexion-->
-    <div style="display:none;">
-        <!-- Données personnelles-->
-        <input type="hidden" id="idMembre" value="<c:out value="${id}"/>"/>
-        <input type="hidden" id="nom" value="<c:out value="${nom}"/>"/> 
-        <input type="hidden" id="prenom" value="<c:out value="${prenom}"/>"/> 
-        <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
+    <body onload="load_listener(['nom_modif', 'prenom_modif', 'email_modif', 'mdp_ancien_modif', 'mdp1_modif', 'mdp2_modif'])">
+        <!-- CHARGEMENT DES DONNEES LIEES A L'UTILISATEUR CONNECTE /!\ indispensable
+        pour la déconnexion-->
+        <div style="display:none;">
+            <!-- Données personnelles-->
+            <input type="hidden" id="idMembre" value="<c:out value="${id}"/>"/>
+            <input type="hidden" id="nom" value="<c:out value="${nom}"/>"/> 
+            <input type="hidden" id="prenom" value="<c:out value="${prenom}"/>"/> 
+            <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
 
-        <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/> 
-        <input type="hidden" id="idStatut" value="<c:out value="${idStatut}"/>"/> 
-    </div>
+            <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/> 
+            <input type="hidden" id="idStatut" value="<c:out value="${idStatut}"/>"/> 
+        </div>
 
 
     <body onload="loadIndexUser(<c:out value="${idStatut}"/>);">
@@ -147,22 +149,22 @@
                     <!-- Formulaire de modification des données -->
                     <!-- Champ pour l'email du compte associé-->
                     <div class="left_bloc">
-                            <p class="left_p">Nom</p>
-                            <input class="large_input" type="text" id="nom_modif" value="<c:out value="${nom}"/>">
-                            <p class="left_p">Prénom</p>
-                            <input class="large_input" type="text" id="prenom_modif" value="<c:out value="${prenom}"/>">
-                            <p class="left_p">Email</p>
-                            <input class="large_input" type="text" id="email_modif" value="<c:out value="${email}"/>">
-                            <p class="left_p">Ancien mot de passe</p>
-                            <input class="large_input" type="password" id="mdp_ancien_modif">
-                            <p class="left_p">Nouveau mot de passe</p>
-                            <input class="large_input" type="password" id="mdp1_modif">
-                            <p class="left_p">Confirmation du mot de passe</p>
-                            <input class="large_input" type="password" id="mdp2_modif">
+                        <p class="left_p">Nom</p>
+                        <input class="large_input" type="text" id="nom_modif" value="<c:out value="${nom}"/>">
+                        <p class="left_p">Prénom</p>
+                        <input class="large_input" type="text" id="prenom_modif" value="<c:out value="${prenom}"/>">
+                        <p class="left_p">Email</p>
+                        <input class="large_input" type="text" id="email_modif" value="<c:out value="${email}"/>">
+                        <p class="left_p">Ancien mot de passe</p>
+                        <input class="large_input" type="password" id="mdp_ancien_modif">
+                        <p class="left_p">Nouveau mot de passe</p>
+                        <input class="large_input" type="password" id="mdp1_modif">
+                        <p class="left_p">Confirmation du mot de passe</p>
+                        <input class="large_input" type="password" id="mdp2_modif">
                     </div>
 
                     <center>
-                        <button id ="valid_password_forgotten" type="button" onclick="modif_infos()" style="margin-top: 20px;">Ok</button>
+                        <button id ="validation_button" type="button" onclick="modif_infos()" style="margin-top: 20px;">Ok</button>
                     </center>
                 </div>
             </div>

@@ -28,9 +28,11 @@
         <!-- SCRIPTS -->
         <script src="Scripts/navigation.js"></script>
         <script src="Scripts/inscription.js"></script>
+        <script src="Scripts/event_listener.js"></script>
 
 
     </head>
+    <body onload="load_listener(['mdp_inscri','mdp_confirm_inscri','email_inscri','nom_inscri','prenom_inscri']);">
 
 
 
@@ -49,7 +51,7 @@
             <p><input type="password" id="mdp_confirm_inscri" style="width:200px;" placeholder="Confirmation de Mot de passe"></p>
             <p><input id="nom_inscri" style="width:200px;" placeholder="Nom"></p>
             <p><input id="prenom_inscri" style="width:200px;" placeholder="Prénom"></p>
-            <button onclick="inscription()">Valider</button>
+            <button id="validation_button" onclick="inscription()">Valider</button>
             </center>
         </div>
     </div>
