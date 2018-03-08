@@ -74,7 +74,7 @@ function recherche2_doc() {
 
         //formulaire envoyé en get à la servlet recherche
         var data = "titre=" + titre + "&" + "serie=" + serie + "&" + "cote=" + cote;
-        xhttp.open("GET", "Recherche?" + data, true);
+        xhttp.open("GET", "RechercheServlet?" + data, true);
         xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
         xhttp.send();
 

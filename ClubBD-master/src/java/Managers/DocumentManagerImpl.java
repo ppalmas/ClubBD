@@ -5,6 +5,8 @@
  */
 package Managers;
 
+import Database.Createur;
+import Database.Createurdocument;
 import Database.Document;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,13 @@ public class DocumentManagerImpl implements DocumentManager {
             emf = Persistence.createEntityManagerFactory("ClubBDPU");
         }
     }
+    
+    public static DocumentManager getInstance() {
+        if (theDocumentManager == null) {
+            theDocumentManager = new DocumentManagerImpl();
+        }
+        return theDocumentManager;
+    }
 
     /**
      * Recherche des documents par un mot clé
@@ -44,6 +53,12 @@ public class DocumentManagerImpl implements DocumentManager {
         return l;
     }
 
+    /**
+     * Recherche un document suivant un liste de critères au format string :
+     * dans cette liste, le premier élément est le titre, le second l'auteur, le troisième la cote
+     * @param criteres
+     * @return 
+     */
     @Override
     public List<Document> findDocument(ArrayList<String> criteres) {
 
@@ -58,6 +73,7 @@ public class DocumentManagerImpl implements DocumentManager {
             //si titre
 
             if (criteres.get(0) != "") {
+                //on recherche un document dont le titre comporte le critère
 
                 SQL = SQL + " d.titre LIKE " + "'%" + criteres.get(0) + "%'";
             } else {
@@ -85,11 +101,51 @@ public class DocumentManagerImpl implements DocumentManager {
         return l;
     }
 
-    public static DocumentManager getInstance() {
-        if (theDocumentManager == null) {
-            theDocumentManager = new DocumentManagerImpl();
+    
+    
+    /**
+     * Renvoie l'id max des documents de la bdd
+     * @return id maximum des documents de la base de données
+     */
+    @Override
+    public int getMaxId(){
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createNamedQuery("Document.findAll", Document.class);
+        List l = q.getResultList();
+        return (l.size() + 1);
+    }
+    
+    /**
+     * Retrouver un document par son id
+     *
+     * @param id id du document
+     * @return Document correspondant
+     */
+    @Override
+    public Document findDocument(int id) {
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT d FROM Document d WHERE  d.idDocument=:id");
+        q.setParameter("id", id);
+        List l = q.getResultList();
+        return l.isEmpty() ? null : (Document) l.get(0);
+    }
+    
+    /**
+     * Retourne la liste des créateurs associée à un document
+     * @param id
+     * @return 
+     */
+    public ArrayList<Createurdocument> findCreateur(int id){
+        ArrayList<Createurdocument> cr = new ArrayList();
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT DISTINCT cd FROM Createurdocument cd JOIN Document d WHERE  d.idDocument=:id");
+       //SELECT distinct l FROM Location l INNER JOIN  Favorite f ON (l.locationId = f.multimediaId.locationId.locationId) WHERE  f.personId=:p
+        q.setParameter("id", id);
+        List l = q.getResultList();
+        for (Object o : l) {
+            cr.add((Createurdocument) o);
         }
-        return theDocumentManager;
+        return cr;
     }
 
 }

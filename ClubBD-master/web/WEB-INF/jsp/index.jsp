@@ -30,6 +30,7 @@
         <script src="Scripts/connecter.js"></script>
         <script src="Scripts/recherche2.js"></script>
         <script src="Scripts/event_listener.js"></script>
+        <script src="Scripts/get_suggestion.js"></script>
 
 
 
@@ -68,7 +69,7 @@
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content'])">Rechercher...</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content'])">Suggestions de lecture</a>
+                    <a class="onglets" href="#" onclick="get_suggestion(); getNewContent('suggestions_content', ['news_content', 'search_content'])">Suggestions de lecture</a>
                 </center>
 
             </div>
@@ -103,10 +104,10 @@
                 </div>
                 <!-- Bloc des suggestions-->
                 <div id ="suggestions_content" class="bloc_home" style="display:none">
-                    <div class="row_content" style="width: 95%;">
-                        <p>Suggestion de lecture</p>
-                        <div id="suggestion_ouvrage">
-                            <p id="sugg_title"></p>
+                    <div class="row_content" style="width: 95%; text-align:center;">
+                        <p id="subtitle">Suggestion de lecture</p>
+                        <div id="suggestion_ouvrage" class="bloc_doc">
+                            <p id="sugg_titre"></p>
                             <p id="sugg_auteur"></p>
                             <p id="sugg_serie"></p>
                             <p id="sugg_numero"></p>

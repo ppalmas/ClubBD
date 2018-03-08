@@ -45,9 +45,7 @@ public class ConnectController {
         //Connexion de l'utilisateur 
         String idco = cm.connect(m);
 
-       /** if (pm.findStatusName(m)==1){
-            
-        }**/ // si on fait une page par niveau d'accès
+       
         ModelAndView r = new ModelAndView("redirect:index_membre.htm");
         r.addObject("idco", idco);
 
@@ -74,10 +72,7 @@ public class ConnectController {
             result.addObject("nom", m.getNom());
             result.addObject("prenom", m.getPrenom());
             result.addObject("id", m.getIdMembre());
-
             result.addObject("idStatut", m.getIdStatut().getIdStatut());
-
-
             //Connexion de l'utilisateur 
             result.addObject("idco", idco);
 
