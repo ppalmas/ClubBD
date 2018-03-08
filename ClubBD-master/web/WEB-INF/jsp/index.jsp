@@ -103,7 +103,15 @@
                 </div>
                 <!-- Bloc des suggestions-->
                 <div id ="suggestions_content" class="bloc_home" style="display:none">
-                    <p>Suggestion</p>
+                    <div class="row_content" style="width: 95%;">
+                        <p>Suggestion de lecture</p>
+                        <div id="suggestion_ouvrage">
+                            <p id="sugg_title"></p>
+                            <p id="sugg_auteur"></p>
+                            <p id="sugg_serie"></p>
+                            <p id="sugg_numero"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -35,7 +35,7 @@
 
 
     </head>
-    <body onload="load_listener(['nom_modif', 'prenom_modif', 'email_modif', 'mdp_ancien_modif', 'mdp1_modif', 'mdp2_modif'])">
+    <body onload="load_listener(['nom_modif', 'prenom_modif', 'email_modif', 'mdp_ancien_modif', 'mdp1_modif', 'mdp2_modif']); loadIndexUser(<c:out value="${idStatut}"/>)">
         <!-- CHARGEMENT DES DONNEES LIEES A L'UTILISATEUR CONNECTE /!\ indispensable
         pour la déconnexion-->
         <div style="display:none;">
@@ -44,7 +44,6 @@
             <input type="hidden" id="nom" value="<c:out value="${nom}"/>"/> 
             <input type="hidden" id="prenom" value="<c:out value="${prenom}"/>"/> 
             <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
-
             <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/> 
             <input type="hidden" id="idStatut" value="<c:out value="${idStatut}"/>"/> 
         </div>
@@ -115,25 +114,13 @@
                 </div>
                 <!-- Bloc des suggestions-->
                 <div id ="suggestions_content" class="bloc_home" style="display:none">
-                    <p>Suggestion</p>
+                    <div class="row_content" style="width: 95%;">
+                        <p>Suggestions de lecture</p>
+                    </div>
                 </div>
 
             </div>
-            <!--BLOC ADMIN-->
-            <!-- Bloc gestion inventaire-->
-            <div id ="gestion_inv_content" class="bloc_home" style="display:none">
-                <p>Gestion de l'inventaire</p>
-            </div>
-
-            <!-- Bloc gestion membres-->
-            <div id ="membres_content" class="bloc_home" style="display:none">
-                <p>Gestion des membres</p>
-            </div>
-
-            <!-- Bloc des stats-->
-            <div id ="stats_content" class="bloc_home" style="display:none">
-                <p>Statistiques</p>
-            </div>
+            
         </div>
 
         <!--POP-UP: modification des données personnelles-->
