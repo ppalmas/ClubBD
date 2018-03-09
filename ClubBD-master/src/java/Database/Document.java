@@ -209,6 +209,8 @@ public class Document implements Serializable {
         hash += (idDocument != null ? idDocument.hashCode() : 0);
         return hash;
     }
+    
+
 
     @Override
     public boolean equals(Object object) {

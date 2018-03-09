@@ -27,9 +27,10 @@
 
         <!-- SCRIPTS -->
         <script src="Scripts/navigation.js"></script>
-        <script src="Scripts/recherche2.js"></script>
+        
         <script src="Scripts/index.js"></script>
         <script src="Scripts/deconnecter.js"></script>
+        <script src="Scripts/gestion_inv.js"></script>
 
 
     </head>
@@ -91,9 +92,33 @@
 
                 <!-- Bloc gestion inventaire-->
                 <div id ="gestion_inv_content" class="bloc_home" style="display:none">
-                    <p>Gestion de l'inventaire</p>
+                    <h1>Gestion de l'inventaire</h1>
+                    <div id="ajout">
+                        <h2>Ajout</h2>
+                        <label for="titrea">Titre</label>
+                        <input id="titrea" type="text"/><br>
+                        <label for="cotea">Côte</label>
+                        <input id="cotea" type="text"/><br>
+                        <label for="seriea">Série</label>
+                        <input id="seriea" type="text"/><br>
+                        <label for="numeroa">Numéro</label>
+                        <input id="numeroa" type="text"/><br>
+                        <label for="descriptiona">Description</label>
+                        <input id="descriptiona" type="text"/><br>
+                        <label for="etata">Etat</label>
+                        <input id="etata" type="text"/><br>
+                        <label for="imagea">Chemin image</label>
+                        <input id="imagea" type="text"/><br>
+                        <label for="commentairea">Commentaire</label>
+                        <input id="commentairea" type="text"/><br>
+                        
+                                    
+                        
+                        <input type="submit" value="Ajouter" onclick="ajouter()"/>
+                        
+                    </div>
                     <div id="selection">
-                        <p>Sélection</p>
+                        <h2>Sélection</h2>
                         <label for="Titre">Titre</label>
                         <input type="text" id="Titre" name="Titre"/><br>
                         <label for="Serie">Série</label>
@@ -102,9 +127,22 @@
                         <input type="text" id="Cote" name="Cote"/><br>
                         <button onclick="recherche2_doc()">Rechercher</button>
                     </div>
+                    <h2>Résultats</h2>
                     <div id="recherche_resultat">
 
+                        
                     </div>
+                    <div id="modif">
+                       <h2>Modification</h2>  
+                       <label for="titrem">Titre</label>
+                       <input type="text" id="titrem" value=""/><br>
+                       <label for="cotem">Côte</label>
+                       <input type="text" id="cotem" value=""/><br>
+                       <label for="seriem">Série</label>
+                       <input type="text" id="seriem" value=""/><br>
+                    </div>
+                   
+                    
 
                 </div>
 

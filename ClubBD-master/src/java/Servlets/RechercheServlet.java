@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author centrale
  */
-@WebServlet(name = "RechercheServlet", urlPatterns = {"/RechercheServlet"})
+@WebServlet(name = "RerchercheServlet", urlPatterns = {"/RechercheServlet"})
 public class RechercheServlet extends HttpServlet {
 
     /**
@@ -57,17 +57,32 @@ public class RechercheServlet extends HttpServlet {
         try {
             l = dm.findDocument(criteres);
 
+            
+            //creation d'un json pour exploiter les reponses dans le js
             for (int i = 0; i < l.size(); i++) {
 
-                res = res + l.get(i).getTitre() + "<br>";
+                res = res + "{\"titre\":\"" + l.get(i).getTitre() + "\",";
+                
+                if (l.get(i).getIdSerie() != null) {
+                    res = res + "\"serie\":\"" + l.get(i).getIdSerie().getNomSerie() + "\",";
+                }
+                else {
+                    res = res + "\"serie\":\"(hors série)\",";
+                }
+                
+                res = res + "\"cote\":\"" + l.get(i).getCote() + "\", \"id\":\""+ l.get(i).getIdDocument().toString()+ "\"}";
+                
+                res=res+",";
             }
+            
         } catch (Exception e) {
 
         }
 
         // Envoi de la réponse
         response.setContentType("text/html; charset=UTF-8");
-        response.getWriter().write(res); // Réponse : resultats
+        System.out.println("{\"resultats\":[" + res.subSequence(0, res.length()-1).toString() + "],\"nb\":\""+l.size()+"\"}");
+        response.getWriter().write("{\"resultats\":[" + res.subSequence(0, res.length()-1).toString() + "],\"nb\":\""+l.size()+"\"}"); // Réponse : resultats
 
     }
 }

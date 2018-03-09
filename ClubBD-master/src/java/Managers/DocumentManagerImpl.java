@@ -5,9 +5,9 @@
  */
 package Managers;
 
-import Database.Createur;
 import Database.Createurdocument;
 import Database.Document;
+import Database.Etat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -128,6 +128,31 @@ public class DocumentManagerImpl implements DocumentManager {
         q.setParameter("id", id);
         List l = q.getResultList();
         return l.isEmpty() ? null : (Document) l.get(0);
+    }
+    
+    public void insert(String titre, String cote) {
+        Document d = new Document();
+        d.setTitre(titre);
+        d.setCote(cote);
+        d.setCommentaire("");
+        d.setDescription("");
+        
+        
+        //pour l'etat
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT e FROM Etat e WHERE  e.idEtat=:id");
+        q.setParameter("id", 1);
+        List l = q.getResultList();       
+        
+        d.setIdEtat((Etat) l.get(0));
+        d.setImageDocument("none");
+        
+        
+        //Insertion
+        
+        em.getTransaction().begin();
+        em.persist(d);
+        em.getTransaction().commit();
     }
     
     /**

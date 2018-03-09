@@ -11,7 +11,6 @@ package Managers;
  */
 
 
-import Database.Createur;
 import Database.Createurdocument;
 import Database.Document;
 import java.util.ArrayList;
@@ -37,6 +36,8 @@ public interface DocumentManager {
      * @return 
      */
     public int getMaxId();
+    
+    public void insert(String titre, String cote);
     
     /**
      * Trouver un document par son id
