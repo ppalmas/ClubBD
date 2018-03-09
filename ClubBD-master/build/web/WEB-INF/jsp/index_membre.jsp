@@ -69,13 +69,13 @@
                 </center>
                 <!-- Différents onglets -->
                 <center><div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content'])">A la une</a>
+                    <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content', 'recap_content'])">A la une</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content'])">Rechercher...</a>
+                    <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content', 'recap_content'])">Rechercher...</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content'])">Suggestions de lecture</a>
+                    <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content', 'recap_content'])">Suggestions de lecture</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getMonCompte()" id="gestion_compte">Mon compte</a>
+                    <a class="onglets" href="#" onclick="getMesEmprunts()" id="gestion_compte">Mes Emprunts</a>
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" style="display:none" onclick="getGestion()" id="gestion_inventaire">Gestion admin</a>
                     <div class="onglet_separator"></div>
@@ -107,11 +107,46 @@
                         <button style="margin-top:10px;" onclick="recherche_doc()">Rechercher</button>
 
                     </div>
+                    
                     <div id="recherche_resultat">
-
+                        <!--<table>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Cote</th>
+                                <th>Serie</th>
+                                <th>Numéro</th>
+                                <th>Genre</th>
+                            </tr>
+                        <c:forEach var="item" items="${itemsList}">
+                             <tr>
+                                <td><c:out value="${item['titre']}"/></td>
+                                <td><c:out value="${item['auteur']}"/></td>
+                                <td><c:out value="${item['cote']}"/></td>
+                                <td><c:out value="${item['serie']}"/></td>
+                                <td><c:out value="${item['numero']}"/></td>
+                                <td><c:out value="${item['genre']}"/></td>
+                            </tr>
+                        </c:forEach>
+                        </table>-->
                     </div>
-
+                    
+                    <div id="display_ouvrage" class="bloc_home" style="display:none;">
+                        <!--<p>Ouvrage</p>
+                        <br/>
+                        <p>Titre : <c:out value="${aBook['titre']}"/></p>
+                        <p>Auteur : <c:out value="${aBook['auteur']}"/></p>
+                        <p>Cote : <c:out value="${aBook['cote']}"/></p>
+                        <p>Série : <c:out value="${aBook['serie']}"/></p>
+                        <p>Numéro : <c:out value="${aBook['numero']}"/></p>
+                        <p>Genre : <c:out value="${aBook['genre']}"/></p>
+                        <p>Description : <c:out value="${aBook['description']}"/></p>
+                        <br/>
+                        <p>Disponibilité : <c:out value="${aBook['disponible']}"/></p>
+                        <button id="reserver_button" onclick="reservation()">Réserver</button>-->
+                    </div>
+                    
                 </div>
+                                
                 <!-- Bloc des suggestions-->
                 <div id ="suggestions_content" class="bloc_home" style="display:none">
                     <div class="row_content" style="width: 95%;">

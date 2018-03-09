@@ -42,24 +42,42 @@ public class SuggestionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        //Initialisation variable
+        String res = "";
         //Récupération de l'id max des documents de la bdd
         DocumentManager dm = DocumentManagerImpl.getInstance();
         int n = dm.getMaxId();
 
         //Générer un nombre aléatoire parmi les id existants
         int idOuvrage = ThreadLocalRandom.current().nextInt(1, n);
-        //TRouver l'ouvrage par son id
-        Document d = dm.findDocument(idOuvrage);
-        String titre = d.getTitre();
-        ArrayList<Createurdocument> liste = dm.findCreateur(idOuvrage);
-        String auteurs = "";
-        for (int i=0; i<liste.size();i++){
-            auteurs += liste.get(i).getIdCreateur().getNomCreateur() + " " + liste.get(i).getIdCreateur().getPrenomCreateur() + ";*";
+        int idOuvrage2 = idOuvrage;
+        while (idOuvrage == idOuvrage2) {
+            idOuvrage2 = ThreadLocalRandom.current().nextInt(1, n);
         }
-        String res = titre + "*/*" + auteurs;
+        //Trouver les 2 ouvrages  par leur id
+        Document d = dm.findDocument(idOuvrage);
+        Document d2 = dm.findDocument(idOuvrage2);
+        //Récupérer la disponibilité des documents
+        Boolean dispo1 = dm.isAvailable(idOuvrage);
+        Boolean dispo2 = dm.isAvailable(idOuvrage2);
+        //Récupérer le titre
+        String titre = d.getTitre();
+        String titre2 = d2.getTitre();
+        //Récupérer les auteurs, en passant par createurDocument d'abord
+        ArrayList<Createurdocument> liste = dm.findCreateur(idOuvrage);
+        ArrayList<Createurdocument> liste2 = dm.findCreateur(idOuvrage2);
+        String auteurs = "";
+        String auteurs2 = "";
+        for (int i = 0; i < liste.size(); i++) {
+            auteurs += liste.get(i).getIdCreateur().getNomCreateur() + " " + liste.get(i).getIdCreateur().getPrenomCreateur() + ";*";           
+        }
+        for (int i = 0; i < liste2.size(); i++) {
+            auteurs2 += liste2.get(i).getIdCreateur().getNomCreateur() + " " + liste2.get(i).getIdCreateur().getPrenomCreateur() + ";*";           
+        }
+        
+        res=titre + "*/*" + auteurs + "*/*" + dispo1 + "*//*" + titre2 + "*/*" + auteurs2 + "*/*" + dispo2;
 
         //Envoi de la réponse : true si les login/mdp correspondent et false sinon
-        ConnectManager m = ConnectManagerImpl.getInstance();
         response.setContentType("text/html; charset=UTF-8");
         response.getWriter().write(res + "");
 

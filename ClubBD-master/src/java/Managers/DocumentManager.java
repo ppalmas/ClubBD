@@ -52,5 +52,20 @@ public interface DocumentManager {
      */
     public ArrayList<Createurdocument> findCreateur(int id);
     
+    /**
+     * Retourne un booléen ; vrai si le document en paramètre est disponible,
+     * faux sinon (le champ dateRetourne est nul)
+     * @param id du document
+     * @return 
+     */
+    public boolean isAvailable(int id);
+    /**
+     * Recherche un document suivant un liste de critères au format string :
+     *      *
+     * @param criteres
+     * @return
+     */
+    public List<Document> findDocumentSearch(ArrayList<String> criteres);
+    
 }
 

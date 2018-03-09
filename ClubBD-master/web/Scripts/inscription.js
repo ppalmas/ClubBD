@@ -56,6 +56,7 @@ function inscription() {
 
                     document.body.appendChild(form);
                     form.submit();
+                    alert("Votre inscription a bien été prise en compte.")
                     
                     //Si l'addresse email est déjà prise   
                 } else {
