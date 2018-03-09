@@ -6,10 +6,9 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
 
-<html>
+<!DOCTYPE html>
+<html lang="fr">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Club BD</title>
@@ -27,7 +26,7 @@
 
         <!-- SCRIPTS -->
         <script src="Scripts/navigation.js"></script>
-        
+
         <script src="Scripts/index.js"></script>
         <script src="Scripts/deconnecter.js"></script>
         <script src="Scripts/gestion_inv.js"></script>
@@ -43,7 +42,11 @@
             <input type="hidden" id="prenom" value="<c:out value="${prenom}"/>"/> 
             <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
             <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/> 
+
+
+
         </div>
+
 
 
 
@@ -93,32 +96,48 @@
                 <!-- Bloc gestion inventaire-->
                 <div id ="gestion_inv_content" class="bloc_home" style="display:none">
                     <h1>Gestion de l'inventaire</h1>
-                    <div id="ajout">
-                        <h2>Ajout</h2>
-                        <label for="titrea">Titre</label>
-                        <input id="titrea" type="text"/><br>
-                        <label for="cotea">Côte</label>
-                        <input id="cotea" type="text"/><br>
+                    <span onclick="getNewContent('ajout',['selection','modif','recherche_resultat'])"><h2>Ajout</h2></span>
+                    
+                    <div id="ajout" style="display:none">
+                        
+
+
+                        <label for="titrea">Titre*</label>
+                        <input name="titrea" id="titrea" type="text" value=""/><br>
+                        <label for="cotea">Côte*</label>
+                        <input name="cotea" id="cotea" type="text" value=""/><br>
                         <label for="seriea">Série</label>
-                        <input id="seriea" type="text"/><br>
+                        <input name="seriea" id="seriea" type="text" value=""/><br>
                         <label for="numeroa">Numéro</label>
-                        <input id="numeroa" type="text"/><br>
+                        <input name="numeroa" id="numeroa" type="text" value=""/><br>
                         <label for="descriptiona">Description</label>
-                        <input id="descriptiona" type="text"/><br>
-                        <label for="etata">Etat</label>
-                        <input id="etata" type="text"/><br>
+                        <input name="descriptiona" id="descriptiona" type="text" value=""/><br>
+                        <p>Etat*</p>
+                        <label for="neuf">Neuf</label>
+                        <input type="radio" id="neuf" name="etat" value="1" checked/>
+                        <label for="tbon">Très bon</label>
+                        <input type="radio" id="tbon" name="etat" value="2"/>
+                        <label for="bon">Bon</label>
+                        <input type="radio" id="bon" name="etat" value="3"/>
+                        <label for="abime">Abimé</label>
+                        <input type="radio" id="abime" name="etat" value="4"/>
+                        <label for="tabime">Très abimé</label>
+                        <input type="radio" id="tabime" name="etat" value="5"/>
+                        <br>
                         <label for="imagea">Chemin image</label>
-                        <input id="imagea" type="text"/><br>
+                        <input name="imagea" id="imagea" type="text" value=""/><br>
                         <label for="commentairea">Commentaire</label>
-                        <input id="commentairea" type="text"/><br>
-                        
-                                    
-                        
+                        <input name="commentairea" id="commentairea" type="text" value=""/><br>
+
+                                
+
                         <input type="submit" value="Ajouter" onclick="ajouter()"/>
-                        
+
+
                     </div>
-                    <div id="selection">
-                        <h2>Sélection</h2>
+                    <span onclick="getNewContent('selection',['ajout'])"><h2>Sélection</h2></span>
+                    <div id="selection" style="display:none">
+                        
                         <label for="Titre">Titre</label>
                         <input type="text" id="Titre" name="Titre"/><br>
                         <label for="Serie">Série</label>
@@ -130,19 +149,46 @@
                     <h2>Résultats</h2>
                     <div id="recherche_resultat">
 
-                        
+
                     </div>
-                    <div id="modif">
-                       <h2>Modification</h2>  
-                       <label for="titrem">Titre</label>
-                       <input type="text" id="titrem" value=""/><br>
-                       <label for="cotem">Côte</label>
-                       <input type="text" id="cotem" value=""/><br>
-                       <label for="seriem">Série</label>
-                       <input type="text" id="seriem" value=""/><br>
+                    <h2>Modification</h2> 
+                    <div id="modif" style="display:none">
+                        <label>Id document</label>
+                        <input id="idm" type="text" readonly="readonly" value=""><br>
+                         
+                        <label for="titrem">Titre*</label>
+                        <input name="titrem" id="titrem" type="text" value=""/><br>
+                        <label for="cotem">Côte*</label>
+                        <input name="cotem" id="cotem" type="text" value=""/><br>
+                        <label for="seriem">Série</label>
+                        <input name="seriem" id="seriem" type="text" value=""/><br>
+                        <label for="numerom">Numéro</label>
+                        <input name="numerom" id="numerom" type="text" value=""/><br>
+                        <label for="descriptionm">Description</label>
+                        <input name="descriptionm" id="descriptionm" type="text" value=""/><br>
+                        <p>Etat*</p>
+                        <label for="neufm">Neuf</label>
+                        <input type="radio" id="neufm" name="etatm" value="1" checked/>
+                        <label for="tbonm">Très bon</label>
+                        <input type="radio" id="tbonm" name="etatm" value="2"/>
+                        <label for="bonmf">Bon</label>
+                        <input type="radio" id="bonm" name="etatm" value="3"/>
+                        <label for="abimem">Abimé</label>
+                        <input type="radio" id="abimem" name="etatm" value="4"/>
+                        <label for="tabimem">Très abimé</label>
+                        <input type="radio" id="tabimem" name="etatm" value="5"/>
+                        <br>
+                        <label for="imagem">Chemin image</label>
+                        <input name="imagem" id="imagem" type="text" value=""/><br>
+                        <label for="commentairem">Commentaire</label>
+                        <input name="commentairem" id="commentairem" type="text" value=""/><br>
+
+                                
+
+                        <input type="submit" value="Modifier" onclick="modifier()"/>
                     </div>
-                   
-                    
+
+
 
                 </div>
 

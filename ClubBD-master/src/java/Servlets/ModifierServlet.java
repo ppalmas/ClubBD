@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author centrale
  */
-@WebServlet(name = "AjoutServlet", urlPatterns = {"/AjoutServlet"})
-public class AjoutServlet extends HttpServlet {
+@WebServlet(name = "ModifierServlet", urlPatterns = {"/ModifierServlet"})
+public class ModifierServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,13 +43,14 @@ public class AjoutServlet extends HttpServlet {
         String desc = request.getParameter("description");
         String comm = request.getParameter("commentaire");
         String img = request.getParameter("image");
+        String iddoc = request.getParameter("idm");
 
         DocumentManager dm = DocumentManagerImpl.getInstance();
 
         Boolean b = false;
         try {
 
-            dm.insert(titre, cote, etat, serie, numero, desc, comm, img);
+            dm.update(iddoc, titre, cote, etat, serie, numero, desc, comm, img);
 
             b = true;
         } catch (Exception e) {

@@ -23,33 +23,29 @@ function recherche2_doc() {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
                 //Réponse de la servlet
                 var answer = xhttp.responseText;
-                
-                res=JSON.parse(answer);
-                
-                
+
+                res = JSON.parse(answer);
+
+
                 //boucle daffichage
-            
-            var disp="";
-            for (i=0;i<res.nb;i++){
-                
-                disp=disp+"<span id=\"res"+res.resultats[i]['id']+"\" idm=\""+res.resultats[i]['id']+"\" num=\""+i+"\">"+res.resultats[i]['titre']+" "+res.resultats[i]['serie']+" "+res.resultats[i]['cote']+"</span>"+"<br>";
-                
-            }
-                
+
+                var disp = "";
+                for (i = 0; i < res.nb; i++) {
+
+                    disp = disp + "<span id=\"res" + res.resultats[i]['id'] + "\" idm=\"" + res.resultats[i]['id'] + "\" num=\"" + i + "\">" + res.resultats[i]['titre'] + " " + res.resultats[i]['serie'] + " " + res.resultats[i]['cote'] + "</span>" + "<br>";
+
+                }
+
 
                 //attribution d'un lien a chaque element qui permet de récupérer l'id de la selection
                 document.getElementById("recherche_resultat").innerHTML = disp;
-            for (i=0;i<res.nb;i++){
-                
-                document.getElementById("res"+res.resultats[i]['id']).onclick= selection;
-                        
-                }
-            }       
-              
+                for (i = 0; i < res.nb; i++) {
 
-            
-            else {
-                document.getElementById("recherche_resultat").innerHTML="";
+                    document.getElementById("res" + res.resultats[i]['id']).onclick = selection;
+
+                }
+            } else {
+                document.getElementById("recherche_resultat").innerHTML = "";
             }
         }
 
@@ -63,71 +59,129 @@ function recherche2_doc() {
 
 
     }
+
+
+setVisible('recherche_resultat');
+}
+
+function ajouter() {
+    var titrea = document.getElementById("titrea").value;
+    var seriea = document.getElementById("seriea").value;
+    var numeroa = document.getElementById("numeroa").value;
+    var descriptiona = document.getElementById("descriptiona").value;
+    var etata = $('input[name=etat]:checked').val(); 
+    var commentairea = document.getElementById("commentairea").value;
+    var imagea = document.getElementById("imagea").value;
+    var cotea = document.getElementById("cotea").value;
+
+
     
 
 
-}
+    //Si la saisie est valide
+    if (titrea !== "" && cotea !== "" && etata !== "") {
 
-function ajouter(){
-     var titrea = document.getElementById("titrea").value;
-     var seriea = document.getElementById("seriea").value;
-     var numeroa = document.getElementById("numeroa").value;
-     var descriptiona = document.getElementById("descriptiona").value;
-     var etata = document.getElementById("etata").value;
-     var commentairea = document.getElementById("commentairea").value;
-     var imagea = document.getElementById("imagea").value;
-     var cotea = document.getElementById("cotea").value;
-
-
-    //Si non vide
-    if (titrea != null && cotea != null) {
-
-        //On envoie les infos a la servlet pour requete
+    
         xhttp = new XMLHttpRequest();
-
-
-
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
                 //Réponse de la servlet
                 var answer = xhttp.responseText;
-                
-                if(answer=="true"){
+
+                if (answer == "true") {
+
                     alert("Document ajouté !");
-                    console.log("ok");
+                    
+                    //Si l'addresse email est déjà prise   
+                } else {
+                    alert("Erreur lors de l'ajout.");
                 }
-                
-            else {
-                alert("problème");
-                console.log("pb");
-            }
-            }      
-              
 
-            
-            
-        }
-
-        //formulaire envoyé en get à la servlet recherche
-        var data = "titre=" + titrea + "&" + "cote=" + cotea;
-        //+ "serie=" + seriea+ "numero=" + numeroa+ "description=" + descriptiona+ "etat=" + etata+ "image=" + imagea+ "commentaire=" + commentairea
-        xhttp.open("GET", "AjoutServlet?" + data, true);
-        xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
-        xhttp.send();
+            } 
+        };
+        var data = "titre=" + titrea + "&" + "cote=" + cotea + "&" + "serie=" + seriea + "&" + "numero=" + numeroa+ "&" + "description=" + descriptiona + "&" + "etat=" + etata + "&" + "commentaire="+commentairea+"&"+"image="+imagea;
+        xhttp.open("POST", "AjoutServlet?");
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send(data);
+        
+        
+        
+        
 
 
+
+    }
+    else{
+        alert("Veuillez remplir tous les champs obligatoires (*)");
+    }
+
+}
+
+function modifier() {
+    var titrea = document.getElementById("titrem").value;
+    var seriea = document.getElementById("seriem").value;
+    var numeroa = document.getElementById("numerom").value;
+    var descriptiona = document.getElementById("descriptionm").value;
+    var etata = $('input[name=etatm]:checked').val(); 
+    var commentairea = document.getElementById("commentairem").value;
+    var imagea = document.getElementById("imagem").value;
+    var cotea = document.getElementById("cotem").value;
 
 
     
-}
+
+
+    //Si la saisie est valide
+    if (titrea !== "" && cotea !== "" && etata !== "") {
+
+        
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                //Réponse de la servlet
+                var answer = xhttp.responseText;
+
+                if (answer == "true") {
+                    
+                    alert("Document modifié !");
+                    
+                    
+                    //Si l'addresse email est déjà prise   
+                } else {
+                    alert("Erreur lors de la modification.");
+                }
+                
+            } 
+        };
+        
+        var data = "idm="+idm+"&"+"titre=" + titrea + "&" + "cote=" + cotea + "&" + "serie=" + seriea + "&" + "numero=" + numeroa+ "&" + "description=" + descriptiona + "&" + "etat=" + etata + "&" + "commentaire="+commentairea+"&"+"image="+imagea;
+        xhttp.open("POST", "ModifierServlet?");
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send(data);
+        
+        
+        
+        
+
+
+
+    }
+    else{
+        alert("Veuillez remplir tous les champs obligatoires (*)");
+    }
+
 }
 
 function selection() {
-    idm=this.getAttribute("idm"); 
-    num=this.getAttribute("num"); 
-    document.getElementById("titrem").value=res.resultats[num]['titre'];
-    document.getElementById("seriem").value=res.resultats[num]['serie'];
-    document.getElementById("cotem").value=res.resultats[num]['cote'];
+    idm = this.getAttribute("idm");
+    num = this.getAttribute("num");
+    document.getElementById("titrem").value = res.resultats[num]['titre'];
+    document.getElementById("seriem").value = res.resultats[num]['serie'];
+    document.getElementById("cotem").value = res.resultats[num]['cote'];
+    document.getElementById("idm").value = idm;
+    
+    
+    setVisible('modif');
 
 
 

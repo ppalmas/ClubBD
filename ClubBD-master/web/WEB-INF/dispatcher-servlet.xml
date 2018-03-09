@@ -23,6 +23,7 @@
                 <prop key="inscription.htm">InscriptionController</prop>
                 <prop key="index_membre.htm">ConnectController</prop>
                 <prop key="admin.htm">AdminController</prop>
+                
             </props>
         </property>
     </bean>
@@ -57,5 +58,6 @@
         name="AdminController"
         class="Controllers.AdminController"
     />
+     
 
 </beans>

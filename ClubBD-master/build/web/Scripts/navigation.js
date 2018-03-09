@@ -9,11 +9,13 @@
  * @param {type} thingHide to Hide (list)
  * @returns {undefined}
  */
+
+
 function getNewContent(thingShow, thingHide) {
     setVisible(thingShow);
     for (i = 0; i < thingHide.length; i++) {
         setInvisible(thingHide[i]);
-        
+
     }
 }
 
@@ -45,17 +47,17 @@ function setInvisible(thingId) {
  * @param idStatut identifiant du statut
  * @returns {undefined}
  */
-function loadIndexUser(idStatut){
-    if (idStatut==3){
+function loadIndexUser(idStatut) {
+    if (idStatut == 3) {
         //L'utilisateur est seulement un centralien non cotisant
-    } else if (idStatut==1){
+    } else if (idStatut == 1) {
         //L'utilisateur est un membre cotisant du club bd
         setVisible('gestion_emprunt');
-    } else if (idStatut==2) {
+    } else if (idStatut == 2) {
         //L'utilisateur est un admin
         setVisible('gestion_emprunt');
         setVisible('gestion_inventaire');
-        
+
     } else {
         //message d'erreur ?
     }
@@ -98,3 +100,4 @@ function goHomeMember() {
     document.body.appendChild(form);
     form.submit();
 }
+

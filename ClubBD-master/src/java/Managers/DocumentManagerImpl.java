@@ -8,6 +8,7 @@ package Managers;
 import Database.Createurdocument;
 import Database.Document;
 import Database.Etat;
+import Database.Serie;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -17,7 +18,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Victouf
+ * @author Arthus
  */
 public class DocumentManagerImpl implements DocumentManager {
 
@@ -130,28 +131,89 @@ public class DocumentManagerImpl implements DocumentManager {
         return l.isEmpty() ? null : (Document) l.get(0);
     }
     
-    public void insert(String titre, String cote) {
+    @Override
+    public void insert(String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img) {
         Document d = new Document();
         d.setTitre(titre);
         d.setCote(cote);
-        d.setCommentaire("");
-        d.setDescription("");
-        
+        d.setCommentaire(comm);
+        d.setDescription(desc);
+        try{
+        d.setNumero(Integer.parseInt(numero));}catch (Exception e){}
+        d.setImageDocument(img);
         
         //pour l'etat
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("SELECT e FROM Etat e WHERE  e.idEtat=:id");
-        q.setParameter("id", 1);
+        Query q = em.createQuery("SELECT e FROM Etat e WHERE  e.idEtat=:etat");
+        q.setParameter("etat", Integer.parseInt(etat));
         List l = q.getResultList();       
         
         d.setIdEtat((Etat) l.get(0));
-        d.setImageDocument("none");
+        
+        //pour la serie
+        
+        Query q2 = em.createQuery("SELECT s FROM Serie s WHERE  s.nomSerie=:serie");
+        q2.setParameter("serie", serie);
+        List l2 = q2.getResultList();       
+        
+        d.setIdSerie((Serie) l2.get(0));
+        
         
         
         //Insertion
         
         em.getTransaction().begin();
         em.persist(d);
+        em.getTransaction().commit();
+    }
+    
+    @Override
+    public void update(String iddoc, String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img) {
+        
+        //on recupere le document avec l'id
+        EntityManager em = emf.createEntityManager();
+        Document d=em.find(Document.class, Integer.parseInt(iddoc));
+        System.out.println(d);
+        
+        em.getTransaction().begin();
+        
+        d.setTitre(titre);
+        System.out.println("1");
+        d.setCote(cote);
+        System.out.println("2");
+        d.setCommentaire(comm);
+        System.out.println("3");
+        d.setDescription(desc);
+        System.out.println("4");
+        try{
+        d.setNumero(Integer.parseInt(numero));}catch (Exception e){}
+        System.out.println("5");
+        d.setImageDocument(img);
+        System.out.println("6");
+        
+        //pour l'etat
+        
+        Query q = em.createQuery("SELECT e FROM Etat e WHERE  e.idEtat=:etat");
+        q.setParameter("etat", Integer.parseInt(etat));
+        List l = q.getResultList();       
+        
+        d.setIdEtat((Etat) l.get(0));
+        System.out.println("passe par là2");
+        //pour la serie
+        try{
+        Query q2 = em.createQuery("SELECT s FROM Serie s WHERE  s.nomSerie=:serie");
+        q2.setParameter("serie", serie);
+        List l2 = q2.getResultList();       
+        
+        d.setIdSerie((Serie) l2.get(0));
+        System.out.println("passe par là3");
+        }catch(Exception e){}
+        
+        
+      
+        
+        System.out.println("passe par là4");
+        
         em.getTransaction().commit();
     }
     

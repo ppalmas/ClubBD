@@ -37,7 +37,9 @@ public interface DocumentManager {
      */
     public int getMaxId();
     
-    public void insert(String titre, String cote);
+    public void insert(String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img);
+    
+    public void update(String iddoc, String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img);
     
     /**
      * Trouver un document par son id
