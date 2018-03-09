@@ -1,0 +1,70 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 8 mars 2018, 23:05:18
+    Author     : Utilisateur
+*/
+
+#selected_title{
+    padding: 2px;
+    margin: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #2C4251;
+    font-size: 25pt;
+    text-align: center;
+}
+
+.el_news{
+    background-color: #E6E6FA;
+    padding: 10px;
+    margin: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 5px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #2C4251;
+}
+
+.news_title{
+    font-size: 20pt;
+    text-align: center;
+}
+
+.news_text{
+    font-size: 13pt;
+}
+
+.suggestion{
+    background-color: #E6E6FA;
+    padding: 10px;
+    margin: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 5px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #2C4251;
+}
+
+.thumbnail{
+    height: 100px;
+    width: 80px;
+    background-color: white;
+}
+
+.book_title{
+    font-size: 17pt;
+    text-align: center;
+}
+
+.book_available{
+    padding: 2px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #2C4251;
+    font-size: 12pt;
+    text-align: center;
+}
