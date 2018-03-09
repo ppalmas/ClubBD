@@ -41,7 +41,9 @@ function recherche2_doc() {
                 document.getElementById("recherche_resultat").innerHTML = disp;
                 for (i = 0; i < res.nb; i++) {
 
+
                     document.getElementById("res" + res.resultats[i]['id']).onclick = selection;
+
 
                 }
             } else {
@@ -60,7 +62,6 @@ function recherche2_doc() {
 
     }
 
-
 setVisible('recherche_resultat');
 }
 
@@ -69,11 +70,13 @@ function ajouter() {
     var seriea = document.getElementById("seriea").value;
     var numeroa = document.getElementById("numeroa").value;
     var descriptiona = document.getElementById("descriptiona").value;
+
     var etata = $('input[name=etat]:checked').val(); 
     
     var commentairea = document.getElementById("commentairea").value;
     var imagea = document.getElementById("imagea").value;
     var cotea = document.getElementById("cotea").value;
+
 
 
     
@@ -91,9 +94,10 @@ function ajouter() {
 
                 if (answer == "true") {
 
+
                     alert("Document ajouté !");
                     
-                    //Si l'addresse email est déjà prise   
+                     
                 } else {
                     alert("Erreur lors de l'ajout.");
                 }
@@ -107,7 +111,7 @@ function ajouter() {
         
         
         
-        
+
 
 
 
@@ -127,6 +131,7 @@ function modifier() {
     var commentairea = document.getElementById("commentairem").value;
     var imagea = document.getElementById("imagem").value;
     var cotea = document.getElementById("cotem").value;
+
 
 
     
@@ -171,6 +176,7 @@ function modifier() {
         alert("Veuillez remplir tous les champs obligatoires (*)");
     }
 
+
 }
 
 function selection() {
@@ -179,10 +185,12 @@ function selection() {
     document.getElementById("titrem").value = res.resultats[num]['titre'];
     document.getElementById("seriem").value = res.resultats[num]['serie'];
     document.getElementById("cotem").value = res.resultats[num]['cote'];
+
     document.getElementById("idm").value = idm;
     
     
     setVisible('modif');
+
 
 
 

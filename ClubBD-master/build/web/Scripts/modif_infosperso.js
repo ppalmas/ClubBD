@@ -41,6 +41,7 @@ function modif_infos() {
 
                         //On ferme la pop-up
                         $('#modif_form').modal('hide');
+                        alert("Vos modifications ont bien été prises en compte.");
 
                     } else {
                         //Message d'erreur

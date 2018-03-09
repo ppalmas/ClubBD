@@ -23,7 +23,7 @@
         <!-- STYLES -->
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/index.css">
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/base.css">
-        
+
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/recherche.css">
 
         <!-- SCRIPTS -->
@@ -123,84 +123,42 @@
                     </div>
 
                 </div>
-                <!-- Bloc des suggestions-->
-          <!--      <div id ="suggestions_content" class="bloc_home" style="display:none">
-                    <div class="row_content" style="width: 95%; text-align:center;">
-                        <p id="subtitle">Suggestion de lecture</p>
-                        <div id="suggestion_ouvrage" class="bloc_doc">
-                            <div class="doc_left">
-                                <p id="sugg_titre" class="doc_title" style="text-align:left;"></p>                                
-                                <p id="sugg_auteur" class="left_p"></p>
-                                <p id="sugg_serie" class="left_p"></p>
-                                <p id="sugg_numero" class="left_p"></p>
-                                <p id="sugg_image" class="left_p"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+
                 <div id ="suggestions_content" class="bloc_home" style="display:none">
-                        <div class="row suggestion">
-                            <div class="col-sm-2">
-                                <div class="thumbnail">image</div>
-                            </div>
-                            <div class="col-sm-10">
-                                <div id="sugg_titre" class="row book_title"></div>
-                                <div id="sugg_auteur" class="row book_title"></div>
-                                <div class="row book_available">
-                                    <br>
-                                    <div class="col-sm-3"
-                                         <div style="height: 20px; width: 20px; background-color: green; padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
-                                    </div>
-                                    <div class="col-sm-5">Réserver</div>
-                                </div>
-                            </div>
+                    <div class="row suggestion">
+                        <div class="col-sm-2">
+                            <div class="thumbnail">image</div>
                         </div>
-                        <div class="row suggestion">
-                            <div class="col-sm-2">
-                                <div class="thumbnail">image</div>
-                            </div>
-                            <div class="col-sm-10">
-                                <div class="row book_title">Ceci est aussi ouvrage</div>
-                                <div class="row book_available">
-                                    <br>
-                                    <div class="col-sm-3"
-                                         <div style="height: 20px; width: 20px; background-color: orange; padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
-                                    </div>
-                                    <div class="col-sm-5">Etre notifié</div>
+                        <div class="col-sm-10">
+                            <div id="sugg_titre1" class="row book_title"></div>
+                            <div id="sugg_auteur1" class="row book_authors"></div>
+                            <div class="row book_available">
+                                <br>
+                                <div class="col-sm-3"
+                                     <div id="dispo_color1" style="height: 20px; width: 20px;  padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row suggestion">
-                            <div class="col-sm-2">
-                                <div class="thumbnail">image</div>
-                            </div>
-                            <div class="col-sm-10">
-                                <div class="row book_title">Ceci est un autre ouvrage</div>
-                                <div class="row book_available">
-                                    <br>
-                                    <div class="col-sm-3"
-                                         <div style="height: 20px; width: 20px; background-color: red; padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
-                                    </div>
-                                    <div class="col-sm-5">Etre notifié</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row suggestion">
-                            <div class="col-sm-2">
-                                <div class="thumbnail">image</div>
-                            </div>
-                            <div class="col-sm-10">
-                                <div class="row book_title">Ceci est encore un ouvrage</div>
-                                <div class="row book_available">
-                                    <br>
-                                    <div class="col-sm-3"
-                                         <div style="height: 20px; width: 20px; background-color: green; padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
-                                    </div>
-                                    <div class="col-sm-5">Réserver</div>
-                                </div>
+                                <div class="col-sm-5"><p>Réserver</p></div>
                             </div>
                         </div>
                     </div>
+                    <div class="row suggestion">
+                        <div class="col-sm-2">
+                            <div class="thumbnail">image</div>
+                        </div>
+                        <div class="col-sm-10">
+                            <div id="sugg_titre2" class="row book_title"></div>
+                            <div id="sugg_auteur2" class="row book_authors"></div>
+                            <div class="row book_available">
+                                <br>
+                                <div class="col-sm-3"
+                                     <div id="dispo_color2" style="height: 20px; width: 20px; padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
+                                </div>
+                                <div class="col-sm-5"><p>Réserver</p></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
         </div>

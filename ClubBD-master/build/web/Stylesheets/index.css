@@ -48,14 +48,12 @@ p{
 
 
 
-/* MESSAGE D'ACCUEIL ET TITRE*/
-#welcome, #title{
-    font-size:26pt;
-}
+
 /* TITRE */
 #title{
     color:#778899;
     font-weight:500;
+    font-size:26pt;
     padding:4%;
 }
 

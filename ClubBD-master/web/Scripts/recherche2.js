@@ -10,33 +10,27 @@ function recherche_doc() {
     var auteur = document.getElementById("critere_auteur").value;
     var serie = document.getElementById("critere_serie").value;
     var sujet = document.getElementById("critere_sujet").value;
+    var all = document.getElementById("recherche_doc").value;
 
 
-    //Si non vide
-    if (titre != null || auteur != null || serie != null || sujet != null) {
 
-        //On envoie les infos a la servlet pour requete
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                //Réponse de la servlet
-                var answer = xhttp.responseText;
-                document.getElementById("recherche_resultat").innerHTML = answer;
+    //On envoie les infos a la servlet pour requete
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            //Réponse de la servlet
+            var answer = xhttp.responseText;
+            document.getElementById("recherche_resultat").innerHTML = answer;
 
-            }
-            ;
         }
-
-        //formulaire envoyé en get à la servlet recherche
-        var data = "titre=" + titre + "&" + "auteur=" + auteur;
-        xhttp.open("GET", "RechercheDoc?" + data, true);
-        xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
-        xhttp.send();
-
-
-
-
+        ;
     }
+
+    //formulaire envoyé en get à la servlet recherche
+    var data = "all=" + all + "&" + "titre=" + titre + "&" + "auteur=" + auteur + "&" + "serie=" + serie + "&"+ "sujet=" + sujet;
+    xhttp.open("GET", "RechercheDoc?" + data, true);
+    xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
+    xhttp.send();
 
 }
 

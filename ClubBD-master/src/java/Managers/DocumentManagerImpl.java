@@ -30,7 +30,7 @@ public class DocumentManagerImpl implements DocumentManager {
             emf = Persistence.createEntityManagerFactory("ClubBDPU");
         }
     }
-    
+
     public static DocumentManager getInstance() {
         if (theDocumentManager == null) {
             theDocumentManager = new DocumentManagerImpl();
@@ -56,9 +56,11 @@ public class DocumentManagerImpl implements DocumentManager {
 
     /**
      * Recherche un document suivant un liste de critères au format string :
-     * dans cette liste, le premier élément est le titre, le second l'auteur, le troisième la cote
+     * dans cette liste, le premier élément est le titre, le second l'auteur, le
+     * troisième la cote
+     *
      * @param criteres
-     * @return 
+     * @return
      */
     @Override
     public List<Document> findDocument(ArrayList<String> criteres) {
@@ -102,20 +104,19 @@ public class DocumentManagerImpl implements DocumentManager {
         return l;
     }
 
-    
-    
     /**
      * Renvoie l'id max des documents de la bdd
+     *
      * @return id maximum des documents de la base de données
      */
     @Override
-    public int getMaxId(){
+    public int getMaxId() {
         EntityManager em = emf.createEntityManager();
         Query q = em.createNamedQuery("Document.findAll", Document.class);
         List l = q.getResultList();
         return (l.size() + 1);
     }
-    
+
     /**
      * Retrouver un document par son id
      *
@@ -130,6 +131,7 @@ public class DocumentManagerImpl implements DocumentManager {
         List l = q.getResultList();
         return l.isEmpty() ? null : (Document) l.get(0);
     }
+
     
     @Override
     public void insert(String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img) {
@@ -137,10 +139,12 @@ public class DocumentManagerImpl implements DocumentManager {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         System.out.println("2");
+
         Document d = new Document();
         System.out.println("3");
         d.setTitre(titre);
         d.setCote(cote);
+
         d.setCommentaire(comm);
         d.setDescription(desc);
         try{
@@ -171,6 +175,7 @@ public class DocumentManagerImpl implements DocumentManager {
         //Insertion
         
         
+
         em.persist(d);
         System.out.println("10");
         em.getTransaction().commit();
@@ -226,17 +231,18 @@ public class DocumentManagerImpl implements DocumentManager {
         
         em.getTransaction().commit();
     }
-    
+
     /**
-     * Retourne la liste des créateurs associée à un document
-     * @param id
-     * @return 
+     * Retourne la liste des créateurs associés à un document
+     *
+     * @param id du document
+     * @return
      */
-    public ArrayList<Createurdocument> findCreateur(int id){
+    public ArrayList<Createurdocument> findCreateur(int id) {
         ArrayList<Createurdocument> cr = new ArrayList();
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("SELECT DISTINCT cd FROM Createurdocument cd JOIN Document d WHERE  d.idDocument=:id");
-       //SELECT distinct l FROM Location l INNER JOIN  Favorite f ON (l.locationId = f.multimediaId.locationId.locationId) WHERE  f.personId=:p
+        Query q = em.createQuery("SELECT cd FROM Createurdocument cd INNER JOIN Document d ON "
+                + "(cd.idDocument.idDocument = d.idDocument) WHERE d.idDocument=:id");
         q.setParameter("id", id);
         List l = q.getResultList();
         for (Object o : l) {
@@ -245,4 +251,67 @@ public class DocumentManagerImpl implements DocumentManager {
         return cr;
     }
 
+    /**
+     * Retourne un booléen ; vrai si le document en paramètre est disponible,
+     * faux sinon : le champ dateRetourne est nul donc le document est emprunté, ou
+     * le champ date réservation est non nul et alors le document est réservé
+     *
+     * @param id du document
+     * @return
+     */
+    @Override
+    public boolean isAvailable(int id) {
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT e FROM Emprunt e INNER JOIN Document d ON (e.idDocument.idDocument = d.idDocument)"
+                + " WHERE  (d.idDocument=:id AND e.dateRetourne IS NULL) ");
+//La condition date retourné nul suffit : si le document est réservé, il n'y a pas de date indiquée,
+// si le document est emprunté, il n'y a pas de date non plus
+        q.setParameter("id", id);
+        List l = q.getResultList();
+        return l.isEmpty();
+
+    }
+
+    /**
+     * Recherche un document suivant un liste de critères au format string :
+     *      *
+     * @param criteres
+     * @return
+     */
+    @Override
+    public List<Document> findDocumentSearch(ArrayList<String> criteres) {
+
+        //recherche un document selon les criteres spécifiés
+        EntityManager em = emf.createEntityManager();
+
+        String SQL = "SELECT d FROM Document d WHERE ";
+        List l = null;
+
+        //structure de la liste critere : (0)titre (1)serie (2)auteur (3)sujet OU (0) all
+        if (criteres.size() == 1) {
+            String all = criteres.get(0);
+            SQL = SQL + " d.titre LIKE '%" + all + "%' OR d.auteur LIKE '%" + all + "%' OR d.serie LIKE '%" + all + "%' OR"
+                    + " d.sujet LIKE '%" + all + "%'";
+        } else if (criteres.size() == 0) {
+            //renoi de toute la base
+        } else { //renvoi par critères
+            for (int i = 0; i < criteres.size(); i++) {
+                //On récupère le critère i
+                String[] list = criteres.get(i).split(":");
+                // Si la 2eme case est vide, alors le champ inpu était vide
+                if (list[1] != "") {
+                    SQL = SQL + " d." + list[0] + " LIKE '%" + list[1] + "%'";
+                }
+            }
+
+        }
+        try {
+            Query q = em.createQuery(SQL);
+            l = q.getResultList();
+        } catch (Exception e) {
+            System.out.println("erreur syntaxe requete // " + SQL);
+        }
+
+        return l;
+    }
 }
