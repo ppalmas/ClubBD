@@ -30,7 +30,7 @@ and open the template in the editor.
     border-radius: 10px;
     width: 400px;
     padding: 1%;
-    text-align: center;
+    text-align: left;
 }
 
 /* PARAGRAPHE */
@@ -61,6 +61,12 @@ p{
     font-size:15pt;
     padding:1%;
 }
+
+.doc_title{
+    color : #75B356;
+    font-size:13pt;
+}
+
 /* LIENS */
 a{
     color : #717474;

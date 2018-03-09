@@ -23,6 +23,8 @@
         <!-- STYLES -->
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/index.css">
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/base.css">
+        
+        <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/recherche.css">
 
         <!-- SCRIPTS -->
         <script src="Scripts/navigation.js"></script>
@@ -35,7 +37,7 @@
 
 
     </head>
-    <body onload="load_listener(['email','password']);">
+    <body onload="load_listener(['email', 'password']);">
 
 
         <!-- CONTENU PRINCIPAL -->
@@ -77,7 +79,26 @@
             <div id="right_div" class="col-md-8"> 
                 <!-- Bloc des news-->
                 <div id="news_content" class="bloc_home">
-                    <p> News</p>
+                    <div class="row">
+                        <div id="selected_title" class="col-sm-10">
+                            <div >A la une</div>
+                            <hr/>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="el_news col-sm-10">
+                            <div class="news_title">Une partie News sur le site</div>
+                            <br/>
+                            <div class="news_text">Via l'onglet "A la une" vous pourrez bientôt vous tenir au courant de l'actu du club BD !</div>
+                        </div>
+                        <div class="el_news col-sm-10">
+                            <div class="news_title">Un nouveau site pour le club BD !</div>
+                            <br/>
+                            <div class="news_text">Le club BD s'offre un nouveau site en recrutant les braves informaticiens du PGROU6.</div>
+                        </div>
+                    </div>
                 </div>
                 <!--Bloc de recherche d'ouvrages-->
                 <div id="search_content" class="bloc_home" style="display:none;">
@@ -103,17 +124,83 @@
 
                 </div>
                 <!-- Bloc des suggestions-->
-                <div id ="suggestions_content" class="bloc_home" style="display:none">
+          <!--      <div id ="suggestions_content" class="bloc_home" style="display:none">
                     <div class="row_content" style="width: 95%; text-align:center;">
                         <p id="subtitle">Suggestion de lecture</p>
                         <div id="suggestion_ouvrage" class="bloc_doc">
-                            <p id="sugg_titre"></p>
-                            <p id="sugg_auteur"></p>
-                            <p id="sugg_serie"></p>
-                            <p id="sugg_numero"></p>
+                            <div class="doc_left">
+                                <p id="sugg_titre" class="doc_title" style="text-align:left;"></p>                                
+                                <p id="sugg_auteur" class="left_p"></p>
+                                <p id="sugg_serie" class="left_p"></p>
+                                <p id="sugg_numero" class="left_p"></p>
+                                <p id="sugg_image" class="left_p"></p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
+                <div id ="suggestions_content" class="bloc_home" style="display:none">
+                        <div class="row suggestion">
+                            <div class="col-sm-2">
+                                <div class="thumbnail">image</div>
+                            </div>
+                            <div class="col-sm-10">
+                                <div id="sugg_titre" class="row book_title"></div>
+                                <div id="sugg_auteur" class="row book_title"></div>
+                                <div class="row book_available">
+                                    <br>
+                                    <div class="col-sm-3"
+                                         <div style="height: 20px; width: 20px; background-color: green; padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
+                                    </div>
+                                    <div class="col-sm-5">Réserver</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row suggestion">
+                            <div class="col-sm-2">
+                                <div class="thumbnail">image</div>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="row book_title">Ceci est aussi ouvrage</div>
+                                <div class="row book_available">
+                                    <br>
+                                    <div class="col-sm-3"
+                                         <div style="height: 20px; width: 20px; background-color: orange; padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
+                                    </div>
+                                    <div class="col-sm-5">Etre notifié</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row suggestion">
+                            <div class="col-sm-2">
+                                <div class="thumbnail">image</div>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="row book_title">Ceci est un autre ouvrage</div>
+                                <div class="row book_available">
+                                    <br>
+                                    <div class="col-sm-3"
+                                         <div style="height: 20px; width: 20px; background-color: red; padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
+                                    </div>
+                                    <div class="col-sm-5">Etre notifié</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row suggestion">
+                            <div class="col-sm-2">
+                                <div class="thumbnail">image</div>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="row book_title">Ceci est encore un ouvrage</div>
+                                <div class="row book_available">
+                                    <br>
+                                    <div class="col-sm-3"
+                                         <div style="height: 20px; width: 20px; background-color: green; padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
+                                    </div>
+                                    <div class="col-sm-5">Réserver</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
 
         </div>
@@ -140,8 +227,8 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
 
     </body>
 </html>

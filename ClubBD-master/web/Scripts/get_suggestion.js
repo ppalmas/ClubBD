@@ -20,7 +20,7 @@ function get_suggestion() {
             var n = answers_auteurs.length-1;
             var auteurs = "";
             for (i=0;i<n-1;i++){
-                auteurs += answers_auteurs[i] + ",";
+                auteurs += answers_auteurs[i] + ", ";
             }
             auteurs += answers_auteurs[n-1];
             document.getElementById("sugg_titre").innerHTML = titre;
