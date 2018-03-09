@@ -133,7 +133,12 @@ public class DocumentManagerImpl implements DocumentManager {
     
     @Override
     public void insert(String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img) {
+        System.out.println("1");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        System.out.println("2");
         Document d = new Document();
+        System.out.println("3");
         d.setTitre(titre);
         d.setCote(cote);
         d.setCommentaire(comm);
@@ -141,30 +146,35 @@ public class DocumentManagerImpl implements DocumentManager {
         try{
         d.setNumero(Integer.parseInt(numero));}catch (Exception e){}
         d.setImageDocument(img);
+        System.out.println("4");
         
         //pour l'etat
-        EntityManager em = emf.createEntityManager();
+        
         Query q = em.createQuery("SELECT e FROM Etat e WHERE  e.idEtat=:etat");
         q.setParameter("etat", Integer.parseInt(etat));
+        System.out.println("5");
         List l = q.getResultList();       
-        
+        System.out.println("6");
         d.setIdEtat((Etat) l.get(0));
-        
+        System.out.println("7");
         //pour la serie
         
-        Query q2 = em.createQuery("SELECT s FROM Serie s WHERE  s.nomSerie=:serie");
+        try{Query q2 = em.createQuery("SELECT s FROM Serie s WHERE  s.nomSerie=:serie");
         q2.setParameter("serie", serie);
         List l2 = q2.getResultList();       
-        
+        System.out.println("8");
         d.setIdSerie((Serie) l2.get(0));
-        
+        System.out.println("9");}
+        catch (Exception e){}
         
         
         //Insertion
         
-        em.getTransaction().begin();
+        
         em.persist(d);
+        System.out.println("10");
         em.getTransaction().commit();
+        System.out.println("11");
     }
     
     @Override

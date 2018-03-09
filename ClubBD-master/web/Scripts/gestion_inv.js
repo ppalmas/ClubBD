@@ -70,6 +70,7 @@ function ajouter() {
     var numeroa = document.getElementById("numeroa").value;
     var descriptiona = document.getElementById("descriptiona").value;
     var etata = $('input[name=etat]:checked').val(); 
+    
     var commentairea = document.getElementById("commentairea").value;
     var imagea = document.getElementById("imagea").value;
     var cotea = document.getElementById("cotea").value;

@@ -45,6 +45,7 @@ public class AjoutServlet extends HttpServlet {
         String img = request.getParameter("image");
 
         DocumentManager dm = DocumentManagerImpl.getInstance();
+        System.out.println("0");
 
         Boolean b = false;
         try {
