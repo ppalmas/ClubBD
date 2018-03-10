@@ -8,10 +8,15 @@
 package Controllers;
 
 import Database.Membre;
+import Database.Serie;
 import Managers.ConnectManager;
 import Managers.ConnectManagerImpl;
 import Managers.MembreManager;
 import Managers.MembreManagerImpl;
+import Managers.SerieManager;
+import Managers.SerieManagerImpl;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +37,20 @@ public class AdminController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView get(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco) {
-
+        
+        System.out.println("aaaa0");
+        //recuperation des noms de serie
+        SerieManager sm = SerieManagerImpl.getInstance();
+        System.out.println("aaaa1");
+        List<Serie> ls = sm.findSerie();
+        System.out.println("aaaa2  "+ls.get(0).getNomSerie());
+        ArrayList<String> lns = new ArrayList();
+        
+        try{for(int i=0;i<ls.size();i++){
+            lns.add(ls.get(i).getNomSerie());
+        }} catch(Exception e){}
+        
+       
         //Récupération de l'utilisateur
         MembreManager mm = MembreManagerImpl.getInstance();
         Membre m = mm.findMembre(idco);
@@ -61,6 +79,10 @@ public class AdminController {
 
                 //Connexion de l'utilisateur 
                 result.addObject("idco", idco);
+                
+                //liste noms de serie pour combobox
+                result.addObject("lserie",lns);
+                
 
                 return result;
 
@@ -69,6 +91,8 @@ public class AdminController {
         } else {
             ModelAndView result = new ModelAndView("index");
             result.addObject("idco", 0);
+            //liste noms de serie pour combobox
+                result.addObject("lserie",lns);
             return result;
         }
     }

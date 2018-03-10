@@ -96,10 +96,10 @@
                 <!-- Bloc gestion inventaire-->
                 <div id ="gestion_inv_content" class="bloc_home" style="display:none">
                     <h1>Gestion de l'inventaire</h1>
-                    <span onclick="getNewContent('ajout',['selection','modif','recherche_resultat'])"><h2>Ajout</h2></span>
-                    
+                    <span onclick="getNewContent('ajout', ['selection', 'modif', 'recherche_resultat'])"><h2>Ajout</h2></span>
+
                     <div id="ajout" style="display:none">
-                        
+
 
 
                         <label for="titrea">Titre*</label>
@@ -107,12 +107,20 @@
                         <label for="cotea">Côte*</label>
                         <input name="cotea" id="cotea" type="text" value=""/><br>
                         <label for="seriea">Série</label>
-                        <input name="seriea" id="seriea" type="text" value=""/><br>
+                        <input type="text" list="seriecombo" id="seriea" name="seriea">
+                         <datalist id="seriecombo" >
+                            <c:forEach items="${lserie}" var="serie">
+
+                                <option><c:out value="${serie}" />
+
+                                </c:forEach>
+                        </datalist>
+                        <br>
                         <label for="numeroa">Numéro</label>
                         <input name="numeroa" id="numeroa" type="text" value=""/><br>
                         <label for="descriptiona">Description</label>
                         <input name="descriptiona" id="descriptiona" type="text" value=""/><br>
-                        <p>Etat*</p>
+                        
                         <label for="neuf">Neuf</label>
                         <input type="radio" id="neuf" name="etat" value="1" checked/>
                         <label for="tbon">Très bon</label>
@@ -129,19 +137,23 @@
                         <label for="commentairea">Commentaire</label>
                         <input name="commentairea" id="commentairea" type="text" value=""/><br>
 
-                                
+
 
                         <input type="submit" value="Ajouter" onclick="ajouter()"/>
 
 
                     </div>
-                    <span onclick="getNewContent('selection',['ajout'])"><h2>Sélection</h2></span>
+                    <span onclick="getNewContent('selection', ['ajout'])"><h2>Sélection</h2></span>
                     <div id="selection" style="display:none">
-                        
+
                         <label for="Titre">Titre</label>
                         <input type="text" id="Titre" name="Titre"/><br>
+
                         <label for="Serie">Série</label>
-                        <input type="text" id="Serie" name="Serie"/><br>
+
+                        <input type="text" id="Serie" name="Serie">
+                        <br>
+
                         <label for="Cote">Côte</label>
                         <input type="text" id="Cote" name="Cote"/><br>
                         <button onclick="recherche2_doc()">Rechercher</button>
@@ -155,18 +167,24 @@
                     <div id="modif" style="display:none">
                         <label>Id document</label>
                         <input id="idm" type="text" readonly="readonly" value=""><br>
-                         
+
                         <label for="titrem">Titre*</label>
                         <input name="titrem" id="titrem" type="text" value=""/><br>
                         <label for="cotem">Côte*</label>
                         <input name="cotem" id="cotem" type="text" value=""/><br>
                         <label for="seriem">Série</label>
-                        <input name="seriem" id="seriem" type="text" value=""/><br>
+
+                        <!-- comboboc serie -->
+                        <input type="text" list="seriecombo" id="seriem" name="seriem">
+
+
+
+                        <br>
                         <label for="numerom">Numéro</label>
                         <input name="numerom" id="numerom" type="text" value=""/><br>
                         <label for="descriptionm">Description</label>
                         <input name="descriptionm" id="descriptionm" type="text" value=""/><br>
-                        <p>Etat*</p>
+                        
                         <label for="neufm">Neuf</label>
                         <input type="radio" id="neufm" name="etatm" value="1" checked/>
                         <label for="tbonm">Très bon</label>
@@ -183,7 +201,7 @@
                         <label for="commentairem">Commentaire</label>
                         <input name="commentairem" id="commentairem" type="text" value=""/><br>
 
-                                
+
 
                         <input type="submit" value="Modifier" onclick="modifier()"/>
                     </div>

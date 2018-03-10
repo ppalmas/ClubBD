@@ -57,32 +57,55 @@ public class RechercheServlet extends HttpServlet {
         try {
             l = dm.findDocument(criteres);
 
-            
             //creation d'un json pour exploiter les reponses dans le js
+            //mais dabord faut mettre null des que cest vide
             for (int i = 0; i < l.size(); i++) {
 
                 res = res + "{\"titre\":\"" + l.get(i).getTitre() + "\",";
-                
-                if (l.get(i).getIdSerie() != null) {
+
+                if (l.get(i).getIdSerie()!= null) {
                     res = res + "\"serie\":\"" + l.get(i).getIdSerie().getNomSerie() + "\",";
-                }
-                else {
+                } else {
                     res = res + "\"serie\":\"(hors série)\",";
                 }
-                
-                res = res + "\"cote\":\"" + l.get(i).getCote() + "\", \"id\":\""+ l.get(i).getIdDocument().toString()+ "\"}";
-                
-                res=res+",";
+                if (l.get(i).getNumero() != null) {
+                    res = res + "\"numero\":\"" + l.get(i).getNumero().toString() + "\",";
+                } else {
+                    res = res + "\"numero\": null,";
+                }
+
+                if (l.get(i).getDescription() != "") {
+                    res = res + "\"description\":\"" + l.get(i).getDescription() + "\",";
+                } else {
+                    res = res + "\"description\": null,";
+                }
+                if (l.get(i).getCommentaire() != "") {
+                    res = res + "\"commentaire\":\"" + l.get(i).getCommentaire() + "\",";
+                } else {
+                    res = res + "\"commentaire\": null,";
+                }
+                if (l.get(i).getImageDocument() != "") {
+                    res = res + "\"image\":\"" + l.get(i).getImageDocument() + "\",";
+                } else {
+                    res = res + "\"image\": null,";
+                }
+
+                res = res + "\"cote\":\"" + l.get(i).getCote() + "\", \"id\":\"" + l.get(i).getIdDocument().toString() + "\",";
+
+                res = res + "\"etat\": \"" + l.get(i).getIdEtat().getIdEtat().toString() + "\"}";
+
+                res = res + ",";
             }
-            
+
         } catch (Exception e) {
 
         }
 
         // Envoi de la réponse
         response.setContentType("text/html; charset=UTF-8");
-        System.out.println("{\"resultats\":[" + res.subSequence(0, res.length()-1).toString() + "],\"nb\":\""+l.size()+"\"}");
-        response.getWriter().write("{\"resultats\":[" + res.subSequence(0, res.length()-1).toString() + "],\"nb\":\""+l.size()+"\"}"); // Réponse : resultats
+        System.out.println("{\"resultats\":[" + res.subSequence(0, res.length() - 1).toString() + "],\"nb\":\"" + l.size() + "\"}");
+        response.getWriter().write("{\"resultats\":[" + res.subSequence(0, res.length() - 1).toString() + "],\"nb\":\"" + l.size() + "\"}"); // Réponse : resultats
 
     }
+
 }

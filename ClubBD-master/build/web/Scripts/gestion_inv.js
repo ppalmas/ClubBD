@@ -185,13 +185,30 @@ function selection() {
     document.getElementById("titrem").value = res.resultats[num]['titre'];
     document.getElementById("seriem").value = res.resultats[num]['serie'];
     document.getElementById("cotem").value = res.resultats[num]['cote'];
+    document.getElementById("descriptionm").value = res.resultats[num]['description'];
+    document.getElementById("commentairem").value = res.resultats[num]['commentaire'];
+    
+    document.getElementById("numerom").value = res.resultats[num]['numero'];
+    document.getElementById("imagem").value = res.resultats[num]['image'];
 
     document.getElementById("idm").value = idm;
+    
+    
+    // pour letat
+    
+    elts=document.getElementsByName("etatm");
+    
+    for(i=1;i<6;i++){
+        if (elts[i].value==res.resultats[num]['etat']){
+            elts[i].checked=true;
+        }else{elts[i].checked=false;
+    }
+    
     
     
     setVisible('modif');
 
 
 
-
+    }
 }
