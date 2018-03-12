@@ -65,9 +65,10 @@ public interface DocumentManager {
      * Recherche un document suivant un liste de critères au format string :
      *      *
      * @param criteres
+     * @param b si b vaut true, l'utilisateur a complété le champ toute recherche (pas de critères)
      * @return
      */
-    public List<Document> findDocumentSearch(ArrayList<String> criteres);
+    public List<Document> findDocumentSearch(ArrayList<String> criteres, Boolean b);
     
 }
 

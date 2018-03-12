@@ -56,10 +56,7 @@
             <div id="left_div" class="col-md-4">
                 <!--Informations du compte-->
                 <center>
-                    <div class="left">
-                        <a href="#" onclick="goHomeMember()">Retour</a>
-                    </div>
-                    <br>
+                    
                     <!-- affichage nom prénom-->
                     <p class="info_perso" id="title" style="margin-top:5px;font-weight:bold;padding:1%;"><c:out value="${prenom}"/> <c:out value="${nom}"/></p>
                     <!-- affichage email-->
@@ -69,7 +66,7 @@
                 <!-- Différents onglets -->
                 <center><div class="onglet_separator"></div>
 
-                    <a class="onglets" href="#" onclick="getMonCompte()" id="gestion_compte">Mon compte</a>
+                    <a class="onglets" href="#" onclick="goHomeMember()" id="gestion_compte">Accueil</a>
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getNewContent('propositions_content', ['stats_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Propositions d'achat</a>
                     <div class="onglet_separator"></div>
