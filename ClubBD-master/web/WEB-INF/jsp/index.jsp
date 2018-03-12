@@ -33,6 +33,7 @@
         <script src="Scripts/recherche2.js"></script>
         <script src="Scripts/event_listener.js"></script>
         <script src="Scripts/get_suggestion.js"></script>
+        <script src="Scripts/index_membre.js"></script>
 
 
 
@@ -118,9 +119,29 @@
                         <button style="margin-top:10px;" onclick="recherche_doc()">Rechercher</button>
 
                     </div>
+                    
                     <div id="recherche_resultat">
-
+                        <!--<table>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Cote</th>
+                                <th>Serie</th>
+                                <th>Numéro</th>
+                                <th>Genre</th>
+                            </tr>
+                        <c:forEach var="item" items="${itemsList}">
+                             <tr>
+                                <td><c:out value="${item['titre']}"/></td>
+                                <td><c:out value="${item['auteur']}"/></td>
+                                <td><c:out value="${item['cote']}"/></td>
+                                <td><c:out value="${item['serie']}"/></td>
+                                <td><c:out value="${item['numero']}"/></td>
+                                <td><c:out value="${item['genre']}"/></td>
+                            </tr>
+                        </c:forEach>
+                        </table>-->
                     </div>
+                    <button style="margin-top:10px;" onclick="goToOuvrageNotConnect()">Aller à l'ouvrage</button>
 
                 </div>
 

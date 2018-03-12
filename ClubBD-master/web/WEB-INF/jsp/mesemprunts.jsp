@@ -33,21 +33,29 @@
         <script src="Scripts/index_membre.js"></script>      
         <script src="Scripts/modif_infosperso.js"></script>  
         <script src="Scripts/event_listener.js"></script>
-        <script src="Scripts/index_membre.js"></script>
-
 
     </head>
+       
     <body>
-
-
-
     <!-- CONTENU PRINCIPAL -->
 
     <div class="container">
-        <div class="left">
-            <a class="back" href="#" onclick="goHome()">Retour</a>
+       
+        <!-- CHARGEMENT DES DONNEES LIEES A L'UTILISATEUR CONNECTE -->
+        <div style="display:none;">
+            <!-- Données personnelles-->
+            <input type="hidden" id="idMembre" value="<c:out value="${id}"/>"/>
+            <input type="hidden" id="nom" value="<c:out value="${nom}"/>"/> 
+            <input type="hidden" id="prenom" value="<c:out value="${prenom}"/>"/> 
+            <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
+            <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/>
+            <input type="hidden" id="idStatut" value="<c:out value="${idStatut}"/>"/>
         </div>
         
+        <div class="left">
+            <a class="back" href="#" onclick="goHomeMember()">Retour</a>
+        </div>
+       
         <!-- Bloc des récapitulatifs emprunts et réservations-->
         <div id ="recap_content" class="bloc_home">
             <center>
@@ -61,13 +69,13 @@
                         <th>Date de réservation</th>
                     </tr>
                     <tr>
-                        <td>Jacques</td>
+                        <td><a class="ouvrage_link" href="#" onclick="goToOuvrage()" id="gestion_compte" style="color:blue;">Jacques</a></td>
                         <td>810</td>
                         <td>03/01</td>
                     </tr>
                 <!--<c:forEach var="item" items="${itemsList}">
                     <tr>
-                        <td><c:out value="${item['titre']}"/></td>
+                        <td><a class="ouvrage_link" href="#" onclick="goToOuvrage()" id="gestion_compte" style="color:blue;"><c:out value="${item['titre']}"/></a></td>
                         <td><c:out value="${item['cote']}"/></td>
                         <td><c:out value="${item['date_reserve']}"/></td>
                     </tr>
@@ -86,15 +94,15 @@
                         <th>Date de retour</th>
                     </tr>
                     <tr>
-                        <td>Jean</td>
-                        <td>S8W</td>
+                        <td><a class="ouvrage_link" href="#" onclick="goToOuvrage()" id="gestion_compte" style="color:blue;">Jean va à la piscine</a></td>
+                        <td>87188E82</td>
                         <td>20/12</td>
                         <td>21/12</td>
                         <td>01/01</td>
                     </tr>
                 <!--<c:forEach var="item" items="${itemsList}">
                      <tr>
-                        <td><c:out value="${item['titre']}"/></td>
+                        <td><a class="ouvrage_link" href="#" onclick="goToOuvrage()" id="gestion_compte" style="color:blue;"><c:out value="${item['titre']}"/></a></td>
                         <td><c:out value="${item['cote']}"/></td>
                         <td><c:out value="${item['date_reserve']}"/></td>
                         <td><c:out value="${item['date_emprunt']}"/></td>
