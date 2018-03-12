@@ -55,8 +55,7 @@
             <!-- Volet de gauche -->
             <div id="left_div" class="col-md-4">
                 <!--Informations du compte-->
-                <center>
-                    
+                <center>     
                     <!-- affichage nom prénom-->
                     <p class="info_perso" id="title" style="margin-top:5px;font-weight:bold;padding:1%;"><c:out value="${prenom}"/> <c:out value="${nom}"/></p>
                     <!-- affichage email-->
@@ -65,7 +64,6 @@
                 </center>
                 <!-- Différents onglets -->
                 <center><div class="onglet_separator"></div>
-
                     <a class="onglets" href="#" onclick="goHomeMember()" id="gestion_compte">Accueil</a>
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getNewContent('propositions_content', ['stats_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Propositions d'achat</a>
@@ -76,7 +74,7 @@
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getNewContent('stats_content', ['propositions_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Statistiques</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('retour_emprunt_content', ['stats_content', 'propositions_content', 'news_content', 'search_content', 'membres_content', 'gestion_inv_content'])">Retour emprunts</a>
+                    <a class="onglets" href="#" onclick="getNewContent('retour_emprunt_content', ['stats_content', 'propositions_content', 'membres_content', 'gestion_inv_content'])">Retour emprunts</a>
                 </center>
             </div>
             <!-- Volet de droite -->
