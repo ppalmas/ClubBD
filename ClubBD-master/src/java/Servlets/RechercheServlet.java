@@ -8,6 +8,9 @@ package Servlets;
 import Database.Document;
 import Managers.DocumentManager;
 import Managers.DocumentManagerImpl;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,16 +58,37 @@ public class RechercheServlet extends HttpServlet {
 
         //Création d'une entité Document
         DocumentManager dm = DocumentManagerImpl.getInstance();
+
+        JsonArray json = new JsonArray();
+
         try {
             l = dm.findDocument(criteres);
 
             //creation d'un json pour exploiter les reponses dans le js
             //mais dabord faut mettre null des que cest vide
             for (int i = 0; i < l.size(); i++) {
+                JsonObject temp = new JsonObject();
+                temp.addProperty("titre", l.get(i).getTitre());
+                temp.addProperty("serie", l.get(i).getIdSerie().getNomSerie());
+                temp.addProperty("numero", l.get(i).getNumero().toString());
+                temp.addProperty("description", l.get(i).getDescription());
+                temp.addProperty("commentaire", l.get(i).getCommentaire());
+                temp.addProperty("image", l.get(i).getImageDocument());
+                temp.addProperty("cote", l.get(i).getCote());
+                temp.addProperty("id", l.get(i).getIdDocument().toString());
+                temp.addProperty("etat", l.get(i).getIdEtat().getIdEtat().toString());
+                json.add(temp);
+            }
+
+                JsonObject temp = new JsonObject();
+                temp.addProperty("num", Boolean.FALSE);
+    
+            
+            for (int i = 0; i < l.size(); i++) {
 
                 res = res + "{\"titre\":\"" + l.get(i).getTitre() + "\",";
 
-                if (l.get(i).getIdSerie()!= null) {
+                if (l.get(i).getIdSerie() != null) {
                     res = res + "\"serie\":\"" + l.get(i).getIdSerie().getNomSerie() + "\",";
                 } else {
                     res = res + "\"serie\":\"(hors série)\",";
@@ -104,8 +128,8 @@ public class RechercheServlet extends HttpServlet {
 
         // Envoi de la réponse
         response.setContentType("text/html; charset=UTF-8");
-        System.out.println("{\"resultats\":[" + res.subSequence(0, res.length() - 1).toString() + "],\"nb\":\"" + l.size() + "\"}");
-        response.getWriter().write("{\"resultats\":[" + res.subSequence(0, res.length() - 1).toString() + "],\"nb\":\"" + l.size() + "\"}"); // Réponse : resultats
+        System.out.println(new Gson().toJson(json));
+        response.getWriter().write((new Gson().toJson(json)).toString()); // Réponse : resultats
 
     }
 

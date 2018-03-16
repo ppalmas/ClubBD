@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  *
@@ -35,14 +36,14 @@ public class ModifierServlet extends HttpServlet {
             throws ServletException, IOException {
 
         //On récupère les paramètres
-        String titre = request.getParameter("titre");
-        String cote = request.getParameter("cote");
-        String etat = request.getParameter("etat");
-        String serie = request.getParameter("serie");
-        String numero = request.getParameter("numero");
-        String desc = request.getParameter("description");
-        String comm = request.getParameter("commentaire");
-        String img = request.getParameter("image");
+        String titre = StringEscapeUtils.escapeHtml4(request.getParameter("titre"));
+        String cote = StringEscapeUtils.escapeHtml4(request.getParameter("cote"));
+        String etat = StringEscapeUtils.escapeHtml4(request.getParameter("etat"));
+        String serie = StringEscapeUtils.escapeHtml4(request.getParameter("serie"));
+        String numero = StringEscapeUtils.escapeHtml4(request.getParameter("numero"));
+        String desc = StringEscapeUtils.escapeHtml4(request.getParameter("description"));
+        String comm = StringEscapeUtils.escapeHtml4(request.getParameter("commentaire"));
+        String img = StringEscapeUtils.escapeHtml4(request.getParameter("image"));
         String iddoc = request.getParameter("idm");
 
         DocumentManager dm = DocumentManagerImpl.getInstance();

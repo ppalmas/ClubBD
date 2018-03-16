@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,16 +39,16 @@ public class AdminController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView get(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco) {
         
-        System.out.println("aaaa0");
+        
         //recuperation des noms de serie
         SerieManager sm = SerieManagerImpl.getInstance();
-        System.out.println("aaaa1");
+        
         List<Serie> ls = sm.findSerie();
-        System.out.println("aaaa2  "+ls.get(0).getNomSerie());
+        
         ArrayList<String> lns = new ArrayList();
         
         try{for(int i=0;i<ls.size();i++){
-            lns.add(ls.get(i).getNomSerie());
+            lns.add(StringEscapeUtils.unescapeHtml4(ls.get(i).getNomSerie()));
         }} catch(Exception e){}
         
        

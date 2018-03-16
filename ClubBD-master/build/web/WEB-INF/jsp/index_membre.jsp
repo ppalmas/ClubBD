@@ -35,7 +35,7 @@
 
 
     </head>
-    <body onload="load_listener(['nom_modif', 'prenom_modif', 'email_modif', 'mdp_ancien_modif', 'mdp1_modif', 'mdp2_modif']); loadIndexUser(<c:out value="${idStatut}"/>)">
+    <body onload="load_listener(['nom_modif', 'prenom_modif', 'email_modif', 'mdp_ancien_modif', 'mdp1_modif', 'mdp2_modif']); loadIndexUser(<c:out value="${idStatut}"/>);">
         <!-- CHARGEMENT DES DONNEES LIEES A L'UTILISATEUR CONNECTE /!\ indispensable
         pour la déconnexion-->
         <div style="display:none;">
@@ -48,8 +48,6 @@
             <input type="hidden" id="idStatut" value="<c:out value="${idStatut}"/>"/> 
         </div>
 
-
-    <body onload="loadIndexUser(<c:out value="${idStatut}"/>);">
         <!-- CONTENU PRINCIPAL -->
         <div class="container">              
             <!-- Volet de gauche -->
@@ -129,22 +127,7 @@
                         </c:forEach>
                         </table>-->
                     </div>
-                    
-                    <div id="display_ouvrage" class="bloc_home" style="display:none;">
-                        <!--<p>Ouvrage</p>
-                        <br/>
-                        <p>Titre : <c:out value="${aBook['titre']}"/></p>
-                        <p>Auteur : <c:out value="${aBook['auteur']}"/></p>
-                        <p>Cote : <c:out value="${aBook['cote']}"/></p>
-                        <p>Série : <c:out value="${aBook['serie']}"/></p>
-                        <p>Numéro : <c:out value="${aBook['numero']}"/></p>
-                        <p>Genre : <c:out value="${aBook['genre']}"/></p>
-                        <p>Description : <c:out value="${aBook['description']}"/></p>
-                        <br/>
-                        <p>Disponibilité : <c:out value="${aBook['disponible']}"/></p>
-                        <button id="reserver_button" onclick="reservation()">Réserver</button>-->
-                    </div>
-                    
+                    <button style="margin-top:10px;" onclick="goToOuvrage()">Aller à l'ouvrage</button>
                 </div>
                                 
                 <!-- Bloc des suggestions-->

@@ -40,6 +40,8 @@ function getMesEmprunts(){
     form.submit();
 }
 
+
+
 /**
  * Méthode permettant d'afficher la pop-up 
  * si l'utilisateur souhaite modifier ses informations personnelles

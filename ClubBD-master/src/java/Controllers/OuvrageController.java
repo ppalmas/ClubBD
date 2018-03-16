@@ -21,17 +21,26 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author Kevin
  */
-public class MesEmpruntsController {
+public class OuvrageController {
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView mesEmpruntsGet(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco) {
+    public ModelAndView ouvrageGet(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco) {
+        
+        ModelAndView result = new ModelAndView("ouvrage");
+        if (idco.equals("0")){
+            result.addObject("idco",idco);
+        }
+        else{
+            MembreManager mm = MembreManagerImpl.getInstance();
+            Membre m = mm.findMembre(idco);
 
-        //Récupération de l'utilisateur
-//        MembreManager mm = MembreManagerImpl.getInstance();
-//        Membre m = mm.findMembre(idco);
-//        Integer statut = m.getIdStatut().getIdStatut();
-
-        ModelAndView result = new ModelAndView("mesemprunts");
-        result.addObject("idco", idco);
+            ConnectManager cm = ConnectManagerImpl.getInstance();
+            cm.checkConnection();
+            cm.updateConnection(cm.getByConnectId(idco));
+            //Résultat
+            result.addObject("idStatut", m.getIdStatut().getIdStatut());
+            result.addObject("idco", idco);
+            //result.addObject("idStatut", idStatut);
+        }
         return result;
     }
 }

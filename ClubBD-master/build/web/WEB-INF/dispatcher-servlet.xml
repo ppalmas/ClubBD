@@ -23,9 +23,8 @@
                 <prop key="inscription.htm">InscriptionController</prop>
                 <prop key="index_membre.htm">ConnectController</prop>
                 <prop key="admin.htm">AdminController</prop>
-
+                <prop key="ouvrage.htm">OuvrageController</prop>
                 <prop key="mesemprunts.htm">MesEmpruntsController</prop>
-
             </props>
         </property>
     </bean>
@@ -65,6 +64,11 @@
      <bean
          name="MesEmpruntsController"
          class="Controllers.MesEmpruntsController"
+    />
+     
+    <bean
+         name="OuvrageController"
+         class="Controllers.OuvrageController"
     />
 
 

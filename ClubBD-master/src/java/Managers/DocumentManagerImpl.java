@@ -18,7 +18,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Arthus
+ * @author Victouf
  */
 public class DocumentManagerImpl implements DocumentManager {
 
@@ -67,37 +67,40 @@ public class DocumentManagerImpl implements DocumentManager {
 
         //recherche un document selon les criteres spécifiés
         EntityManager em = emf.createEntityManager();
-
-        String SQL = "SELECT d FROM Document d WHERE ";
         List l = null;
-
-        //structure de la liste critere : (0)titre (1)serie (2)cote
+ //structure de la liste critere : (0)titre (1)serie (2)cote
         if (criteres.get(0) != "" || criteres.get(1) != "" || criteres.get(2) != "") {
+        Query query = em.createQuery("SELECT d FROM Document d WHERE d.titre LIKE :titre AND d.idSerie.nomSerie LIKE :serie AND d.cote LIKE :cote ") ;
+        
+        
+
+       
             //si titre
 
             if (criteres.get(0) != "") {
                 //on recherche un document dont le titre comporte le critère
 
-                SQL = SQL + " d.titre LIKE " + "'%" + criteres.get(0) + "%'";
+                query.setParameter("titre", "%" + criteres.get(0) + "%");
             } else {
-                SQL = SQL + " d.titre LIKE " + "'%'";
+                query.setParameter("titre", "$");
             }
             //si serie
             if (criteres.get(1) != "") {
-                SQL = SQL + " AND " + "d.idSerie.nomSerie LIKE " + "'%" + criteres.get(1) + "%'";
+                query.setParameter("serie", "%" + criteres.get(1) + "%");
             }
+            else {query.setParameter("serie", "%");}
 
             //si cote
             if (criteres.get(2) != "") {
-                SQL = SQL + " AND " + "d.cote LIKE " + "'%" + criteres.get(2) + "%'";
+                query.setParameter("cote", "%" + criteres.get(2) + "%"); 
             }
+            else { query.setParameter("cote", "%");}
 
             try {
-                Query q = em.createQuery(SQL);
-
-                l = q.getResultList();
+            
+                l = query.getResultList();
             } catch (Exception e) {
-                System.out.println("erreur syntaxe requete // " + SQL);
+                System.out.println("erreur syntaxe requete // " + query.toString());
             }
 
         }
@@ -132,7 +135,17 @@ public class DocumentManagerImpl implements DocumentManager {
         return l.isEmpty() ? null : (Document) l.get(0);
     }
 
-    
+    /**
+     * Insertion d'un document dans la bdd
+     * @param titre
+     * @param cote
+     * @param etat
+     * @param serie
+     * @param numero
+     * @param desc
+     * @param comm
+     * @param img 
+     */
     @Override
     public void insert(String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img) {
         
@@ -146,17 +159,21 @@ public class DocumentManagerImpl implements DocumentManager {
 
         d.setCommentaire(comm);
         d.setDescription(desc);
-        try{
-        d.setNumero(Integer.parseInt(numero));}catch (Exception e){}
+        try {
+            d.setNumero(Integer.parseInt(numero));
+        } catch (Exception e) {
+        }
         d.setImageDocument(img);
-        
+
         //pour l'etat
-        
         Query q = em.createQuery("SELECT e FROM Etat e WHERE  e.idEtat=:etat");
         q.setParameter("etat", Integer.parseInt(etat));
+
         List l = q.getResultList();       
+
         d.setIdEtat((Etat) l.get(0));
         //pour la serie
+
         
         try{Query q2 = em.createQuery("SELECT s FROM Serie s WHERE  s.nomSerie=:serie");
         q2.setParameter("serie", serie);
@@ -169,36 +186,51 @@ public class DocumentManagerImpl implements DocumentManager {
         //Insertion
         
         
-
         em.persist(d);
         em.getTransaction().commit();
     }
-    
+
+    /**
+     * Update des infos d'un livre
+     * @param iddoc
+     * @param titre
+     * @param cote
+     * @param etat
+     * @param serie
+     * @param numero
+     * @param desc
+     * @param comm
+     * @param img 
+     */
     @Override
     public void update(String iddoc, String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img) {
-        
+
         //on recupere le document avec l'id
         EntityManager em = emf.createEntityManager();
+
         Document d=em.find(Document.class, Integer.parseInt(iddoc));
         
+
         em.getTransaction().begin();
-        
+
         d.setTitre(titre);
         d.setCote(cote);
         d.setCommentaire(comm);
         d.setDescription(desc);
+
         try{
         d.setNumero(Integer.parseInt(numero));}catch (Exception e){}
         d.setImageDocument(img);
         
+
         //pour l'etat
-        
         Query q = em.createQuery("SELECT e FROM Etat e WHERE  e.idEtat=:etat");
         q.setParameter("etat", Integer.parseInt(etat));
-        List l = q.getResultList();       
-        
+        List l = q.getResultList();
+
         d.setIdEtat((Etat) l.get(0));
         //pour la serie
+
         try{
         Query q2 = em.createQuery("SELECT s FROM Serie s WHERE  s.nomSerie=:serie");
         q2.setParameter("serie", serie);
@@ -211,6 +243,7 @@ public class DocumentManagerImpl implements DocumentManager {
       
         
         
+
         em.getTransaction().commit();
     }
 
@@ -235,8 +268,8 @@ public class DocumentManagerImpl implements DocumentManager {
 
     /**
      * Retourne un booléen ; vrai si le document en paramètre est disponible,
-     * faux sinon : le champ dateRetourne est nul donc le document est emprunté, ou
-     * le champ date réservation est non nul et alors le document est réservé
+     * faux sinon : le champ dateRetourne est nul donc le document est emprunté,
+     * ou le champ date réservation est non nul et alors le document est réservé
      *
      * @param id du document
      * @return
@@ -255,37 +288,36 @@ public class DocumentManagerImpl implements DocumentManager {
     }
 
     /**
-     * Recherche un document suivant un liste de critères au format string :
-     *      *
+     * Recherche un document suivant un liste de critères au format string : *
      * @param criteres
+     * @param b si b vaut true, l'utilisateur a complété le champ toute
+     * recherche (pas de critères)
      * @return
      */
     @Override
-    public List<Document> findDocumentSearch(ArrayList<String> criteres) {
+    public List<Document> findDocumentSearch(ArrayList<String> criteres, Boolean b) {
 
         //recherche un document selon les criteres spécifiés
         EntityManager em = emf.createEntityManager();
-
-        String SQL = "SELECT d FROM Document d WHERE ";
+        String SQL = "SELECT d FROM Document d";
         List l = null;
-
         //structure de la liste critere : (0)titre (1)serie (2)auteur (3)sujet OU (0) all
-        if (criteres.size() == 1) {
+        if (b) {
+            //renvoi de la liste suivant tous les critères
             String all = criteres.get(0);
-            SQL = SQL + " d.titre LIKE '%" + all + "%' OR d.auteur LIKE '%" + all + "%' OR d.serie LIKE '%" + all + "%' OR"
+            SQL = SQL + " WHERE d.titre LIKE '%" + all + "%' OR d.auteur LIKE '%" + all + "%' OR d.serie LIKE '%" + all + "%' OR"
                     + " d.sujet LIKE '%" + all + "%'";
-        } else if (criteres.size() == 0) {
-            //renoi de toute la base
-        } else { //renvoi par critères
+        } else if (criteres.size() >= 1) {
+            //renvoi suivant tous les critères
             for (int i = 0; i < criteres.size(); i++) {
                 //On récupère le critère i
                 String[] list = criteres.get(i).split(":");
-                // Si la 2eme case est vide, alors le champ inpu était vide
-                if (list[1] != "") {
-                    SQL = SQL + " d." + list[0] + " LIKE '%" + list[1] + "%'";
+                // Si la 2eme case est vide, alors le champ input était vide
+                if (list.length >= 2) {
+                    SQL = SQL + " WHERE d." + list[0] + " LIKE '%" + list[1] + "%'";
                 }
             }
-
+//TODO attention, faire requête paramétrée
         }
         try {
             Query q = em.createQuery(SQL);

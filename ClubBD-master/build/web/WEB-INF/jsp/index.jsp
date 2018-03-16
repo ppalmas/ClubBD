@@ -105,22 +105,33 @@
                     <div class="row_content" style="width: 95%;">
                         <p style="text-align:left;">Recherche de documents
                             <input id="recherche_doc" style="width:500px; margin-left:30px;" placeholder="Titre, Auteur/Illustrateur, Serie"></p>
-                        <p style="text-align:left;" id="critere" style="margin-top:10px;" onclick="setVisible('search_critere')">Rechercher par critère</p>
+                        <a style="text-align:left;" id="critere" style="margin-top:10px;" onclick="setVisible('search_critere')">Rechercher par critère</a>
                         <div id="search_critere" style="display:none; text-align:left">
-                            <input id="search_titre" style="width:300px; margin:10px;" placeholder="Titre">
+                            <input id="critere_titre" style="width:300px; margin:10px;" placeholder="Titre">
                             <br>
                             <input id="critere_auteur" style="width:300px; margin:10px;" placeholder="Auteur, Illustrateur">
                             <br>
-                            <input id="search_serie" style="width:300px; margin:10px;" placeholder="Serie">
+                            <input id="critere_serie" style="width:300px; margin:10px;" placeholder="Serie">
                             <br>
-                            <input id="search_sujet" style="width:300px; margin:10px;" placeholder="Sujet">
+                            <input id="critere_sujet" style="width:300px; margin:10px;" placeholder="Sujet">
                         </div>
                         <button style="margin-top:10px;" onclick="recherche_doc()">Rechercher</button>
 
                     </div>
                     <div id="recherche_resultat">
-
                     </div>
+                    <div id="selection">
+                        <h2>Sélection</h2>
+                        <label for="Titre">Titre</label>
+                        <input type="text" id="Titre" name="Titre"/><br>
+                        <label for="Serie">Série</label>
+                        <input type="text" id="Serie" name="Serie"/><br>
+                        <label for="Cote">Côte</label>
+                        <input type="text" id="Cote" name="Cote"/><br>
+                        <label for="Cote">Auteurs</label>
+                        <input type="text" id="Auteurs" name="Auteurs"/><br>
+                    </div>
+                    <button style="margin-top:10px;" onclick="goToOuvrageNotConnect()">Aller à l'ouvrage</button>
 
                 </div>
 
