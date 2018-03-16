@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  *
@@ -37,9 +38,9 @@ public class RechercheServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Récupération des paramètres via le javascript recherche2.js
-        String titre = request.getParameter("titre");
-        String serie = request.getParameter("serie");
-        String cote = request.getParameter("cote");
+        String titre = StringEscapeUtils.escapeHtml4(request.getParameter("titre"));
+        String cote = StringEscapeUtils.escapeHtml4(request.getParameter("cote"));
+        String serie = StringEscapeUtils.escapeHtml4(request.getParameter("serie"));
         String res = "";
 
         //transformation en liste critères
