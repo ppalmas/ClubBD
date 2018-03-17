@@ -106,7 +106,7 @@ function ajouter() {
         };
         var data = "titre=" + titrea + "&" + "cote=" + cotea + "&" + "serie=" + seriea + "&" + "numero=" + numeroa + "&" + "description=" + descriptiona + "&" + "etat=" + etata + "&" + "commentaire=" + commentairea + "&" + "image=" + imagea;
         xhttp.open("POST", "AjoutServlet?");
-        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
         xhttp.send(data);
 
 
@@ -130,7 +130,6 @@ function modifier() {
     var commentairea = document.getElementById("commentairem").value;
     var imagea = document.getElementById("imagem").value;
     var cotea = document.getElementById("cotem").value;
-
 
 
 

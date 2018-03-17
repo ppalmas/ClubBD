@@ -13,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.lang3.StringEscapeUtils;
 
 
 /**
@@ -37,14 +36,15 @@ public class AjoutServlet extends HttpServlet {
             throws ServletException, IOException {
 
         //On récupère les paramètres
-        String titre = StringEscapeUtils.escapeXml(request.getParameter("titre"));
-        String cote = StringEscapeUtils.escapeXml(request.getParameter("cote"));
-        String etat = StringEscapeUtils.escapeXml(request.getParameter("etat"));
-        String serie = StringEscapeUtils.escapeXml(request.getParameter("serie"));
-        String numero = StringEscapeUtils.escapeXml(request.getParameter("numero"));
-        String desc = StringEscapeUtils.escapeXml(request.getParameter("description"));
-        String comm = StringEscapeUtils.escapeXml(request.getParameter("commentaire"));
-        String img = StringEscapeUtils.escapeXml(request.getParameter("image"));
+        String titre = request.getParameter("titre");
+        
+        String cote = request.getParameter("cote");
+        String etat = request.getParameter("etat");
+        String serie = request.getParameter("serie");
+        String numero = request.getParameter("numero");
+        String desc = request.getParameter("description");
+        String comm = request.getParameter("commentaire");
+        String img = request.getParameter("image");
 
         DocumentManager dm = DocumentManagerImpl.getInstance();
         System.out.println("0");

@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -40,7 +41,7 @@ public class RechercheServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Récupération des paramètres via le javascript recherche2.js
-        String titre = request.getParameter("titre");
+        String titre = Normalizer.normalize(request.getParameter("titre"),Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
         String cote = request.getParameter("cote");
         String serie = request.getParameter("serie");
 
