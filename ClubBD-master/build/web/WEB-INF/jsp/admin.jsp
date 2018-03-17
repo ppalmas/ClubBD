@@ -30,6 +30,7 @@
         <script src="Scripts/index.js"></script>
         <script src="Scripts/deconnecter.js"></script>
         <script src="Scripts/gestion_inv.js"></script>
+        
 
 
     </head>

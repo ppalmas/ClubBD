@@ -80,6 +80,7 @@ public class Document implements Serializable {
     private Collection<Genredocument> genredocumentCollection;
 
     public Document() {
+        
     }
 
     public Document(Integer idDocument) {

@@ -68,10 +68,16 @@ public class DocumentManagerImpl implements DocumentManager {
         //recherche un document selon les criteres spécifiés
         EntityManager em = emf.createEntityManager();
         List l = null;
+        Query query;
  //structure de la liste critere : (0)titre (1)serie (2)cote
         if (criteres.get(0) != "" || criteres.get(1) != "" || criteres.get(2) != "") {
-        Query query = em.createQuery("SELECT d FROM Document d WHERE d.titre LIKE :titre AND d.idSerie.nomSerie LIKE :serie AND d.cote LIKE :cote ") ;
         
+         if (criteres.get(1) != "") {
+        query = em.createQuery("SELECT d FROM Document d WHERE d.titre LIKE :titre AND d.idSerie.nomSerie LIKE :serie AND d.cote LIKE :cote ") ;
+                System.out.println("serie non null");
+         }
+         else {query = em.createQuery("SELECT d FROM Document d WHERE d.titre LIKE :titre AND d.cote LIKE :cote ");
+         System.out.println("serie null");}
         
 
        
@@ -82,13 +88,13 @@ public class DocumentManagerImpl implements DocumentManager {
 
                 query.setParameter("titre", "%" + criteres.get(0) + "%");
             } else {
-                query.setParameter("titre", "$");
+                query.setParameter("titre", "%");
             }
             //si serie
             if (criteres.get(1) != "") {
                 query.setParameter("serie", "%" + criteres.get(1) + "%");
             }
-            else {query.setParameter("serie", "%");}
+            
 
             //si cote
             if (criteres.get(2) != "") {

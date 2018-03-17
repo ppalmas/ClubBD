@@ -19,7 +19,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  *
@@ -41,10 +40,9 @@ public class RechercheServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Récupération des paramètres via le javascript recherche2.js
-        String titre = StringEscapeUtils.escapeHtml4(request.getParameter("titre"));
-        String cote = StringEscapeUtils.escapeHtml4(request.getParameter("cote"));
-        String serie = StringEscapeUtils.escapeHtml4(request.getParameter("serie"));
-        String res = "";
+        String titre = request.getParameter("titre");
+        String cote = request.getParameter("cote");
+        String serie = request.getParameter("serie");
 
         //transformation en liste critères
         ArrayList<String> criteres = new ArrayList();
@@ -59,68 +57,43 @@ public class RechercheServlet extends HttpServlet {
         //Création d'une entité Document
         DocumentManager dm = DocumentManagerImpl.getInstance();
 
-        JsonArray json = new JsonArray();
+        JsonObject json = new JsonObject();
+        JsonArray resultats = new JsonArray();
 
         try {
             l = dm.findDocument(criteres);
-
+            System.out.println("requete ok  "+l.size());
             //creation d'un json pour exploiter les reponses dans le js
-            //mais dabord faut mettre null des que cest vide
+
             for (int i = 0; i < l.size(); i++) {
                 JsonObject temp = new JsonObject();
                 temp.addProperty("titre", l.get(i).getTitre());
-                temp.addProperty("serie", l.get(i).getIdSerie().getNomSerie());
-                temp.addProperty("numero", l.get(i).getNumero().toString());
+
+                try {
+                    temp.addProperty("serie", l.get(i).getIdSerie().getNomSerie());
+                    
+                } catch (Exception e) {
+                    temp.addProperty("serie", "");
+                    
+                }
+
+                try {
+                    temp.addProperty("numero", l.get(i).getNumero().toString());
+                } catch (Exception e) {
+                    temp.addProperty("numero", "");
+                }
                 temp.addProperty("description", l.get(i).getDescription());
                 temp.addProperty("commentaire", l.get(i).getCommentaire());
                 temp.addProperty("image", l.get(i).getImageDocument());
                 temp.addProperty("cote", l.get(i).getCote());
                 temp.addProperty("id", l.get(i).getIdDocument().toString());
                 temp.addProperty("etat", l.get(i).getIdEtat().getIdEtat().toString());
-                json.add(temp);
+                resultats.add(temp);
+
             }
 
-                JsonObject temp = new JsonObject();
-                temp.addProperty("num", Boolean.FALSE);
-    
-            
-            for (int i = 0; i < l.size(); i++) {
-
-                res = res + "{\"titre\":\"" + l.get(i).getTitre() + "\",";
-
-                if (l.get(i).getIdSerie() != null) {
-                    res = res + "\"serie\":\"" + l.get(i).getIdSerie().getNomSerie() + "\",";
-                } else {
-                    res = res + "\"serie\":\"(hors série)\",";
-                }
-                if (l.get(i).getNumero() != null) {
-                    res = res + "\"numero\":\"" + l.get(i).getNumero().toString() + "\",";
-                } else {
-                    res = res + "\"numero\": null,";
-                }
-
-                if (l.get(i).getDescription() != "") {
-                    res = res + "\"description\":\"" + l.get(i).getDescription() + "\",";
-                } else {
-                    res = res + "\"description\": null,";
-                }
-                if (l.get(i).getCommentaire() != "") {
-                    res = res + "\"commentaire\":\"" + l.get(i).getCommentaire() + "\",";
-                } else {
-                    res = res + "\"commentaire\": null,";
-                }
-                if (l.get(i).getImageDocument() != "") {
-                    res = res + "\"image\":\"" + l.get(i).getImageDocument() + "\",";
-                } else {
-                    res = res + "\"image\": null,";
-                }
-
-                res = res + "\"cote\":\"" + l.get(i).getCote() + "\", \"id\":\"" + l.get(i).getIdDocument().toString() + "\",";
-
-                res = res + "\"etat\": \"" + l.get(i).getIdEtat().getIdEtat().toString() + "\"}";
-
-                res = res + ",";
-            }
+            json.add("resultats", resultats);
+            json.addProperty("nb", l.size());
 
         } catch (Exception e) {
 
@@ -129,7 +102,7 @@ public class RechercheServlet extends HttpServlet {
         // Envoi de la réponse
         response.setContentType("text/html; charset=UTF-8");
         System.out.println(new Gson().toJson(json));
-        response.getWriter().write((new Gson().toJson(json)).toString()); // Réponse : resultats
+        response.getWriter().write(new Gson().toJson(json)); // Réponse : resultats
 
     }
 

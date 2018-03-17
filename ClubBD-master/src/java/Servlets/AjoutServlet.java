@@ -37,14 +37,14 @@ public class AjoutServlet extends HttpServlet {
             throws ServletException, IOException {
 
         //On récupère les paramètres
-        String titre = StringEscapeUtils.escapeHtml4(request.getParameter("titre"));
-        String cote = StringEscapeUtils.escapeHtml4(request.getParameter("cote"));
-        String etat = StringEscapeUtils.escapeHtml4(request.getParameter("etat"));
-        String serie = StringEscapeUtils.escapeHtml4(request.getParameter("serie"));
-        String numero = StringEscapeUtils.escapeHtml4(request.getParameter("numero"));
-        String desc = StringEscapeUtils.escapeHtml4(request.getParameter("description"));
-        String comm = StringEscapeUtils.escapeHtml4(request.getParameter("commentaire"));
-        String img = StringEscapeUtils.escapeHtml4(request.getParameter("image"));
+        String titre = StringEscapeUtils.escapeXml(request.getParameter("titre"));
+        String cote = StringEscapeUtils.escapeXml(request.getParameter("cote"));
+        String etat = StringEscapeUtils.escapeXml(request.getParameter("etat"));
+        String serie = StringEscapeUtils.escapeXml(request.getParameter("serie"));
+        String numero = StringEscapeUtils.escapeXml(request.getParameter("numero"));
+        String desc = StringEscapeUtils.escapeXml(request.getParameter("description"));
+        String comm = StringEscapeUtils.escapeXml(request.getParameter("commentaire"));
+        String img = StringEscapeUtils.escapeXml(request.getParameter("image"));
 
         DocumentManager dm = DocumentManagerImpl.getInstance();
         System.out.println("0");
