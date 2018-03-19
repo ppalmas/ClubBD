@@ -44,21 +44,24 @@ public class RechercheDocServlet extends HttpServlet {
         String sujet = request.getParameter("sujet");
         String all = request.getParameter("all");
         String res = "";
-
+        int m = 0;
+        int n = 0;
         //transformation en liste critères
         ArrayList<String> criteres = new ArrayList();
         Boolean b = true;//b vaut true si le champ all uniquement est complété, ou
         //si aucun champ n'est complété
-        if (all == null || all == "") {
+        if (all == null || all == "" || all.equals("")) {
             if ((titre != "") || (serie != "") || (auteur != "") || (sujet != "")) {
                 for (int i = 0; i < 4; i++) {
                     criteres.add("");
                 }
                 criteres.set(0, "titre:" + titre);
-                criteres.set(1, "serie:" + serie);
-                criteres.set(2, "auteur:" + auteur);
-                criteres.set(3, "sujet:" + sujet);
+                criteres.set(1, "sujet:" + sujet);
+                criteres.set(2, "serie:" + serie);
+                criteres.set(3, "auteur:" + auteur);
                 b = false;
+            } else {
+                //TODO renvoyer TOUS LES DOCS
             }
         } else {
             criteres.add("");
@@ -69,43 +72,54 @@ public class RechercheDocServlet extends HttpServlet {
         //Création d'une entité Document
         DocumentManager dm = DocumentManagerImpl.getInstance();
         l = dm.findDocumentSearch(criteres, b);
+        if ((l == null)||l.isEmpty()) {
+            res = res + "{\"titre\":\"" + "\"," + "\"serie\":\"\"," + "\"cote\":\"" + "\"," + "\"id\":\"" + "\",";
+            res = res + "\"auteurs\":" + "{" + "\"auteur" + "\":\"" + "\"}" + "},";
+            m = 0 ;
+            
+        } else {
+            m = l.size();
 //TODO : faire afficher les résultats dans une liste d'items cf cours
-        //creation d'un json pour exploiter les reponses dans le js
-        for (int i = 0; i < l.size(); i++) {
-            //Ecriture de chaque document
-            res = res + "{\"titre\":\"" + l.get(i).getTitre() + "\",";
-            if (l.get(i).getIdSerie() != null) {
-                res = res + "\"serie\":\"" + l.get(i).getIdSerie().getNomSerie() + "\",";
-            } else {
-                res = res + "\"serie\":\"(Hors série)\",";
-            }
-
-            res = res + "\"cote\":\"" + l.get(i).getCote() + "\"," + "\"id\":\"" + l.get(i).getIdDocument().toString() + "\",";
-
-            res = res + "\"auteurs\":";
-
-            ArrayList<Createurdocument> liste = dm.findCreateur(l.get(i).getIdDocument());
-            int n = liste.size();
-            res = res + "{";
-            if (n <= 1) {
-                res = res + "\"auteur" + (n - 1) + "\":\"" + liste.get(n - 1).getIdCreateur().getNomCreateur()
-                        + " " + liste.get(n - 1).getIdCreateur().getPrenomCreateur() + "\"}";
-            } else {
-                for (int j = 0; j < n - 1; j++) {
-                    res = res + "\"auteur" + j + "\":\"" + liste.get(j).getIdCreateur().getNomCreateur()
-                            + " " + liste.get(j).getIdCreateur().getPrenomCreateur() + "\",";
+            //creation d'un json pour exploiter les reponses dans le js
+            for (int i = 0; i < m; i++) {
+                //Ecriture de chaque document
+                res = res + "{\"titre\":\"" + l.get(i).getTitre() + "\",";
+                if (l.get(i).getIdSerie() != null) {
+                    res = res + "\"serie\":\"" + l.get(i).getIdSerie().getNomSerie() + "\",";
+                } else {
+                    res = res + "\"serie\":\"(Hors série)\",";
                 }
-                res = res + "\"auteur" + (n - 1) + "\":\"" + liste.get(n - 1).getIdCreateur().getNomCreateur()
-                        + " " + liste.get(n - 1).getIdCreateur().getPrenomCreateur() + "\"}";
-            }
-            res = res + "},";
 
+                res = res + "\"cote\":\"" + l.get(i).getCote() + "\"," + "\"id\":\"" + l.get(i).getIdDocument().toString() + "\",";
+
+                res = res + "\"auteurs\":";
+
+                ArrayList<Createurdocument> liste = dm.findCreateur(l.get(i).getIdDocument());
+                n = liste.size();
+                res = res + "{";
+                if (n==0){
+                    res = res + "\"auteur\":\"\"}";
+                } else if (n <= 1) {
+                    res = res + "\"auteur" + (n - 1) + "\":\"" + liste.get(n - 1).getIdCreateur().getNomCreateur()
+                            + " " + liste.get(n - 1).getIdCreateur().getPrenomCreateur() + "\"}";
+                } else {
+                    for (int j = 0; j < n - 1; j++) {
+                        res = res + "\"auteur" + j + "\":\"" + liste.get(j).getIdCreateur().getNomCreateur()
+                                + " " + liste.get(j).getIdCreateur().getPrenomCreateur() + "\",";
+                    }
+                    res = res + "\"auteur" + (n - 1) + "\":\"" + liste.get(n - 1).getIdCreateur().getNomCreateur()
+                            + " " + liste.get(n - 1).getIdCreateur().getPrenomCreateur() + "\"}";
+                }
+                res = res + ",\"nbA\":\"" + n + "\"";
+                res = res + "},";
+
+            }
         }
 
         // Envoi de la réponse
         response.setContentType("text/html; charset=UTF-8");
-        System.out.println("{\"resultats\":[" + res.subSequence(0, res.length()-1).toString() + "],\"nb\":\"" + l.size() + "\"}");
-        response.getWriter().write("{\"resultats\":[" + res.subSequence(0, res.length()-1).toString() + "],\"nb\":\"" + l.size() + "\"}"); // Réponse : resultats
+        System.out.println("{\"resultats\":[" + res.subSequence(0, res.length() - 1).toString() + "],\"nb\":\"" + m + "\"}");
+        response.getWriter().write("{\"resultats\":[" + res.subSequence(0, res.length() - 1).toString() + "],\"nb\":\"" + m + "\"}"); // Réponse : resultats
 
     }
 }

@@ -120,18 +120,7 @@
                     </div>
                     <div id="recherche_resultat">
                     </div>
-                    <div id="selection">
-                        <h2>Sélection</h2>
-                        <label for="Titre">Titre</label>
-                        <input type="text" id="Titre" name="Titre"/><br>
-                        <label for="Serie">Série</label>
-                        <input type="text" id="Serie" name="Serie"/><br>
-                        <label for="Cote">Côte</label>
-                        <input type="text" id="Cote" name="Cote"/><br>
-                        <label for="Cote">Auteurs</label>
-                        <input type="text" id="Auteurs" name="Auteurs"/><br>
-                    </div>
-                    <button style="margin-top:10px;" onclick="goToOuvrageNotConnect()">Aller à l'ouvrage</button>
+                    
 
                 </div>
 
