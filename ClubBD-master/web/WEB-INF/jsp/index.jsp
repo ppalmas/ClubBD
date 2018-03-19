@@ -120,7 +120,9 @@
                     </div>
                     <div id="recherche_resultat">
                     </div>
-                    
+                    <div id="table_result" style="align-content: center;">
+                        
+                    </div>
 
                 </div>
 

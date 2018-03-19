@@ -59,10 +59,9 @@ public class RechercheDocServlet extends HttpServlet {
                 criteres.set(1, "sujet:" + sujet);
                 criteres.set(2, "serie:" + serie);
                 criteres.set(3, "auteur:" + auteur);
-                b = false;
-            } else {
-                //TODO renvoyer TOUS LES DOCS
+                
             }
+            b = false;
         } else {
             criteres.add("");
             criteres.set(0, all);

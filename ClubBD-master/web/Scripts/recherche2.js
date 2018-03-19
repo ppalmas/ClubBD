@@ -43,9 +43,15 @@ function recherche_doc() {
 
 }
 
-
+/**
+ * Fonction pour gérer dynamiquement l'affichage des résultats
+ * de la recherche + définition d'id, des attributs onclick...
+ * @param {type} array
+ * @returns {Element|makeUL.div}
+ */
 function makeUL(array) {
     var div = document.createElement('div');
+    //Définition de l'id de la div
     div.setAttribute("id", "result_temp");
     for (var i = 0; i < array.length; i++) {
         var item = document.createElement('table');
@@ -53,6 +59,7 @@ function makeUL(array) {
 
         //Titre
         var ligne = document.createElement('tr');
+        //Défintion de l'id pour le titre, et de l'action à effectuer onclick
         ligne.setAttribute("id", "titre_result" + i);
         ligne.setAttribute("onclick", "TEST");
         ligne.appendChild(document.createTextNode(array[i]['titre']));
@@ -78,7 +85,7 @@ function makeUL(array) {
 
         //Serie
         var serie = array[i]['serie'];
-        if (serie != "#0*##") {
+        if (serie != "#0*##") {//Document non hors série
             var ligne = document.createElement('tr');
             ligne.appendChild(document.createTextNode("Série : " + serie));
             item.appendChild(ligne);
