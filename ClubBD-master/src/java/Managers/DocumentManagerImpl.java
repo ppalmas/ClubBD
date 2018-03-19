@@ -292,9 +292,10 @@ public class DocumentManagerImpl implements DocumentManager {
         return l.isEmpty();
 
     }
-
     /**
-     * Recherche un document suivant un liste de critères au format string : *
+     * Recherche un document suivant un liste de critères au format string :
+     *
+     *
      * @param criteres
      * @param b si b vaut true, l'utilisateur a complété le champ toute
      * recherche (pas de critères)
@@ -302,34 +303,137 @@ public class DocumentManagerImpl implements DocumentManager {
      */
     @Override
     public List<Document> findDocumentSearch(ArrayList<String> criteres, Boolean b) {
-
         //recherche un document selon les criteres spécifiés
         EntityManager em = emf.createEntityManager();
-        String SQL = "SELECT d FROM Document d";
+        String SQL = "SELECT DISTINCT d FROM Document d";
+        String SQL_part = "";
+        String SQL2 = "";
+        String titre = "";
+        String serie = "";
+        String sujet = "";
+        String auteur = "";
         List l = null;
-        //structure de la liste critere : (0)titre (1)serie (2)auteur (3)sujet OU (0) all
+        //structure de la liste critere : (0)titre (1)sujet (2)serie (3)auteur OU (0) all
+
         if (b) {
             //renvoi de la liste suivant tous les critères
             String all = criteres.get(0);
-            SQL = SQL + " WHERE d.titre LIKE '%" + all + "%' OR d.auteur LIKE '%" + all + "%' OR d.serie LIKE '%" + all + "%' OR"
-                    + " d.sujet LIKE '%" + all + "%'";
+            /**
+             * String[] tab_search = all.split(" "); int len =
+             * tab_search.length-1; String keyword = ""; for (int k=0;
+             * k<len;k++){ keyword = "all"+k; SQL_part = SQL_part + "
+             * (LOWER(d.titre) LIKE LOWER(:keyword) OR" + " LOWER(d.description)
+             * LIKE LOWER(:keyword) OR LOWER(c.nomCreateur) LIKE LOWER(:keyword)
+             * OR" + " LOWER(d.idSerie.nomSerie) LIKE LOWER(:keyword)) AND";
+             *
+             * }
+             * keyword = "all" + len; SQL_part = SQL_part + " (LOWER(d.titre)
+             * LIKE LOWER(:keyword) OR" + " LOWER(d.description) LIKE
+             * LOWER(:keyword) OR LOWER(c.nomCreateur) LIKE LOWER(:keyword) OR"
+             * + " LOWER(d.idSerie.nomSerie) LIKE LOWER(:keyword))"; SQL = SQL +
+             * " INNER JOIN Createurdocument cd ON (d.idDocument =
+             * cd.idDocument.idDocument) " + "(INNER JOIN Createur c ON
+             * (cd.idCreateur.idCreateur = c.idCreateur)) WHERE " + SQL_part;*
+             */
+            SQL_part = " (LOWER(d.titre) LIKE LOWER(:all) OR"
+                    + " LOWER(d.description) LIKE LOWER(:all) OR LOWER(c.nomCreateur) LIKE LOWER(:all) OR"
+                    + " LOWER(c.prenomCreateur) LIKE (:all) OR LOWER(d.idSerie.nomSerie) LIKE LOWER(:all))";
+            SQL = SQL + " INNER JOIN Createurdocument cd ON (d.idDocument = cd.idDocument.idDocument) "
+                    + "(INNER JOIN Createur c ON (cd.idCreateur.idCreateur = c.idCreateur)) WHERE " + SQL_part;
+            try {
+                Query q = em.createQuery(SQL);
+                q.setParameter("all", "%" + all + "%");
+                l = q.getResultList();
+                System.out.println(SQL);
+            } catch (Exception e) {
+                System.out.println("erreur syntaxe requete // " + SQL);
+                System.out.println(e);
+                l = null;
+            }
+
         } else if (criteres.size() >= 1) {
+            SQL_part = "";
             //renvoi suivant tous les critères
             for (int i = 0; i < criteres.size(); i++) {
                 //On récupère le critère i
                 String[] list = criteres.get(i).split(":");
-                // Si la 2eme case est vide, alors le champ input était vide
-                if (list.length >= 2) {
-                    SQL = SQL + " WHERE d." + list[0] + " LIKE '%" + list[1] + "%'";
+
+// Si la 2eme case du critère est vide ou n'existe pas, alors le champ input était vide
+//D'où le test if (list.length >=2 pour chaque item
+                //Pour le titre (i=0)
+                if (i == 0) {
+                    if (list.length >= 2) {
+                        titre = list[1];
+                    } else {
+                        titre = "";
+                    }
+                    SQL_part = " LOWER(d.titre) LIKE LOWER(:titre)";
+                    //Si le titre n'est pas indiqué, on met quand même un bout de requête
+                    //pour ne pas avoir de problème avec les autres critères et le 'AND'
+
+                    //Pour le sujet/description (id =1)
+                } else if (i == 1) {
+                    if (list.length >= 2) {
+                        sujet = list[1];
+                    } else {
+                        sujet = "";
+                    }
+                    SQL_part = SQL_part + " AND LOWER(d.description) LIKE LOWER(:sujet)";
+                    //Pour la série (id=2)
+                } else if (i == 2) {
+                    if (list.length >= 2) {
+                        serie = list[1];
+                    } else {
+                        serie = "";
+                    }
+                    //On reprend la query sql de base
+                    ///!\ SI PAS d'IDSERIE RENSEIGNE, L'ouvrage n'apparait pas dans la liste
+                    SQL_part = SQL_part + " AND (LOWER(d.idSerie.nomSerie) LIKE LOWER(:serie))";
+
+                    //Pour les auteurs (id=3)
+                } else if (i == 3) {
+                    if (list.length >= 2) {
+                        auteur = list[1];
+                        System.out.println("auteur:" + auteur);
+                    } else {
+                        auteur = "";
+                        System.out.println("auteur:" + auteur);
+                    }
+                    SQL2 = SQL2
+                            + " (INNER JOIN Createurdocument cd ON (d.idDocument = cd.idDocument.idDocument)" + " (INNER JOIN Createur c ON "
+                            + "(cd.idCreateur.idCreateur = c.idCreateur)))";
+                    SQL_part = SQL_part + " AND LOWER(c.nomCreateur) LIKE LOWER(:auteur)";
+
                 }
+
             }
-//TODO attention, faire requête paramétrée
-        }
-        try {
-            Query q = em.createQuery(SQL);
-            l = q.getResultList();
-        } catch (Exception e) {
-            System.out.println("erreur syntaxe requete // " + SQL);
+            SQL = SQL + SQL2 + " WHERE" + SQL_part;
+            try {
+                Query q = em.createQuery(SQL);
+                q.setParameter("titre", "%" + titre + "%");
+                q.setParameter("sujet", "%" + sujet + "%");
+                q.setParameter("serie", "%" + serie + "%");
+                q.setParameter("auteur", "%" + auteur + "%");
+                l = q.getResultList();
+                System.out.println(SQL);
+                System.out.println(q);
+                System.out.println("titre = " + titre);
+                System.out.println("serie= " + serie);
+                System.out.println("auteur= " + auteur);
+                System.out.println(l);
+            } catch (Exception e) {
+                System.out.println("erreur syntaxe requete 2 // " + SQL);
+                System.out.println(e);
+                l = null;
+            }
+        } else { //Renvoi de tous les documents de la bdd
+            try {
+                Query q = em.createQuery(SQL);
+                l = q.getResultList();
+            } catch (Exception e) {
+                l = null;
+                System.out.println("erreur pour renvoyer TOUS les docs de la bdd//" + SQL);
+            }
         }
 
         return l;

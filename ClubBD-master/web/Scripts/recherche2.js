@@ -16,27 +16,19 @@ function recherche_doc() {
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
+
             //Réponse de la servlet
             var answer = xhttp.responseText;
+
             res = JSON.parse(answer);
             //boucle daffichage
             var disp = "";
-            for (i = 0; i < res.nb; i++) {
-                disp = disp + "<span id=\"res" + res.resultats[i]['id'] + "\" idm=\"" + res.resultats[i]['id'] + "\" num=\"" + i + "\">" +
-                        res.resultats[i]['titre'] + " " + res.resultats[i]['serie'] + " " + res.resultats[i]['cote'] +
-                        " ";
-                var temp = res.resultats[i]['auteurs'];
-                for (j = 0; i<temp.nb; j++){
-                    disp = disp + temp['auteur'] + " "
-                }
-                + "</span>" + "<br>";
-                        
-            }
-
-            //attribution d'un lien a chaque element qui permet de récupérer l'id de la selection
-            document.getElementById("recherche_resultat").innerHTML = disp;
-            for (i = 0; i < res.nb; i++) {
-                document.getElementById("res" + res.resultats[i]['id']).onclick = selection;
+            if (res == null) {
+                document.getElementById("recherche_resultat").innerHTML = "Erreur.";
+            } else if (res.nb == "0") {
+                document.getElementById("recherche_resultat").innerHTML = "Aucun résultat.";
+            } else {
+                document.getElementById("recherche_resultat").appendChild(makeUL(res.resultats));
             }
         } else {
             document.getElementById("recherche_resultat").innerHTML = "";
@@ -44,58 +36,65 @@ function recherche_doc() {
     }
 
     //formulaire envoyé en get à la servlet recherche
-    var data = "titre=" + titre + "&" + "serie=" + serie + "&" + "auteur=" + auteur +"&" + "sujet=" + sujet + "&" + "all=" + all;
+    var data = "titre=" + titre + "&" + "serie=" + serie + "&" + "auteur=" + auteur + "&" + "sujet=" + sujet + "&" + "all=" + all;
     xhttp.open("GET", "RechercheDocServlet?" + data, true);
     xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
     xhttp.send();
 
 }
 
-
-
-
 /**
- * Récupération des sources qui correspondent à un type donné et affichage
- * @returns {Liste de sources}
+ * Fonction pour gérer dynamiquement l'affichage des résultats
+ * de la recherche + définition d'id, des attributs onclick...
+ * @param {type} array
+ * @returns {Element|makeUL.div}
  */
-function recherche2_doc() {
-    //On récupère les infos
-    var titre = document.getElementById("Titre").value;
-    var serie = document.getElementById("Serie").value;
-    var cote = document.getElementById("Cote").value;
+function makeUL(array) {
+    var div = document.createElement('div');
+    //Définition de l'id de la div
+    div.setAttribute("id", "result_temp");
+    for (var i = 0; i < array.length; i++) {
+        var item = document.createElement('table');
+        var ligne = document.createElement('tr');
 
+        //Titre
+        var ligne = document.createElement('tr');
+        //Défintion de l'id pour le titre, et de l'action à effectuer onclick
+        ligne.setAttribute("id", "titre_result" + i);
+        ligne.setAttribute("onclick", "TEST");
+        ligne.appendChild(document.createTextNode(array[i]['titre']));
 
-    //Si non vide
-    if (titre != null || serie != null || cote != null) {
+        item.appendChild(ligne);
 
-        //On envoie les infos a la servlet pour requete
-        xhttp = new XMLHttpRequest();
+        //Auteur
+        var ligne = document.createElement('tr');
 
-
-
-        xhttp.onreadystatechange = function () {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                //Réponse de la servlet
-                var answer = xhttp.responseText;
-
-
-                document.getElementById("recherche_resultat").innerHTML = answer;
-
-
+        //Nombre d'auteurs pour chaque document
+        var nb = array[i]['nbA'];
+        if (nb > 0) {
+            if (nb > 1) {
+                for (var j = 0; j < nb-1; j++) {
+                    ligne.appendChild(document.createTextNode(array[i]['auteurs']['auteur' + j] + ", "));
+                }
             }
-            ;
+            ligne.appendChild(document.createTextNode(array[i]['auteurs']['auteur' + (nb-1)]));
+            item.appendChild(ligne);
+        } else {
+            item.appendChild(document.createTextNode(""));
         }
 
-        //formulaire envoyé en get à la servlet recherche
-        var data = "titre=" + titre + "&" + "serie=" + serie + "&" + "cote=" + cote;
-        xhttp.open("GET", "RechercheServlet?" + data, true);
-        xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
-        xhttp.send();
+        //Serie
+        var serie = array[i]['serie'];
+        if (serie != "#0*##") {//Document non hors série
+            var ligne = document.createElement('tr');
+            ligne.appendChild(document.createTextNode("Série : " + serie));
+            item.appendChild(ligne);
+        }
 
-
-
-
+        div.appendChild(item);
     }
 
+    // Finally, return the constructed list:
+    return div;
 }
 
