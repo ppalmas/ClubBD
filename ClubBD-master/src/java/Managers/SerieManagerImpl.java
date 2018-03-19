@@ -43,16 +43,74 @@ public class SerieManagerImpl implements SerieManager {
 
         try {
             Query q = em.createQuery("SELECT s FROM Serie s");
-System.out.println("aaaa4");
+
             l = q.getResultList();
-            System.out.println("aaaa5");
+
         } catch (Exception e) {
             System.out.println("erreur syntaxe requete // ");
         }
 
-    
-    return l ;
-}
+        return l;
+    }
 
+    @Override
+    public List<Serie> findSerie(String seriename) {
+
+        EntityManager em = emf.createEntityManager();
+
+        List l = null;
+
+        try {
+            Query q = em.createQuery("SELECT s FROM Serie s WHERE s.nomSerie LIKE :seriename");
+            q.setParameter("seriename", "%" + seriename + "%");
+            l = q.getResultList();
+
+        } catch (Exception e) {
+            System.out.println("erreur syntaxe requete // ");
+        }
+
+        return l;
+    }
+
+    @Override
+    public void insert(String seriename, String seriedesc) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+
+        Serie s = new Serie();
+        s.setComplet(false);
+        s.setNomSerie(seriename);
+        s.setSerieDescription(seriedesc);
+
+        em.persist(s);
+        em.getTransaction().commit();
+
+    }
+
+    @Override
+    public void update(String idserie, String seriename, String seriedesc, String complet) {
+
+        //on recupere le document avec l'id
+        EntityManager em = emf.createEntityManager();
+
+        Serie s = em.find(Serie.class, Integer.parseInt(idserie));
+
+        em.getTransaction().begin();
+
+        if (Integer.parseInt(complet) == 1) {
+            s.setComplet(true);
+        } else {
+            s.setComplet(false);
+        }
+
+        s.setNomSerie(seriename);
+
+        try {
+            s.setSerieDescription(seriedesc);
+        } catch (Exception e) {
+        }
+
+        em.getTransaction().commit();
+    }
 
 }

@@ -7,13 +7,14 @@ package Servlets;
 
 import Managers.DocumentManager;
 import Managers.DocumentManagerImpl;
+import Managers.SerieManager;
+import Managers.SerieManagerImpl;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 /**
  *
@@ -37,7 +38,7 @@ public class AjoutServlet extends HttpServlet {
 
         //On récupère les paramètres
         String titre = request.getParameter("titre");
-        
+        Integer type = Integer.parseInt(request.getParameter("type"));
         String cote = request.getParameter("cote");
         String etat = request.getParameter("etat");
         String serie = request.getParameter("serie");
@@ -45,22 +46,56 @@ public class AjoutServlet extends HttpServlet {
         String desc = request.getParameter("description");
         String comm = request.getParameter("commentaire");
         String img = request.getParameter("image");
+        String seriename = request.getParameter("seriename");
+        String seriedesc = request.getParameter("seriedesc");
+        
+        
+          System.out.println(type);
 
-        DocumentManager dm = DocumentManagerImpl.getInstance();
-        System.out.println("0");
+        if (type == 0) {
+              System.out.println("if");
 
-        Boolean b = false;
-        try {
+            DocumentManager dm = DocumentManagerImpl.getInstance();
 
-            dm.insert(titre, cote, etat, serie, numero, desc, comm, img);
+            Boolean b = false;
+            try {
 
-            b = true;
-        } catch (Exception e) {
+                dm.insert(titre, cote, etat, serie, numero, desc, comm, img);
+
+                b = true;
+            } catch (Exception e) {
+            }
+
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().write(b + "");
+
         }
+        
+        else if (type == 1) {
+            
+            System.out.println("elif");
 
-        response.setContentType("text/html; charset=UTF-8");
-        response.getWriter().write(b + "");
+            SerieManager sm = SerieManagerImpl.getInstance();
 
+            Boolean b = false;
+            try {
+
+                sm.insert(seriename,seriedesc);
+
+                b = true;
+            } catch (Exception e) {
+            }
+
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().write(b + "");
+
+        }
+        
+        else {
+              System.out.println("else");
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().write("false" + "");
+        }
     }
 }
 

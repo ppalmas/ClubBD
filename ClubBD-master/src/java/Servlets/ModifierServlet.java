@@ -7,13 +7,14 @@ package Servlets;
 
 import Managers.DocumentManager;
 import Managers.DocumentManagerImpl;
+import Managers.SerieManager;
+import Managers.SerieManagerImpl;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 /**
  *
@@ -46,19 +47,42 @@ public class ModifierServlet extends HttpServlet {
         String img = request.getParameter("image");
         String iddoc = request.getParameter("idm");
 
-        DocumentManager dm = DocumentManagerImpl.getInstance();
+        Integer type = Integer.parseInt(request.getParameter("type"));
+
+        //pour série
+        String complet = request.getParameter("complet");
+        String seriename = request.getParameter("seriename");
+        String seriedesc = request.getParameter("seriedesc");
+        String idserie = request.getParameter("idserie");
+
+        
 
         Boolean b = false;
-        try {
 
-            dm.update(iddoc, titre, cote, etat, serie, numero, desc, comm, img);
+        if (type == 0) {
+            try {
+                DocumentManager dm = DocumentManagerImpl.getInstance();
+                dm.update(iddoc, titre, cote, etat, serie, numero, desc, comm, img);
 
-            b = true;
-        } catch (Exception e) {
+                b = true;
+            } catch (Exception e) {
+            }
+
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().write(b + "");
+
+        } else if (type == 1) {
+            try {
+                SerieManager sm = SerieManagerImpl.getInstance();
+                sm.update(idserie, seriename, seriedesc,complet);
+
+                b = true;
+            } catch (Exception e) {
+            }
+
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().write(b + "");
         }
-
-        response.setContentType("text/html; charset=UTF-8");
-        response.getWriter().write(b + "");
 
     }
 }

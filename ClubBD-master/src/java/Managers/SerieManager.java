@@ -25,5 +25,8 @@ public interface SerieManager {
      */
     
     public List<Serie> findSerie();
+    public void insert(String seriename,String seriedesc);
+    public List<Serie> findSerie(String seriename);
+    public void update(String idserie, String seriename, String seriedesc, String complet);
 }
 

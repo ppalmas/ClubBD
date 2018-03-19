@@ -4,6 +4,8 @@
  */
 var res; //reponse json de resultats de recherche
 var idm; //id de lelement selectionné
+
+
 function recherche2_doc() {
     //On récupère les infos
     var titre = document.getElementById("Titre").value;
@@ -98,13 +100,57 @@ function ajouter() {
                     alert("Document ajouté !");
 
 
+
                 } else {
                     alert("Erreur lors de l'ajout.");
                 }
 
             }
         };
-        var data = "titre=" + titrea + "&" + "cote=" + cotea + "&" + "serie=" + seriea + "&" + "numero=" + numeroa + "&" + "description=" + descriptiona + "&" + "etat=" + etata + "&" + "commentaire=" + commentairea + "&" + "image=" + imagea;
+        var data = "titre=" + titrea + "&" + "cote=" + cotea + "&" + "serie=" + seriea + "&" + "numero=" + numeroa + "&" + "description=" + descriptiona + "&" + "etat=" + etata + "&" + "commentaire=" + commentairea + "&" + "image=" + imagea + "&seriename=&seriedesc=&type=0";
+        xhttp.open("POST", "AjoutServlet?");
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+        xhttp.send(data);
+
+
+
+
+
+
+
+    } else {
+        alert("Veuillez remplir tous les champs obligatoires (*)");
+    }
+
+}
+
+function ajouterserie() {
+    var seriename = document.getElementById("seriename").value;
+    var seriedesc = document.getElementById("seriedesc").value;
+
+
+    //Si la saisie est valide
+    if (seriename !== "") {
+
+
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                //Réponse de la servlet
+                var answer = xhttp.responseText;
+
+                if (answer == "true") {
+
+
+                    alert("Série ajoutée !");
+
+                } else {
+                    alert("Erreur lors de l'ajout.");
+                }
+
+            }
+        };
+        var data = "titre=&cote=&serie=&numero=&description=&etat=&commentaire=&image=&" + "seriename=" + seriename + "&" + "seriedesc=" + seriedesc + "&type=1";
         xhttp.open("POST", "AjoutServlet?");
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
         xhttp.send(data);
@@ -149,6 +195,55 @@ function modifier() {
 
                     alert("Document modifié !");
 
+                    //Si l'addresse email est déjà prise   
+                } else {
+                    alert("Erreur lors de la modification.");
+                }
+
+            }
+        };
+
+        var data = "idm=" + idm + "&" + "titre=" + titrea + "&" + "cote=" + cotea + "&" + "serie=" + seriea + "&" + "numero=" + numeroa + "&" + "description=" + descriptiona + "&" + "etat=" + etata + "&" + "commentaire=" + commentairea + "&" + "image=" + imagea+"&type=0&seriename=&seriedesc=&complet=&idserie=";
+        xhttp.open("POST", "ModifierServlet?");
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+        xhttp.send(data);
+
+
+
+
+
+
+
+    } else {
+        alert("Veuillez remplir tous les champs obligatoires (*)");
+    }
+
+
+}
+
+function modifierserie() {
+    var seriename = document.getElementById("serienamem").value;
+    var seriedesc = document.getElementById("seriedescm").value;
+    var complet=0;
+    
+    //pour complet
+    if (document.getElementById('completm').checked==true){
+        complet=1;
+    }
+    
+    //Si la saisie est valide
+    if (seriename !== "") {
+
+
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                //Réponse de la servlet
+                var answer = xhttp.responseText;
+
+                if (answer == "true") {
+
+                    alert("Série modifiée !");
 
                     //Si l'addresse email est déjà prise   
                 } else {
@@ -158,9 +253,9 @@ function modifier() {
             }
         };
 
-        var data = "idm=" + idm + "&" + "titre=" + titrea + "&" + "cote=" + cotea + "&" + "serie=" + seriea + "&" + "numero=" + numeroa + "&" + "description=" + descriptiona + "&" + "etat=" + etata + "&" + "commentaire=" + commentairea + "&" + "image=" + imagea;
+        var data = "idm=&titre=&cote=&serie=&numero=&description=&etat=&commentaire=&image=&"+"seriename="+seriename+"&seriedesc="+seriedesc+"&complet="+complet+"&type=1&idserie="+idm;
         xhttp.open("POST", "ModifierServlet?");
-        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
         xhttp.send(data);
 
 
@@ -210,4 +305,94 @@ function selection() {
 
 
 
+}
+
+function selectionserie() {
+    idm = this.getAttribute("idm");
+    num = this.getAttribute("num");
+    document.getElementById("serienamem").value = res.resultats[num]['seriename'];
+    document.getElementById("seriedescm").value = res.resultats[num]['seriedesc'];
+
+
+    document.getElementById("idms").value = idm;
+
+
+    // pour complet
+
+    if (res.resultats[num]['complet'] == true) {
+        document.getElementById('completm').checked = true;
+    } else {
+        document.getElementById('completm').checked = false;
+    }
+
+    setVisible('modif');
+
+
+
+
+}
+
+function refresh() {
+    window.location.replace("admin.htm?idco=" + document.getElementById("idco").value);
+
+}
+
+function recherche2_serie() {
+    //On récupère les infos
+    var seriename = document.getElementById("nomseries").value;
+
+
+
+    //Si non vide
+    if (seriename != null) {
+        console.log(seriename);
+        //On envoie les infos a la servlet pour requete
+        xhttp = new XMLHttpRequest();
+
+
+
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                //Réponse de la servlet
+                var answer = xhttp.responseText;
+
+                res = JSON.parse(answer);
+
+
+                //boucle daffichage
+
+                var disp = "";
+                for (i = 0; i < res.nb; i++) {
+
+                    disp = disp + "<span id=\"res" + res.resultats[i]['id'] + "\" idm=\"" + res.resultats[i]['id'] + "\" num=\"" + i + "\">" + res.resultats[i]['seriename'] + "</span>" + "<br>";
+
+                }
+
+
+                //attribution d'un lien a chaque element qui permet de récupérer l'id de la selection
+                document.getElementById("recherche_resultat").innerHTML = disp;
+                for (i = 0; i < res.nb; i++) {
+
+
+                    document.getElementById("res" + res.resultats[i]['id']).onclick = selectionserie;
+
+
+                }
+            } else {
+                document.getElementById("recherche_resultat").innerHTML = "";
+            }
+        }
+
+        //formulaire envoyé en get à la servlet recherche
+        var data = "seriename=" + seriename;
+        xhttp.open("GET", "RechercheSerieServlet?" + data, true);
+        xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
+        xhttp.send();
+
+
+
+
+    }
+
+    setVisible('recherche_resultat');
 }

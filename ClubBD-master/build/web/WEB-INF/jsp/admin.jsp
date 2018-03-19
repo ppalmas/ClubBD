@@ -30,7 +30,7 @@
         <script src="Scripts/index.js"></script>
         <script src="Scripts/deconnecter.js"></script>
         <script src="Scripts/gestion_inv.js"></script>
-        
+
 
 
     </head>
@@ -92,19 +92,21 @@
                 <!-- Bloc gestion inventaire-->
                 <div id ="gestion_inv_content" class="bloc_home" style="display:none">
                     <h1>Gestion de l'inventaire</h1>
+                    <input type="button" id="refresh" value="Rafraîchir la BDD" onclick="refresh()"/>
                     <span onclick="getNewContent('ajout', ['selection', 'modif', 'recherche_resultat'])"><h2>Ajout</h2></span>
 
                     <div id="ajout" style="display:none">
 
 
 
+                        <div><h3>Ajout d'un document</h3>
                         <label for="titrea">Titre*</label>
                         <input name="titrea" id="titrea" type="text" value=""/><br>
                         <label for="cotea">Côte*</label>
                         <input name="cotea" id="cotea" type="text" value=""/><br>
                         <label for="seriea">Série</label>
                         <input type="text" list="seriecombo" id="seriea" name="seriea">
-                         <datalist id="seriecombo" >
+                        <datalist id="seriecombo" >
                             <c:forEach items="${lserie}" var="serie">
 
                                 <option><c:out value="${serie}" />
@@ -116,7 +118,7 @@
                         <input name="numeroa" id="numeroa" type="text" value=""/><br>
                         <label for="descriptiona">Description</label>
                         <input name="descriptiona" id="descriptiona" type="text" value=""/><br>
-                        
+
                         <label for="neuf">Neuf</label>
                         <input type="radio" id="neuf" name="etat" value="1" checked/>
                         <label for="tbon">Très bon</label>
@@ -135,13 +137,25 @@
 
 
 
-                        <input type="submit" value="Ajouter" onclick="ajouter()"/>
+                        <input type="submit" value="Ajouter" onclick="ajouter()"/><br><br></div>
+
+                        <div><h3>Ajout d'une série</h3>
+                        <label for="seriename">Nom de la série*</label>
+                        <input type="text" id="seriename" name="seriename" value=""/><br>
+                        <label for="seriedesc">Description</label>
+                        <input type="text" id="seriedesc" name="seriedesc" value=""/><br>
+                        <input type="submit" value="Ajouter" onclick="ajouterserie()"/><br><br></div>
+
+
+
+
 
 
                     </div>
                     <span onclick="getNewContent('selection', ['ajout'])"><h2>Sélection</h2></span>
+                    
                     <div id="selection" style="display:none">
-
+                       <div> <h3>Sélection document</h3><br>
                         <label for="Titre">Titre</label>
                         <input type="text" id="Titre" name="Titre"/><br>
 
@@ -152,15 +166,26 @@
 
                         <label for="Cote">Côte</label>
                         <input type="text" id="Cote" name="Cote"/><br>
-                        <button onclick="recherche2_doc()">Rechercher</button>
+                        <button onclick="recherche2_doc()">Rechercher document</button><br><br></div>
+                        
+                        
+                        <div><h3>Sélection série</h3><br>
+                        <label for="nomseries">Nom série</label>
+                        <input type="text" id="nomseries" name="nomseries"/><br>
+
+                        
+
+                        <button onclick="recherche2_serie()">Rechercher série</button></div>
+                        
                     </div>
                     <h2>Résultats</h2>
                     <div id="recherche_resultat">
 
 
                     </div>
-                    <h2>Modification</h2> 
+                    <h2>Modification document</h2> 
                     <div id="modif" style="display:none">
+                        <h3>Modification document</h3>
                         <label>Id document</label>
                         <input id="idm" type="text" readonly="readonly" value=""><br>
 
@@ -180,7 +205,7 @@
                         <input name="numerom" id="numerom" type="text" value=""/><br>
                         <label for="descriptionm">Description</label>
                         <input name="descriptionm" id="descriptionm" type="text" value=""/><br>
-                        
+
                         <label for="neufm">Neuf</label>
                         <input type="radio" id="neufm" name="etatm" value="1" checked/>
                         <label for="tbonm">Très bon</label>
@@ -199,10 +224,27 @@
 
 
 
-                        <input type="submit" value="Modifier" onclick="modifier()"/>
+                        <input type="submit" value="Modifier document" onclick="modifier()"/>
+                    
+                                
+                    
+
+
+                    <h3>Modification Série</h3> 
+                        <label>ID série</label>
+                        <input id="idms" type="text" readonly="readonly" value=""><br>
+
+                        <label for="serienamem">Titre*</label>
+                        <input name="serienamem" id="serienamem" type="text" value=""/><br>
+                        <label for="seriedescm">Description</label>
+                        <input name="seriedescm" id="seriedescm" type="text" value=""/><br>
+                        <label for="completm">Complet</label>
+                        <input name="completm" id="completm" type="checkbox"/><br>
+
+                        <input type="submit" value="Modifier série" onclick="modifierserie()"/>
                     </div>
 
-
+                    </div>
 
                 </div>
 
