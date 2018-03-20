@@ -4,6 +4,8 @@
  */
 var res; //reponse json de resultats de recherche
 var idm; //id de lelement selectionné
+var nbcrea = 0; // pour +/- crea
+var nbcream=0;
 
 
 function recherche2_doc() {
@@ -79,6 +81,11 @@ function ajouter() {
     var imagea = document.getElementById("imagea").value;
     var cotea = document.getElementById("cotea").value;
 
+    var cnp0 = document.getElementById("createura0").value;
+    var cnp1 = document.getElementById("createura1").value;
+    var cnp2 = document.getElementById("createura2").value;
+
+
 
 
 
@@ -107,7 +114,7 @@ function ajouter() {
 
             }
         };
-        var data = "titre=" + titrea + "&" + "cote=" + cotea + "&" + "serie=" + seriea + "&" + "numero=" + numeroa + "&" + "description=" + descriptiona + "&" + "etat=" + etata + "&" + "commentaire=" + commentairea + "&" + "image=" + imagea + "&seriename=&seriedesc=&type=0";
+        var data = "cnp0="+cnp0+"&cnp1="+cnp1+"&cnp2="+cnp2+"&titre=" + titrea + "&" + "cote=" + cotea + "&" + "serie=" + seriea + "&" + "numero=" + numeroa + "&" + "description=" + descriptiona + "&" + "etat=" + etata + "&" + "commentaire=" + commentairea + "&" + "image=" + imagea + "&seriename=&seriedesc=&type=0&nomcrea=&prenomcrea=";
         xhttp.open("POST", "AjoutServlet?");
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
         xhttp.send(data);
@@ -150,7 +157,51 @@ function ajouterserie() {
 
             }
         };
-        var data = "titre=&cote=&serie=&numero=&description=&etat=&commentaire=&image=&" + "seriename=" + seriename + "&" + "seriedesc=" + seriedesc + "&type=1";
+        var data = "cnp0=&cnp1=&cnp2=&titre=&cote=&serie=&numero=&description=&etat=&commentaire=&image=&" + "seriename=" + seriename + "&" + "seriedesc=" + seriedesc + "&type=1";
+        xhttp.open("POST", "AjoutServlet?");
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+        xhttp.send(data);
+
+
+
+
+
+
+
+    } else {
+        alert("Veuillez remplir tous les champs obligatoires (*)");
+    }
+
+}
+
+
+function ajoutercreateur() {
+    var nomcrea = document.getElementById("nomcrea").value;
+    var prenomcrea = document.getElementById("prenomcrea").value;
+
+
+    //Si la saisie est valide
+    if (nomcrea !== "" && prenomcrea !== "") {
+
+
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                //Réponse de la servlet
+                var answer = xhttp.responseText;
+
+                if (answer == "true") {
+
+
+                    alert("Créateur ajouté !");
+
+                } else {
+                    alert("Erreur lors de l'ajout.");
+                }
+
+            }
+        };
+        var data = "cnp0=&cnp1=&cnp2=&titre=&cote=&serie=&numero=&description=&etat=&commentaire=&image=&seriename=&seriedesc=&type=2" + "&nomcrea=" + nomcrea + "&prenomcrea=" + prenomcrea;
         xhttp.open("POST", "AjoutServlet?");
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
         xhttp.send(data);
@@ -176,6 +227,10 @@ function modifier() {
     var commentairea = document.getElementById("commentairem").value;
     var imagea = document.getElementById("imagem").value;
     var cotea = document.getElementById("cotem").value;
+    
+    var cnp0 = document.getElementById("createurm0").value;
+    var cnp1 = document.getElementById("createurm1").value;
+    var cnp2 = document.getElementById("createurm2").value;
 
 
 
@@ -203,7 +258,7 @@ function modifier() {
             }
         };
 
-        var data = "idm=" + idm + "&" + "titre=" + titrea + "&" + "cote=" + cotea + "&" + "serie=" + seriea + "&" + "numero=" + numeroa + "&" + "description=" + descriptiona + "&" + "etat=" + etata + "&" + "commentaire=" + commentairea + "&" + "image=" + imagea+"&type=0&seriename=&seriedesc=&complet=&idserie=";
+        var data ="cnp0="+cnp0+"&cnp1="+cnp1+"&cnp2="+cnp2+ "&idm=" + idm + "&" + "titre=" + titrea + "&" + "cote=" + cotea + "&" + "serie=" + seriea + "&" + "numero=" + numeroa + "&" + "description=" + descriptiona + "&" + "etat=" + etata + "&" + "commentaire=" + commentairea + "&" + "image=" + imagea + "&type=0&seriename=&seriedesc=&complet=&idserie=";
         xhttp.open("POST", "ModifierServlet?");
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
         xhttp.send(data);
@@ -224,13 +279,13 @@ function modifier() {
 function modifierserie() {
     var seriename = document.getElementById("serienamem").value;
     var seriedesc = document.getElementById("seriedescm").value;
-    var complet=0;
-    
+    var complet = 0;
+
     //pour complet
-    if (document.getElementById('completm').checked==true){
-        complet=1;
+    if (document.getElementById('completm').checked == true) {
+        complet = 1;
     }
-    
+
     //Si la saisie est valide
     if (seriename !== "") {
 
@@ -253,7 +308,7 @@ function modifierserie() {
             }
         };
 
-        var data = "idm=&titre=&cote=&serie=&numero=&description=&etat=&commentaire=&image=&"+"seriename="+seriename+"&seriedesc="+seriedesc+"&complet="+complet+"&type=1&idserie="+idm;
+        var data = "cnp0=&cnp1=&cnp2=&idm=&titre=&cote=&serie=&numero=&description=&etat=&commentaire=&image=&" + "seriename=" + seriename + "&seriedesc=" + seriedesc + "&complet=" + complet + "&type=1&idserie=" + idm;
         xhttp.open("POST", "ModifierServlet?");
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
         xhttp.send(data);
@@ -284,6 +339,10 @@ function selection() {
     document.getElementById("imagem").value = res.resultats[num]['image'];
 
     document.getElementById("idm").value = idm;
+    
+    document.getElementById("createurm0").value=res.resultats[num]['crea0'];
+    document.getElementById("createurm1").value=res.resultats[num]['crea1'];
+    document.getElementById("createurm2").value=res.resultats[num]['crea2'];
 
 
     // pour letat
@@ -344,7 +403,7 @@ function recherche2_serie() {
 
 
     //Si non vide
-    if (seriename != null) {
+    if (seriename != "") {
         console.log(seriename);
         //On envoie les infos a la servlet pour requete
         xhttp = new XMLHttpRequest();
@@ -396,3 +455,31 @@ function recherche2_serie() {
 
     setVisible('recherche_resultat');
 }
+
+function addcrea() {
+    if (nbcrea == 0) {
+        setVisible('crea1');
+        nbcrea += 1;
+    } else if (nbcrea == 1) {
+        setVisible('crea2');
+        nbcrea += 1;
+    }
+
+}
+
+function rmvcrea() {
+    if (nbcrea == 2) {
+        setInvisible('crea2');
+        document.getElementById("createura2").value = "";
+        nbcrea -= 1;
+    } else if (nbcrea == 1) {
+        setInvisible('crea1');
+        document.getElementById("createura1").value = "";
+        nbcrea -= 1;
+    } else if (nbcrea == 0) {
+
+        document.getElementById("createura0").value = "";
+    }
+
+}
+

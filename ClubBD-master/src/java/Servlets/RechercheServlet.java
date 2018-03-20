@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Database.Createurdocument;
 import Database.Document;
 import Managers.DocumentManager;
 import Managers.DocumentManagerImpl;
@@ -70,10 +71,10 @@ public class RechercheServlet extends HttpServlet {
 
                 try {
                     temp.addProperty("serie", l.get(i).getIdSerie().getNomSerie());
-                    
+
                 } catch (Exception e) {
                     temp.addProperty("serie", "");
-                    
+
                 }
 
                 try {
@@ -81,6 +82,25 @@ public class RechercheServlet extends HttpServlet {
                 } catch (Exception e) {
                     temp.addProperty("numero", "");
                 }
+                //pour les créateurs
+                List<Createurdocument> lcrea = new ArrayList(l.get(i).getCreateurdocumentCollection());
+
+                try {
+                    temp.addProperty("crea0", lcrea.get(0).getIdCreateur().getNomCreateur() + " " + lcrea.get(0).getIdCreateur().getPrenomCreateur());
+                } catch (Exception e) {
+                    temp.addProperty("crea0","");
+                }
+                try {
+                    temp.addProperty("crea1", lcrea.get(0).getIdCreateur().getNomCreateur() + " " + lcrea.get(1).getIdCreateur().getPrenomCreateur());
+                } catch (Exception e) {
+                    temp.addProperty("crea1","");
+                }
+                try {
+                    temp.addProperty("crea2", lcrea.get(0).getIdCreateur().getNomCreateur() + " " + lcrea.get(2).getIdCreateur().getPrenomCreateur());
+                } catch (Exception e) {
+                    temp.addProperty("crea2","");
+                }
+                
                 temp.addProperty("description", l.get(i).getDescription());
                 temp.addProperty("commentaire", l.get(i).getCommentaire());
                 temp.addProperty("image", l.get(i).getImageDocument());

@@ -116,6 +116,22 @@
                         <br>
                         <label for="numeroa">Numéro</label>
                         <input name="numeroa" id="numeroa" type="text" value=""/><br>
+                        
+                        <label for="createura">Créateurs</label>
+                        <input type="text" list="createurcombo" id="createura0" name="createura0">
+                        <input type="button" id="addcrea" name="addcrea" onclick="addcrea()" value="+"/>
+                        <input type="button" id="rmvcrea" name="rmvcrea" onclick="rmvcrea()" value="-"/><br>
+                        <div id="crea1" style="display:none"><input type="text" list="createurcombo" id="createura1" name="createura1" ><br></div>
+                        <div id="crea2" style="display:none"><input type="text" list="createurcombo" id="createura2" name="createura2" ><br></div>
+                        <datalist id="createurcombo" >
+                            <c:forEach items="${lcrea}" var="crea">
+
+                                <option><c:out value="${crea}" />
+
+                                </c:forEach>
+                        </datalist>
+                        
+                        
                         <label for="descriptiona">Description</label>
                         <input name="descriptiona" id="descriptiona" type="text" value=""/><br>
 
@@ -130,6 +146,7 @@
                         <label for="tabime">Très abimé</label>
                         <input type="radio" id="tabime" name="etat" value="5"/>
                         <br>
+                        
                         <label for="imagea">Chemin image</label>
                         <input name="imagea" id="imagea" type="text" value=""/><br>
                         <label for="commentairea">Commentaire</label>
@@ -145,7 +162,15 @@
                         <label for="seriedesc">Description</label>
                         <input type="text" id="seriedesc" name="seriedesc" value=""/><br>
                         <input type="submit" value="Ajouter" onclick="ajouterserie()"/><br><br></div>
-
+                        
+                        <div><h3>Ajout d'un créateur</h3>
+                        <label for="nomcrea">Nom créateur*</label>
+                        <input type="text" id="nomcrea" name="nomcrea" value=""/><br>
+                        <label for="prenomcrea">Prénom créateur*</label>
+                        <input type="text" id="prenomcrea" name="prenomcrea" value=""/><br>
+                        <input type="submit" value="Ajouter créateur" onclick="ajoutercreateur()"/><br><br></div>
+                        
+                        
 
 
 
@@ -203,6 +228,15 @@
                         <br>
                         <label for="numerom">Numéro</label>
                         <input name="numerom" id="numerom" type="text" value=""/><br>
+                        
+                        <label for="createurm">Créateurs</label>
+                        <input type="text" list="createurcombo" id="createurm0" name="createurm0">
+                        <br>
+                        <input type="text" list="createurcombo" id="createurm1" name="createurm1" ><br>
+                        <input type="text" list="createurcombo" id="createurm2" name="createurm2" >
+                        <br>
+                        
+                        
                         <label for="descriptionm">Description</label>
                         <input name="descriptionm" id="descriptionm" type="text" value=""/><br>
 

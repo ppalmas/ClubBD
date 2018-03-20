@@ -46,6 +46,9 @@ public class ModifierServlet extends HttpServlet {
         String comm = request.getParameter("commentaire");
         String img = request.getParameter("image");
         String iddoc = request.getParameter("idm");
+        String cnp0 = request.getParameter("cnp0");
+        String cnp1 = request.getParameter("cnp1");
+        String cnp2 = request.getParameter("cnp2");
 
         Integer type = Integer.parseInt(request.getParameter("type"));
 
@@ -55,14 +58,12 @@ public class ModifierServlet extends HttpServlet {
         String seriedesc = request.getParameter("seriedesc");
         String idserie = request.getParameter("idserie");
 
-        
-
         Boolean b = false;
 
         if (type == 0) {
             try {
                 DocumentManager dm = DocumentManagerImpl.getInstance();
-                dm.update(iddoc, titre, cote, etat, serie, numero, desc, comm, img);
+                dm.update(iddoc, titre, cote, etat, serie, numero, desc, comm, img, cnp0, cnp1, cnp2);
 
                 b = true;
             } catch (Exception e) {
@@ -74,7 +75,7 @@ public class ModifierServlet extends HttpServlet {
         } else if (type == 1) {
             try {
                 SerieManager sm = SerieManagerImpl.getInstance();
-                sm.update(idserie, seriename, seriedesc,complet);
+                sm.update(idserie, seriename, seriedesc, complet);
 
                 b = true;
             } catch (Exception e) {

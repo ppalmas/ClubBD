@@ -7,10 +7,13 @@
  */
 package Controllers;
 
+import Database.Createur;
 import Database.Membre;
 import Database.Serie;
 import Managers.ConnectManager;
 import Managers.ConnectManagerImpl;
+import Managers.CreateurManager;
+import Managers.CreateurManagerImpl;
 import Managers.MembreManager;
 import Managers.MembreManagerImpl;
 import Managers.SerieManager;
@@ -19,12 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 
 public class AdminController {
 
@@ -38,20 +39,32 @@ public class AdminController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView get(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco) {
-        
-        
+
         //recuperation des noms de serie
         SerieManager sm = SerieManagerImpl.getInstance();
-        
+
         List<Serie> ls = sm.findSerie();
-        
+
         ArrayList<String> lns = new ArrayList();
-        
-        try{for(int i=0;i<ls.size();i++){
-            lns.add(StringEscapeUtils.unescapeHtml4(ls.get(i).getNomSerie()));
-        }} catch(Exception e){}
-        
-       
+
+        try {
+            for (int i = 0; i < ls.size(); i++) {
+                lns.add(ls.get(i).getNomSerie());
+            }
+        } catch (Exception e) {
+        }
+
+        //recup noms createurs
+        CreateurManager crm = CreateurManagerImpl.getInstance();
+        List<Createur> lc = crm.findCreateur();
+        ArrayList<String> lnpc = new ArrayList();
+        try {
+            for (int i = 0; i < lc.size(); i++) {
+                lnpc.add(lc.get(i).getNomCreateur() + " " + lc.get(i).getPrenomCreateur());
+            }
+        } catch (Exception e) {
+        }
+
         //Récupération de l'utilisateur
         MembreManager mm = MembreManagerImpl.getInstance();
         Membre m = mm.findMembre(idco);
@@ -80,10 +93,13 @@ public class AdminController {
 
                 //Connexion de l'utilisateur 
                 result.addObject("idco", idco);
-                
+
                 //liste noms de serie pour combobox
-                result.addObject("lserie",lns);
-                
+                result.addObject("lserie", lns);
+
+                //liste createurs
+                result.addObject("lcrea", lnpc);
+                System.out.println(lnpc.toString());
 
                 return result;
 
@@ -93,7 +109,7 @@ public class AdminController {
             ModelAndView result = new ModelAndView("index");
             result.addObject("idco", 0);
             //liste noms de serie pour combobox
-                result.addObject("lserie",lns);
+            result.addObject("lserie", lns);
             return result;
         }
     }

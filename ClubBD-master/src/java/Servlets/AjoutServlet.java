@@ -5,6 +5,8 @@
  */
 package Servlets;
 
+import Managers.CreateurManager;
+import Managers.CreateurManagerImpl;
 import Managers.DocumentManager;
 import Managers.DocumentManagerImpl;
 import Managers.SerieManager;
@@ -48,19 +50,25 @@ public class AjoutServlet extends HttpServlet {
         String img = request.getParameter("image");
         String seriename = request.getParameter("seriename");
         String seriedesc = request.getParameter("seriedesc");
-        
-        
-          System.out.println(type);
+
+        String nomcrea = request.getParameter("nomcrea");
+        String prenomcrea = request.getParameter("prenomcrea");
+
+        String cnp0 = request.getParameter("cnp0");
+        String cnp1 = request.getParameter("cnp1");
+        String cnp2 = request.getParameter("cnp2");
+
+        System.out.println(type);
 
         if (type == 0) {
-              System.out.println("if");
+            System.out.println("if");
 
             DocumentManager dm = DocumentManagerImpl.getInstance();
 
             Boolean b = false;
             try {
 
-                dm.insert(titre, cote, etat, serie, numero, desc, comm, img);
+                dm.insert(titre, cote, etat, serie, numero, desc, comm, img, cnp0, cnp1, cnp2);
 
                 b = true;
             } catch (Exception e) {
@@ -69,10 +77,8 @@ public class AjoutServlet extends HttpServlet {
             response.setContentType("text/html; charset=UTF-8");
             response.getWriter().write(b + "");
 
-        }
-        
-        else if (type == 1) {
-            
+        } else if (type == 1) {
+
             System.out.println("elif");
 
             SerieManager sm = SerieManagerImpl.getInstance();
@@ -80,7 +86,7 @@ public class AjoutServlet extends HttpServlet {
             Boolean b = false;
             try {
 
-                sm.insert(seriename,seriedesc);
+                sm.insert(seriename, seriedesc);
 
                 b = true;
             } catch (Exception e) {
@@ -89,10 +95,23 @@ public class AjoutServlet extends HttpServlet {
             response.setContentType("text/html; charset=UTF-8");
             response.getWriter().write(b + "");
 
-        }
-        
-        else {
-              System.out.println("else");
+        } else if (type == 2) {
+
+            CreateurManager cm = CreateurManagerImpl.getInstance();
+
+            Boolean b = false;
+            try {
+
+                cm.insert(nomcrea, prenomcrea);
+
+                b = true;
+            } catch (Exception e) {
+            }
+
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().write(b + "");
+        } else {
+            System.out.println("else");
             response.setContentType("text/html; charset=UTF-8");
             response.getWriter().write("false" + "");
         }

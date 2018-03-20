@@ -5,6 +5,7 @@
  */
 package Managers;
 
+import Database.Createur;
 import Database.Createurdocument;
 import Database.Document;
 import Database.Etat;
@@ -69,20 +70,18 @@ public class DocumentManagerImpl implements DocumentManager {
         EntityManager em = emf.createEntityManager();
         List l = null;
         Query query;
- //structure de la liste critere : (0)titre (1)serie (2)cote
+        //structure de la liste critere : (0)titre (1)serie (2)cote
         if (criteres.get(0) != "" || criteres.get(1) != "" || criteres.get(2) != "") {
-        
-         if (criteres.get(1) != "") {
-        query = em.createQuery("SELECT d FROM Document d WHERE d.titre LIKE :titre AND d.idSerie.nomSerie LIKE :serie AND d.cote LIKE :cote ") ;
+
+            if (criteres.get(1) != "") {
+                query = em.createQuery("SELECT d FROM Document d WHERE d.titre LIKE :titre AND d.idSerie.nomSerie LIKE :serie AND d.cote LIKE :cote ");
                 System.out.println("serie non null");
-         }
-         else {query = em.createQuery("SELECT d FROM Document d WHERE d.titre LIKE :titre AND d.cote LIKE :cote ");
-         System.out.println("serie null");}
-        
+            } else {
+                query = em.createQuery("SELECT d FROM Document d WHERE d.titre LIKE :titre AND d.cote LIKE :cote ");
+                System.out.println("serie null");
+            }
 
-       
             //si titre
-
             if (criteres.get(0) != "") {
                 //on recherche un document dont le titre comporte le critère
 
@@ -94,16 +93,16 @@ public class DocumentManagerImpl implements DocumentManager {
             if (criteres.get(1) != "") {
                 query.setParameter("serie", "%" + criteres.get(1) + "%");
             }
-            
 
             //si cote
             if (criteres.get(2) != "") {
-                query.setParameter("cote", "%" + criteres.get(2) + "%"); 
+                query.setParameter("cote", "%" + criteres.get(2) + "%");
+            } else {
+                query.setParameter("cote", "%");
             }
-            else { query.setParameter("cote", "%");}
 
             try {
-            
+
                 l = query.getResultList();
             } catch (Exception e) {
                 System.out.println("erreur syntaxe requete // " + query.toString());
@@ -143,6 +142,7 @@ public class DocumentManagerImpl implements DocumentManager {
 
     /**
      * Insertion d'un document dans la bdd
+     *
      * @param titre
      * @param cote
      * @param etat
@@ -150,14 +150,13 @@ public class DocumentManagerImpl implements DocumentManager {
      * @param numero
      * @param desc
      * @param comm
-     * @param img 
+     * @param img
      */
     @Override
-    public void insert(String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img) {
-        
+    public void insert(String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img, String cnp0, String cnp1, String cnp2) {
+
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        
 
         Document d = new Document();
         d.setTitre(titre);
@@ -175,29 +174,97 @@ public class DocumentManagerImpl implements DocumentManager {
         Query q = em.createQuery("SELECT e FROM Etat e WHERE  e.idEtat=:etat");
         q.setParameter("etat", Integer.parseInt(etat));
 
-        List l = q.getResultList();       
+        List l = q.getResultList();
 
         d.setIdEtat((Etat) l.get(0));
         //pour la serie
 
-        
-        try{Query q2 = em.createQuery("SELECT s FROM Serie s WHERE  s.nomSerie=:serie");
-        q2.setParameter("serie", serie);
-        List l2 = q2.getResultList();       
-        d.setIdSerie((Serie) l2.get(0));
+        try {
+            Query q2 = em.createQuery("SELECT s FROM Serie s WHERE  s.nomSerie=:serie");
+            q2.setParameter("serie", serie);
+            List l2 = q2.getResultList();
+            d.setIdSerie((Serie) l2.get(0));
+        } catch (Exception e) {
+            Query q2 = em.createNamedQuery("Serie.findByIdSerie", Serie.class);
+            q2.setParameter("idSerie", 1);
+            List l2 = q2.getResultList();
+            d.setIdSerie((Serie) l2.get(0));
         }
-        catch (Exception e){}
-        
-        
+        System.out.println(1);
         //Insertion
-        
-        
         em.persist(d);
+        
+        System.out.println(2);
+
+        
+        
+
+        //pour les créateurs
+        Query q3 = em.createQuery("SELECT c FROM Createur c"); //on recup tous les createurs et on compare avec la concatenation nom-prenom
+        List<Createur> l3 = q3.getResultList();
+        System.out.println(3);
+        //comparaison
+        Boolean endcnp0 = true;
+        Boolean endcnp1 = true;
+        Boolean endcnp2 = true;
+
+        for (int i = 0; i < l3.size(); i++) {
+            System.out.println(endcnp0 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp0));
+            try {
+                if (endcnp0 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp0)) {
+
+                    Createurdocument cd = new Createurdocument();
+                    cd.setIdCreateur(l3.get(i));
+                    cd.setIdDocument(d);
+                    cd.setPoste("défaut");
+                    em.persist(cd);
+                    System.out.println(5);
+                    endcnp0 = false;
+
+                }
+            } catch (Exception e) {
+                System.out.println("b");
+            }
+            try {
+                if (endcnp1 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp1)) {
+                    Createurdocument cd = new Createurdocument();
+                    cd.setIdCreateur(l3.get(i));
+                    cd.setIdDocument(d);
+                    cd.setPoste("défaut");
+                    em.persist(cd);
+                    System.out.println(6);
+
+                    endcnp1 = false;
+
+                }
+            } catch (Exception e) {
+            }
+            try {
+                if (endcnp2 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp2)) {
+                    Createurdocument cd = new Createurdocument();
+                    cd.setIdCreateur(l3.get(i));
+                    cd.setIdDocument(d);
+                    cd.setPoste("défaut");
+                    em.persist(cd);
+                    System.out.println(7);
+
+                    endcnp2 = false;
+
+                }
+            } catch (Exception e) {
+            }
+        }
+        System.out.println(8);
+
+        
         em.getTransaction().commit();
+        System.out.println(9);
+
     }
 
     /**
      * Update des infos d'un livre
+     *
      * @param iddoc
      * @param titre
      * @param cote
@@ -206,16 +273,15 @@ public class DocumentManagerImpl implements DocumentManager {
      * @param numero
      * @param desc
      * @param comm
-     * @param img 
+     * @param img
      */
     @Override
-    public void update(String iddoc, String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img) {
+    public void update(String iddoc, String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img, String cnp0, String cnp1, String cnp2) {
 
         //on recupere le document avec l'id
         EntityManager em = emf.createEntityManager();
 
-        Document d=em.find(Document.class, Integer.parseInt(iddoc));
-        
+        Document d = em.find(Document.class, Integer.parseInt(iddoc));
 
         em.getTransaction().begin();
 
@@ -224,10 +290,11 @@ public class DocumentManagerImpl implements DocumentManager {
         d.setCommentaire(comm);
         d.setDescription(desc);
 
-        try{
-        d.setNumero(Integer.parseInt(numero));}catch (Exception e){}
+        try {
+            d.setNumero(Integer.parseInt(numero));
+        } catch (Exception e) {
+        }
         d.setImageDocument(img);
-        
 
         //pour l'etat
         Query q = em.createQuery("SELECT e FROM Etat e WHERE  e.idEtat=:etat");
@@ -237,17 +304,82 @@ public class DocumentManagerImpl implements DocumentManager {
         d.setIdEtat((Etat) l.get(0));
         //pour la serie
 
-        try{
-        Query q2 = em.createQuery("SELECT s FROM Serie s WHERE  s.nomSerie=:serie");
-        q2.setParameter("serie", serie);
-        List l2 = q2.getResultList();       
+        try {
+            Query q2 = em.createQuery("SELECT s FROM Serie s WHERE  s.nomSerie=:serie");
+            q2.setParameter("serie", serie);
+            List l2 = q2.getResultList();
+
+            d.setIdSerie((Serie) l2.get(0));
+        } catch (Exception e) {
+
+            Query q2 = em.createNamedQuery("Serie.findByIdSerie", Serie.class);
+            q2.setParameter("idSerie", 1);
+            List l2 = q2.getResultList();
+            d.setIdSerie((Serie) l2.get(0));
+        }
         
-        d.setIdSerie((Serie) l2.get(0));
-        }catch(Exception e){}
         
+        //pour les createurs
+        Query q3 = em.createQuery("SELECT c FROM Createur c"); //on recup tous les createurs et on compare avec la concatenation nom-prenom
+        List<Createur> l3 = q3.getResultList();
+        System.out.println(3);
+        //comparaison
+        Boolean endcnp0 = true;
+        Boolean endcnp1 = true;
+        Boolean endcnp2 = true;
         
-      
+        //solution simple pas tres opti : on remove tous les createursdocument de la collection et on les recreer...
+        List<Createurdocument> lcrea= new ArrayList(d.getCreateurdocumentCollection());
+        for (int j=0; j<lcrea.size();j++){
+            em.remove(lcrea.get(j));
+        }
         
+        for (int i = 0; i < l3.size(); i++) {
+            System.out.println(endcnp0 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp0));
+            try {
+                if (endcnp0 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp0)) {
+
+                    Createurdocument cd = new Createurdocument();
+                    cd.setIdCreateur(l3.get(i));
+                    cd.setIdDocument(d);
+                    cd.setPoste("défaut");
+                    em.persist(cd);
+                    System.out.println(5);
+                    endcnp0 = false;
+
+                }
+            } catch (Exception e) {
+                System.out.println("b");
+            }
+            try {
+                if (endcnp1 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp1)) {
+                    Createurdocument cd = new Createurdocument();
+                    cd.setIdCreateur(l3.get(i));
+                    cd.setIdDocument(d);
+                    cd.setPoste("défaut");
+                    em.persist(cd);
+                    System.out.println(6);
+
+                    endcnp1 = false;
+
+                }
+            } catch (Exception e) {
+            }
+            try {
+                if (endcnp2 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp2)) {
+                    Createurdocument cd = new Createurdocument();
+                    cd.setIdCreateur(l3.get(i));
+                    cd.setIdDocument(d);
+                    cd.setPoste("défaut");
+                    em.persist(cd);
+                    System.out.println(7);
+
+                    endcnp2 = false;
+
+                }
+            } catch (Exception e) {
+            }
+        }
         
 
         em.getTransaction().commit();
@@ -292,6 +424,7 @@ public class DocumentManagerImpl implements DocumentManager {
         return l.isEmpty();
 
     }
+
     /**
      * Recherche un document suivant un liste de critères au format string :
      *
