@@ -24,3 +24,21 @@ function load_listener(Liste) {
                 });
     }
 }
+
+/**
+ * Trigger pour valider le formulaire de recherche lorsqu'un des champs input
+ * est sélectionné
+ * @param Liste liste des champs input
+ * @return Action comme si on cliquait sur le bouton recherche_button
+ */
+function load_listenerSearch(Liste) {
+    for (i = 0; i < Liste.length; i++) {
+        document.getElementById(Liste[i])
+                .addEventListener("keyup", function (event) {
+                    event.preventDefault();
+                    if (event.keyCode === 13) {
+                        document.getElementById("recherche_button").click();
+                    }
+                });
+    }
+}

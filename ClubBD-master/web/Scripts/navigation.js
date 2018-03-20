@@ -102,11 +102,11 @@ function goHomeMember() {
 }
 
 /**
- * Méthode pour obtenir la page d'ouvrage
+ * Méthode pour obtenir la page d'ouvrage (à partir d'un utilisateur connecté)
  * @returns {undefined}
  */
-function goToOuvrage(){
-    // Formulaire pour obtenir la page admin
+function goToOuvrage() {
+    // Formulaire pour obtenir la page de visualisation d'un ouvrage
     var form = document.createElement('form');
     form.method = "GET";
     form.action = "ouvrage.htm";
@@ -114,7 +114,11 @@ function goToOuvrage(){
     var c1 = document.createElement('input');
     c1.type = "hidden";
     c1.name = "idco";
-    c1.value = document.getElementById("idco").value;
+    try {
+        c1.value = document.getElementById("idco").value;
+    } catch (Exception) {
+        c1.value = 0;
+    }
     form.appendChild(c1);
     document.body.appendChild(form);
     form.submit();

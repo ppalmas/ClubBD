@@ -61,7 +61,7 @@ function makeUL(array) {
         var ligne = document.createElement('tr');
         //Défintion de l'id pour le titre, et de l'action à effectuer onclick
         ligne.setAttribute("id", "titre_result" + i);
-        ligne.setAttribute("onclick", "TEST");
+        ligne.setAttribute("onclick", "goToOuvrage()");
         ligne.appendChild(document.createTextNode(array[i]['titre']));
 
         item.appendChild(ligne);

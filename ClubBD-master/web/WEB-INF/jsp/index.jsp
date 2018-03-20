@@ -30,14 +30,15 @@
         <script src="Scripts/navigation.js"></script>
         <script src="Scripts/index.js"></script>
         <script src="Scripts/connecter.js"></script>
-        <script src="Scripts/recherche2.js"></script>
+        <script src="Scripts/recherche.js"></script>
         <script src="Scripts/event_listener.js"></script>
         <script src="Scripts/get_suggestion.js"></script>
 
 
 
     </head>
-    <body onload="load_listener(['email', 'password']);">
+    <body onload="load_listener(['email', 'password']);load_listenerSearch(['recherche_doc','critere_titre','critere_auteur',
+            'critere_serie','critere_sujet']);">
 
 
         <!-- CONTENU PRINCIPAL -->
@@ -115,7 +116,7 @@
                             <br>
                             <input id="critere_sujet" style="width:300px; margin:10px;" placeholder="Sujet">
                         </div>
-                        <button style="margin-top:10px;" onclick="recherche_doc()">Rechercher</button>
+                        <button id="recherche_button" style="margin-top:10px;" onclick="recherche_doc()">Rechercher</button>
 
                     </div>
                     <div id="recherche_resultat">

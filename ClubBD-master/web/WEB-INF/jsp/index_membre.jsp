@@ -32,12 +32,15 @@
         <script src="Scripts/index_membre.js"></script>      
         <script src="Scripts/modif_infosperso.js"></script>  
         <script src="Scripts/event_listener.js"></script>
+        <script src="Scripts/recherche.js"></script>
 
 
     </head>
-    <body onload="load_listener(['nom_modif', 'prenom_modif', 'email_modif', 'mdp_ancien_modif', 'mdp1_modif', 'mdp2_modif']); loadIndexUser(<c:out value="${idStatut}"/>);">
+    <body onload="load_listener(['nom_modif', 'prenom_modif', 'email_modif', 'mdp_ancien_modif', 'mdp1_modif', 'mdp2_modif']);
+        loadIndexUser(<c:out value="${idStatut}"/>);load_listenerSearch(['recherche_doc','critere_titre','critere_auteur',
+            'critere_serie','critere_sujet']);">
         <!-- CHARGEMENT DES DONNEES LIEES A L'UTILISATEUR CONNECTE /!\ indispensable
-        pour la déconnexion-->
+        pour la déconnexion notamment-->
         <div style="display:none;">
             <!-- Données personnelles-->
             <input type="hidden" id="idMembre" value="<c:out value="${id}"/>"/>
@@ -92,42 +95,25 @@
                     <div class="row_content" style="width: 95%;">
                         <p style="text-align:left;">Recherche de documents
                             <input id="recherche_doc" style="width:500px; margin-left:30px;" placeholder="Titre, Auteur/Illustrateur, Serie"></p>
-                        <p style="text-align:left;" id="critere" style="margin-top:10px;" onclick="setVisible('search_critere')">Rechercher par critère</p>
+                        <a style="text-align:left;" id="critere" style="margin-top:10px;" onclick="setVisible('search_critere')">Rechercher par critère</a>
                         <div id="search_critere" style="display:none; text-align:left">
-                            <input id="search_titre" style="width:300px; margin:10px;" placeholder="Titre">
+                            <input id="critere_titre" style="width:300px; margin:10px;" placeholder="Titre">
                             <br>
                             <input id="critere_auteur" style="width:300px; margin:10px;" placeholder="Auteur, Illustrateur">
                             <br>
-                            <input id="search_serie" style="width:300px; margin:10px;" placeholder="Serie">
+                            <input id="critere_serie" style="width:300px; margin:10px;" placeholder="Serie">
                             <br>
-                            <input id="search_sujet" style="width:300px; margin:10px;" placeholder="Sujet">
+                            <input id="critere_sujet" style="width:300px; margin:10px;" placeholder="Sujet">
                         </div>
-                        <button style="margin-top:10px;" onclick="recherche_doc()">Rechercher</button>
+                        <button id="recherche_button" style="margin-top:10px;" onclick="recherche_doc()">Rechercher</button>
 
                     </div>
-                    
                     <div id="recherche_resultat">
-                        <!--<table>
-                            <tr>
-                                <th>Titre</th>
-                                <th>Cote</th>
-                                <th>Serie</th>
-                                <th>Numéro</th>
-                                <th>Genre</th>
-                            </tr>
-                        <c:forEach var="item" items="${itemsList}">
-                             <tr>
-                                <td><c:out value="${item['titre']}"/></td>
-                                <td><c:out value="${item['auteur']}"/></td>
-                                <td><c:out value="${item['cote']}"/></td>
-                                <td><c:out value="${item['serie']}"/></td>
-                                <td><c:out value="${item['numero']}"/></td>
-                                <td><c:out value="${item['genre']}"/></td>
-                            </tr>
-                        </c:forEach>
-                        </table>-->
                     </div>
-                    <button style="margin-top:10px;" onclick="goToOuvrage()">Aller à l'ouvrage</button>
+                    <div id="table_result" style="align-content: center;">
+                        
+                    </div>
+
                 </div>
                                 
                 <!-- Bloc des suggestions-->
