@@ -8,6 +8,7 @@ package Util;
 /**
  *
  * @author centrale
+ * Permet de calculer la distance entre 2 chaines de caractères
  */
 public class Levenshtein {
     public static int distance(String mot1, String mot2)
