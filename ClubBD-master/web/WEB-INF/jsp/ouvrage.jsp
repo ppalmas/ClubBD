@@ -36,7 +36,7 @@
         <script src="Scripts/ouvrage.js"></script>
 
     </head>
-    <body onload="loadOuvrageUser(<c:out value="${idStatut}"/>);disponibility('disponible');">
+    <body onload="loadOuvrageUser(<c:out value="${idStatut}"/>);disponibility('<c:out value="${dispo}"/>')">
 
     <!-- CONTENU PRINCIPAL -->
 
@@ -50,6 +50,7 @@
             <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
             <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/>
             <input type="hidden" id="idStatut" value="<c:out value="${idStatut}"/>"/>
+            <input type="hidden" id="iddoc" value="<c:out value="${iddoc}"/>"/>
         </div>
                 
         <div class="left">
@@ -64,13 +65,13 @@
                 <div class="row">
                     <div class="column">
                         <div id="image_ouvrage">
-                            <img src="theprohecyistrue.jpg" alt="L'image n'a pas pu être affichée"/>
-                            <!--<p><c:out value="${aBook['image']}"/></p>-->
+                            <!--<img src="theprohecyistrue.jpg" alt="L'image n'a pas pu être affichée"/>-->
+                            <img src=<c:out value="${image}"/> alt="L'image n'a pas pu être affichée"/>
                         </div>
                     </div>
                     <div class="column">
-                        <div id="infos_ouvrage">
-                            <h2>Jean va à la piscine</h2>
+                        
+                            <!--<h2>Jean va à la piscine</h2>
                             <br/>
                             <p><strong>Auteur :</strong> The Prophecy Is True</p>
                             <p><strong>Série :</strong> La vie de Jean
@@ -83,20 +84,33 @@
                                 Jean se casse le pied en glissant à la piscine</p>
                             <p><strong>Etat :</strong> En décomposition</p>
                             <br/>
-                            <div id="dispo"></div>
+                            <div id="dispo"></div>-->
                             
-                            <!--<h2><c:out value="${aBook['titre']}"/></h2>
+                            <h2><c:out value="${titre}"/></h2>
                             <br/>
-                            <p><strong>Auteur :</strong> <c:out value="${aBook['auteur']}"/></p>
-                            <p><strong>Série :</strong> <c:out value="${aBook['serie']}"/>
-                                <strong>N° :</strong> <c:out value="${aBook['numero']}"/></p>
-                            <p><strong>Cote :</strong> <c:out value="${aBook['cote']}"/></p>
-                            <p><strong>Genre :</strong> <c:out value="${aBook['genre']}"/></p>
-                            <p><strong>Description :</strong> <c:out value="${aBook['description']}"/></p>
-                            <p><strong>Etat :</strong> <c:out value="${aBook['etat']}"/></p>
+                            <c:forEach var="createur" items="${createurs}">
+                                <c:if test="${createur.poste=='Auteur'}">
+                                    <p><strong><c:out value="${createur['poste']}"/>(s) :</strong> <c:out value="${createur['nom']}"/> <c:out value="${createur['prenom']}"/></p>
+                                </c:if>
+                            </c:forEach>
+                            <c:forEach var="createur" items="${createurs}">
+                                <c:if test="${createur['poste']=='Illustrateur'}">
+                                    <p><strong><c:out value="${createur['poste']}"/>(s) :</strong> <c:out value="${createur['nom']}"/> <c:out value="${createur['prenom']}"/></p>
+                                </c:if>
+                            </c:forEach>
+                            <c:forEach var="createur" items="${createurs}">
+                                <c:if test="${(createur['poste']!='Auteur')&&(createur['poste']!='Illustrateur')}">
+                                    <p><strong><c:out value="${createur['poste']}"/> :</strong> <c:out value="${createur['nom']}"/> <c:out value="${createur['prenom']}"/></p>
+                                </c:if>
+                            </c:forEach>
+                            <p><strong>Série :</strong> <c:out value="${serie}"/>
+                                <strong>N° :</strong> <c:out value="${numero}"/></p>
+                            <p><strong>Cote :</strong> <c:out value="${cote}"/></p>
+                            <p><strong>Genre :</strong> <c:out value="${genre}"/></p>
+                            <p><strong>Description :</strong> <c:out value="${description}"/></p>
+                            <p><strong>Etat :</strong> <c:out value="${etat}"/></p>
                             <br/>
                             <div id="dispo"></div>
-                            -->
                             
                             <br/>
                             <center>
@@ -105,7 +119,7 @@
                             </center>
                             
                             
-                        </div>
+                        
                     </div>
                 </div>
             </div>

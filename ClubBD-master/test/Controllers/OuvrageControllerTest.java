@@ -49,10 +49,12 @@ public class OuvrageControllerTest {
         HttpServletRequest request = null;
         HttpServletResponse response = null;
         String idco = "0";
+        String iddoc = "2";
         OuvrageController instance = new OuvrageController();
         ModelAndView expResult = new ModelAndView("ouvrage");
         expResult.addObject("idco",idco);
-        ModelAndView result = instance.ouvrageGet(request, response, idco);
+        expResult.addObject("idco",iddoc);
+        ModelAndView result = instance.ouvrageGet(request, response, idco, iddoc);
         assertEquals(expResult.toString(), result.toString());
     }
     

@@ -64,4 +64,3 @@ function loadOuvrageUser(idStatut){
         //message d'erreur ?
     }
 }
-
