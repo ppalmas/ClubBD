@@ -11,6 +11,14 @@ package Util;
  * Permet de calculer la distance entre 2 chaines de caractères
  */
 public class Levenshtein {
+    public static String[] inutiles = {"LE", "LA", "LES", "DE", "L", "DES", "DU", " "};
+    
+    /**
+     * permet de calculer la distance entre 2 chaines de caractères
+     * @param mot1
+     * @param mot2
+     * @return 
+     */
     public static int distance(String mot1, String mot2)
     {
         int size1 = mot1.length();
@@ -46,6 +54,14 @@ public class Levenshtein {
         return d[size1][size2];   
     }
     
+    
+    /**
+     * permet de claculer le minimum entre 3 entiers
+     * @param x1
+     * @param x2
+     * @param x3
+     * @return 
+     */
     public static int mini(int x1, int x2, int x3)
     {
         int result;
@@ -72,4 +88,40 @@ public class Levenshtein {
         }
         return result;
     }
+    
+    /**
+     * permet d'enlever les espaces, les apostrophes et les mots jugés inutiles d'une chaine de caractères
+     * @param mot
+     * @return 
+     */
+    public static String condense(String mot)
+    {
+      String[] mot_split=mot.split("'| ");
+      boolean inut;
+      int j;
+      for (int i = 0; i<mot_split.length; i++)
+      {
+          inut = false;
+          j = 0;
+          while (!inut && j<inutiles.length)
+          {
+              if (mot_split[i].equals(inutiles[j]))
+              {
+                  inut=true;
+              }
+              j++;
+          }
+          if (inut)
+          {
+              mot_split[i]="";
+          }
+      }
+      String motSansInutiles="";
+      for (String c : mot_split)
+      {
+          motSansInutiles+=c;
+      }
+      return motSansInutiles;
+    };
+    
 }
