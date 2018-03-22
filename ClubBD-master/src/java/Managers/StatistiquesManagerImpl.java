@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import Database.Recherche;
+import java.util.Collection;
 /**
  *
  * @author centrale
@@ -30,4 +31,13 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
         }
         return theStatistiquesManager;
     }
+
+    @Override
+    public Collection<Recherche> tout() {
+        EntityManager em = emf.createEntityManager();
+        Query queryProductsByName = em.createNamedQuery("Recherche.findAll", Recherche.class);
+        Collection theList = queryProductsByName.getResultList();
+        return theList;
+    }
+    
 }

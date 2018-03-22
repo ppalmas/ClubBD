@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,6 +13,20 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <table>
+            <tr>
+                <th>titre</th>
+                <th>date</th>
+                <th>serie</th>
+            </tr>
+            
+            <c:forEach var="i" items="${stats}">
+                <tr>
+                    <td><c:out value="${i['titre']}"/></td>
+                    <td><c:out value="${i['dateRecherche']}"/></td>
+                    <td><c:out value="${i['serie']}"/></td>
+                </tr>
+            </c:forEach> 
+        </table>
     </body>
 </html>

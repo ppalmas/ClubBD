@@ -6,10 +6,11 @@
 package Managers;
 
 import Database.Recherche;
+import java.util.Collection;
 /**
  *
  * @author centrale
  */
 public interface StatistiquesManager {
-    
+    public Collection<Recherche> tout();
 }
