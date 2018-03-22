@@ -8,7 +8,9 @@ package Controllers;
 import Database.Recherche;
 import Managers.StatistiquesManager;
 import Managers.StatistiquesManagerImpl;
+import Util.CoupleStats;
 import java.util.Collection;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +33,7 @@ public class StatistiquesController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView handleStatistiques(HttpServletRequest request, HttpServletResponse response) {
         StatistiquesManager theStatistiquesManager = StatistiquesManagerImpl.getInstance();
-        Collection<Recherche> theRecherches = theStatistiquesManager.tout();
+        List<CoupleStats> theRecherches = theStatistiquesManager.stats();
         //Résultat
         ModelAndView r = new ModelAndView("statistiques");
         r.addObject("stats", theRecherches);

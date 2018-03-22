@@ -6,11 +6,19 @@
 package Managers;
 
 import Database.Recherche;
+import Util.CoupleStats;
 import java.util.Collection;
+import java.util.List;
 /**
  *
  * @author centrale
  */
 public interface StatistiquesManager {
     public Collection<Recherche> tout();
+
+    /**
+     *
+     * @return
+     */
+    public List<CoupleStats> stats();
 }

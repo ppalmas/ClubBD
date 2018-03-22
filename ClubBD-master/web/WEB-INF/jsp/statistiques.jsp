@@ -22,9 +22,8 @@
             
             <c:forEach var="i" items="${stats}">
                 <tr>
-                    <td><c:out value="${i['titre']}"/></td>
-                    <td><c:out value="${i['dateRecherche']}"/></td>
-                    <td><c:out value="${i['serie']}"/></td>
+                    <td><c:out value="${i['name']}"/></td>
+                    <td><c:out value="${i['value']}"/></td>
                 </tr>
             </c:forEach> 
         </table>
