@@ -11,7 +11,7 @@ package Util;
  * Permet de calculer la distance entre 2 chaines de caractères
  */
 public class Levenshtein {
-    public static String[] inutiles = {"LE", "LA", "LES", "DE", "L", "DES", "DU", " "};
+    public static String[] inutiles = {"LE", "LA", "LES", "DE", "L", "DES", "DU"};
     
     /**
      * permet de calculer la distance entre 2 chaines de caractères
@@ -96,6 +96,7 @@ public class Levenshtein {
      */
     public static String condense(String mot)
     {
+      mot = mot.toUpperCase();
       String[] mot_split=mot.split("'| ");
       boolean inut;
       int j;
