@@ -27,6 +27,7 @@ function recherche_doc() {
                 document.getElementById("recherche_resultat").innerHTML = "Erreur.";
             } else if (res.nb == "0") {
                 document.getElementById("recherche_resultat").innerHTML = "Aucun résultat.";
+                sauvegarde_recherche(all, titre, serie);
             } else {
                 document.getElementById("recherche_resultat").appendChild(makeUL(res.resultats));
             }
@@ -73,11 +74,11 @@ function makeUL(array) {
         var nb = array[i]['nbA'];
         if (nb > 0) {
             if (nb > 1) {
-                for (var j = 0; j < nb-1; j++) {
+                for (var j = 0; j < nb - 1; j++) {
                     ligne.appendChild(document.createTextNode(array[i]['auteurs']['auteur' + j] + ", "));
                 }
             }
-            ligne.appendChild(document.createTextNode(array[i]['auteurs']['auteur' + (nb-1)]));
+            ligne.appendChild(document.createTextNode(array[i]['auteurs']['auteur' + (nb - 1)]));
             item.appendChild(ligne);
         } else {
             item.appendChild(document.createTextNode(""));
@@ -98,3 +99,24 @@ function makeUL(array) {
     return div;
 }
 
+/**
+ * 
+ * @param {type} all
+ * @param {type} titre
+ * @param {type} serie
+ * @returns {undefined}
+ */
+function sauvegarde_recherche(all, titre, serie) {
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+            //Réponse de la servlet
+            var answer = xhttp.responseText;
+        }
+    }
+    var data = "titre=" + titre + "&" + "serie=" + serie + "&" + "all=" + all;
+    xhttp.open("GET", "SauveRechercheServlet?" + data, true);
+    xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
+    xhttp.send();
+}
