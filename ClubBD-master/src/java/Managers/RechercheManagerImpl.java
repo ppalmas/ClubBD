@@ -43,7 +43,7 @@ public class RechercheManagerImpl implements RechercheManager {
      */
     @Override
     public void insert(String texte, String serie) {
-//Création de l'objet personne
+//Création de l'objet Recherche
         Recherche m = new Recherche();
 
         m.setSerie(texte);

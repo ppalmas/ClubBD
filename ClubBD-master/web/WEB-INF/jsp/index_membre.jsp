@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Club BD</title>
+        <title>Accueil</title>
 
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -39,7 +39,7 @@
     <body onload="load_listener(['nom_modif', 'prenom_modif', 'email_modif', 'mdp_ancien_modif', 'mdp1_modif', 'mdp2_modif']);
             loadIndexUser(<c:out value="${idStatut}"/>);
             load_listenerSearch(['recherche_doc', 'critere_titre', 'critere_auteur',
-                'critere_serie', 'critere_sujet']);">
+                'critere_serie', 'critere_sujet']);load_listenerProposition(['titre_proposition','commentaire_proposition']);">
         <!-- CHARGEMENT DES DONNEES LIEES A L'UTILISATEUR CONNECTE /!\ indispensable
         pour la déconnexion notamment-->
         <div style="display:none;">
@@ -93,7 +93,7 @@
                 </div>
                 <!--Bloc de recherche d'ouvrages-->
                 <div id="search_content" class="bloc_home" style="display:none;">
-                    <div class="col-md-4" id="row_content" style="width: 95%;">
+                    <div class="col-md-8" id="row_content" style="width: 98%;">
                         <p style="text-align:left;">Recherche de documents
                             <input id="recherche_doc" style="width:500px; margin-left:30px;" placeholder="Titre, Auteur/Illustrateur, Serie"></p>
                         <div class="col-md-5" id="input_recherche" style="width:60%;">
@@ -110,21 +110,30 @@
                             <button id="recherche_button" style="margin-top:10px;" onclick="recherche_doc()">Rechercher</button>
                         </div>
                         <div class="col-md-3" id="info_recherche" style="width:40%;position:relative;display:inline;">
-                            
+
                             <p>IMPORTANT :<br><br> La recherche par critères prend en compte tous
-                            les critères complétés.
-                            <br>
-                            <br>Pour chaque type de recherche, la recherche <b>cherchera exactement le mot-clef</b>
-                            entré, dans les documents du club. Par exemple, "chat" donnera tous les documents dont
-                            le titre, série, auteur ou sujet contiennent "chat".
+                                les critères complétés.
+                                <br>
+                                <br>Pour chaque type de recherche, la recherche <b>cherchera exactement le mot-clef</b>
+                                entré, dans les documents du club. Par exemple, "chat potté" donnera tous les documents dont
+                                le titre, série, auteur ou sujet contiennent "chat potté" et non "chat" et "potté".
                             </p>
                         </div>
 
                     </div>
-                    <div id="recherche_resultat">
+                    <br>
+                    <div style="width:100%; position:static">
+                        <p id="result_nothing"> </p>
+                        <br>
                     </div>
-                    <div id="table_result" style="align-content: center;">
+                    <div id="recherche_resultat" style="position:static">
 
+                    </div>
+                    <div id="div_proposition" style="width:100%;display:none;position:static;" >
+                        <p>Vous ne trouvez pas ce que vous cherchez ? Proposez l'achat d'un document.</p>
+                        <input id="titre_proposition" placeholder="Titre">
+                        <input id="commentaire_proposition" placeholder="Commentaire">
+                        <button id="validation_proposition" onclick="save_prop();">Envoyer</button>
                     </div>
 
                 </div>
