@@ -22,6 +22,8 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
     
     private EntityManagerFactory emf;
     private static StatistiquesManagerImpl theStatistiquesManager;
+    private List<String> chaineModif;
+    private List<String> chaine;
 
     private StatistiquesManagerImpl() {
         if (emf == null) {
@@ -45,28 +47,63 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
     }
 
     @Override
-    public List<CoupleStats> stats() {
-        
-        EntityManager em = emf.createEntityManager();
+    public void stats() {
+        initListes();
+    }
+    
+    private void initListes()
+    {
+       EntityManager em = emf.createEntityManager();
         Query query;
         Query q = em.createQuery("SELECT r FROM Recherche r ORDER BY r.idRecherche DESC").setMaxResults(200);
         List<Recherche> l = q.getResultList();
-        List<CoupleStats> chaine= new ArrayList<>();
+        chaineModif= new ArrayList<>();
+        chaine= new ArrayList<>();
         for (int i=0; i<l.size(); i++)
         {
             if (l.get(i).getSerie()!=null && !(l.get(i).getSerie().equals("")))
             {
-                chaine.add(new CoupleStats(Levenshtein.condense(l.get(i).getSerie()),1));
+                chaineModif.add(Levenshtein.condense(l.get(i).getSerie()));
+                chaine.add(l.get(i).getSerie());
             }
             else
             {
                 if (l.get(i).getTitre()!=null && !(l.get(i).getTitre().equals("")));
                 {
-                    chaine.add(new CoupleStats(Levenshtein.condense(l.get(i).getTitre()),1));
+                    chaineModif.add(Levenshtein.condense(l.get(i).getTitre()));
+                    chaine.add(l.get(i).getTitre());
                 }
             }
         }
-        return chaine;
     }
     
+    private ArrayList<ArrayList<Integer>> premRegroupement(int crit){
+        ArrayList<ArrayList<Integer>> regroup = new ArrayList<>();
+        ArrayList<Integer> interm;
+        boolean pasPresent;
+        int i = 0;
+        int j;
+        while (i<chaineModif.size())
+        {
+            j=0;
+            pasPresent=true;
+            while (j<regroup.size()&&pasPresent)
+            {
+                if (Levenshtein.distance(chaineModif.get(regroup.get(j).get(0)), chaineModif.get(i))<=crit)
+                {
+                    pasPresent=false;
+                    regroup.get(j).add(i);
+                }
+                j++;
+            }
+            if (pasPresent)
+            {
+                interm = new ArrayList<>();
+                interm.add(i);
+                regroup.add(interm);
+            }
+            i++;
+        }         
+        return regroup;
+    }
 }

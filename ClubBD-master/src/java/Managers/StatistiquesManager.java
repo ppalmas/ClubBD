@@ -20,5 +20,5 @@ public interface StatistiquesManager {
      *
      * @return
      */
-    public List<CoupleStats> stats();
+    public void stats();
 }
