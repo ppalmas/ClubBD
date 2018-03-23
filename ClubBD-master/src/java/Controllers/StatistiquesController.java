@@ -9,6 +9,7 @@ import Database.Recherche;
 import Managers.StatistiquesManager;
 import Managers.StatistiquesManagerImpl;
 import Util.CoupleStats;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,7 @@ public class StatistiquesController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView handleStatistiques(HttpServletRequest request, HttpServletResponse response) {
         StatistiquesManager theStatistiquesManager = StatistiquesManagerImpl.getInstance();
-        List<CoupleStats> theRecherches = theStatistiquesManager.stats();
+        List<CoupleStats> theRecherches = new ArrayList<>();
         //Résultat
         ModelAndView r = new ModelAndView("statistiques");
         r.addObject("stats", theRecherches);
