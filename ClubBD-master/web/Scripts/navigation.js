@@ -50,9 +50,12 @@ function setInvisible(thingId) {
 function loadIndexUser(idStatut) {
     if (idStatut == 3) {
         //L'utilisateur est seulement un centralien non cotisant
+        setInvisible('sep_member');
+        setInvisible('sep_admin');
     } else if (idStatut == 1) {
         //L'utilisateur est un membre cotisant du club bd
         setVisible('gestion_emprunt');
+        setInvisible('sep_admin');
     } else if (idStatut == 2) {
         //L'utilisateur est un admin
         setVisible('gestion_emprunt');

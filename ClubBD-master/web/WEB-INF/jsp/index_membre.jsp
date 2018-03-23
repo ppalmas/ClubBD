@@ -77,9 +77,9 @@
                     <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content', 'recap_content'])">Suggestions de lecture</a>
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getMesEmprunts()" id="gestion_compte">Mes Emprunts</a>
-                    <div class="onglet_separator"></div>
+                    <div class="onglet_separator" id="sep_admin"></div>
                     <a class="onglets" href="#" style="display:none" onclick="getGestion()" id="gestion_inventaire">Gestion admin</a>
-                    <div class="onglet_separator"></div>
+                    <div class="onglet_separator" id="sep_member"></div>
                     <a class="onglets" href="#" style="display:none" onclick="" id="gestion_emprunt">Gestion des emprunts</a>
                 </center>
 
