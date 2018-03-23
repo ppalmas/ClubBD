@@ -37,8 +37,9 @@
 
     </head>
     <body onload="load_listener(['nom_modif', 'prenom_modif', 'email_modif', 'mdp_ancien_modif', 'mdp1_modif', 'mdp2_modif']);
-        loadIndexUser(<c:out value="${idStatut}"/>);load_listenerSearch(['recherche_doc','critere_titre','critere_auteur',
-            'critere_serie','critere_sujet']);">
+            loadIndexUser(<c:out value="${idStatut}"/>);
+            load_listenerSearch(['recherche_doc', 'critere_titre', 'critere_auteur',
+                'critere_serie', 'critere_sujet']);">
         <!-- CHARGEMENT DES DONNEES LIEES A L'UTILISATEUR CONNECTE /!\ indispensable
         pour la déconnexion notamment-->
         <div style="display:none;">
@@ -92,39 +93,50 @@
                 </div>
                 <!--Bloc de recherche d'ouvrages-->
                 <div id="search_content" class="bloc_home" style="display:none;">
-                    <div class="row_content" style="width: 95%;">
+                    <div class="col-md-4" id="row_content" style="width: 95%;">
                         <p style="text-align:left;">Recherche de documents
                             <input id="recherche_doc" style="width:500px; margin-left:30px;" placeholder="Titre, Auteur/Illustrateur, Serie"></p>
-                        <a style="text-align:left;" id="critere" style="margin-top:10px;" onclick="setVisible('search_critere')">Rechercher par critère</a>
-                        <div id="search_critere" style="display:none; text-align:left">
-                            <input id="critere_titre" style="width:300px; margin:10px;" placeholder="Titre">
-                            <br>
-                            <input id="critere_auteur" style="width:300px; margin:10px;" placeholder="Auteur, Illustrateur">
-                            <br>
-                            <input id="critere_serie" style="width:300px; margin:10px;" placeholder="Serie">
-                            <br>
-                            <input id="critere_sujet" style="width:300px; margin:10px;" placeholder="Sujet">
+                        <div class="col-md-5" id="input_recherche" style="width:60%;">
+                            <p style="text-align:left;">Rechercher par critère</a>
+                            <div id="search_critere" style="text-align:left">
+                                <input id="critere_titre" style="width:300px; margin:7px;" placeholder="Titre">
+                                <br>
+                                <input id="critere_auteur" style="width:300px; margin:7px;" placeholder="Auteur, Illustrateur">
+                                <br>
+                                <input id="critere_serie" style="width:300px; margin:7px;" placeholder="Serie">
+                                <br>
+                                <input id="critere_sujet" style="width:300px; margin:7px;" placeholder="Sujet">
+                            </div>
+                            <button id="recherche_button" style="margin-top:10px;" onclick="recherche_doc()">Rechercher</button>
                         </div>
-                        <button id="recherche_button" style="margin-top:10px;" onclick="recherche_doc()">Rechercher</button>
+                        <div class="col-md-3" id="info_recherche" style="width:40%;position:relative;display:inline;">
+                            
+                            <p>IMPORTANT :<br><br> La recherche par critères prend en compte tous
+                            les critères complétés.
+                            <br>
+                            <br>Pour chaque type de recherche, la recherche <b>cherchera exactement le mot-clef</b>
+                            entré, dans les documents du club. Par exemple, "chat" donnera tous les documents dont
+                            le titre, série, auteur ou sujet contiennent "chat".
+                            </p>
+                        </div>
 
                     </div>
                     <div id="recherche_resultat">
                     </div>
                     <div id="table_result" style="align-content: center;">
-                        
+
                     </div>
 
                 </div>
-                                
+
                 <!-- Bloc des suggestions-->
                 <div id ="suggestions_content" class="bloc_home" style="display:none">
-                    <div class="row_content" style="width: 95%;">
+                    <div id="row_content" style="width: 95%;">
                         <p>Suggestions de lecture</p>
                     </div>
                 </div>
 
             </div>
-            
         </div>
 
         <!--POP-UP: modification des données personnelles-->

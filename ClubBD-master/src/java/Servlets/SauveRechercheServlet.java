@@ -38,15 +38,11 @@ public class SauveRechercheServlet  extends HttpServlet {
         RechercheManager rm = RechercheManagerImpl.getInstance();
         Boolean b = false;
         
-        if (all!=""){
-            rm.insert(all, false);
+        if ((all!="")||!(all.equals(""))){
+            rm.insert(all, "");
             b = true;
-        } else if (titre!=""){
-           rm.insert(titre, false);
-           b = true;
-        } else if (serie!=""){
-            rm.insert(serie, true);
-            b= true;
+        } else {
+            rm.insert(titre, serie);
         }
         
         // Envoi de la réponse

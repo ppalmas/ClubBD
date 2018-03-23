@@ -13,7 +13,7 @@ public interface RechercheManager {
     /**
      * Insertion d'un élément de recherche (sauvegarde)
      * @param texte 
-     * @param b
+     * @param serie
      */
-    public void insert(String texte, Boolean b);
+    public void insert(String texte, String serie);
 }

@@ -39,18 +39,16 @@ public class RechercheManagerImpl implements RechercheManager {
      * Insertion d'un élément de recherche (sauvegarde)
      *
      * @param texte
-     * @param b vaut true si le texte est une série, false sinon
+     * @param serie vaut true si le texte est une série, false sinon
      */
     @Override
-    public void insert(String texte, Boolean b) {
+    public void insert(String texte, String serie) {
 //Création de l'objet personne
         Recherche m = new Recherche();
-        if (b) {
-            m.setSerie(texte);
-        } else {
-            m.setTitre(texte);
-        }
-        
+
+        m.setSerie(texte);
+        m.setTitre(texte);
+
         Timestamp stamp = new Timestamp(System.currentTimeMillis());
         m.setDateRecherche(stamp);
         //Insertion
