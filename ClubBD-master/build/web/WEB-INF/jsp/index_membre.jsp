@@ -39,7 +39,8 @@
     <body onload="load_listener(['nom_modif', 'prenom_modif', 'email_modif', 'mdp_ancien_modif', 'mdp1_modif', 'mdp2_modif']);
             loadIndexUser(<c:out value="${idStatut}"/>);
             load_listenerSearch(['recherche_doc', 'critere_titre', 'critere_auteur',
-                'critere_serie', 'critere_sujet']);load_listenerProposition(['titre_proposition','commentaire_proposition']);">
+                'critere_serie', 'critere_sujet']);
+            load_listenerProposition(['titre_proposition', 'commentaire_proposition']);">
         <!-- CHARGEMENT DES DONNEES LIEES A L'UTILISATEUR CONNECTE /!\ indispensable
         pour la déconnexion notamment-->
         <div style="display:none;">
@@ -82,14 +83,37 @@
                     <a class="onglets" href="#" style="display:none" onclick="getGestion()" id="gestion_inventaire">Gestion admin</a>
                     <div class="onglet_separator" id="sep_member"></div>
                     <a class="onglets" href="#" style="display:none" onclick="" id="gestion_emprunt">Gestion des emprunts</a>
+                    <div class="onglet_separator"></div>
+                    <a class="onglets" href="#" onclick="getNewContent('infos_content', ['suggestions_content', 'news_content', 'search_content'])">Informations</a>
+
                 </center>
 
             </div>
             <!-- Volet de droite -->
             <div id="right_div" class="col-md-8"> 
                 <!-- Bloc des news-->
+                <!-- Bloc des news-->
                 <div id="news_content" class="bloc_home">
-                    <p> News</p>
+                    <div class="row">
+                        <div id="selected_title" class="col-sm-10">
+                            <div >A la une</div>
+                            <hr/>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="el_news col-sm-10">
+                            <div class="news_title">Une partie News sur le site</div>
+                            <br/>
+                            <div class="news_text">Via l'onglet "A la une" vous pourrez bientôt vous tenir au courant de l'actu du club BD !</div>
+                        </div>
+                        <div class="el_news col-sm-10">
+                            <div class="news_title">Un nouveau site pour le club BD !</div>
+                            <br/>
+                            <div class="news_text">Le club BD s'offre un nouveau site en recrutant les braves informaticiens du PGROU6.</div>
+                        </div>
+                    </div>
                 </div>
                 <!--Bloc de recherche d'ouvrages-->
                 <div id="search_content" class="bloc_home" style="display:none;">
@@ -138,11 +162,58 @@
 
                 </div>
 
-                <!-- Bloc des suggestions-->
+                <!--BLOC DE SUGGESTIONS de lecture-->
                 <div id ="suggestions_content" class="bloc_home" style="display:none">
-                    <div id="row_content" style="width: 95%;">
-                        <p>Suggestions de lecture</p>
+                    <div class="row suggestion">
+                        <div class="col-sm-2">
+                            <div class="thumbnail">image</div>
+                        </div>
+                        <div class="col-sm-10">
+                            <div id="sugg_titre1" class="row book_title"></div>
+                            <div id="sugg_auteur1" class="row book_authors"></div>
+                            <div class="row book_available">
+                                <br>
+                                <div class="col-sm-3"
+                                     <div id="dispo_color1" style="height: 20px; width: 20px;  padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
+                                </div>
+                                <div class="col-sm-5"><p>Réserver</p></div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="row suggestion">
+                        <div class="col-sm-2">
+                            <div class="thumbnail">image</div>
+                        </div>
+                        <div class="col-sm-10">
+                            <div id="sugg_titre2" class="row book_title"></div>
+                            <div id="sugg_auteur2" class="row book_authors"></div>
+                            <div class="row book_available">
+                                <br>
+                                <div class="col-sm-3"
+                                     <div id="dispo_color2" style="height: 20px; width: 20px; padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
+                                </div>
+                                <div class="col-sm-5"><p>Réserver</p></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--Bloc d'informations sur l'application-->
+                <div class="bloc_home" id="infos_content" style="display:none;">
+                    <p>Le site du club BD a été réalisé par des étudiants de l'option informatique en 2018
+                        dans le cadre d'un projet de groupe. Le site propose aux utilisateurs de consulter l'inventaire 
+                        du club, de se créer un compte pour réserver des documents et gérer ses emprunts. Les membres cotisants
+                        du club peuvent s'en servir pour gérer les emprunts et retours des documents.
+                        <br>
+                        <br>
+                        Vos données:
+                        <br>
+                        Veuillez noter que vos recherches,
+                        lorsqu'elles sont infructueuses, seront enregistrées pour une utilisation purement statistique par le club.
+                        Ces données sont anonymisées. Les emprunts que vous effectuez sont enregistrés également à des fins statistiques 
+                        mais aussi pour permettre de pouvoir accéder à l'historique des documents. Ces données ne sont donc pas anonymisées.
+                    </p>
                 </div>
 
             </div>

@@ -59,5 +59,3 @@ function load_listenerProposition(Liste){
                 });
     }
 }
-
-//ALED

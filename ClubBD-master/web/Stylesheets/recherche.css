@@ -19,6 +19,10 @@ and open the template in the editor.
     text-align: center;
 }
 
+#recherche_resultat{
+    padding-top: 300px;
+}
+
 .el_news{
     background-color: #E6E6FA;
     padding: 10px;
@@ -67,6 +71,11 @@ and open the template in the editor.
     color: #2C4251;
     font-size: 12pt;
     text-align: center;
+}
+
+.search_result{
+    margin: 5px;
+    background-color: #E6E6FA;
 }
 
 table{

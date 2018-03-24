@@ -95,6 +95,7 @@ function makeUL(array) {
     div.setAttribute("id", "result_temp");
     for (var i = 0; i < array.length; i++) {
         var item = document.createElement('table');
+        item.setAttribute("class", "search_result");
         var ligne = document.createElement('tr');
 
         //Titre

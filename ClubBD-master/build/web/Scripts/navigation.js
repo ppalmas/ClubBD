@@ -50,9 +50,12 @@ function setInvisible(thingId) {
 function loadIndexUser(idStatut) {
     if (idStatut == 3) {
         //L'utilisateur est seulement un centralien non cotisant
+        setInvisible('sep_member');
+        setInvisible('sep_admin');
     } else if (idStatut == 1) {
         //L'utilisateur est un membre cotisant du club bd
         setVisible('gestion_emprunt');
+        setInvisible('sep_admin');
     } else if (idStatut == 2) {
         //L'utilisateur est un admin
         setVisible('gestion_emprunt');
@@ -102,11 +105,12 @@ function goHomeMember() {
 }
 
 /**
- * Méthode pour obtenir la page d'ouvrage
+ * Méthode pour obtenir la page d'ouvrage (à partir d'un utilisateur connecté)
+ * @param {type} iddoc 
  * @returns {undefined}
  */
-function goToOuvrage(){
-    // Formulaire pour obtenir la page admin
+function goToOuvrage(iddoc) {
+    // Formulaire pour obtenir la page de visualisation d'un ouvrage
     var form = document.createElement('form');
     form.method = "GET";
     form.action = "ouvrage.htm";
@@ -114,8 +118,19 @@ function goToOuvrage(){
     var c1 = document.createElement('input');
     c1.type = "hidden";
     c1.name = "idco";
-    c1.value = document.getElementById("idco").value;
+    try {
+        c1.value = document.getElementById("idco").value;
+    } catch (Exception) {
+        c1.value = 0;
+    }
     form.appendChild(c1);
+    var c2 = document.createElement('input');
+    c2.type = "hidden";
+    c2.name = "iddoc";
+    c2.value = iddoc;
+    form.appendChild(c2);
+    document.body.appendChild(form);
+    form.submit();
     document.body.appendChild(form);
     form.submit();
 }

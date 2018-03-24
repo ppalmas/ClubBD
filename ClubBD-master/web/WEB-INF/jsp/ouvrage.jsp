@@ -63,30 +63,32 @@
             <br/>
             <div id="display_ouvrage" class="bloc_home">
                 <div class="row">
-                    <div class="column">
+                    <div class="col-sm-4">
                         <div id="image_ouvrage">
                             <!--<img src="theprohecyistrue.jpg" alt="L'image n'a pas pu être affichée"/>-->
-                            <img src=<c:out value="${image}"/> alt="L'image n'a pas pu être affichée"/>
+                            <img class="img_border" src=<c:out value="${image}"/> alt="L'image n'a pas pu être affichée"/>
                         </div>
                     </div>
-                    <div class="column">                          
+                    <div class="col-sm-8" id="infos_ouvrage">                          
                             <h2><c:out value="${titre}"/></h2>
                             <br/>
-                            <p><strong>Créateur(s) : </strong>
-                            <c:forEach var="createur" items="${createurs}" varStatus="loop">
-                                <c:out value="${createur['nom']}"/> <c:out value="${createur['prenom']}"/> (<c:out value="${createur['poste']}"/>)<c:choose><c:when test="${!loop.last}">,</c:when><c:otherwise>.</c:otherwise></c:choose>
-                            </c:forEach>
-                            </p>
-                            <p><strong>Série :</strong> <c:out value="${serie}"/>
-                                <strong>N° :</strong> <c:out value="${numero}"/></p>
-                            <p><strong>Cote :</strong> <c:out value="${cote}"/></p>
-                            <p><strong>Genre(s) : </strong>
-                            <c:forEach var="genre" items="${genres}" varStatus="loop">
-                                 <c:out value="${genre}"/><c:if test="${!loop.last}">,</c:if>
-                            </c:forEach>
-                            </p>
-                            <p><strong>Description :</strong> <c:out value="${description}"/></p>
-                            <p><strong>Etat :</strong> <c:out value="${etat}"/></p>
+                            <div id="txt_infos">
+                                <p><strong>Créateur(s) : </strong>
+                                <c:forEach var="createur" items="${createurs}" varStatus="loop">
+                                    <c:out value="${createur['nom']}"/> <c:out value="${createur['prenom']}"/> (<c:out value="${createur['poste']}"/>)<c:choose><c:when test="${!loop.last}">,</c:when><c:otherwise>.</c:otherwise></c:choose>
+                                </c:forEach>
+                                </p>
+                                <p><strong>Série :</strong> <c:out value="${serie}"/></^>
+                                <p><strong>N° :</strong> <c:out value="${numero}"/></p>
+                                <p><strong>Cote :</strong> <c:out value="${cote}"/></p>
+                                <p><strong>Genre(s) : </strong>
+                                <c:forEach var="genre" items="${genres}" varStatus="loop">
+                                     <c:out value="${genre}"/><c:if test="${!loop.last}">,</c:if>
+                                </c:forEach>
+                                </p>
+                                <p><strong>Description :</strong> <c:out value="${description}"/></p>
+                                <p><strong>Etat :</strong> <c:out value="${etat}"/></p>
+                            </div>
                             <br/>
                             <div id="dispo"></div>
                             
