@@ -23,6 +23,7 @@
         <!-- STYLES -->
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/index.css">
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/base.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/recherche.css">
 
 
         <!-- SCRIPTS -->
@@ -72,11 +73,11 @@
                 </center>
                 <!-- Différents onglets -->
                 <center><div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content', 'recap_content'])">A la une</a>
+                    <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content', 'infos_content'])">A la une</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content', 'recap_content'])">Rechercher...</a>
+                    <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content', 'infos_content'])">Rechercher...</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content', 'recap_content'])">Suggestions de lecture</a>
+                    <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content', 'infos_content'])">Suggestions de lecture</a>
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getMesEmprunts()" id="gestion_compte">Mes Emprunts</a>
                     <div class="onglet_separator" id="sep_admin"></div>

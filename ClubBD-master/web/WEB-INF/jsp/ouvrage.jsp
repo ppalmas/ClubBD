@@ -78,7 +78,7 @@
                                     <c:out value="${createur['nom']}"/> <c:out value="${createur['prenom']}"/> (<c:out value="${createur['poste']}"/>)<c:choose><c:when test="${!loop.last}">,</c:when><c:otherwise>.</c:otherwise></c:choose>
                                 </c:forEach>
                                 </p>
-                                <p><strong>Série :</strong> <c:out value="${serie}"/></^>
+                                <p><strong>Série :</strong> <c:out value="${serie}"/></p>
                                 <p><strong>N° :</strong> <c:out value="${numero}"/></p>
                                 <p><strong>Cote :</strong> <c:out value="${cote}"/></p>
                                 <p><strong>Genre(s) : </strong>

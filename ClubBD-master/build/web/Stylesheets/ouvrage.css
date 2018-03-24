@@ -41,6 +41,10 @@ body{
     border-collapse: collapse;
 }
 
+#dispo{
+    
+}
+
 .column {
     flex: 50%;
 }
@@ -53,9 +57,9 @@ body{
 .back{
     padding: 10px;
     border-style: solid;
-    background-color: #BFC0C0;
+    background-color: #F4F4F4;
     color: black;
-    border-color: white;
+    border-color: #BFC0C0;
     border-radius: 5px;
 }
 
@@ -75,4 +79,10 @@ p{
     text-align: left;
 }
 
+h2{
+    font-size: 17pt;
+}
 
+h3{
+    font-size: 20pt;
+}

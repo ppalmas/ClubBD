@@ -64,7 +64,7 @@ public class MesEmpruntsController {
                 
                 Date dEmp = e.getDateEmprunt();
                 if (dEmp == null){
-                    Emprunts es2 = new Emprunts(d.getIdDocument(), d.getTitre(), d.getCote(), formatter.format(e.getDateReserve()), "", "", "");
+                    Emprunts es2 = new Emprunts(d.getIdDocument(), d.getTitre(), d.getCote(), "", "", "", "");
                     reservs.add(es2);
                 }
                 else{
