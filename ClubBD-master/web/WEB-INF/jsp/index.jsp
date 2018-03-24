@@ -39,7 +39,8 @@
     </head>
     <body onload="load_listener(['email', 'password']);
             load_listenerSearch(['recherche_doc', 'critere_titre', 'critere_auteur',
-                'critere_serie', 'critere_sujet']);load_listenerProposition(['titre_proposition','commentaire_proposition']);">
+                'critere_serie', 'critere_sujet']);
+            load_listenerProposition(['titre_proposition', 'commentaire_proposition']);">
 
 
         <!-- CONTENU PRINCIPAL -->
@@ -69,11 +70,14 @@
                 <!-- Différents onglets -->
                 <center>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content'])">A la une</a>
+                    <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content', 'infos_content'])">A la une</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content'])">Rechercher...</a>
+                    <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content', 'infos_content'])">Rechercher...</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="get_suggestion(); getNewContent('suggestions_content', ['news_content', 'search_content'])">Suggestions de lecture</a>
+                    <a class="onglets" href="#" onclick="get_suggestion(); getNewContent('suggestions_content', ['news_content', 'search_content', 'infos_content'])">Suggestions de lecture</a>
+                    <div class="onglet_separator"></div>
+                    <a class="onglets" href="#" onclick="getNewContent('infos_content', ['suggestions_content', 'news_content', 'search_content'])">Informations</a>
+
                 </center>
 
             </div>
@@ -149,6 +153,7 @@
 
                 </div>
 
+                <!--BLOC DE SUGGESTIONS de lecture-->
                 <div id ="suggestions_content" class="bloc_home" style="display:none">
                     <div class="row suggestion">
                         <div class="col-sm-2">
@@ -184,6 +189,24 @@
                     </div>
 
                 </div>
+                
+                <!--Bloc d'informations sur l'application-->
+                <div class="bloc_home" id="infos_content" style="display:none;">
+                    <p>Le site du club BD a été réalisé par des étudiants de l'option informatique en 2018
+                    dans le cadre d'un projet de groupe. Le site propose aux utilisateurs de consulter l'inventaire 
+                    du club, de se créer un compte pour réserver des documents et gérer ses emprunts. Les membres cotisants
+                    du club peuvent s'en servir pour gérer les emprunts et retours des documents.
+                    <br>
+                    <br>
+                    Vos données:
+                    <br>
+                    Veuillez noter que vos recherches,
+                     lorsqu'elles sont infructueuses, seront enregistrées pour une utilisation purement statistique par le club.
+                    Ces données sont anonymisées. Les emprunts que vous effectuez sont enregistrés également à des fins statistiques 
+                    mais aussi pour permettre de pouvoir accéder à l'historique des documents. Ces données ne sont donc pas anonymisées.
+                   </p>
+                </div>
+                    
             </div>
 
         </div>
