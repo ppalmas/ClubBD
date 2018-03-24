@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Club BD</title>
+        <title>Accueil</title>
 
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -32,12 +32,16 @@
         <script src="Scripts/index_membre.js"></script>      
         <script src="Scripts/modif_infosperso.js"></script>  
         <script src="Scripts/event_listener.js"></script>
+        <script src="Scripts/recherche.js"></script>
 
 
     </head>
-    <body onload="load_listener(['nom_modif', 'prenom_modif', 'email_modif', 'mdp_ancien_modif', 'mdp1_modif', 'mdp2_modif']); loadIndexUser(<c:out value="${idStatut}"/>);">
+    <body onload="load_listener(['nom_modif', 'prenom_modif', 'email_modif', 'mdp_ancien_modif', 'mdp1_modif', 'mdp2_modif']);
+            loadIndexUser(<c:out value="${idStatut}"/>);
+            load_listenerSearch(['recherche_doc', 'critere_titre', 'critere_auteur',
+                'critere_serie', 'critere_sujet']);load_listenerProposition(['titre_proposition','commentaire_proposition']);">
         <!-- CHARGEMENT DES DONNEES LIEES A L'UTILISATEUR CONNECTE /!\ indispensable
-        pour la déconnexion-->
+        pour la déconnexion notamment-->
         <div style="display:none;">
             <!-- Données personnelles-->
             <input type="hidden" id="idMembre" value="<c:out value="${id}"/>"/>
@@ -74,9 +78,9 @@
                     <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content', 'recap_content'])">Suggestions de lecture</a>
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getMesEmprunts()" id="gestion_compte">Mes Emprunts</a>
-                    <div class="onglet_separator"></div>
+                    <div class="onglet_separator" id="sep_admin"></div>
                     <a class="onglets" href="#" style="display:none" onclick="getGestion()" id="gestion_inventaire">Gestion admin</a>
-                    <div class="onglet_separator"></div>
+                    <div class="onglet_separator" id="sep_member"></div>
                     <a class="onglets" href="#" style="display:none" onclick="" id="gestion_emprunt">Gestion des emprunts</a>
                 </center>
 
@@ -89,56 +93,59 @@
                 </div>
                 <!--Bloc de recherche d'ouvrages-->
                 <div id="search_content" class="bloc_home" style="display:none;">
-                    <div class="row_content" style="width: 95%;">
+                    <div class="col-md-8" id="row_content" style="width: 98%;">
                         <p style="text-align:left;">Recherche de documents
                             <input id="recherche_doc" style="width:500px; margin-left:30px;" placeholder="Titre, Auteur/Illustrateur, Serie"></p>
-                        <p style="text-align:left;" id="critere" style="margin-top:10px;" onclick="setVisible('search_critere')">Rechercher par critère</p>
-                        <div id="search_critere" style="display:none; text-align:left">
-                            <input id="search_titre" style="width:300px; margin:10px;" placeholder="Titre">
-                            <br>
-                            <input id="critere_auteur" style="width:300px; margin:10px;" placeholder="Auteur, Illustrateur">
-                            <br>
-                            <input id="search_serie" style="width:300px; margin:10px;" placeholder="Serie">
-                            <br>
-                            <input id="search_sujet" style="width:300px; margin:10px;" placeholder="Sujet">
+                        <div class="col-md-5" id="input_recherche" style="width:60%;">
+                            <p style="text-align:left;">Rechercher par critère</a>
+                            <div id="search_critere" style="text-align:left">
+                                <input id="critere_titre" style="width:300px; margin:7px;" placeholder="Titre">
+                                <br>
+                                <input id="critere_auteur" style="width:300px; margin:7px;" placeholder="Auteur, Illustrateur">
+                                <br>
+                                <input id="critere_serie" style="width:300px; margin:7px;" placeholder="Serie">
+                                <br>
+                                <input id="critere_sujet" style="width:300px; margin:7px;" placeholder="Sujet">
+                            </div>
+                            <button id="recherche_button" style="margin-top:10px;" onclick="recherche_doc()">Rechercher</button>
                         </div>
-                        <button style="margin-top:10px;" onclick="recherche_doc()">Rechercher</button>
+                        <div class="col-md-3" id="info_recherche" style="width:40%;position:relative;display:inline;">
+
+                            <p>IMPORTANT :<br><br> La recherche par critères prend en compte tous
+                                les critères complétés.
+                                <br>
+                                <br>Pour chaque type de recherche, la recherche <b>cherchera exactement le mot-clef</b>
+                                entré, dans les documents du club. Par exemple, "chat potté" donnera tous les documents dont
+                                le titre, série, auteur ou sujet contiennent "chat potté" et non "chat" et "potté".
+                            </p>
+                        </div>
 
                     </div>
-                    
-                    <div id="recherche_resultat">
-                        <!--<table>
-                            <tr>
-                                <th>Titre</th>
-                                <th>Cote</th>
-                                <th>Serie</th>
-                                <th>Numéro</th>
-                                <th>Genre</th>
-                            </tr>
-                        <c:forEach var="item" items="${itemsList}">
-                             <tr>
-                                <td><c:out value="${item['titre']}"/></td>
-                                <td><c:out value="${item['auteur']}"/></td>
-                                <td><c:out value="${item['cote']}"/></td>
-                                <td><c:out value="${item['serie']}"/></td>
-                                <td><c:out value="${item['numero']}"/></td>
-                                <td><c:out value="${item['genre']}"/></td>
-                            </tr>
-                        </c:forEach>
-                        </table>-->
+                    <br>
+                    <div style="width:100%; position:static">
+                        <p id="result_nothing"> </p>
+                        <br>
                     </div>
-                    <button style="margin-top:10px;" onclick="goToOuvrage()">Aller à l'ouvrage</button>
+                    <div id="recherche_resultat" style="position:static">
+
+                    </div>
+                    <div id="div_proposition" style="width:100%;display:none;position:static;" >
+                        <p>Vous ne trouvez pas ce que vous cherchez ? Proposez l'achat d'un document.</p>
+                        <input id="titre_proposition" placeholder="Titre">
+                        <input id="commentaire_proposition" placeholder="Commentaire">
+                        <button id="validation_proposition" onclick="save_prop();">Envoyer</button>
+                    </div>
+
                 </div>
-                                
+
                 <!-- Bloc des suggestions-->
                 <div id ="suggestions_content" class="bloc_home" style="display:none">
-                    <div class="row_content" style="width: 95%;">
+                    <div id="row_content" style="width: 95%;">
                         <p>Suggestions de lecture</p>
                     </div>
                 </div>
 
             </div>
-            
         </div>
 
         <!--POP-UP: modification des données personnelles-->

@@ -30,6 +30,7 @@ function inscription() {
                 //Si l'adresse email n'est pas déjà prise, l'inscription a été effectuée. 
                 //Reste à connecter la personne
                 if (answer == "true") {
+                    alert("Votre inscription a bien été prise en compte.")
 
                     //Appel du controller pour effuectuer la connexion via un formulaire (en Post)
                     var form = document.createElement('form');
@@ -56,7 +57,7 @@ function inscription() {
 
                     document.body.appendChild(form);
                     form.submit();
-                    alert("Votre inscription a bien été prise en compte.")
+                    
                     
                     //Si l'addresse email est déjà prise   
                 } else {

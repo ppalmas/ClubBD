@@ -42,3 +42,22 @@ function load_listenerSearch(Liste) {
                 });
     }
 }
+
+/**
+ * Trigger pour valider formulaire de proposition
+ * @param {type} Liste
+ * @returns {undefined}
+ */
+function load_listenerProposition(Liste){
+    for (i = 0; i < Liste.length; i++) {
+        document.getElementById(Liste[i])
+                .addEventListener("keyup", function (event) {
+                    event.preventDefault();
+                    if (event.keyCode === 13) {
+                        document.getElementById("validation_proposition").click();
+                    }
+                });
+    }
+}
+
+//ALED
