@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Mes emprunts</title>
+        <title>Club BD</title>
 
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -68,18 +68,13 @@
                         <th>Cote</th>
                         <th>Date de réservation</th>
                     </tr>
+                    <c:forEach var="reservation" items="${reservations}">
                     <tr>
-                        <td><a class="ouvrage_link" href="#" onclick="goToOuvrage()" id="gestion_compte" style="color:blue;">Jacques</a></td>
-                        <td>810</td>
-                        <td>03/01</td>
+                        <td><a class="ouvrage_link" href="#" onclick="goToOuvrage(<c:out value="${reservation['iddoc']}"/>)" id="gestion_compte" style="color:blue;"><c:out value="${reservation['titre']}"/></a></td>
+                        <td><c:out value="${reservation['cote']}"/></td>
+                        <td><c:out value="${reservation['date_reserve']}"/></td>
                     </tr>
-                <!--<c:forEach var="item" items="${itemsList}">
-                    <tr>
-                        <td><a class="ouvrage_link" href="#" onclick="goToOuvrage()" id="gestion_compte" style="color:blue;"><c:out value="${item['titre']}"/></a></td>
-                        <td><c:out value="${item['cote']}"/></td>
-                        <td><c:out value="${item['date_reserve']}"/></td>
-                    </tr>
-                </c:forEach>-->
+                    </c:forEach>
                 </table>
             </div>
 
@@ -93,22 +88,15 @@
                         <th>Date d'emprunt</th>
                         <th>Date de retour</th>
                     </tr>
+                    <c:forEach var="emprunt" items="${emprunts}">
                     <tr>
-                        <td><a class="ouvrage_link" href="#" onclick="goToOuvrage()" id="gestion_compte" style="color:blue;">Jean va à la piscine</a></td>
-                        <td>87188E82</td>
-                        <td>20/12</td>
-                        <td>21/12</td>
-                        <td>01/01</td>
+                        <td><a class="ouvrage_link" href="#" onclick="goToOuvrage(<c:out value="${emprunt['iddoc']}"/>)" id="gestion_compte" style="color:blue;"><c:out value="${emprunt['titre']}"/></a></td>
+                        <td><c:out value="${emprunt['cote']}"/></td>
+                        <td><c:out value="${emprunt['date_reserve']}"/></td>
+                        <td><c:out value="${emprunt['date_emprunt']}"/></td>
+                        <td><c:out value="${emprunt['date_retour']}"/></td>
                     </tr>
-                <!--<c:forEach var="item" items="${itemsList}">
-                     <tr>
-                        <td><a class="ouvrage_link" href="#" onclick="goToOuvrage()" id="gestion_compte" style="color:blue;"><c:out value="${item['titre']}"/></a></td>
-                        <td><c:out value="${item['cote']}"/></td>
-                        <td><c:out value="${item['date_reserve']}"/></td>
-                        <td><c:out value="${item['date_emprunt']}"/></td>
-                        <td><c:out value="${item['date_retour']}"/></td>
-                    </tr>
-                </c:forEach>-->
+                    </c:forEach>
                 </table>                
             </div>
             </center>

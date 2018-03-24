@@ -9,6 +9,7 @@ import Database.Createur;
 import Database.Createurdocument;
 import Database.Document;
 import Database.Etat;
+import Database.Genredocument;
 import Database.Serie;
 import java.util.ArrayList;
 import java.util.List;
@@ -556,4 +557,25 @@ public class DocumentManagerImpl implements DocumentManager {
 
         return l;
     }
+    
+    /**
+     * Retourne la liste des genres associés à un document
+     *
+     * @param id du document
+     * @return
+     */
+    @Override
+    public ArrayList<Genredocument> findGenre(int id) {
+        ArrayList<Genredocument> gr = new ArrayList();
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT gd FROM Genredocument gd INNER JOIN Document d ON "
+                + "(gd.idDocument.idDocument = d.idDocument) WHERE d.idDocument=:id");
+        q.setParameter("id", id);
+        List l = q.getResultList();
+        for (Object o : l) {
+            gr.add((Genredocument) o);
+        }
+        return gr;
+    }
+    
 }

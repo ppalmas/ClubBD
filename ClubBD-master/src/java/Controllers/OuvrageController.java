@@ -8,6 +8,8 @@ package Controllers;
 import Database.Createurdocument;
 import Database.Document;
 import Database.Etat;
+import Database.Genre;
+import Database.Genredocument;
 import Database.Membre;
 import Managers.ConnectManager;
 import Managers.ConnectManagerImpl;
@@ -82,10 +84,16 @@ public class OuvrageController {
         }
         result.addObject("createurs", createurs);
         
+        ArrayList<Genredocument> gd = dm.findGenre(idDoc);
+        ArrayList<String> genres = new ArrayList<>();
         
+        String s = "";
+        for(Genredocument g : gd){
+            s = g.getIdGenre().getNomGenre();
+            genres.add(s);
+        }
         
-//        result.addObject("auteur", "The Prophecy Is True");
-        result.addObject("genre", "Fantastique");
+        result.addObject("genres", genres);
         
         //ArrayList<Createurdocument> findCreateur(idDoc)
         

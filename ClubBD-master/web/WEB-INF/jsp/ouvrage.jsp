@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>${titre}</title>
+        <title>Club BD</title>
 
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -69,44 +69,22 @@
                             <img src=<c:out value="${image}"/> alt="L'image n'a pas pu être affichée"/>
                         </div>
                     </div>
-                    <div class="column">
-                        
-                            <!--<h2>Jean va à la piscine</h2>
-                            <br/>
-                            <p><strong>Auteur :</strong> The Prophecy Is True</p>
-                            <p><strong>Série :</strong> La vie de Jean
-                                <strong>N° :</strong> PI</p>
-                            <p><strong>Cote :</strong> 87188E82</p>
-                            <p><strong>Genre :</strong> Fantastique</p>
-                            <p><strong>Description :</strong> Jean se casse le pied en glissant à la piscine.
-                                Jean se casse le pied en glissant à la piscine.
-                                Jean se casse le pied en glissant à la piscine.
-                                Jean se casse le pied en glissant à la piscine</p>
-                            <p><strong>Etat :</strong> En décomposition</p>
-                            <br/>
-                            <div id="dispo"></div>-->
-                            
+                    <div class="column">                          
                             <h2><c:out value="${titre}"/></h2>
                             <br/>
-                            <c:forEach var="createur" items="${createurs}">
-                                <c:if test="${createur.poste=='Auteur'}">
-                                    <p><strong><c:out value="${createur['poste']}"/>(s) :</strong> <c:out value="${createur['nom']}"/> <c:out value="${createur['prenom']}"/></p>
-                                </c:if>
+                            <p><strong>Créateur(s) : </strong>
+                            <c:forEach var="createur" items="${createurs}" varStatus="loop">
+                                <c:out value="${createur['nom']}"/> <c:out value="${createur['prenom']}"/> (<c:out value="${createur['poste']}"/>)<c:choose><c:when test="${!loop.last}">,</c:when><c:otherwise>.</c:otherwise></c:choose>
                             </c:forEach>
-                            <c:forEach var="createur" items="${createurs}">
-                                <c:if test="${createur['poste']=='Illustrateur'}">
-                                    <p><strong><c:out value="${createur['poste']}"/>(s) :</strong> <c:out value="${createur['nom']}"/> <c:out value="${createur['prenom']}"/></p>
-                                </c:if>
-                            </c:forEach>
-                            <c:forEach var="createur" items="${createurs}">
-                                <c:if test="${(createur['poste']!='Auteur')&&(createur['poste']!='Illustrateur')}">
-                                    <p><strong><c:out value="${createur['poste']}"/> :</strong> <c:out value="${createur['nom']}"/> <c:out value="${createur['prenom']}"/></p>
-                                </c:if>
-                            </c:forEach>
+                            </p>
                             <p><strong>Série :</strong> <c:out value="${serie}"/>
                                 <strong>N° :</strong> <c:out value="${numero}"/></p>
                             <p><strong>Cote :</strong> <c:out value="${cote}"/></p>
-                            <p><strong>Genre :</strong> <c:out value="${genre}"/></p>
+                            <p><strong>Genre(s) : </strong>
+                            <c:forEach var="genre" items="${genres}" varStatus="loop">
+                                 <c:out value="${genre}"/><c:if test="${!loop.last}">,</c:if>
+                            </c:forEach>
+                            </p>
                             <p><strong>Description :</strong> <c:out value="${description}"/></p>
                             <p><strong>Etat :</strong> <c:out value="${etat}"/></p>
                             <br/>
@@ -116,10 +94,7 @@
                             <center>
                                 <button id="reserver_button" onclick="reserver(<c:out value="${idco}"/>)" style="color:green;">Réserver</button>
                                 <button id="retourner_button" onclick="retourner(<c:out value="${idStatut}"/>)" style="margin-left: 100px; color:red; display:none;">Retourner</button>
-                            </center>
-                            
-                            
-                        
+                            </center>    
                     </div>
                 </div>
             </div>
