@@ -7,6 +7,7 @@ package Managers;
 
 import Database.Recherche;
 import Util.CoupleStats;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 /**
@@ -20,5 +21,5 @@ public interface StatistiquesManager {
      *
      * @return
      */
-    public void stats();
+    public ArrayList<CoupleStats> stats();
 }
