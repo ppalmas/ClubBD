@@ -27,6 +27,7 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
     private ArrayList<ArrayList<Integer>> regroup1;
     private ArrayList<ArrayList<Integer>> regroupFinal;
     private int crit;
+    private int nb_recherche=200;
 
     private StatistiquesManagerImpl(int critt) {
         this.crit=critt;
@@ -62,7 +63,7 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
     {
        EntityManager em = emf.createEntityManager();
         Query query;
-        Query q = em.createQuery("SELECT r FROM Recherche r ORDER BY r.idRecherche DESC").setMaxResults(200);
+        Query q = em.createQuery("SELECT r FROM Recherche r ORDER BY r.idRecherche DESC").setMaxResults(nb_recherche);
         List<Recherche> l = q.getResultList();
         chaineModif= new ArrayList<>();
         chaine= new ArrayList<>();
@@ -129,7 +130,7 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
         int dMin, d, iMin;
          for (ArrayList<Integer> l : regroup1)
         {
-            dMin=crit;
+            dMin=crit*nb_recherche;
             iMin=0;
             for (Integer i : l)
             {
@@ -148,8 +149,6 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
             interm.add(iMin);
             regroupFinal.add(interm);
         } 
-        int i =0;
-        int j=2;
     }
     
     private void RegroupementFinal(){
