@@ -31,6 +31,7 @@
         <script src="Scripts/index.js"></script>
         <script src="Scripts/deconnecter.js"></script>
         <script src="Scripts/gestion_inv.js"></script>
+        <script src="Scripts/get_propositions.js"></script>
 
 
 
@@ -68,7 +69,7 @@
                 <center><div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="goHomeMember()" id="gestion_compte">Accueil</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('propositions_content', ['stats_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Propositions d'achat</a>
+                    <a class="onglets" href="#" onclick="get_propositions();getNewContent('propositions_content', ['stats_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Propositions d'achat</a>
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getNewContent('gestion_inv_content', ['propositions_content', 'stats_content', 'membres_content', 'retour_emprunt_content'])">Gestion inventaire</a>
                     <div class="onglet_separator"></div>
@@ -87,7 +88,9 @@
                     <p>Retourner un emprunt</p>
                 </div>
                 <div id ="propositions_content" class="bloc_home" style="display:none">
-                    <p>Propositions d'achat</p>
+                    <p>proposi</p>
+                    <div id="propositions_resultat" style="position:static">
+                    </div>
                 </div>
 
                 <!-- Bloc gestion inventaire-->
@@ -290,22 +293,7 @@
 
                 <!-- Bloc des stats-->
                 <div id ="stats_content" class="bloc_home" style="display:none">
-                    <h1>Statistiques</h1>
-                    <h2>(nombre d'occurences sur <c:out value="${nb_recherche}"/> recherches)</h2>
-                    <h3>valeur du critère : <c:out value="${crit}"/></h3>
-                    <table>
-                        <tr>
-                            <th>titre/série</th>
-                            <th>nombre d'occurences</th>
-                        </tr>
-
-                        <c:forEach var="i" items="${stats}">
-                            <tr>
-                                <td><c:out value="${i['name']}"/></td>
-                                <td><c:out value="${i['value']}"/></td>
-                            </tr>
-                        </c:forEach> 
-                    </table>
+                    
                 </div>
             </div>
 
