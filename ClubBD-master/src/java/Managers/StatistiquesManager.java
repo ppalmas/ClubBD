@@ -22,4 +22,8 @@ public interface StatistiquesManager {
      * @return
      */
     public ArrayList<CoupleStats> stats();
+    
+    public int getCrit();
+
+    public int getNb_recherche();
 }

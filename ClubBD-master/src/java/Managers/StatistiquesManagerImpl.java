@@ -26,19 +26,18 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
     private List<String> chaine;
     private ArrayList<ArrayList<Integer>> regroup1;
     private ArrayList<ArrayList<Integer>> regroupFinal;
-    private int crit;
-    private int nb_recherche=200;
+    private int crit=2;
+    private int nb_recherche=400;
 
-    private StatistiquesManagerImpl(int critt) {
-        this.crit=critt;
+    private StatistiquesManagerImpl() {
         if (emf == null) {
             emf = Persistence.createEntityManagerFactory("ClubBDPU");
         }
     }
 
-    public static StatistiquesManager getInstance(int critt) {
+    public static StatistiquesManager getInstance() {
         if (theStatistiquesManager == null) {
-            theStatistiquesManager = new StatistiquesManagerImpl(critt);
+            theStatistiquesManager = new StatistiquesManagerImpl();
         }
         return theStatistiquesManager;
     }
@@ -181,4 +180,16 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
             i++;
         }
     }
+
+    @Override
+    public int getCrit() {
+        return crit;
+    }
+
+    @Override
+    public int getNb_recherche() {
+        return nb_recherche;
+    }
+    
+    
 }

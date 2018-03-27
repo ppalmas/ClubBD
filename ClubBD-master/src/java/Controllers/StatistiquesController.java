@@ -33,11 +33,13 @@ public class StatistiquesController {
     
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView handleStatistiques(HttpServletRequest request, HttpServletResponse response) {
-        StatistiquesManager theStatistiquesManager = StatistiquesManagerImpl.getInstance(2);
+        StatistiquesManager theStatistiquesManager = StatistiquesManagerImpl.getInstance();
         List<CoupleStats> theRecherches = theStatistiquesManager.stats();
         //Résultat
         ModelAndView r = new ModelAndView("admin");
         r.addObject("stats", theRecherches);
+        r.addObject("crit", theStatistiquesManager.getCrit());
+        r.addObject("nb_recherche", theStatistiquesManager.getNb_recherche());
         return r;
     }
 }

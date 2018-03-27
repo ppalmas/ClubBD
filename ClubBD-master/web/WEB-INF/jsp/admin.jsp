@@ -22,6 +22,7 @@
         <!-- STYLES -->
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/index.css">
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/base.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/tableau.css">
 
 
         <!-- SCRIPTS -->
@@ -289,11 +290,13 @@
 
                 <!-- Bloc des stats-->
                 <div id ="stats_content" class="bloc_home" style="display:none">
+                    <h1>Statistiques</h1>
+                    <h2>(nombre d'occurences sur <c:out value="${nb_recherche}"/> recherches)</h2>
+                    <h3>valeur du critère : <c:out value="${crit}"/></h3>
                     <table>
                         <tr>
-                            <th>titre</th>
-                            <th>date</th>
-                            <th>serie</th>
+                            <th>titre/série</th>
+                            <th>nombre d'occurences</th>
                         </tr>
 
                         <c:forEach var="i" items="${stats}">
