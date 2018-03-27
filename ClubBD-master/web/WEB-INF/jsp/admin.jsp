@@ -34,6 +34,7 @@
         <script src="Scripts/deconnecter.js"></script>
         <script src="Scripts/gestion_inv.js"></script>
         <script src="Scripts/get_propositions.js"></script>
+        <script src="Scripts/get_stats.js"></script>
 
 
 
@@ -77,7 +78,7 @@
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getNewContent('membres_content', ['propositions_content', 'stats_content', 'gestion_inv_content', 'retour_emprunt_content'])">Gestion membres</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('stats_content', ['propositions_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Statistiques</a>
+                    <a class="onglets" href="#" onclick="get_stats();getNewContent('stats_content', ['propositions_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Statistiques</a>
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getNewContent('retour_emprunt_content', ['stats_content', 'propositions_content', 'membres_content', 'gestion_inv_content'])">Retour emprunts</a>
                 </center>
@@ -342,6 +343,8 @@
                 <!-- Bloc des stats-->
                 <div id ="stats_content" class="bloc_home" style="display:none">
                     
+                    <div id="stats_resultat" style="position:static">
+                    </div>
                 </div>
             </div>
 

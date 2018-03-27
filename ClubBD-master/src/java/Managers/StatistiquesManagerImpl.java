@@ -13,6 +13,7 @@ import Util.CoupleStats;
 import Util.Levenshtein;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 /**
  *
@@ -119,6 +120,7 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
         {
             result.add(new CoupleStats(chaine.get(l.get(0)),l.size()));
         }
+        Collections.sort(result, Collections.reverseOrder());
         return result;
     }
     

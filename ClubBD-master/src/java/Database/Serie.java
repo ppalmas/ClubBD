@@ -52,8 +52,6 @@ public class Serie implements Serializable {
     private String serieDescription;
     @OneToMany(mappedBy = "idSerie")
     private Collection<Document> documentCollection;
-    @OneToMany(mappedBy = "idSerie")
-    private Collection<Recherche> rechercheCollection;
 
     public Serie() {
     }
@@ -108,15 +106,6 @@ public class Serie implements Serializable {
 
     public void setDocumentCollection(Collection<Document> documentCollection) {
         this.documentCollection = documentCollection;
-    }
-
-    @XmlTransient
-    public Collection<Recherche> getRechercheCollection() {
-        return rechercheCollection;
-    }
-
-    public void setRechercheCollection(Collection<Recherche> rechercheCollection) {
-        this.rechercheCollection = rechercheCollection;
     }
 
     @Override

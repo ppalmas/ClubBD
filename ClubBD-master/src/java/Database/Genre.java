@@ -43,7 +43,6 @@ public class Genre implements Serializable {
     @Basic(optional = false)
     @Column(name = "nom_genre")
     private String nomGenre;
-    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idGenre")
     private Collection<Genredocument> genredocumentCollection;
 
@@ -74,8 +73,6 @@ public class Genre implements Serializable {
     public void setNomGenre(String nomGenre) {
         this.nomGenre = nomGenre;
     }
-
-    
 
     @XmlTransient
     public Collection<Genredocument> getGenredocumentCollection() {

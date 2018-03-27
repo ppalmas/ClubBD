@@ -80,7 +80,6 @@ public class Document implements Serializable {
     private Collection<Genredocument> genredocumentCollection;
 
     public Document() {
-        
     }
 
     public Document(Integer idDocument) {
@@ -210,8 +209,6 @@ public class Document implements Serializable {
         hash += (idDocument != null ? idDocument.hashCode() : 0);
         return hash;
     }
-    
-
 
     @Override
     public boolean equals(Object object) {

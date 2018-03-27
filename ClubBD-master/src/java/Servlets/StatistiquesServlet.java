@@ -8,8 +8,12 @@ package Servlets;
 import Database.Proposition;
 import Managers.PropositionManager;
 import Managers.PropositionManagerImpl;
+import Managers.StatistiquesManager;
+import Managers.StatistiquesManagerImpl;
+import Util.CoupleStats;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +25,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author centrale
  */
-@WebServlet(name = "PropositionServlet", urlPatterns = {"/PropositionServlet"})
-public class PropositionServlet extends HttpServlet{
+@WebServlet(name = "StatistiquesServlet", urlPatterns = {"/StatistiquesServlet"})
+public class StatistiquesServlet extends HttpServlet{
      /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -35,21 +39,21 @@ public class PropositionServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String res = "";
-        List<Proposition> l;
+        ArrayList<CoupleStats> l;
         int m;
         //Création d'une entité Document
-        PropositionManager pm = PropositionManagerImpl.getInstance();
-        l = pm.propositions();
+        StatistiquesManager sm = StatistiquesManagerImpl.getInstance();
+        l = sm.stats();
         if ((l == null)||l.isEmpty()) {
-            res = res + "{\"nomProp\":\"" + "\"," + "\"comProp\":\""+"\""+"},";
+            res = res + "{\"nomRech\":\"" + "\"," + "\"nbRech\":\""+"\""+"},";
             m = 0 ;
             
         } else {
             m = l.size();
             for (int i = 0; i < m; i++) {
                 //Ecriture de chaque document
-                res = res + "{\"nomProp\":\"" + l.get(i).getNomProposition() + "\"";
-                res = res + ",\"comProp\":\"" + l.get(i).getCommentaireProposition() + "\"";
+                res = res + "{\"nomRech\":\"" + l.get(i).getName() + "\"";
+                res = res + ",\"nbRech\":\"" + l.get(i).getValue() + "\"";
                 res = res + "},";
 
             }
