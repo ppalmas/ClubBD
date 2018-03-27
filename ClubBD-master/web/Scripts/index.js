@@ -23,22 +23,3 @@ function getInscription() {
     form.submit();
 
 }
-
-/**
- * Méthode pour obtenir la page d'ouvrage
- * (Appel au controleur IndexController en méthode GET)
- */
-function goToOuvrageNotConnect(){
-    // Formulaire pour obtenir la page admin
-    var form = document.createElement('form');
-    form.method = "GET";
-    form.action = "ouvrage.htm";
-    // Le paramètre idco - identifiant de connexion - est envoyé avec la requête
-    var c1 = document.createElement('input');
-    c1.type = "hidden";
-    c1.name = "idco";
-    c1.value = "0";
-    form.appendChild(c1);
-    document.body.appendChild(form);
-    form.submit();
-}

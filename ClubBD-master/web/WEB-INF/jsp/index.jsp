@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Club BD</title>
+        <title>Club BD - Accueil</title>
 
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -30,14 +30,17 @@
         <script src="Scripts/navigation.js"></script>
         <script src="Scripts/index.js"></script>
         <script src="Scripts/connecter.js"></script>
-        <script src="Scripts/recherche2.js"></script>
+        <script src="Scripts/recherche.js"></script>
         <script src="Scripts/event_listener.js"></script>
         <script src="Scripts/get_suggestion.js"></script>
 
 
 
     </head>
-    <body onload="load_listener(['email', 'password']);">
+    <body onload="load_listener(['email', 'password']);
+            load_listenerSearch(['recherche_doc', 'critere_titre', 'critere_auteur',
+                'critere_serie', 'critere_sujet']);
+            load_listenerProposition(['titre_proposition', 'commentaire_proposition']);">
 
 
         <!-- CONTENU PRINCIPAL -->
@@ -67,11 +70,14 @@
                 <!-- Différents onglets -->
                 <center>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content'])">A la une</a>
+                    <a class="onglets" href="#" onclick="getNewContent('news_content', ['search_content', 'suggestions_content', 'infos_content'])">A la une</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content'])">Rechercher...</a>
+                    <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content', 'infos_content'])">Rechercher...</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="get_suggestion(); getNewContent('suggestions_content', ['news_content', 'search_content'])">Suggestions de lecture</a>
+                    <a class="onglets" href="#" onclick="get_suggestion(); getNewContent('suggestions_content', ['news_content', 'search_content', 'infos_content'])">Suggestions de lecture</a>
+                    <div class="onglet_separator"></div>
+                    <a class="onglets" href="#" onclick="getNewContent('infos_content', ['suggestions_content', 'news_content', 'search_content'])">Informations</a>
+
                 </center>
 
             </div>
@@ -102,30 +108,52 @@
                 </div>
                 <!--Bloc de recherche d'ouvrages-->
                 <div id="search_content" class="bloc_home" style="display:none;">
-                    <div class="row_content" style="width: 95%;">
+                    <div class="col-md-8" id="row_content" style="width: 98%;">
                         <p style="text-align:left;">Recherche de documents
                             <input id="recherche_doc" style="width:500px; margin-left:30px;" placeholder="Titre, Auteur/Illustrateur, Serie"></p>
-                        <a style="text-align:left;" id="critere" style="margin-top:10px;" onclick="setVisible('search_critere')">Rechercher par critère</a>
-                        <div id="search_critere" style="display:none; text-align:left">
-                            <input id="critere_titre" style="width:300px; margin:10px;" placeholder="Titre">
-                            <br>
-                            <input id="critere_auteur" style="width:300px; margin:10px;" placeholder="Auteur, Illustrateur">
-                            <br>
-                            <input id="critere_serie" style="width:300px; margin:10px;" placeholder="Serie">
-                            <br>
-                            <input id="critere_sujet" style="width:300px; margin:10px;" placeholder="Sujet">
+                        <div class="col-md-5" id="input_recherche" style="width:60%;">
+                            <p style="text-align:left;">Rechercher par critère</a>
+                            <div id="search_critere" style="text-align:left">
+                                <input id="critere_titre" style="width:300px; margin:7px;" placeholder="Titre">
+                                <br>
+                                <input id="critere_auteur" style="width:300px; margin:7px;" placeholder="Auteur, Illustrateur">
+                                <br>
+                                <input id="critere_serie" style="width:300px; margin:7px;" placeholder="Serie">
+                                <br>
+                                <input id="critere_sujet" style="width:300px; margin:7px;" placeholder="Sujet">
+                            </div>
+                            <button id="recherche_button" style="margin-top:10px;" onclick="recherche_doc()">Rechercher</button>
                         </div>
-                        <button style="margin-top:10px;" onclick="recherche_doc()">Rechercher</button>
+                        <div class="col-md-3" id="info_recherche" style="width:40%;position:relative;display:inline;">
+
+                            <p>IMPORTANT :<br><br> La recherche par critères prend en compte tous
+                                les critères complétés.
+                                <br>
+                                <br>Pour chaque type de recherche, la recherche <b>cherchera exactement le mot-clef</b>
+                                entré, dans les documents du club. Par exemple, "chat potté" donnera tous les documents dont
+                                le titre, série, auteur ou sujet contiennent "chat potté" et non "chat" et "potté".
+                            </p>
+                        </div>
 
                     </div>
-                    <div id="recherche_resultat">
+                    <br>
+                    <div style="width:100%; position:static">
+                        <p id="result_nothing"> </p>
+                        <br>
                     </div>
-                    <div id="table_result" style="align-content: center;">
-                        
+                    <div id="recherche_resultat" style="position:static">
+
+                    </div>
+                    <div id="div_proposition" style="width:100%;display:none;position:static;" >
+                        <p>Vous ne trouvez pas ce que vous cherchez ? Proposez l'achat d'un document.</p>
+                        <input id="titre_proposition" placeholder="Titre">
+                        <input id="commentaire_proposition" placeholder="Commentaire">
+                        <button id="validation_proposition" onclick="save_prop();">Envoyer</button>
                     </div>
 
                 </div>
 
+                <!--BLOC DE SUGGESTIONS de lecture-->
                 <div id ="suggestions_content" class="bloc_home" style="display:none">
                     <div class="row suggestion">
                         <div class="col-sm-2">
@@ -161,6 +189,24 @@
                     </div>
 
                 </div>
+                
+                <!--Bloc d'informations sur l'application-->
+                <div class="bloc_home" id="infos_content" style="display:none;">
+                    <p>Le site du club BD a été réalisé par des étudiants de l'option informatique en 2018
+                    dans le cadre d'un projet de groupe. Le site propose aux utilisateurs de consulter l'inventaire 
+                    du club, de se créer un compte pour réserver des documents et gérer ses emprunts. Les membres cotisants
+                    du club peuvent s'en servir pour gérer les emprunts et retours des documents.
+                    <br>
+                    <br>
+                    Vos données:
+                    <br>
+                    Veuillez noter que vos recherches,
+                     lorsqu'elles sont infructueuses, seront enregistrées pour une utilisation purement statistique par le club.
+                    Ces données sont anonymisées. Les emprunts que vous effectuez sont enregistrés également à des fins statistiques 
+                    mais aussi pour permettre de pouvoir accéder à l'historique des documents. Ces données ne sont donc pas anonymisées.
+                   </p>
+                </div>
+                    
             </div>
 
         </div>

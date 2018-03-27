@@ -25,6 +25,7 @@
                 <prop key="admin.htm">AdminController</prop>
                 <prop key="ouvrage.htm">OuvrageController</prop>
                 <prop key="mesemprunts.htm">MesEmpruntsController</prop>
+                <prop key="statistiques.htm">StatistiquesController</prop>
             </props>
         </property>
     </bean>
@@ -69,6 +70,10 @@
     <bean
          name="OuvrageController"
          class="Controllers.OuvrageController"
+    />
+    <bean
+         name="StatistiquesController"
+         class="Controllers.StatistiquesController"
     />
 
 

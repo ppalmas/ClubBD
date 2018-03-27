@@ -47,8 +47,7 @@ public class Createur implements Serializable {
     @Basic(optional = false)
     @Column(name = "prenom_createur")
     private String prenomCreateur;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCreateur")
-    private Collection<Createurrecherche> createurrechercheCollection;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCreateur")
     private Collection<Createurdocument> createurdocumentCollection;
 
@@ -89,14 +88,7 @@ public class Createur implements Serializable {
         this.prenomCreateur = prenomCreateur;
     }
 
-    @XmlTransient
-    public Collection<Createurrecherche> getCreateurrechercheCollection() {
-        return createurrechercheCollection;
-    }
-
-    public void setCreateurrechercheCollection(Collection<Createurrecherche> createurrechercheCollection) {
-        this.createurrechercheCollection = createurrechercheCollection;
-    }
+    
 
     @XmlTransient
     public Collection<Createurdocument> getCreateurdocumentCollection() {

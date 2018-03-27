@@ -11,7 +11,7 @@
 <html lang="fr">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Club BD</title>
+        <title>Admin</title>
 
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -22,13 +22,9 @@
         <!-- STYLES -->
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/index.css">
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/base.css">
-        <style>label
-{
-	display: block;
-	width: 150px;
-	float: left;
-}
-</style>
+
+        <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/tableau.css">
+
 
 
         <!-- SCRIPTS -->
@@ -37,6 +33,7 @@
         <script src="Scripts/index.js"></script>
         <script src="Scripts/deconnecter.js"></script>
         <script src="Scripts/gestion_inv.js"></script>
+        <script src="Scripts/get_propositions.js"></script>
 
 
 
@@ -74,7 +71,7 @@
                 <center><div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="goHomeMember()" id="gestion_compte">Accueil</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('propositions_content', ['stats_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Propositions d'achat</a>
+                    <a class="onglets" href="#" onclick="get_propositions();getNewContent('propositions_content', ['stats_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Propositions d'achat</a>
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getNewContent('gestion_inv_content', ['propositions_content', 'stats_content', 'membres_content', 'retour_emprunt_content'])">Gestion inventaire</a>
                     <div class="onglet_separator"></div>
@@ -93,7 +90,9 @@
                     <p>Retourner un emprunt</p>
                 </div>
                 <div id ="propositions_content" class="bloc_home" style="display:none">
-                    <p>Propositions d'achat</p>
+                    <p>proposi</p>
+                    <div id="propositions_resultat" style="position:static">
+                    </div>
                 </div>
 
                 <!-- Bloc gestion inventaire-->
@@ -123,14 +122,17 @@
                             <br>
                             <label for="numeroa">Numéro</label>
                             <input name="numeroa" id="numeroa" type="text" value=""/><br>
+
                             <label for="genrea">Genres (séparer par une virgule)</label>
                             <input id="genrea" name="genrea" type="text" value=""/><br>
                             <label for="createura">Créateurs,poste (sans espace)</label>
+
                             <input type="text" list="createurcombo" id="createura0" name="createura0">
                             <input type="button" id="addcrea" name="addcrea" onclick="addcrea()" value="+"/>
                             <input type="button" id="rmvcrea" name="rmvcrea" onclick="rmvcrea()" value="-"/><br>
                             <div id="crea1" style="display:none"><input type="text" list="createurcombo" id="createura1" name="createura1" ><br></div>
                             <div id="crea2" style="display:none"><input type="text" list="createurcombo" id="createura2" name="createura2" ><br></div>
+
                             <div id="crea3" style="display:none"><input type="text" list="createurcombo" id="createura3" name="createura3" ><br></div>
                             <div id="crea4" style="display:none"><input type="text" list="createurcombo" id="createura4" name="createura4" ><br></div>
                             <datalist id="createurcombo" >
@@ -210,7 +212,9 @@
 
 
 
+
                             <button onclick="recherche2_serie()">Rechercher série</button></div>
+
 
                     </div>
                     <h2>Résultats</h2>
@@ -238,18 +242,22 @@
                         <br>
                         <label for="numerom">Numéro</label>
                         <input name="numerom" id="numerom" type="text" value=""/><br>
+
                         <label for="genrem">Genres (séparer avec une virgule)</label>
                         <input name="genrem" id="genrem" type="text" value=""/><br>
 
                         <label for="createurm">Créateurs,poste (sans espace)</label>
+
                         <input type="text" list="createurcombo" id="createurm0" name="createurm0">
                         <br>
                         <input type="text" list="createurcombo" id="createurm1" name="createurm1" ><br>
                         <input type="text" list="createurcombo" id="createurm2" name="createurm2" >
                         <br>
+
                         <input type="text" list="createurcombo" id="createurm3" name="createurm3" ><br>
                         <input type="text" list="createurcombo" id="createurm4" name="createurm4" >
                         <br>
+
 
 
                         <label for="descriptionm">Description</label>
@@ -333,7 +341,7 @@
 
                 <!-- Bloc des stats-->
                 <div id ="stats_content" class="bloc_home" style="display:none">
-                    <p>Statistiques</p>
+                    
                 </div>
             </div>
 
@@ -361,7 +369,6 @@
                 </div>
             </div>
         </div>
-
     </body>
 </html>
 

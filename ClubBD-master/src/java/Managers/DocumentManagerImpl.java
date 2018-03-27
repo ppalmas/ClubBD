@@ -604,28 +604,11 @@ public class DocumentManagerImpl implements DocumentManager {
         if (b) {
             //renvoi de la liste suivant tous les critères
             String all = criteres.get(0);
-            /**
-             * String[] tab_search = all.split(" "); int len =
-             * tab_search.length-1; String keyword = ""; for (int k=0;
-             * k<len;k++){ keyword = "all"+k; SQL_part = SQL_part + "
-             * (LOWER(d.titre) LIKE LOWER(:keyword) OR" + " LOWER(d.description)
-             * LIKE LOWER(:keyword) OR LOWER(c.nomCreateur) LIKE LOWER(:keyword)
-             * OR" + " LOWER(d.idSerie.nomSerie) LIKE LOWER(:keyword)) AND";
-             *
-             * }
-             * keyword = "all" + len; SQL_part = SQL_part + " (LOWER(d.titre)
-             * LIKE LOWER(:keyword) OR" + " LOWER(d.description) LIKE
-             * LOWER(:keyword) OR LOWER(c.nomCreateur) LIKE LOWER(:keyword) OR"
-             * + " LOWER(d.idSerie.nomSerie) LIKE LOWER(:keyword))"; SQL = SQL +
-             * " INNER JOIN Createurdocument cd ON (d.idDocument =
-             * cd.idDocument.idDocument) " + "(INNER JOIN Createur c ON
-             * (cd.idCreateur.idCreateur = c.idCreateur)) WHERE " + SQL_part;*
-             */
             SQL_part = " (LOWER(d.titre) LIKE LOWER(:all) OR"
-                    + " LOWER(d.description) LIKE LOWER(:all) OR LOWER(c.nomCreateur) LIKE LOWER(:all) OR"
-                    + " LOWER(c.prenomCreateur) LIKE (:all) OR LOWER(d.idSerie.nomSerie) LIKE LOWER(:all))";
-            SQL = SQL + " INNER JOIN Createurdocument cd ON (d.idDocument = cd.idDocument.idDocument) "
-                    + "(INNER JOIN Createur c ON (cd.idCreateur.idCreateur = c.idCreateur)) WHERE " + SQL_part;
+                    + " LOWER(d.description) LIKE LOWER(:all) "
+                    + " OR LOWER(cd.idCreateur.prenomCreateur) LIKE (:all) OR LOWER(cd.idCreateur.nomCreateur) LIKE (:all)"
+                    + " OR LOWER(d.idSerie.nomSerie) LIKE LOWER(:all))";
+            SQL = SQL + " INNER JOIN Createurdocument cd ON (d.idDocument = cd.idDocument.idDocument) " + "WHERE" + SQL_part;
             try {
                 Query q = em.createQuery(SQL);
                 q.setParameter("all", "%" + all + "%");
@@ -683,9 +666,11 @@ public class DocumentManagerImpl implements DocumentManager {
                         System.out.println("auteur:" + auteur);
                     }
                     SQL2 = SQL2
-                            + " (INNER JOIN Createurdocument cd ON (d.idDocument = cd.idDocument.idDocument)" + " (INNER JOIN Createur c ON "
-                            + "(cd.idCreateur.idCreateur = c.idCreateur)))";
-                    SQL_part = SQL_part + " AND LOWER(c.nomCreateur) LIKE LOWER(:auteur)";
+                            + " JOIN Createurdocument cd ON (d.idDocument = cd.idDocument.idDocument)";
+                    //SQL2 = SQL2
+                    //        + " (JOIN Createurdocument cd ON (d.idDocument = cd.idDocument.idDocument)" + " (JOIN Createur c ON "
+                    //        + "(cd.idCreateur.idCreateur = c.idCreateur)))";
+                    SQL_part = SQL_part + " AND (LOWER(cd.idCreateur.nomCreateur) LIKE LOWER(:auteur) OR LOWER(cd.idCreateur.prenomCreateur) LIKE LOWER(:auteur))";
 
                 }
 
@@ -721,4 +706,25 @@ public class DocumentManagerImpl implements DocumentManager {
 
         return l;
     }
+    
+    /**
+     * Retourne la liste des genres associés à un document
+     *
+     * @param id du document
+     * @return
+     */
+    @Override
+    public ArrayList<Genredocument> findGenre(int id) {
+        ArrayList<Genredocument> gr = new ArrayList();
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT gd FROM Genredocument gd INNER JOIN Document d ON "
+                + "(gd.idDocument.idDocument = d.idDocument) WHERE d.idDocument=:id");
+        q.setParameter("id", id);
+        List l = q.getResultList();
+        for (Object o : l) {
+            gr.add((Genredocument) o);
+        }
+        return gr;
+    }
+    
 }

@@ -13,6 +13,7 @@ package Managers;
 
 import Database.Createurdocument;
 import Database.Document;
+import Database.Genredocument;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +70,14 @@ public interface DocumentManager {
      * @return
      */
     public List<Document> findDocumentSearch(ArrayList<String> criteres, Boolean b);
+    
+    /**
+     * Retourne la liste des genres associés à un document
+     *
+     * @param id du document
+     * @return
+     */
+    public ArrayList<Genredocument> findGenre(int id);    
     
 }
 

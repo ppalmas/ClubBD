@@ -12,14 +12,14 @@ and open the template in the editor.
 .container{
     text-align: center;
 }
-.row_content{
+#row_content{
     background-color : #F4F4F4;
     border : 1px solid black;
-    width : 300px;
-    padding:1%;
+    padding:1.5%;
     margin : auto;
     margin-top: 10px!important;
     text-align: center;
+    position:relative;
     border-radius: 10px;
 }
 

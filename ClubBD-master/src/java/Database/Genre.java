@@ -43,8 +43,7 @@ public class Genre implements Serializable {
     @Basic(optional = false)
     @Column(name = "nom_genre")
     private String nomGenre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idGenre")
-    private Collection<Genrerecherche> genrerechercheCollection;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idGenre")
     private Collection<Genredocument> genredocumentCollection;
 
@@ -76,14 +75,7 @@ public class Genre implements Serializable {
         this.nomGenre = nomGenre;
     }
 
-    @XmlTransient
-    public Collection<Genrerecherche> getGenrerechercheCollection() {
-        return genrerechercheCollection;
-    }
-
-    public void setGenrerechercheCollection(Collection<Genrerecherche> genrerechercheCollection) {
-        this.genrerechercheCollection = genrerechercheCollection;
-    }
+    
 
     @XmlTransient
     public Collection<Genredocument> getGenredocumentCollection() {
