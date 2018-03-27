@@ -25,6 +25,29 @@
 
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/tableau.css">
 
+        
+        <style>
+            .container {
+                text-align: left;
+            }
+            
+            label {
+                width: 250px;
+            }
+            
+            .radio {
+                
+                display: ruby;
+            }
+            
+            h2{
+               cursor: pointer; 
+            }
+            
+            .res{
+                cursor: pointer;
+            }
+        </style>
 
 
         <!-- SCRIPTS -->
@@ -34,6 +57,7 @@
         <script src="Scripts/deconnecter.js"></script>
         <script src="Scripts/gestion_inv.js"></script>
         <script src="Scripts/get_propositions.js"></script>
+        <script src="Scripts/get_stats.js"></script>
 
 
 
@@ -77,7 +101,7 @@
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getNewContent('membres_content', ['propositions_content', 'stats_content', 'gestion_inv_content', 'retour_emprunt_content'])">Gestion membres</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('stats_content', ['propositions_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Statistiques</a>
+                    <a class="onglets" href="#" onclick="get_stats();getNewContent('stats_content', ['propositions_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Statistiques</a>
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getNewContent('retour_emprunt_content', ['stats_content', 'propositions_content', 'membres_content', 'gestion_inv_content'])">Retour emprunts</a>
                 </center>
@@ -147,15 +171,15 @@
                             <label for="descriptiona">Description</label>
                             <input name="descriptiona" id="descriptiona" type="text" value=""/><br>
 
-                            <label for="neuf">Neuf</label>
+                            <label class="radio" for="neuf">Neuf</label>
                             <input type="radio" id="neuf" name="etat" value="1" checked/>
-                            <label for="tbon">Très bon</label>
+                            <label class="radio" for="tbon">Très bon</label>
                             <input type="radio" id="tbon" name="etat" value="2"/>
-                            <label for="bon">Bon</label>
+                            <label class="radio" for="bon">Bon</label>
                             <input type="radio" id="bon" name="etat" value="3"/>
-                            <label for="abime">Abimé</label>
+                            <label class="radio" for="abime">Abimé</label>
                             <input type="radio" id="abime" name="etat" value="4"/>
-                            <label for="tabime">Très abimé</label>
+                            <label class="radio" for="tabime">Très abimé</label>
                             <input type="radio" id="tabime" name="etat" value="5"/>
                             <br>
 
@@ -263,15 +287,15 @@
                         <label for="descriptionm">Description</label>
                         <input name="descriptionm" id="descriptionm" type="text" value=""/><br>
 
-                        <label for="neufm">Neuf</label>
+                        <label class="radio" for="neufm">Neuf</label>
                         <input type="radio" id="neufm" name="etatm" value="1" checked/>
-                        <label for="tbonm">Très bon</label>
+                        <label class="radio" for="tbonm">Très bon</label>
                         <input type="radio" id="tbonm" name="etatm" value="2"/>
-                        <label for="bonmf">Bon</label>
+                        <label class="radio" for="bonmf">Bon</label>
                         <input type="radio" id="bonm" name="etatm" value="3"/>
-                        <label for="abimem">Abimé</label>
+                        <label class="radio" for="abimem">Abimé</label>
                         <input type="radio" id="abimem" name="etatm" value="4"/>
-                        <label for="tabimem">Très abimé</label>
+                        <label class="radio" for="tabimem">Très abimé</label>
                         <input type="radio" id="tabimem" name="etatm" value="5"/>
                         <br>
                         <label for="imagem">Chemin image</label>
@@ -326,12 +350,13 @@
                         <input type="text" id="nommembrem" readonly="true" value=""><br>
                         <label for="prenommembrem">Prénom</label>
                         <input type="text" id="prenommembrem" readonly="true" value=""><br>
-                        <label for="membre">Membre</label>
+                        <label class="radio" for="membre">Membre</label>
                             <input type="radio" id="membre" name="idmradio" value="1"/>
-                            <label for="staff">Admin</label>
+                            <label class="radio" for="staff">Admin</label>
                             <input type="radio" id="staff" name="idmradio" value="2"/>
-                            <label for="admin">Cotisant</label>
-                            <input type="radio" id="admin" name="idmradio" value="3"/>
+                            <label class="radio" for="admin">Cotisant</label>
+                            <input type="radio" id="admin" name="idmradio" value="3"/><br>
+                            
                         <input type="submit" value="Modifier" onclick="updatemembre()"><br>
 
 
@@ -342,6 +367,8 @@
                 <!-- Bloc des stats-->
                 <div id ="stats_content" class="bloc_home" style="display:none">
                     
+                    <div id="stats_resultat" style="position:static">
+                    </div>
                 </div>
             </div>
 

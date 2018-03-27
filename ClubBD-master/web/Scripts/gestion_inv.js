@@ -36,7 +36,7 @@ function recherche2_doc() {
                 var disp = "";
                 for (i = 0; i < res.nb; i++) {
 
-                    disp = disp + "<span id=\"res" + res.resultats[i]['id'] + "\" idm=\"" + res.resultats[i]['id'] + "\" num=\"" + i + "\">" + res.resultats[i]['titre'] + " " + res.resultats[i]['serie'] + " " + res.resultats[i]['cote'] + "</span>" + "<br>";
+                    disp = disp + "<span class=\"res\" id=\"res" + res.resultats[i]['id'] + "\" idm=\"" + res.resultats[i]['id'] + "\" num=\"" + i + "\">" + res.resultats[i]['titre'] + " " + res.resultats[i]['serie'] + " " + res.resultats[i]['cote'] + "</span>" + "<br>";
 
                 }
 
@@ -508,7 +508,7 @@ function recherche2_serie() {
                 var disp = "";
                 for (i = 0; i < res.nb; i++) {
 
-                    disp = disp + "<span id=\"res" + res.resultats[i]['id'] + "\" idm=\"" + res.resultats[i]['id'] + "\" num=\"" + i + "\">" + res.resultats[i]['seriename'] + "</span>" + "<br>";
+                    disp = disp + "<span class=\"res\" id=\"res" + res.resultats[i]['id'] + "\" idm=\"" + res.resultats[i]['id'] + "\" num=\"" + i + "\">" + res.resultats[i]['seriename'] + "</span>" + "<br>";
 
                 }
 
@@ -570,7 +570,7 @@ function recherche2_membre() {
                 var disp = "";
                 for (i = 0; i < res.nb; i++) {
 
-                    disp = disp + "<span id=\"res" + res.resultats[i]['id'] + "\" idm=\"" + res.resultats[i]['id'] + "\" num=\"" + i + "\">" + res.resultats[i]['prenom'] +" "+ res.resultats[i]['nom'] + "</span>" + "<br>";
+                    disp = disp + "<span class=\"res\" id=\"res" + res.resultats[i]['id'] + "\" idm=\"" + res.resultats[i]['id'] + "\" num=\"" + i + "\">" + res.resultats[i]['prenom'] +" "+ res.resultats[i]['nom'] + "</span>" + "<br>";
 
                 }
 
