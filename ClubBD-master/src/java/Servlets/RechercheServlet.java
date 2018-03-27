@@ -7,6 +7,7 @@ package Servlets;
 
 import Database.Createurdocument;
 import Database.Document;
+import Database.Genredocument;
 import Managers.DocumentManager;
 import Managers.DocumentManagerImpl;
 import com.google.gson.Gson;
@@ -62,9 +63,9 @@ public class RechercheServlet extends HttpServlet {
         JsonArray resultats = new JsonArray();
 
         try {
-            l = dm.findDocument(criteres);
+            l = dm.findDocumentCr(criteres);
             //creation d'un json pour exploiter les reponses dans le js
-
+            System.out.println(criteres);
             for (int i = 0; i < l.size(); i++) {
                 JsonObject temp = new JsonObject();
                 temp.addProperty("titre", l.get(i).getTitre());
@@ -83,24 +84,51 @@ public class RechercheServlet extends HttpServlet {
                     temp.addProperty("numero", "");
                 }
                 //pour les créateurs
+
                 List<Createurdocument> lcrea = new ArrayList(l.get(i).getCreateurdocumentCollection());
 
                 try {
-                    temp.addProperty("crea0", lcrea.get(0).getIdCreateur().getNomCreateur() + " " + lcrea.get(0).getIdCreateur().getPrenomCreateur());
+                    temp.addProperty("crea0", lcrea.get(0).getIdCreateur().getNomCreateur() + " " + lcrea.get(0).getIdCreateur().getPrenomCreateur() + "," + lcrea.get(0).getPoste());
                 } catch (Exception e) {
-                    temp.addProperty("crea0","");
+                    temp.addProperty("crea0", "");
                 }
                 try {
-                    temp.addProperty("crea1", lcrea.get(0).getIdCreateur().getNomCreateur() + " " + lcrea.get(1).getIdCreateur().getPrenomCreateur());
+                    temp.addProperty("crea1", lcrea.get(1).getIdCreateur().getNomCreateur() + " " + lcrea.get(1).getIdCreateur().getPrenomCreateur() + "," + lcrea.get(1).getPoste());
                 } catch (Exception e) {
-                    temp.addProperty("crea1","");
+                    temp.addProperty("crea1", "");
                 }
                 try {
-                    temp.addProperty("crea2", lcrea.get(0).getIdCreateur().getNomCreateur() + " " + lcrea.get(2).getIdCreateur().getPrenomCreateur());
+                    temp.addProperty("crea2", lcrea.get(2).getIdCreateur().getNomCreateur() + " " + lcrea.get(2).getIdCreateur().getPrenomCreateur() + "," + lcrea.get(2).getPoste());
                 } catch (Exception e) {
-                    temp.addProperty("crea2","");
+                    temp.addProperty("crea2", "");
                 }
-                
+                try {
+                    temp.addProperty("crea3", lcrea.get(3).getIdCreateur().getNomCreateur() + " " + lcrea.get(3).getIdCreateur().getPrenomCreateur() + "," + lcrea.get(3).getPoste());
+                } catch (Exception e) {
+                    temp.addProperty("crea3", "");
+                }
+                try {
+                    temp.addProperty("crea4", lcrea.get(4).getIdCreateur().getNomCreateur() + " " + lcrea.get(4).getIdCreateur().getPrenomCreateur() + "," + lcrea.get(4).getPoste());
+                } catch (Exception e) {
+                    temp.addProperty("crea4", "");
+                }
+
+                //genres
+                try {
+                    List<Genredocument> lgenre = new ArrayList(l.get(i).getGenredocumentCollection());
+                    String genres = "";
+                    for (int j = 0; j < lgenre.size(); j++) {
+                        genres = genres + lgenre.get(j).getIdGenre().getNomGenre() + ",";
+
+                    }
+                    genres = genres.substring(0, genres.length() - 1);
+
+                    temp.addProperty("genres", genres);
+                } catch (Exception e) {
+                    temp.addProperty("genres", "");
+
+                }
+
                 temp.addProperty("description", l.get(i).getDescription());
                 temp.addProperty("commentaire", l.get(i).getCommentaire());
                 temp.addProperty("image", l.get(i).getImageDocument());
@@ -117,7 +145,7 @@ public class RechercheServlet extends HttpServlet {
         } catch (Exception e) {
 
         }
-
+        
         // Envoi de la réponse
         response.setContentType("text/html; charset=UTF-8");
         response.getWriter().write(new Gson().toJson(json)); // Réponse : resultats

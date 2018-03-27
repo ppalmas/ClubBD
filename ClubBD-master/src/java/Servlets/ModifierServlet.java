@@ -7,6 +7,8 @@ package Servlets;
 
 import Managers.DocumentManager;
 import Managers.DocumentManagerImpl;
+import Managers.MembreManager;
+import Managers.MembreManagerImpl;
 import Managers.SerieManager;
 import Managers.SerieManagerImpl;
 import java.io.IOException;
@@ -49,8 +51,12 @@ public class ModifierServlet extends HttpServlet {
         String cnp0 = request.getParameter("cnp0");
         String cnp1 = request.getParameter("cnp1");
         String cnp2 = request.getParameter("cnp2");
+        String cnp3 = request.getParameter("cnp3");
+        String cnp4 = request.getParameter("cnp4");
 
         Integer type = Integer.parseInt(request.getParameter("type"));
+
+        String genre = request.getParameter("genre");
 
         //pour série
         String complet = request.getParameter("complet");
@@ -58,12 +64,17 @@ public class ModifierServlet extends HttpServlet {
         String seriedesc = request.getParameter("seriedesc");
         String idserie = request.getParameter("idserie");
 
+        //pour membre
+        Integer idstat = Integer.parseInt(request.getParameter("idstat"));
+
+        Integer idmembre = Integer.parseInt(request.getParameter("idmembre"));
+
         Boolean b = false;
 
         if (type == 0) {
             try {
                 DocumentManager dm = DocumentManagerImpl.getInstance();
-                dm.update(iddoc, titre, cote, etat, serie, numero, desc, comm, img, cnp0, cnp1, cnp2);
+                dm.update(iddoc, titre, cote, etat, serie, numero, desc, comm, img, cnp0, cnp1, cnp2, cnp3, cnp4, genre);
 
                 b = true;
             } catch (Exception e) {
@@ -81,10 +92,18 @@ public class ModifierServlet extends HttpServlet {
             } catch (Exception e) {
             }
 
-            response.setContentType("text/html; charset=UTF-8");
-            response.getWriter().write(b + "");
-        }
+        } else if (type == 4) {
+            try {
+                MembreManager mm = MembreManagerImpl.getInstance();
+                mm.updateStat(idstat, idmembre);
 
+                b = true;
+            } catch (Exception e) {
+
+            }
+        }
+        response.setContentType("text/html; charset=UTF-8");
+        response.getWriter().write(b + "");
     }
 }
 

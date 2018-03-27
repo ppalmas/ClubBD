@@ -4,7 +4,6 @@
  * Gestion des membres
  *********************************************************************
  */
-
 package Managers;
 
 import Database.Membre;
@@ -16,11 +15,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
- 
 public class MembreManagerImpl implements MembreManager {
-    
-    
-  
 
     private EntityManagerFactory emf;
     private static MembreManagerImpl theMembreManager;
@@ -31,6 +26,28 @@ public class MembreManagerImpl implements MembreManager {
         }
     }
 
+    public void updateStat(Integer idstat, Integer idmembre){
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Query q = em.createQuery("SELECT m FROM Membre m WHERE m.idMembre=:idmembre");
+        q.setParameter("idmembre", idmembre);
+        Membre m = (Membre) q.getResultList().get(0);
+        System.out.println("apres membre");
+        m.setIdStatut(em.find(Statut.class, idstat));
+                System.out.println("apres find statt");
+
+        em.merge(m);
+                System.out.println("apres merge");
+
+        em.getTransaction().commit();
+                System.out.println("apres commit");
+
+        
+        
+        
+        
+    }
+    
     public static MembreManager getInstance() {
         if (theMembreManager == null) {
             theMembreManager = new MembreManagerImpl();
@@ -41,7 +58,6 @@ public class MembreManagerImpl implements MembreManager {
     /**
      * Retrouver un membre par son identifiant de connexion TODO table connect
      */
-    
     /**
      * Retrouver un membre par son identifiant de connexion
      *
@@ -57,6 +73,22 @@ public class MembreManagerImpl implements MembreManager {
         return l.isEmpty() ? null : (Membre) l.get(0);
     }
 
+    public List<Membre> findMembre(String prenom, String nom) {
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT m FROM Membre m WHERE  UPPER(m.nom) LIKE UPPER(:nom) AND UPPER(m.prenom) LIKE UPPER(:prenom)");
+        if (nom != "") {
+            q.setParameter("nom", "%" + nom + "%");
+        } else {
+            q.setParameter("nom", "%");
+        }
+        if (prenom != "") {
+            q.setParameter("prenom", "%" + prenom + "%");
+        } else {
+            q.setParameter("prenom", "%");
+        }
+        List l = q.getResultList();
+        return l;
+    }
 
     /**
      * Retrouver une personne par son email
@@ -73,21 +105,22 @@ public class MembreManagerImpl implements MembreManager {
         return l.isEmpty() ? null : (Membre) l.get(0);
     }
 
-     /**
+    /**
      * Renvoyer la liste de tous les membres
      *
      * @return liste de Personnes
      */
     @Override
-    public List<Membre> listMembre(){
+    public List<Membre> listMembre() {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT m FROM Membre m");
         List l = q.getResultList();
         return l;
     }
-    
+
     /**
      * Renvoyer la liste de tous les membres ayant cette adresse mail
+     *
      * @param email recherché
      * @return liste de Personnes
      */
@@ -99,9 +132,10 @@ public class MembreManagerImpl implements MembreManager {
         List l = q.getResultList();
         return l;
     }
-    
+
     /**
      * Renvoyer la liste de tous les membres ayant ce nom
+     *
      * @param nom recherché
      * @return liste de Personnes
      */
@@ -113,9 +147,10 @@ public class MembreManagerImpl implements MembreManager {
         List l = q.getResultList();
         return l;
     }
-    
+
     /**
      * Renvoyer la liste de tous les membres ayant ce prenom
+     *
      * @param prenom recherché
      * @return liste de Personnes
      */
@@ -127,9 +162,10 @@ public class MembreManagerImpl implements MembreManager {
         List l = q.getResultList();
         return l;
     }
-    
+
     /**
      * Renvoyer la liste de tous les membres ayant ce prenom et ce nom
+     *
      * @param prenom recherché
      * @param nom recherché
      * @return liste de Personnes
@@ -143,7 +179,7 @@ public class MembreManagerImpl implements MembreManager {
         List l = q.getResultList();
         return l;
     }
-    
+
     /**
      * Inscription d'un membre
      *
@@ -178,7 +214,7 @@ public class MembreManagerImpl implements MembreManager {
      * @param email Adresse Email
      */
     @Override
-    public void updateInfos (Membre m, String name, String firstname, String email) {
+    public void updateInfos(Membre m, String name, String firstname, String email) {
         //Mise à jour des infos
         m.setEmail(email);
         m.setPrenom(firstname);
@@ -189,7 +225,7 @@ public class MembreManagerImpl implements MembreManager {
         em.merge(m);
         em.getTransaction().commit();
     }
-    
+
     /**
      * Mise à jour du mot de passe d'une personne
      *
@@ -205,5 +241,5 @@ public class MembreManagerImpl implements MembreManager {
         em.getTransaction().begin();
         em.merge(m);
         em.getTransaction().commit();
-    }    
+    }
 }

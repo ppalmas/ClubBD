@@ -61,7 +61,7 @@ public class SerieManagerImpl implements SerieManager {
         List l = null;
 
         try {
-            Query q = em.createQuery("SELECT s FROM Serie s WHERE s.nomSerie LIKE :seriename");
+            Query q = em.createQuery("SELECT s FROM Serie s WHERE UPPER(s.nomSerie) LIKE UPPER(:seriename)");
             q.setParameter("seriename", "%" + seriename + "%");
             l = q.getResultList();
 

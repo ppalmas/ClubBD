@@ -57,18 +57,20 @@ public class AjoutServlet extends HttpServlet {
         String cnp0 = request.getParameter("cnp0");
         String cnp1 = request.getParameter("cnp1");
         String cnp2 = request.getParameter("cnp2");
+        String cnp3 = request.getParameter("cnp3");
+        String cnp4 = request.getParameter("cnp4");
 
-        System.out.println(type);
+        String genre = request.getParameter("genre");
+
 
         if (type == 0) {
-            System.out.println("if");
 
             DocumentManager dm = DocumentManagerImpl.getInstance();
 
             Boolean b = false;
             try {
 
-                dm.insert(titre, cote, etat, serie, numero, desc, comm, img, cnp0, cnp1, cnp2);
+                dm.insert(titre, cote, etat, serie, numero, desc, comm, img, cnp0, cnp1, cnp2,cnp3,cnp4,genre);
 
                 b = true;
             } catch (Exception e) {
@@ -79,7 +81,6 @@ public class AjoutServlet extends HttpServlet {
 
         } else if (type == 1) {
 
-            System.out.println("elif");
 
             SerieManager sm = SerieManagerImpl.getInstance();
 
@@ -111,7 +112,6 @@ public class AjoutServlet extends HttpServlet {
             response.setContentType("text/html; charset=UTF-8");
             response.getWriter().write(b + "");
         } else {
-            System.out.println("else");
             response.setContentType("text/html; charset=UTF-8");
             response.getWriter().write("false" + "");
         }
