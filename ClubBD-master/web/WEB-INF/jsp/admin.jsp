@@ -37,7 +37,7 @@
             
             .radio {
                 
-                display: ruby;
+                display: unset;
             }
             
             h2{
