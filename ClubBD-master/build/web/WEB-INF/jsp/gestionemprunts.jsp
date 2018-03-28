@@ -1,4 +1,4 @@
-<!-- PAGE DE RECAP DES EMPRUNTS-->
+<!-- PAGE DE GESTIOND DES EMPRUNTS-->
 
 <!-- Tags -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,7 +14,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Club BD</title>
 
-        <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -60,7 +59,7 @@
         <!-- Bloc des récapitulatifs emprunts et réservations-->
         <div id ="recap_content" class="bloc_home">
             <center>
-            <h3>Mes emprunts</h3>
+            <h3>Gestion des emprunts</h3>
             <hr>
             
             <br/>
@@ -84,17 +83,24 @@
                     <tr>
                         <th onclick="sortTable(0,'table_reservations')">Titre</th>
                         <th onclick="sortTable(1,'table_reservations')">Cote</th>
-                        <th onclick="sortTable(2,'table_reservations')">Date de réservation</th>
+                        <th onclick="sortTable(2,'table_reservations')">Nom</th>
+                        <th onclick="sortTable(3,'table_reservations')">Prénom</th>
+                        <th onclick="sortTable(4,'table_reservations')">Mail</th>
+                        <th onclick="sortTable(5,'table_reservations')">Date de réservation</th>
                     </tr>
                     <c:forEach var="reservation" items="${reservations}">
                     <tr>
                         <td><a class="ouvrage_link" href="#" onclick="goToOuvrage(<c:out value="${reservation['iddoc']}"/>)" id="gestion_compte" style="color:blue;"><c:out value="${reservation['titre']}"/></a></td>
                         <td><c:out value="${reservation['cote']}"/></td>
+                        <td><c:out value="${reservation['nom']}"/></td>
+                        <td><c:out value="${reservation['prenom']}"/></td>
+                        <td><c:out value="${reservation['mail']}"/></td>
                         <td><c:out value="${reservation['date_reserve']}"/></td>
                     </tr>
                     </c:forEach>
                 </table>
             </div>
+            <br/>
 
             <div id="recap_emprunts_content" style="width: 95%;">
                 <table id="table_emprunts">
@@ -102,14 +108,20 @@
                     <tr>
                         <th onclick="sortTable(0, 'table_emprunts')">Titre</th>
                         <th onclick="sortTable(1, 'table_emprunts')">Cote</th>
-                        <th onclick="sortTable(2, 'table_emprunts')">Date de réservation</th>
-                        <th onclick="sortTable(3, 'table_emprunts')">Date d'emprunt</th>
-                        <th onclick="sortTable(4, 'table_emprunts')">Date de retour</th>
+                        <th onclick="sortTable(2, 'table_emprunts')">Nom</th>
+                        <th onclick="sortTable(3, 'table_emprunts')">Prénom</th>
+                        <th onclick="sortTable(4, 'table_emprunts')">Mail</th>
+                        <th onclick="sortTable(5, 'table_emprunts')">Date de réservation</th>
+                        <th onclick="sortTable(6, 'table_emprunts')">Date d'emprunt</th>
+                        <th onclick="sortTable(7, 'table_emprunts')">Date de retour</th>
                     </tr>
                     <c:forEach var="emprunt" items="${emprunts}">
                     <tr>
                         <td><a class="ouvrage_link" href="#" onclick="goToOuvrage(<c:out value="${emprunt['iddoc']}"/>)" id="gestion_compte" style="color:blue;"><c:out value="${emprunt['titre']}"/></a></td>
                         <td><c:out value="${emprunt['cote']}"/></td>
+                        <td><c:out value="${emprunt['nom']}"/></td>
+                        <td><c:out value="${emprunt['prenom']}"/></td>
+                        <td><c:out value="${emprunt['mail']}"/></td>                        
                         <td><c:out value="${emprunt['date_reserve']}"/></td>
                         <td><c:out value="${emprunt['date_emprunt']}"/></td>
                         <td><c:out value="${emprunt['date_retour']}"/></td>

@@ -65,9 +65,9 @@ public class ModifierServlet extends HttpServlet {
         String idserie = request.getParameter("idserie");
 
         //pour membre
-        Integer idstat = Integer.parseInt(request.getParameter("idstat"));
+        String idstat = request.getParameter("idstat");
 
-        Integer idmembre = Integer.parseInt(request.getParameter("idmembre"));
+        String idmembre = request.getParameter("idmembre");
 
         Boolean b = false;
 
@@ -75,27 +75,26 @@ public class ModifierServlet extends HttpServlet {
             try {
                 DocumentManager dm = DocumentManagerImpl.getInstance();
                 dm.update(iddoc, titre, cote, etat, serie, numero, desc, comm, img, cnp0, cnp1, cnp2, cnp3, cnp4, genre);
-
+                System.out.println("doc okokokk");
                 b = true;
             } catch (Exception e) {
             }
 
-            response.setContentType("text/html; charset=UTF-8");
-            response.getWriter().write(b + "");
+           
 
         } else if (type == 1) {
             try {
                 SerieManager sm = SerieManagerImpl.getInstance();
                 sm.update(idserie, seriename, seriedesc, complet);
-
-                b = true;
+                
+                b = true;System.out.println("serie okokokk");
             } catch (Exception e) {
             }
 
         } else if (type == 4) {
             try {
                 MembreManager mm = MembreManagerImpl.getInstance();
-                mm.updateStat(idstat, idmembre);
+                mm.updateStat(Integer.parseInt(idstat), Integer.parseInt(idmembre));
 
                 b = true;
             } catch (Exception e) {
