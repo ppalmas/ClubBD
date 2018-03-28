@@ -19,7 +19,7 @@ th, td /* Toutes les cellules des tableaux... */
     /*border: 1px solid black; /* auront une bordure de 1px */
     text-align: center;
     border: thin solid #6495ed;
-    width: 20%;
+/*    width: 20%;*/
 }
 
 caption

@@ -96,7 +96,7 @@
                                 <button id="reserver_button" onclick="reserver('<c:out value="${idco}"/>', '<c:out value="${iddoc}"/>')" style="color:green; display:none;">Réserver</button>
                                 <button id="valider_button" onclick="valider(<c:out value="${idStatut}"/>)" style="color:blue; display:none;">Valider</button>
                                 <button id="retourner_button" onclick="retourner(<c:out value="${idStatut}"/>, '<c:out value="${idemp}"/>')" style="color:red; display:none;">Retourner</button>
-                            </center>   
+                            </center>    
                     </div>
                 </div>
             </div>

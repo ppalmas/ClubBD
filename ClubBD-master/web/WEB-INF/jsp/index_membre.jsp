@@ -83,7 +83,7 @@
                     <div class="onglet_separator" id="sep_admin"></div>
                     <a class="onglets" href="#" style="display:none" onclick="getGestion()" id="gestion_inventaire">Gestion admin</a>
                     <div class="onglet_separator" id="sep_member"></div>
-                    <a class="onglets" href="#" style="display:none" onclick="" id="gestion_emprunt">Gestion des emprunts</a>
+                    <a class="onglets" href="#" style="display:none" onclick="getGestionEmprunts(<c:out value="${idStatut}"/>)" id="gestion_emprunt">Gestion des emprunts</a>
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getNewContent('infos_content', ['suggestions_content', 'news_content', 'search_content'])">Informations</a>
 
