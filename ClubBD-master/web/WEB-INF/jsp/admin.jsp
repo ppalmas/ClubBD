@@ -114,7 +114,7 @@
                     <p>Retourner un emprunt</p>
                 </div>
                 <div id ="propositions_content" class="bloc_home" style="display:none">
-                    <p>proposi</p>
+                    <h1>Propositions d'achat</h1>
                     <div id="propositions_resultat" style="position:static">
                     </div>
                 </div>
@@ -366,7 +366,7 @@
 
                 <!-- Bloc des stats-->
                 <div id ="stats_content" class="bloc_home" style="display:none">
-                    
+                    <h1>Statistiques sur les dernières recherches non abouties</h1>
                     <div id="stats_resultat" style="position:static">
                     </div>
                 </div>
