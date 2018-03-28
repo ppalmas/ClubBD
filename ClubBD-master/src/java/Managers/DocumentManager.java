@@ -34,8 +34,11 @@ public interface DocumentManager {
     public List<Document> findDocumentCr(ArrayList<String> criteres);
     /**
      * Récupérer l'id max des documents de la bdd (utilisé pour la suggestion de lecture)
+     * @param cote
      * @return 
      */
+    
+    public Boolean exist(String cote);
     public int getMaxId();
     
     public void insert(String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img,String cnp0,String cnp1,String cnp2,String cnp3,String cnp4,String genre);

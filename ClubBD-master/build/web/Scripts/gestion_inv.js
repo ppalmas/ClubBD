@@ -88,6 +88,9 @@ function ajouter() {
     var cnp4 = document.getElementById("createura4").value;
 
     var genre = document.getElementById("genrea").value;
+    
+    
+    
 
 
 
@@ -239,6 +242,13 @@ function modifier() {
     var cnp4 = document.getElementById("createurm4").value;
 
     var genre = document.getElementById("genrem").value;
+    var chg="false";
+    
+    console.log(document.getElementById("cotem").value+" "+res.resultats[num]['cote']);
+    var a = document.getElementById("cotem").value;
+    var b = res.resultats[num]['cote'];
+    
+    if (a!==b){chg="true";}
 
 
 
@@ -266,7 +276,7 @@ function modifier() {
             }
         };
 
-        var data = "genre=" + genre + "&cnp0=" + cnp0 + "&cnp1=" + cnp1 + "&cnp2=" + cnp2 + "&cnp3=" + cnp3 + "&cnp4=" + cnp4 + "&idm=" + document.getElementById("idm").value + "&" + "titre=" + titrea + "&" + "cote=" + cotea + "&" + "serie=" + seriea + "&" + "numero=" + numeroa + "&" + "description=" + descriptiona + "&" + "etat=" + etata + "&" + "commentaire=" + commentairea + "&" + "image=" + imagea + "&type=0&seriename=&seriedesc=&complet=&idserie=";
+        var data = "chg="+chg+"&genre=" + genre + "&cnp0=" + cnp0 + "&cnp1=" + cnp1 + "&cnp2=" + cnp2 + "&cnp3=" + cnp3 + "&cnp4=" + cnp4 + "&idm=" + document.getElementById("idm").value + "&" + "titre=" + titrea + "&" + "cote=" + cotea + "&" + "serie=" + seriea + "&" + "numero=" + numeroa + "&" + "description=" + descriptiona + "&" + "etat=" + etata + "&" + "commentaire=" + commentairea + "&" + "image=" + imagea + "&type=0&seriename=&seriedesc=&complet=&idserie=";
         xhttp.open("POST", "ModifierServlet?");
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
         xhttp.send(data);
@@ -288,6 +298,8 @@ function modifierserie() {
     var seriename = document.getElementById("serienamem").value;
     var seriedesc = document.getElementById("seriedescm").value;
     var complet = 0;
+    var chg="false";
+    if (document.getElementById("serienamem")!=res.resultats[num]['serie']){chg="true"}
 
     //pour complet
     if (document.getElementById('completm').checked == true) {
@@ -316,7 +328,7 @@ function modifierserie() {
             }
         };
 
-        var data = "cnp0=&cnp1=&cnp2=&cnp3=&cnp4=&idm=&titre=&cote=&serie=&numero=&description=&etat=&commentaire=&image=&" + "seriename=" + seriename + "&seriedesc=" + seriedesc + "&complet=" + complet + "&type=1&idserie=" + document.getElementById("idms").value;
+        var data = "chg="+chg+"&cnp0=&cnp1=&cnp2=&cnp3=&cnp4=&idm=&titre=&cote=&serie=&numero=&description=&etat=&commentaire=&image=&" + "seriename=" + seriename + "&seriedesc=" + seriedesc + "&complet=" + complet + "&type=1&idserie=" + document.getElementById("idms").value;
         xhttp.open("POST", "ModifierServlet?");
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
         xhttp.send(data);
@@ -477,7 +489,9 @@ function selectionmembre() {
 }
 
 function refresh() {
+    
     window.location.replace("admin.htm?idco=" + document.getElementById("idco").value);
+    
 
 }
 

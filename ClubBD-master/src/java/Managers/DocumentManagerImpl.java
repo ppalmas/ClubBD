@@ -331,6 +331,22 @@ public class DocumentManagerImpl implements DocumentManager {
 
     }
 
+    
+    
+    @Override
+    public Boolean exist(String cote){
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT d FROM Document d WHERE UPPER(d.cote) LIKE UPPER(:cote)");
+        q.setParameter("cote", cote);
+        System.out.println("parametre ok");
+        System.out.println(q.getResultList().size());
+        if (q.getResultList().size() != 0){
+            return true;
+        }
+        else {return false;}
+        
+    }
+    
     /**
      * Update des infos d'un livre
      *

@@ -62,17 +62,17 @@ public class AjoutServlet extends HttpServlet {
 
         String genre = request.getParameter("genre");
 
-
         if (type == 0) {
 
             DocumentManager dm = DocumentManagerImpl.getInstance();
 
             Boolean b = false;
             try {
+                if (!dm.exist(cote)) {
+                    dm.insert(titre, cote, etat, serie, numero, desc, comm, img, cnp0, cnp1, cnp2, cnp3, cnp4, genre);
 
-                dm.insert(titre, cote, etat, serie, numero, desc, comm, img, cnp0, cnp1, cnp2,cnp3,cnp4,genre);
-
-                b = true;
+                    b = true;
+                }
             } catch (Exception e) {
             }
 
@@ -81,15 +81,16 @@ public class AjoutServlet extends HttpServlet {
 
         } else if (type == 1) {
 
-
             SerieManager sm = SerieManagerImpl.getInstance();
 
             Boolean b = false;
             try {
-
-                sm.insert(seriename, seriedesc);
-
-                b = true;
+                if (!sm.exist(titre)) {
+                    System.out.println("serie existe pas");
+                    sm.insert(seriename, seriedesc);
+System.out.println("serie insérée");
+                    b = true;
+                }
             } catch (Exception e) {
             }
 
@@ -98,6 +99,7 @@ public class AjoutServlet extends HttpServlet {
 
         } else if (type == 2) {
 
+            
             CreateurManager cm = CreateurManagerImpl.getInstance();
 
             Boolean b = false;
