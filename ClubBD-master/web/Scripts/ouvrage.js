@@ -41,18 +41,15 @@ function pop_userNotConnect() {
 }
 
 /**
- * Méthode pour reserver un ouvrage à partir de la page d'ouvrage
+ * Méthode pour reserver un ouvrage
  * @param {type} idco 
  * @param {type} iddoc 
  */
 function reserver(idco, iddoc){
     if (idco==="0"){
         pop_userNotConnect();
-        
-        alert(idco + " doc: " + iddoc);
     }
     else{
-        alert(idco);
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState === 4 && xhttp.status === 200) {
@@ -64,8 +61,6 @@ function reserver(idco, iddoc){
                 } else {
                     alert("Erreur lors de la réservation.");
                 }
-            } else {
-                alert("Erreur lors de la réservation.");
             }
         };
         var data = "idco="+idco+"&"+"iddoc="+iddoc;
