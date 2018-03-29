@@ -69,7 +69,7 @@ function parseDoc(liste) {
     var id = doc[3];
     var answers_auteurs = doc[1].split(";*");
     var n = answers_auteurs.length - 1;
-    var auteurs = "";
+    var auteurs = " ";
     for (i = 0; i < n - 1; i++) {
         auteurs += answers_auteurs[i] + ", ";
     }

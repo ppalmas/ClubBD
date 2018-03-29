@@ -71,16 +71,15 @@ public class SuggestionServlet extends HttpServlet {
         //Récupérer les auteurs, en passant par createurDocument d'abord
         ArrayList<Createurdocument> liste = dm.findCreateur(idOuvrage);
         ArrayList<Createurdocument> liste2 = dm.findCreateur(idOuvrage2);
-        String auteurs = "";
-        String auteurs2 = "";
+        String auteurs = " ";
+        String auteurs2 = " ";
         String id1 = String.valueOf(idOuvrage);
         String id2 = String.valueOf(idOuvrage2);
         for (int i = 0; i < liste.size(); i++) {
             auteurs += liste.get(i).getIdCreateur().getNomCreateur() + " " + liste.get(i).getIdCreateur().getPrenomCreateur() + ";*";           
         }
         for (int i = 0; i < liste2.size(); i++) {
-            auteurs2 += liste2.get(i).getIdCreateur().getNomCreateur() + " " + liste2.get(i).getIdCreateur().getPrenomCreateur() + " "+
-                    idOuvrage2 + ";*";           
+            auteurs2 += liste2.get(i).getIdCreateur().getNomCreateur() + " " + liste2.get(i).getIdCreateur().getPrenomCreateur() + ";*";           
         }
         
         res=titre + "*/*" + auteurs + "*/*" + dispo1 + "*/*" + id1 + "*//*" + titre2 + "*/*" + auteurs2 + "*/*" + dispo2 + "*/*" + id2;
