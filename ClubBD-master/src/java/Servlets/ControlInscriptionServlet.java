@@ -18,6 +18,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Servlet pour gérer l'inscriptin d'un utilisateur
+ * @author Utilisateur
+ */
 @WebServlet(name = "ControlInscriptionServlet", urlPatterns = {"/ControlInscriptionServlet"})
 public class ControlInscriptionServlet extends HttpServlet {
 

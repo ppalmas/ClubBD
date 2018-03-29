@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Servlet Propostion
+ * --------------------------------------------------------------------
+ * Gestion des propositions
+ *********************************************************************
  */
 package Servlets;
 
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Gestion des propositions
  * @author centrale
  */
 @WebServlet(name = "PropositionServlet", urlPatterns = {"/PropositionServlet"})

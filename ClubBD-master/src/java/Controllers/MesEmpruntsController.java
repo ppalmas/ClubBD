@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Controller Mes Emprunts
+ * --------------------------------------------------------------------
+ * Gestion de l'affichage des emprunts et réservations pour les utilisateurs connectés.
  */
 package Controllers;
 
@@ -30,10 +30,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- *
+ * Gestion de l'affichage des emprunts et réservations pour les utilisateurs connectés.
  * @author Kevin
  */
 public class MesEmpruntsController {
+
+    /**
+     *
+     * @param request
+     * @param response
+     * @param idco
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView mesEmpruntsGet(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco) {
         

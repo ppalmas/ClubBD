@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Controller Ouvrage
+ * --------------------------------------------------------------------
+ * Gestion de l'affichage de la page d'information sur un ouvrage.
  */
 package Controllers;
 
@@ -31,10 +31,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- *
+ * Gestion de l'affichage de la page d'information sur un ouvrage.
  * @author Kevin
  */
 public class OuvrageController {
+
+    /**
+     *
+     * @param request
+     * @param response
+     * @param idco
+     * @param iddoc
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView ouvrageGet(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco, @RequestParam("iddoc") String iddoc) {
     

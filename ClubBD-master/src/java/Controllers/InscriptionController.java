@@ -15,11 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- *
+ * Affichage de la page d'inscription
  * @author Paola
  */
 public class InscriptionController {
     
+    /**
+     *
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView handleInscription(HttpServletRequest request, HttpServletResponse response) {
 

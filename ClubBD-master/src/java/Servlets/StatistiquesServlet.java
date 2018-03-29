@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Servlet Statistiques
+ * --------------------------------------------------------------------
+ * Gestion des statistiques
+ *********************************************************************
  */
 package Servlets;
 
@@ -22,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Gestion des statistiques
  * @author centrale
  */
 @WebServlet(name = "StatistiquesServlet", urlPatterns = {"/StatistiquesServlet"})

@@ -33,6 +33,7 @@
         <script src="Scripts/recherche.js"></script>
         <script src="Scripts/event_listener.js"></script>
         <script src="Scripts/get_suggestion.js"></script>
+        <script src="Scripts/ouvrage.js"></script>
 
 
 
@@ -42,6 +43,12 @@
                 'critere_serie', 'critere_sujet']);
             load_listenerProposition(['titre_proposition', 'commentaire_proposition']);">
 
+        <div style="display:none;">
+            <!-- Données personnelles-->
+            <input type="hidden" id="idco" value="0"/>
+            <input type="hidden" id="iddoc1" value=""/>
+            <input type="hidden" id="iddoc2" value=""/>
+        </div>
 
         <!-- CONTENU PRINCIPAL -->
 
@@ -144,7 +151,7 @@
                     <div id="recherche_resultat" style="position:static">
 
                     </div>
-                    <div id="div_proposition" style="width:100%;display:none;position:static;" >
+                    <div id="div_proposition" style="width:95%;display:none;position:relative;" >
                         <p>Vous ne trouvez pas ce que vous cherchez ? Proposez l'achat d'un document.</p>
                         <input id="titre_proposition" placeholder="Titre">
                         <input id="commentaire_proposition" placeholder="Commentaire">
@@ -160,14 +167,14 @@
                             <div class="thumbnail">image</div>
                         </div>
                         <div class="col-sm-10">
-                            <div id="sugg_titre1" class="row book_title"></div>
+                            <div id="sugg_titre1" class="row book_title" onclick="goToOuvrage('<c:out value="${iddoc1}"/>'.toString())"></div>
                             <div id="sugg_auteur1" class="row book_authors"></div>
                             <div class="row book_available">
                                 <br>
                                 <div class="col-sm-3"
                                      <div id="dispo_color1" style="height: 20px; width: 20px;  padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
                                 </div>
-                                <div class="col-sm-5"><p>Réserver</p></div>
+                                <div class="col-sm-5" href="#" onclick="reserver2('0','iddoc1')"><p>Réserver</p></div>
                             </div>
                         </div>
                     </div>
@@ -176,37 +183,37 @@
                             <div class="thumbnail">image</div>
                         </div>
                         <div class="col-sm-10">
-                            <div id="sugg_titre2" class="row book_title"></div>
+                            <div id="sugg_titre2" class="row book_title" onclick="goToOuvrage(<c:out value="${iddoc2}"/>);"></div>
                             <div id="sugg_auteur2" class="row book_authors"></div>
                             <div class="row book_available">
                                 <br>
                                 <div class="col-sm-3"
                                      <div id="dispo_color2" style="height: 20px; width: 20px; padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
                                 </div>
-                                <div class="col-sm-5"><p>Réserver</p></div>
+                                <div class="col-sm-5" href="#" onclick="reserver2('0','iddoc2')"><p>Réserver</p></div>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                
+
                 <!--Bloc d'informations sur l'application-->
                 <div class="bloc_home" id="infos_content" style="display:none;">
                     <p>Le site du club BD a été réalisé par des étudiants de l'option informatique en 2018
-                    dans le cadre d'un projet de groupe. Le site propose aux utilisateurs de consulter l'inventaire 
-                    du club, de se créer un compte pour réserver des documents et gérer ses emprunts. Les membres cotisants
-                    du club peuvent s'en servir pour gérer les emprunts et retours des documents.
-                    <br>
-                    <br>
-                    Vos données:
-                    <br>
-                    Veuillez noter que vos recherches,
-                     lorsqu'elles sont infructueuses, seront enregistrées pour une utilisation purement statistique par le club.
-                    Ces données sont anonymisées. Les emprunts que vous effectuez sont enregistrés également à des fins statistiques 
-                    mais aussi pour permettre de pouvoir accéder à l'historique des documents. Ces données ne sont donc pas anonymisées.
-                   </p>
+                        dans le cadre d'un projet de groupe. Le site propose aux utilisateurs de consulter l'inventaire 
+                        du club, de se créer un compte pour réserver des documents et gérer ses emprunts. Les membres cotisants
+                        du club peuvent s'en servir pour gérer les emprunts et retours des documents.
+                        <br>
+                        <br>
+                        Vos données:
+                        <br>
+                        Veuillez noter que vos recherches,
+                        lorsqu'elles sont infructueuses, seront enregistrées pour une utilisation purement statistique par le club.
+                        Ces données sont anonymisées. Les emprunts que vous effectuez sont enregistrés également à des fins statistiques 
+                        mais aussi pour permettre de pouvoir accéder à l'historique des documents. Ces données ne sont donc pas anonymisées.
+                    </p>
                 </div>
-                    
+
             </div>
 
         </div>
@@ -230,6 +237,29 @@
                             <button id ="valid_password_forgotten" type="button" onclick="" style="margin-top: 20px;">Ok</button>
                         </center>
                     </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--POP-UP: utilisateur non connecté ayant appuyé sur réserver-->
+        <div class="modal fade" id="connect-form" role="dialog">
+            <div class="modal-dialog modal-sm" id="pop_form">
+                <div class="modal-content modal_form">
+                    <!-- Croix de fermeture -->
+                    <button class="close" data-dismiss="modal" style="margin-right: 10px;">&times;</button>
+                    <!-- Titre -->
+                    <p id= "subtitle" style="margin-top: 40px; text-align: center;">Vous n'êtes pas connecté</p> 
+                    <!-- Zone pour les messages d'erreur -->
+                    <p id="modification_error" class="error_message"></p>
+
+                    <center>
+                        <!-- bouton renvoyant sur index_membre pour se connecter-->
+                        <button id ="validation_button" type="button" onclick="goHome()" style="margin-top: 20px; color:green; margin-bottom:20px;margin-right:50px;">Se connecter</button>
+                        <!-- bouton renvoyant vers la fenêtre d'inscription-->
+                        <button id ="validation_button" type="button" onclick="getInscription()" style="margin-top: 20px; color:blue; margin-bottom:20px;">S'inscrire</button>
+                    </center>
+                    <br/>
                 </div>
             </div>
         </div>

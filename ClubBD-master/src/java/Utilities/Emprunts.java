@@ -1,23 +1,62 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Class Emprunts
+ * Création d'un type Emprunts
+ *********************************************************************
  */
 package Utilities;
 
 /**
- *
+ * Création d'un type Emprunts
  * @author Kevin
  */
 public class Emprunts {
+
+    /**
+     *
+     */
     public Integer iddoc;
+
+    /**
+     *
+     */
     public String titre;
+
+    /**
+     *
+     */
     public String cote;
+
+    /**
+     *
+     */
     public String date_reserve;
+
+    /**
+     *
+     */
     public String date_emprunt;
+
+    /**
+     *
+     */
     public String date_retour;
+
+    /**
+     *
+     */
     public String date_retourne;
 
+    /**
+     *
+     * @param iddoc
+     * @param titre
+     * @param cote
+     * @param date_reserve
+     * @param date_emprunt
+     * @param date_retour
+     * @param date_retourne
+     */
     public Emprunts(Integer iddoc, String titre, String cote, String date_reserve, String date_emprunt, String date_retour, String date_retourne) {
         this.iddoc = iddoc;
         this.titre = titre;

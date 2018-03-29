@@ -27,6 +27,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Servlet pour renvoyer un résultat aléatoire parmi la liste des ouvrages
+ * de la base de données, comme suggestion
+ * @author Utilisateur
+ */
 @WebServlet(name = "SuggestionServlet", urlPatterns = {"/SuggestionServlet"})
 public class SuggestionServlet extends HttpServlet {
 

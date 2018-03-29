@@ -22,6 +22,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Servlet pour gérer la modification des informations personnelles
+ * d'un utilisateur
+ * @author Utilisateur
+ */
 @WebServlet(name = "ModifInfosPersoServlet", urlPatterns = {"/ModifInfosPersoServlet"})
 public class ModifInfosPersoServlet extends HttpServlet {
 

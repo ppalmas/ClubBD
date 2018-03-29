@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Class EmpruntManagerImpl
+ * Gestion des emprunts
+ *********************************************************************
  */
 package Managers;
 
@@ -18,7 +19,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 /**
- *
+ * Gestion des emprunts
  * @author Kevin
  */
 public class EmpruntManagerImpl implements EmpruntManager{
@@ -32,6 +33,10 @@ public class EmpruntManagerImpl implements EmpruntManager{
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static EmpruntManager getInstance() {
         if (theEmpruntManager == null) {
             theEmpruntManager = new EmpruntManagerImpl();

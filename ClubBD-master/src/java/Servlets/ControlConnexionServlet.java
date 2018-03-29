@@ -17,6 +17,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Servlet pour tester si le login et mdp d'un utilisateur sont corrects ou non
+ * @author Utilisateur
+ */
 @WebServlet(name = "ControlConnexionServlet", urlPatterns = {"/ControlConnexionServlet"})
 public class ControlConnexionServlet extends HttpServlet {
 

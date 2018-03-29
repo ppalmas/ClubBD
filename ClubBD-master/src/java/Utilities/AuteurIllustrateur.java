@@ -1,19 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Class AuteurIllustrateur
+ * Définition d'un type AuteurIllustrateur
+ *********************************************************************
  */
 package Utilities;
 
 /**
- *
+ * Définition d'un type AuteurIllustrateur
  * @author Kevin
  */
 public class AuteurIllustrateur {
+
+    /**
+     *
+     */
     public String nom;
+
+    /**
+     *
+     */
     public String prenom;
+
+    /**
+     *
+     */
     public String poste;
 
+    /**
+     *
+     * @param nom
+     * @param prenom
+     * @param poste
+     */
     public AuteurIllustrateur(String nom, String prenom, String poste) {
         this.nom = nom;
         this.prenom = prenom;

@@ -1,26 +1,80 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Class EmpruntEmprunteur
+ * Creation d'un type emprunteur
+ *********************************************************************
  */
 package Utilities;
 
 /**
- *
+ * Creation d'un type emprunteur
  * @author Kevin
  */
 public class EmpruntEmprunteur {
+
+    /**
+     *
+     */
     public Integer iddoc;
+
+    /**
+     *
+     */
     public String titre;
+
+    /**
+     *
+     */
     public String cote;
+
+    /**
+     *
+     */
     public String date_reserve;
+
+    /**
+     *
+     */
     public String date_emprunt;
+
+    /**
+     *
+     */
     public String date_retour;
+
+    /**
+     *
+     */
     public String date_retourne;
+
+    /**
+     *
+     */
     public String nom;
+
+    /**
+     *
+     */
     public String prenom;
+
+    /**
+     *
+     */
     public String mail;
 
+    /**
+     *
+     * @param iddoc
+     * @param titre
+     * @param cote
+     * @param date_reserve
+     * @param date_emprunt
+     * @param date_retour
+     * @param date_retourne
+     * @param mail
+     * @param nom
+     * @param prenom
+     */
     public EmpruntEmprunteur(Integer iddoc, String titre, String cote, String date_reserve, String date_emprunt, String date_retour, String date_retourne, String mail, String nom, String prenom) {
         this.iddoc = iddoc;
         this.titre = titre;

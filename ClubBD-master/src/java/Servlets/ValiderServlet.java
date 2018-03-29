@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Servlet Valider
+ * --------------------------------------------------------------------
+ * Gestion de la validation d'emprunts par un membre du club
+ *********************************************************************
  */
 package Servlets;
 
@@ -26,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Gestion de la validation d'emprunts par un membre du club
  * @author Kevin
  */
 @WebServlet(name = "ValiderServlet", urlPatterns = {"/ValiderServlet"})

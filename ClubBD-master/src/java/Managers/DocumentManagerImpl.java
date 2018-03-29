@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Class DocumentManagerImpl
+ * Gestion des documents
+ *********************************************************************
  */
 package Managers;
 
@@ -20,7 +21,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 /**
- *
+ * Gestion des documents
  * @author Victouf
  */
 public class DocumentManagerImpl implements DocumentManager {
@@ -34,6 +35,10 @@ public class DocumentManagerImpl implements DocumentManager {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static DocumentManager getInstance() {
         if (theDocumentManager == null) {
             theDocumentManager = new DocumentManagerImpl();
@@ -153,6 +158,12 @@ public class DocumentManagerImpl implements DocumentManager {
      * @param desc
      * @param comm
      * @param img
+     * @param cnp0
+     * @param cnp3
+     * @param cnp1
+     * @param cnp2
+     * @param cnp4
+     * @param genre
      */
     @Override
     public void insert(String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img, String cnp0, String cnp1, String cnp2, String cnp3, String cnp4, String genre) {
@@ -359,6 +370,12 @@ public class DocumentManagerImpl implements DocumentManager {
      * @param desc
      * @param comm
      * @param img
+     * @param cnp0
+     * @param cnp1
+     * @param cnp3
+     * @param genre
+     * @param cnp4
+     * @param cnp2
      */
     @Override
     public void update(String iddoc, String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img, String cnp0, String cnp1, String cnp2, String cnp3, String cnp4, String genre) {

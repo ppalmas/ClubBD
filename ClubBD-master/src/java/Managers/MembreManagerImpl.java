@@ -1,6 +1,6 @@
 /**
  * ********************************************************************
- * Class MembreManagementImpl
+ * Class MembreManagerImpl
  * Gestion des membres
  *********************************************************************
  */
@@ -15,6 +15,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+/**
+ * Gestion des membres
+ * @author Utilisateur
+ */
 public class MembreManagerImpl implements MembreManager {
 
     private EntityManagerFactory emf;
@@ -26,6 +30,11 @@ public class MembreManagerImpl implements MembreManager {
         }
     }
 
+    /**
+     *
+     * @param idstat
+     * @param idmembre
+     */
     public void updateStat(Integer idstat, Integer idmembre){
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -48,6 +57,10 @@ public class MembreManagerImpl implements MembreManager {
         
     }
     
+    /**
+     *
+     * @return
+     */
     public static MembreManager getInstance() {
         if (theMembreManager == null) {
             theMembreManager = new MembreManagerImpl();
@@ -73,6 +86,12 @@ public class MembreManagerImpl implements MembreManager {
         return l.isEmpty() ? null : (Membre) l.get(0);
     }
 
+    /**
+     *
+     * @param prenom
+     * @param nom
+     * @return
+     */
     public List<Membre> findMembre(String prenom, String nom) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT m FROM Membre m WHERE  UPPER(m.nom) LIKE UPPER(:nom) AND UPPER(m.prenom) LIKE UPPER(:prenom)");

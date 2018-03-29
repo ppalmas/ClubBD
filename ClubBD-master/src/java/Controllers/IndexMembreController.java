@@ -14,11 +14,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- *
+ * Gère la déconnexion
  * @author Paola
  */
 public class IndexMembreController {
  
+    /**
+     *
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView deco() {
         ModelAndView r = new ModelAndView("redirect:index.htm");
@@ -26,6 +30,12 @@ public class IndexMembreController {
         return r;
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView handleDeco(HttpServletRequest request, HttpServletResponse response) {
 

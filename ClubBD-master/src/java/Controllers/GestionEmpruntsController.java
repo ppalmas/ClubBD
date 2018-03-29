@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Controller GestionEmprunts
+ * Gère l'affichage des emprunts pour la gestion par les membres du club (validation, retour).
+ * --------------------------------------------------------------------
+ * Gestion de l'affichage de la page d'admin
  */
 package Controllers;
 
@@ -31,11 +32,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- *
+ * Gère l'affichage des emprunts pour la gestion par les membres du club (validation, retour).
+ * Gestion de l'affichage de la page d'admin
  * @author Kevin
  */
 public class GestionEmpruntsController {
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @param idco
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView gestionEmpruntsGet(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco) {
 

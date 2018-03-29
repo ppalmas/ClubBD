@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Class SerieManagerImpl
+ * Gestion des séries
+ *********************************************************************
  */
 package Managers;
 
@@ -13,7 +14,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 /**
- *
+ * Gestion des séries
  * @author Arthus
  */
 public class SerieManagerImpl implements SerieManager {
@@ -43,6 +44,10 @@ public class SerieManagerImpl implements SerieManager {
         
     }    
     
+    /**
+     *
+     * @return
+     */
     public static SerieManager getInstance() {
         if (theSerieManager == null) {
             theSerieManager = new SerieManagerImpl();

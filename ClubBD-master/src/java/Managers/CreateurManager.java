@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Interface CreateurManager
+ *********************************************************************
  */
 package Managers;
 
@@ -9,12 +9,23 @@ import Database.Createur;
 import java.util.List;
 
 /**
- *
+ * Interface CreateurManager
  * @author Paola
  */
 public interface CreateurManager {
+
+    /**
+     *
+     * @param nomcrea
+     * @param prenomcrea
+     */
     public void insert(String nomcrea, String prenomcrea);
-     public List<Createur> findCreateur();
+
+    /**
+     *
+     * @return
+     */
+    public List<Createur> findCreateur();
      
     
 }

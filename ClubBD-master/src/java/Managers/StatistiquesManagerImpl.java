@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Class StatistiquesManagerImpl
+ * Gestion des statistiques
+ *********************************************************************
  */
 package Managers;
 import javax.persistence.EntityManager;
@@ -16,7 +17,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 /**
- *
+ * Gestion des statistiques
  * @author centrale
  */
 public class StatistiquesManagerImpl implements StatistiquesManager {
@@ -36,6 +37,10 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static StatistiquesManager getInstance() {
         if (theStatistiquesManager == null) {
             theStatistiquesManager = new StatistiquesManagerImpl();
@@ -43,6 +48,10 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
         return theStatistiquesManager;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Collection<Recherche> tout() {
         EntityManager em = emf.createEntityManager();
@@ -207,11 +216,19 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getCrit() {
         return crit;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getNb_recherche() {
         return nb_recherche;

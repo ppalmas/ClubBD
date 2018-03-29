@@ -1,3 +1,9 @@
+/**
+ * ********************************************************************
+ * Class CreateurManagerImpl
+ * Gestion des createurs.
+ *********************************************************************
+ */
 
 package Managers;
 
@@ -8,7 +14,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
- 
+/**
+ * Gestion des createurs.
+ * @author Utilisateur
+ */
 public class CreateurManagerImpl implements CreateurManager {
     
     
@@ -23,6 +32,10 @@ public class CreateurManagerImpl implements CreateurManager {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static CreateurManager getInstance() {
         if (theCreateurManager == null) {
             theCreateurManager = new CreateurManagerImpl();
@@ -30,7 +43,11 @@ public class CreateurManagerImpl implements CreateurManager {
         return theCreateurManager;
     }
 
-    
+    /**
+     *
+     * @param nomcrea
+     * @param prenomcrea
+     */
     @Override
     public void insert(String nomcrea, String prenomcrea) {
         //Création de l'objet createur
@@ -45,6 +62,10 @@ public class CreateurManagerImpl implements CreateurManager {
         em.getTransaction().commit();
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Createur> findCreateur(){
         EntityManager em = emf.createEntityManager();
        

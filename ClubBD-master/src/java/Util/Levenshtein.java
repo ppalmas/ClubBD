@@ -1,16 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Class Levenshtein
+ * Gestion de la comparaison entre chaînes de caractères
+ *********************************************************************
  */
 package Util;
 
 /**
- *
+ * Gestion de la comparaison entre chaînes de caractères
  * @author centrale
  * Permet de calculer la distance entre 2 chaines de caractères
  */
 public class Levenshtein {
+
+    /**
+     *
+     */
     public static String[] inutiles = {"LE", "LA", "LES", "DE", "L", "DES", "DU"};
     
     /**

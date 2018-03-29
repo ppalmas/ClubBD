@@ -2,7 +2,7 @@
  * ********************************************************************
  * Controller Admin
  * --------------------------------------------------------------------
- * Affichage de la page d'admin
+ * Gestion de l'affichage de la page d'admin
  *********************************************************************
  */
 package Controllers;
@@ -27,6 +27,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * Gestion de l'affichage de la page d'admin
+ * @author Utilisateur
+ */
 public class AdminController {
 
     /**

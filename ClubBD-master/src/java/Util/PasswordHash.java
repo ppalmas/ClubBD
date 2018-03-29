@@ -11,6 +11,10 @@ package Util;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+/**
+ * Hachage des mots de passe
+ * @author Utilisateur
+ */
 public class PasswordHash {
 
     /**

@@ -29,7 +29,12 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public class ConnectController {
     
-    
+    /**
+     *
+     * @param email
+     * @param mdp
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView post(@RequestParam("email") String email, @RequestParam("mdp") String mdp) {
         
@@ -56,6 +61,13 @@ public class ConnectController {
         return r;
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @param idco
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView get(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco){
 

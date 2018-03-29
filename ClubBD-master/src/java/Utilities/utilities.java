@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Class utilities
+ * Fonction return_page simple
+ *********************************************************************
  */
 package Utilities;
 
@@ -15,10 +16,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Fonction return_page simple
  * @author Paola
  */
 public class utilities {
+
+    /**
+     *
+     * @param page
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected static void return_page(String page, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             RequestDispatcher dispatcher = request.getRequestDispatcher(page);

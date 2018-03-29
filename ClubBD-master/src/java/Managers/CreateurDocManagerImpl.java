@@ -1,7 +1,7 @@
 /**
  * ********************************************************************
- * Class MembreManagementImpl
- * Gestion des membres
+ * Class CreateurDocManagerImpl
+ * Gestion des createurs de documents.
  *********************************************************************
  */
 package Managers;
@@ -15,6 +15,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+/**
+ * Gestion des createurs de documents.
+ * @author Utilisateur
+ */
 public class CreateurDocManagerImpl implements CreateurDocManager {
 
     private EntityManagerFactory emf;
@@ -26,6 +30,10 @@ public class CreateurDocManagerImpl implements CreateurDocManager {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static CreateurDocManager getInstance() {
         if (theCreateurDocManager == null) {
             theCreateurDocManager = new CreateurDocManagerImpl();
@@ -33,6 +41,13 @@ public class CreateurDocManagerImpl implements CreateurDocManager {
         return theCreateurDocManager;
     }
 
+    /**
+     *
+     * @param iddoc
+     * @param nomcrea
+     * @param prenomcrea
+     * @param poste
+     */
     @Override
     public void insert(String iddoc, String nomcrea, String prenomcrea, String poste) {
         //Création de l'objet createurdoc

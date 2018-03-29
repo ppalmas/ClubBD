@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Servlet SauveProposition
+ * --------------------------------------------------------------------
+ * Gestion de la sauvegarde de propositions
+ *********************************************************************
  */
 package Servlets;
 
@@ -15,12 +17,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Gestion de la sauvegarde de propositions
  * @author Paola
  */
 @WebServlet(name = "SauvePropositionServlet", urlPatterns = {"/SauvePropositionServlet"})
 public class SauvePropositionServlet extends HttpServlet {
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

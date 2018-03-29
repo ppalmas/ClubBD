@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Servlet Reserve
+ * --------------------------------------------------------------------
+ * Gestion des réservations
+ *********************************************************************
  */
 package Servlets;
 
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Gestion des réservations
  * @author Kevin
  */
 @WebServlet(name = "ReserveServlet", urlPatterns = {"/ReserveServlet"})

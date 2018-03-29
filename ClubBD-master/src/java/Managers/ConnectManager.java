@@ -8,6 +8,10 @@ package Managers;
 import Database.Connect;
 import Database.Membre;
 
+/**
+ * Interface ConnectManager
+ * @author Utilisateur
+ */
 public interface ConnectManager {
 
     /**

@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Class rechercheManagerImpl
+ * Gestion des recherches
+ *********************************************************************
  */
 package Managers;
 
@@ -14,7 +15,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
- *
+ * Gestion des recherches
  * @author Paola
  */
 public class RechercheManagerImpl implements RechercheManager {
@@ -28,6 +29,10 @@ public class RechercheManagerImpl implements RechercheManager {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static RechercheManager getInstance() {
         if (theRechercheManager == null) {
             theRechercheManager = new RechercheManagerImpl();

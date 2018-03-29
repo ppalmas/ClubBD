@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Interface DocumentManager
+ *********************************************************************
  */
 package Managers;
 
@@ -17,7 +17,10 @@ import Database.Genredocument;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Interface DocumentManager
+ * @author Utilisateur
+ */
 public interface DocumentManager {
     
     /**
@@ -39,10 +42,50 @@ public interface DocumentManager {
      */
     
     public Boolean exist(String cote);
+
+    /**
+     *
+     * @return
+     */
     public int getMaxId();
     
+    /**
+     *
+     * @param titre
+     * @param cote
+     * @param etat
+     * @param serie
+     * @param numero
+     * @param desc
+     * @param comm
+     * @param img
+     * @param cnp0
+     * @param cnp1
+     * @param cnp2
+     * @param cnp3
+     * @param cnp4
+     * @param genre
+     */
     public void insert(String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img,String cnp0,String cnp1,String cnp2,String cnp3,String cnp4,String genre);
     
+    /**
+     *
+     * @param iddoc
+     * @param titre
+     * @param cote
+     * @param etat
+     * @param serie
+     * @param numero
+     * @param desc
+     * @param comm
+     * @param img
+     * @param cnp0
+     * @param cnp1
+     * @param cnp2
+     * @param cnp3
+     * @param cnp4
+     * @param genre
+     */
     public void update(String iddoc, String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img, String cnp0, String cnp1, String cnp2,String cnp3,String cnp4, String genre);
     
     /**

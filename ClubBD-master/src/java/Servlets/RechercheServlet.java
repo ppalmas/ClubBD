@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Servlet Recherche
+ * --------------------------------------------------------------------
+ * Gestion des recherches
+ *********************************************************************
  */
 package Servlets;
 
@@ -23,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Gestion des recherches
  * @author centrale
  */
 @WebServlet(name = "RerchercheServlet", urlPatterns = {"/RechercheServlet"})

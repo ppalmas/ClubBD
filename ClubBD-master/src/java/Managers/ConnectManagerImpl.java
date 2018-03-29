@@ -1,6 +1,6 @@
 /**
  * ********************************************************************
- * Class ConnectManagementImpl
+ * Class ConnectManagerImpl
  * Gestion des connexions
  *********************************************************************
  */
@@ -18,6 +18,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+/**
+ * Gestion des connexions
+ * @author Utilisateur
+ */
 public class ConnectManagerImpl implements ConnectManager {
 
     private EntityManagerFactory emf;
@@ -29,6 +33,10 @@ public class ConnectManagerImpl implements ConnectManager {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static ConnectManager getInstance() {
         if (theConnectManager == null) {
             theConnectManager = new ConnectManagerImpl();

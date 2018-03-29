@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Class PropositionManagerImpl
+ * Gestion des propositions
+ *********************************************************************
  */
 package Managers;
 
@@ -17,7 +18,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 /**
- *
+ * Gestion des propositions
  * @author centrale
  */
 public class PropositionManagerImpl implements PropositionManager{
@@ -32,6 +33,10 @@ public class PropositionManagerImpl implements PropositionManager{
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static PropositionManager getInstance() {
         if (thePropositionsManager == null) {
             thePropositionsManager = new PropositionManagerImpl();
@@ -68,6 +73,10 @@ public class PropositionManagerImpl implements PropositionManager{
         em.getTransaction().commit();
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public int getNb_propositions() {
         return nb_propositions;

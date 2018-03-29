@@ -1,3 +1,9 @@
+/**
+ * ********************************************************************
+ * Class GenreManagerImpl
+ * Gestion des genres
+ *********************************************************************
+ */
 
 package Managers;
 
@@ -8,7 +14,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
- 
+/**
+ * Gestion des genres * @author Utilisateur
+ */
 public class GenreManagerImpl implements GenreManager {
     
     
@@ -23,6 +31,10 @@ public class GenreManagerImpl implements GenreManager {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static GenreManager getInstance() {
         if (theGenreManager == null) {
             theGenreManager = new GenreManagerImpl();
@@ -30,7 +42,10 @@ public class GenreManagerImpl implements GenreManager {
         return theGenreManager;
     }
 
-    
+    /**
+     *
+     * @param nom
+     */
     @Override
     public void insert(String nom) {
         //Création de l'objet createur
@@ -45,6 +60,10 @@ public class GenreManagerImpl implements GenreManager {
         em.getTransaction().commit();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Genre> findGenre(){
         EntityManager em = emf.createEntityManager();

@@ -1,7 +1,7 @@
 /**
  * ********************************************************************
- * Class MembreManagementImpl
- * Gestion des membres
+ * Class GenreDocManagerImpl
+ * Gestion des genre de documents
  *********************************************************************
  */
 package Managers;
@@ -15,6 +15,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+/**
+ * Gestion des genre de documents
+ * @author Utilisateur
+ */
 public class GenreDocManagerImpl implements GenreDocManager {
 
     private EntityManagerFactory emf;
@@ -26,6 +30,10 @@ public class GenreDocManagerImpl implements GenreDocManager {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static GenreDocManager getInstance() {
         if (theGenreDocManager == null) {
             theGenreDocManager = new GenreDocManagerImpl();
@@ -33,6 +41,11 @@ public class GenreDocManagerImpl implements GenreDocManager {
         return theGenreDocManager;
     }
 
+    /**
+     *
+     * @param iddoc
+     * @param nom
+     */
     @Override
     public void insert(String iddoc, String nom) {
         //Création de l'objet createurdoc

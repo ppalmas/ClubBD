@@ -34,6 +34,8 @@
         <script src="Scripts/modif_infosperso.js"></script>  
         <script src="Scripts/event_listener.js"></script>
         <script src="Scripts/recherche.js"></script>
+        <script src="Scripts/ouvrage.js"></script>
+        <script src="Scripts/get_suggestion.js"></script>
 
 
     </head>
@@ -52,6 +54,8 @@
             <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
             <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/> 
             <input type="hidden" id="idStatut" value="<c:out value="${idStatut}"/>"/> 
+            <input type="hidden" id="iddoc1" value=""/> 
+            <input type="hidden" id="iddoc2" value=""/> 
         </div>
 
         <!-- CONTENU PRINCIPAL -->
@@ -77,7 +81,7 @@
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getNewContent('search_content', ['news_content', 'suggestions_content', 'infos_content'])">Rechercher...</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content', 'infos_content'])">Suggestions de lecture</a>
+                    <a class="onglets" href="#" onclick="getNewContent('suggestions_content', ['news_content', 'search_content', 'infos_content']); get_suggestion();">Suggestions de lecture</a>
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getMesEmprunts()" id="gestion_compte">Mes Emprunts</a>
                     <div class="onglet_separator" id="sep_admin"></div>
@@ -93,15 +97,7 @@
             <!-- Volet de droite -->
             <div id="right_div" class="col-md-8"> 
                 <!-- Bloc des news-->
-                <!-- Bloc des news-->
                 <div id="news_content" class="bloc_home">
-                    <div class="row">
-                        <div id="selected_title" class="col-sm-10">
-                            <div >A la une</div>
-                            <hr/>
-                        </div>
-
-                    </div>
                     <div class="row">
 
                         <div class="el_news col-sm-10">
@@ -154,7 +150,7 @@
                     <div id="recherche_resultat" style="position:static">
 
                     </div>
-                    <div id="div_proposition" style="width:100%;display:none;position:static;" >
+                    <div id="div_proposition" style="width:95%;display:none;position:relative;" >
                         <p>Vous ne trouvez pas ce que vous cherchez ? Proposez l'achat d'un document.</p>
                         <input id="titre_proposition" placeholder="Titre">
                         <input id="commentaire_proposition" placeholder="Commentaire">
@@ -170,14 +166,14 @@
                             <div class="thumbnail">image</div>
                         </div>
                         <div class="col-sm-10">
-                            <div id="sugg_titre1" class="row book_title"></div>
+                            <div id="sugg_titre1" class="row book_title" onclick="goToOuvrage2('iddoc1')"></div>
                             <div id="sugg_auteur1" class="row book_authors"></div>
                             <div class="row book_available">
                                 <br>
                                 <div class="col-sm-3"
                                      <div id="dispo_color1" style="height: 20px; width: 20px;  padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
                                 </div>
-                                <div class="col-sm-5"><p>Réserver</p></div>
+                                <div class="col-sm-5" href="#" onclick="reserver2('<c:out value="${idco}"/>', 'iddoc1')"><p>Réserver</p></div>
                             </div>
                         </div>
                     </div>
@@ -186,14 +182,14 @@
                             <div class="thumbnail">image</div>
                         </div>
                         <div class="col-sm-10">
-                            <div id="sugg_titre2" class="row book_title"></div>
+                            <div id="sugg_titre2" class="row book_title" onclick="goToOuvrage2('iddoc2');"></div>
                             <div id="sugg_auteur2" class="row book_authors"></div>
                             <div class="row book_available">
                                 <br>
                                 <div class="col-sm-3"
                                      <div id="dispo_color2" style="height: 20px; width: 20px; padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
                                 </div>
-                                <div class="col-sm-5"><p>Réserver</p></div>
+                                <div class="col-sm-5" href="#" onclick="reserver2('<c:out value="${idco}"/>', 'iddoc2')"><p>Réserver</p></div>
                             </div>
                         </div>
                     </div>
@@ -250,6 +246,28 @@
                     <center>
                         <button id ="validation_button" type="button" onclick="modif_infos()" style="margin-top: 20px;">Ok</button>
                     </center>
+                </div>
+            </div>
+        </div>
+
+        <!--POP-UP: utilisateur non connecté ayant appuyé sur réserver-->
+        <div class="modal fade" id="connect-form" role="dialog">
+            <div class="modal-dialog modal-sm" id="pop_form">
+                <div class="modal-content modal_form">
+                    <!-- Croix de fermeture -->
+                    <button class="close" data-dismiss="modal" style="margin-right: 10px;">&times;</button>
+                    <!-- Titre -->
+                    <p id= "subtitle" style="margin-top: 40px; text-align: center;">Vous n'êtes pas connecté</p> 
+                    <!-- Zone pour les messages d'erreur -->
+                    <p id="modification_error" class="error_message"></p>
+
+                    <center>
+                        <!-- bouton renvoyant sur index_membre pour se connecter-->
+                        <button id ="validation_button" type="button" onclick="goHome()" style="margin-top: 20px; color:green; margin-bottom:20px;margin-right:50px;">Se connecter</button>
+                        <!-- bouton renvoyant vers la fenêtre d'inscription-->
+                        <button id ="validation_button" type="button" onclick="getInscription()" style="margin-top: 20px; color:blue; margin-bottom:20px;">S'inscrire</button>
+                    </center>
+                    <br/>
                 </div>
             </div>
         </div>

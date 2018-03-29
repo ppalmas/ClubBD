@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********************************************************************
+ * Interface MembreManager
+ *********************************************************************
  */
 package Managers;
 
@@ -10,7 +10,7 @@ import Database.Statut;
 import java.util.List;
 
 /**
- *
+ * Interface MembreManager
  * @author Paola
  */
 public interface MembreManager {
@@ -23,8 +23,19 @@ public interface MembreManager {
      */
     public Membre findMembreByEmail(String email);
 
+    /**
+     *
+     * @param prenom
+     * @param nom
+     * @return
+     */
     public List<Membre> findMembre(String prenom, String nom);
 
+    /**
+     *
+     * @param idstat
+     * @param idmembre
+     */
     public void updateStat(Integer idstat, Integer idmembre);
 
     /**
