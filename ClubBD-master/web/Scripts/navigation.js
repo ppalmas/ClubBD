@@ -105,11 +105,43 @@ function goHomeMember() {
 }
 
 /**
- * Méthode pour obtenir la page d'ouvrage (à partir d'un utilisateur connecté)
+ * Méthode pour obtenir la page d'ouvrage
  * @param {type} iddoc 
  * @returns {undefined}
  */
 function goToOuvrage(iddoc) {
+    // Formulaire pour obtenir la page de visualisation d'un ouvrage
+    var form = document.createElement('form');
+    form.method = "GET";
+    form.action = "ouvrage.htm";
+    // Le paramètre idco - identifiant de connexion - est envoyé avec la requête
+    var c1 = document.createElement('input');
+    c1.type = "hidden";
+    c1.name = "idco";
+    try {
+        c1.value = document.getElementById("idco").value;
+    } catch (Exception) {
+        c1.value = 0;
+    }
+    form.appendChild(c1);
+    var c2 = document.createElement('input');
+    c2.type = "hidden";
+    c2.name = "iddoc";
+    c2.value = iddoc;
+    form.appendChild(c2);
+    document.body.appendChild(form);
+    form.submit();
+    document.body.appendChild(form);
+    form.submit();
+}
+
+/**
+ * Méthode pour obtenir la page d'ouvrage (à partir de la page de suggestion !)
+ * @param {type} doc 
+ * @returns {undefined}
+ */
+function goToOuvrage2(doc) {
+    var iddoc = document.getElementById(doc).value;
     // Formulaire pour obtenir la page de visualisation d'un ouvrage
     var form = document.createElement('form');
     form.method = "GET";

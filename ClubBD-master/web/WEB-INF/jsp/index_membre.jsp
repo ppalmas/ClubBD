@@ -166,7 +166,7 @@
                             <div class="thumbnail">image</div>
                         </div>
                         <div class="col-sm-10">
-                            <div id="sugg_titre1" class="row book_title" onclick="goToOuvrage('<c:out value="${iddoc1}"/>'.toString())"></div>
+                            <div id="sugg_titre1" class="row book_title" onclick="goToOuvrage2('iddoc1')"></div>
                             <div id="sugg_auteur1" class="row book_authors"></div>
                             <div class="row book_available">
                                 <br>
@@ -182,7 +182,7 @@
                             <div class="thumbnail">image</div>
                         </div>
                         <div class="col-sm-10">
-                            <div id="sugg_titre2" class="row book_title" onclick="goToOuvrage(<c:out value="${iddoc2}"/>);"></div>
+                            <div id="sugg_titre2" class="row book_title" onclick="goToOuvrage2('iddoc2');"></div>
                             <div id="sugg_auteur2" class="row book_authors"></div>
                             <div class="row book_available">
                                 <br>

@@ -18,6 +18,8 @@ function get_suggestion() {
             var auteurs2 = "";
             var titre1 = "";
             var titre2 = "";
+            var id1 = "";
+            var id2 = "";
             //Récupération des titres, auteurs, et disponibilité
             var answers = answer.split("*//*");
             var liste1 = parseDoc(answers[0]);
@@ -28,7 +30,8 @@ function get_suggestion() {
             var titre2 = liste2[0];
             var auteurs2 = liste2[1];
             var dispo2 = liste2[2];
-            
+            var id1 = liste1[3];
+            var id2 = liste2[3];
             //Suivant la disponibilité, on affiche en vert ou en orange
             if (dispo1=="true"){
                 document.getElementById("dispo_color1").style.backgroundColor = "green";
@@ -41,6 +44,8 @@ function get_suggestion() {
                 document.getElementById("dispo_color2").style.backgroundColor = "orange";
             }
             //Actualisation des informations des documents de la page
+            document.getElementById("iddoc1").value = id1;
+            document.getElementById("iddoc2").value = id2;
             document.getElementById("sugg_titre1").innerHTML = titre1;
             document.getElementById("sugg_auteur1").innerHTML = auteurs1;
             document.getElementById("sugg_titre2").innerHTML = titre2;
@@ -51,7 +56,6 @@ function get_suggestion() {
     }
 
     //formulaire envoyé en get à la servlet recherche
-
     xhttp.open("GET", "SuggestionServlet?", true);
     xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
     xhttp.send();
@@ -62,6 +66,7 @@ function parseDoc(liste) {
     var doc = liste.split("*/*");
     var titre = doc[0];
     var dispo = doc[2];
+    var id = doc[3];
     var answers_auteurs = doc[1].split(";*");
     var n = answers_auteurs.length - 1;
     var auteurs = "";
@@ -73,6 +78,7 @@ function parseDoc(liste) {
     result[0] = titre;
     result[1] = auteurs;
     result[2] = dispo;
+    result[3] = id;
     return result;
 }
 
