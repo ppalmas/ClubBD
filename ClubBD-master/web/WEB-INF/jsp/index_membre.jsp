@@ -150,7 +150,7 @@
                     <div id="recherche_resultat" style="position:static">
 
                     </div>
-                    <div id="div_proposition" style="width:100%;display:none;position:static;" >
+                    <div id="div_proposition" style="width:95%;display:none;position:relative;" >
                         <p>Vous ne trouvez pas ce que vous cherchez ? Proposez l'achat d'un document.</p>
                         <input id="titre_proposition" placeholder="Titre">
                         <input id="commentaire_proposition" placeholder="Commentaire">
