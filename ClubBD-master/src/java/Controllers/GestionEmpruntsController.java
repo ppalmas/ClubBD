@@ -35,49 +35,52 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Kevin
  */
 public class GestionEmpruntsController {
+
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView gestionEmpruntsGet(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco) {
-        
-        
-//        Récupération de l'utilisateur
-//        MembreManager mm = MembreManagerImpl.getInstance();
-//        Membre m = mm.findMembre(idco);
-//        Integer statut = m.getIdStatut().getIdStatut();
 
-        ModelAndView result = new ModelAndView("gestionemprunts");
-        result.addObject("idco", idco);
-        
+//        Récupération de l'utilisateur
         MembreManager mm = MembreManagerImpl.getInstance();
-        Membre id = mm.findMembre(idco);
-        
-        EmpruntManager em = EmpruntManagerImpl.getInstance();
-        ArrayList<Emprunt> emp = new ArrayList<>(em.findEmprunts());  
-        ArrayList<EmpruntEmprunteur> emps = new ArrayList<>();
-        ArrayList<EmpruntEmprunteur> reservs = new ArrayList<>();
-        
-        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        
-        for(Emprunt e : emp){
-            Document d = e.getIdDocument();
-            
-            Date dRet = e.getDateRetourne();
-            if (dRet == null){
-                Membre emprunteur = e.getIdMembre();
-                
-                Date dEmp = e.getDateEmprunt();
-                if (dEmp == null){
-                    EmpruntEmprunteur es2 = new EmpruntEmprunteur(d.getIdDocument(), d.getTitre(), d.getCote(), formatter.format(e.getDateReserve()), "", "", "", emprunteur.getEmail(), emprunteur.getNom(), emprunteur.getPrenom());
-                    //Emprunts es2 = new Emprunts(d.getIdDocument(), d.getTitre(), d.getCote(), "", "", "", "");
-                    reservs.add(es2);
-                }
-                else{
-                    EmpruntEmprunteur es = new EmpruntEmprunteur(d.getIdDocument(), d.getTitre(), d.getCote(), formatter.format(e.getDateReserve()), formatter.format(dEmp), formatter.format(e.getDateRetour()), "", emprunteur.getEmail(), emprunteur.getNom(), emprunteur.getPrenom()); 
-                    emps.add(es);   
+        Membre m = mm.findMembre(idco);
+        Integer statut = m.getIdStatut().getIdStatut();
+        if (statut == 3) {
+            ModelAndView result = new ModelAndView("index_membre");
+            result.addObject("idco", idco);
+            return result;
+        } else {
+            ModelAndView result = new ModelAndView("gestionemprunts");
+            result.addObject("idco", idco);
+
+            Membre id = mm.findMembre(idco);
+
+            EmpruntManager em = EmpruntManagerImpl.getInstance();
+            ArrayList<Emprunt> emp = new ArrayList<>(em.findEmprunts());
+            ArrayList<EmpruntEmprunteur> emps = new ArrayList<>();
+            ArrayList<EmpruntEmprunteur> reservs = new ArrayList<>();
+
+            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+
+            for (Emprunt e : emp) {
+                Document d = e.getIdDocument();
+
+                Date dRet = e.getDateRetourne();
+                if (dRet == null) {
+                    Membre emprunteur = e.getIdMembre();
+
+                    Date dEmp = e.getDateEmprunt();
+                    if (dEmp == null) {
+                        EmpruntEmprunteur es2 = new EmpruntEmprunteur(d.getIdDocument(), d.getTitre(), d.getCote(), formatter.format(e.getDateReserve()), "", "", "", emprunteur.getEmail(), emprunteur.getNom(), emprunteur.getPrenom());
+                        //Emprunts es2 = new Emprunts(d.getIdDocument(), d.getTitre(), d.getCote(), "", "", "", "");
+                        reservs.add(es2);
+                    } else {
+                        EmpruntEmprunteur es = new EmpruntEmprunteur(d.getIdDocument(), d.getTitre(), d.getCote(), formatter.format(e.getDateReserve()), formatter.format(dEmp), formatter.format(e.getDateRetour()), "", emprunteur.getEmail(), emprunteur.getNom(), emprunteur.getPrenom());
+                        emps.add(es);
+                    }
                 }
             }
+            result.addObject("emprunts", emps);
+            result.addObject("reservations", reservs);
+            return result;
         }
-        result.addObject("emprunts", emps);
-        result.addObject("reservations", reservs);
-        return result;
     }
 }
