@@ -13,6 +13,7 @@ import Util.CoupleStats;
 import Util.Levenshtein;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 /**
  *
@@ -119,6 +120,7 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
         {
             result.add(new CoupleStats(chaine.get(l.get(0)),l.size()));
         }
+        Collections.sort(result, Collections.reverseOrder());
         return result;
     }
     
@@ -148,6 +150,23 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
             interm.add(iMin);
             regroupFinal.add(interm);
         } 
+        int i = 0;
+        int j=1;
+        while (i<regroupFinal.size())
+        {
+            while (j<regroupFinal.size())
+            {
+                if (Levenshtein.distance(chaineModif.get(regroupFinal.get(i).get(0)), chaineModif.get(regroupFinal.get(j).get(0)))<=crit)
+                {
+                    regroupFinal.remove(j);
+                }
+                else {
+                    j++;
+                }
+            }
+            i++;
+            j=i+1;
+        }
     }
     
     private void RegroupementFinal(){
@@ -155,18 +174,21 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
         ArrayList<Integer> interm;
         boolean pasPresent;
         int i = 0;
-        int j;
+        int j, indice, dist_indice;
+        indice = 0;
         while (i<chaineModif.size())
         {
             j=0;
             pasPresent=true;
+            dist_indice=crit+1;
             while (j<regroupFinal.size()&&pasPresent)
             {
                 if (Levenshtein.distance(chaineModif.get(regroupFinal.get(j).get(0)), chaineModif.get(i))<=crit)
                 {
                     pasPresent=false;
-                    if(regroupFinal.get(j).get(0) != i){
-                        regroupFinal.get(j).add(i);
+                    if(regroupFinal.get(j).get(0) != i&&(Levenshtein.distance(chaineModif.get(regroupFinal.get(j).get(0)), chaineModif.get(i))<dist_indice)){
+                        indice=j;
+                        dist_indice = Levenshtein.distance(chaineModif.get(regroupFinal.get(j).get(0)), chaineModif.get(i));
                     }
                 }
                 j++;
@@ -176,6 +198,10 @@ public class StatistiquesManagerImpl implements StatistiquesManager {
                 interm = new ArrayList<>();
                 interm.add(i);
                 regroupFinal.add(interm);
+            }
+            else
+            {
+                regroupFinal.get(indice).add(i);
             }
             i++;
         }

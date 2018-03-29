@@ -36,7 +36,7 @@
         <script src="Scripts/ouvrage.js"></script>
 
     </head>
-    <body onload="loadOuvrageUser(<c:out value="${idStatut}"/>);disponibility('<c:out value="${dispo}"/>')">
+    <body onload="loadOuvrageUser(<c:out value="${idStatut}"/>,'<c:out value="${dispo}"/>', '<c:out value="${emprunt}"/>');disponibility('<c:out value="${dispo}"/>', '<c:out value="${emprunt}"/>');">
 
     <!-- CONTENU PRINCIPAL -->
 
@@ -65,7 +65,6 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div id="image_ouvrage">
-                            <!--<img src="theprohecyistrue.jpg" alt="L'image n'a pas pu être affichée"/>-->
                             <img class="img_border" src=<c:out value="${image}"/> alt="L'image n'a pas pu être affichée"/>
                         </div>
                     </div>
@@ -94,23 +93,44 @@
                             
                             <br/>
                             <center>
-                                <button id="reserver_button" onclick="reserver(<c:out value="${idco}"/>)" style="color:green;">Réserver</button>
-                                <button id="retourner_button" onclick="retourner(<c:out value="${idStatut}"/>)" style="margin-left: 100px; color:red; display:none;">Retourner</button>
+                                <button id="reserver_button" onclick="reserver('<c:out value="${idco}"/>', '<c:out value="${iddoc}"/>')" style="color:green; display:none;">Réserver</button>
+                                <button id="valider_button" onclick="valider(<c:out value="${idStatut}"/>)" style="color:blue; display:none;">Valider</button>
+                                <button id="retourner_button" onclick="retourner(<c:out value="${idStatut}"/>, '<c:out value="${idemp}"/>')" style="color:red; display:none;">Retourner</button>
                             </center>    
                     </div>
                 </div>
             </div>
         </div>
     </div>
+                            
+    <!--POP-UP: validation de l'emprunt-->
+    <div class="modal fade" id="valider-form" role="dialog">
+        <div class="modal-dialog modal-sm" id="pop_form">
+            <div class="modal-content modal_form">
+                <!-- Croix de fermeture -->
+                <button class="close" data-dismiss="modal" style="margin-right: 10px;">&times;</button>
+                <!-- Titre -->
+                    <p id= "subtitle" style="margin-top: 40px; text-align:center;">Veuillez indiquer la date de retour prévu :</p><br/> 
+                    <p style="text-align:center;">Jour : <input type="text" id="jourInput" style="width:100px; margin-left:25px" value=""/></p>
+                    <p style="text-align:center;">Mois : <input type="text" id="moisInput" style="width:100px; margin-left:20px" value=""/></p>
+                    <p style="text-align:center;">Année : <input type="text" id="anneeInput" style="width:100px; margin-left:10px" value=""/></p>
+                <center>       
+                    <!--Confirmer la date et l'emprunt-->
+                    <button id ="validation_button" type="button" onclick="confirmer(<c:out value="${idStatut}"/>,'<c:out value="${idco}"/>', '<c:out value="${idemp}"/>')" style="margin-top: 20px; color:blue; margin-bottom:20px;">Confirmer</button>
+                </center>
+                <br/>
+            </div>
+        </div>
+    </div>                            
     
     <!--POP-UP: utilisateur non connecté ayant appuyé sur réserver-->
     <div class="modal fade" id="connect-form" role="dialog">
         <div class="modal-dialog modal-sm" id="pop_form">
             <div class="modal-content modal_form">
                 <!-- Croix de fermeture -->
-                <button class="close" data-dismiss="modal">&times;</button>
+                <button class="close" data-dismiss="modal" style="margin-right: 10px;">&times;</button>
                 <!-- Titre -->
-                <p id= "subtitle" style="margin-top: 40px">Vous n'êtes pas connecté</p> 
+                <p id= "subtitle" style="margin-top: 40px; text-align: center;">Vous n'êtes pas connecté</p> 
                 <!-- Zone pour les messages d'erreur -->
                 <p id="modification_error" class="error_message"></p>
 

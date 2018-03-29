@@ -63,5 +63,11 @@ public interface EmpruntManager {
      * @param id id du document
      * @return Emprunt correspondant
      */
-    public Emprunt findEmpruntByID(Integer id);    
+    public Emprunt findEmpruntByID(Integer id);  
+    
+    /**
+     * Retourne la liste des emprunts/réservations en cours
+     * @return
+     */
+    public ArrayList<Emprunt> findEmprunts();  
 }

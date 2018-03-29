@@ -33,6 +33,7 @@
         <script src="Scripts/index_membre.js"></script>      
         <script src="Scripts/modif_infosperso.js"></script>  
         <script src="Scripts/event_listener.js"></script>
+        <script src="Scripts/gestionemprunts.js"></script>
 
     </head>
        
@@ -60,13 +61,30 @@
         <div id ="recap_content" class="bloc_home">
             <center>
             <h3>Mes emprunts</h3>
-            <div class="recap_reservations_content" style="width: 95%;">
-                <table>
+            <hr>
+            
+            <br/>
+            <fieldset>
+              <div class="col-sm-6">
+                <input type="checkbox" id="reservations_checkbox" onclick="setContrary('recap_reservations_content')" checked>
+                <label for="reservations_checkbox">Afficher les réservations</label>
+              </div>
+              <div class="col-sm-6">
+                <input type="checkbox" id="emprunts_checkbox" onclick="setContrary('recap_emprunts_content')" checked>
+                <label for="emprunts_checkbox">Afficher les emprunts</label>
+              </div>
+            </fieldset>
+            <br/>
+            
+            <p><i>Vous pouvez trier les tableaux en cliquant sur le titre d'une colonne.</i></p>
+            
+            <div id="recap_reservations_content" style="width: 95%;">
+                <table id="table_reservations">
                     <caption>Récapitulatif des réservations</caption>
                     <tr>
-                        <th>Titre</th>
-                        <th>Cote</th>
-                        <th>Date de réservation</th>
+                        <th onclick="sortTable(0,'table_reservations')">Titre</th>
+                        <th onclick="sortTable(1,'table_reservations')">Cote</th>
+                        <th onclick="sortTable(2,'table_reservations')">Date de réservation</th>
                     </tr>
                     <c:forEach var="reservation" items="${reservations}">
                     <tr>
@@ -78,15 +96,15 @@
                 </table>
             </div>
 
-            <div class="recap_emprunts_content" style="width: 95%;">
-                <table>
+            <div id="recap_emprunts_content" style="width: 95%;">
+                <table id="table_emprunts">
                     <caption>Récapitulatif des emprunts</caption>
                     <tr>
-                        <th>Titre</th>
-                        <th>Cote</th>
-                        <th>Date de réservation</th>
-                        <th>Date d'emprunt</th>
-                        <th>Date de retour</th>
+                        <th onclick="sortTable(0, 'table_emprunts')">Titre</th>
+                        <th onclick="sortTable(1, 'table_emprunts')">Cote</th>
+                        <th onclick="sortTable(2, 'table_emprunts')">Date de réservation</th>
+                        <th onclick="sortTable(3, 'table_emprunts')">Date d'emprunt</th>
+                        <th onclick="sortTable(4, 'table_emprunts')">Date de retour</th>
                     </tr>
                     <c:forEach var="emprunt" items="${emprunts}">
                     <tr>

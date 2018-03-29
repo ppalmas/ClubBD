@@ -6,22 +6,19 @@
 package Database;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,8 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Recherche.findAll", query = "SELECT r FROM Recherche r")
     , @NamedQuery(name = "Recherche.findByIdRecherche", query = "SELECT r FROM Recherche r WHERE r.idRecherche = :idRecherche")
     , @NamedQuery(name = "Recherche.findByTitre", query = "SELECT r FROM Recherche r WHERE r.titre = :titre")
-    , @NamedQuery(name = "Recherche.findByNumero", query = "SELECT r FROM Recherche r WHERE r.numero = :numero")
-    , @NamedQuery(name = "Recherche.findByCote", query = "SELECT r FROM Recherche r WHERE r.cote = :cote")})
+    , @NamedQuery(name = "Recherche.findBySerie", query = "SELECT r FROM Recherche r WHERE r.serie = :serie")
+    , @NamedQuery(name = "Recherche.findByDateRecherche", query = "SELECT r FROM Recherche r WHERE r.dateRecherche = :dateRecherche")})
 public class Recherche implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,22 +41,14 @@ public class Recherche implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_recherche")
     private Integer idRecherche;
-    @Basic(optional = false)
     @Column(name = "titre")
     private String titre;
+    @Column(name = "serie")
+    private String serie;
     @Basic(optional = false)
-    @Column(name = "numero")
-    private int numero;
-    @Basic(optional = false)
-    @Column(name = "cote")
-    private String cote;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecherche")
-    private Collection<Createurrecherche> createurrechercheCollection;
-    @JoinColumn(name = "id_serie", referencedColumnName = "id_serie")
-    @ManyToOne
-    private Serie idSerie;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecherche")
-    private Collection<Genrerecherche> genrerechercheCollection;
+    @Column(name = "date_recherche")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateRecherche;
 
     public Recherche() {
     }
@@ -68,11 +57,9 @@ public class Recherche implements Serializable {
         this.idRecherche = idRecherche;
     }
 
-    public Recherche(Integer idRecherche, String titre, int numero, String cote) {
+    public Recherche(Integer idRecherche, Date dateRecherche) {
         this.idRecherche = idRecherche;
-        this.titre = titre;
-        this.numero = numero;
-        this.cote = cote;
+        this.dateRecherche = dateRecherche;
     }
 
     public Integer getIdRecherche() {
@@ -91,46 +78,20 @@ public class Recherche implements Serializable {
         this.titre = titre;
     }
 
-    public int getNumero() {
-        return numero;
+    public String getSerie() {
+        return serie;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setSerie(String serie) {
+        this.serie = serie;
     }
 
-    public String getCote() {
-        return cote;
+    public Date getDateRecherche() {
+        return dateRecherche;
     }
 
-    public void setCote(String cote) {
-        this.cote = cote;
-    }
-
-    @XmlTransient
-    public Collection<Createurrecherche> getCreateurrechercheCollection() {
-        return createurrechercheCollection;
-    }
-
-    public void setCreateurrechercheCollection(Collection<Createurrecherche> createurrechercheCollection) {
-        this.createurrechercheCollection = createurrechercheCollection;
-    }
-
-    public Serie getIdSerie() {
-        return idSerie;
-    }
-
-    public void setIdSerie(Serie idSerie) {
-        this.idSerie = idSerie;
-    }
-
-    @XmlTransient
-    public Collection<Genrerecherche> getGenrerechercheCollection() {
-        return genrerechercheCollection;
-    }
-
-    public void setGenrerechercheCollection(Collection<Genrerecherche> genrerechercheCollection) {
-        this.genrerechercheCollection = genrerechercheCollection;
+    public void setDateRecherche(Date dateRecherche) {
+        this.dateRecherche = dateRecherche;
     }
 
     @Override

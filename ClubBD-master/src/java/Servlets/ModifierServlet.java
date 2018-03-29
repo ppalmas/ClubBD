@@ -7,6 +7,8 @@ package Servlets;
 
 import Managers.DocumentManager;
 import Managers.DocumentManagerImpl;
+import Managers.MembreManager;
+import Managers.MembreManagerImpl;
 import Managers.SerieManager;
 import Managers.SerieManagerImpl;
 import java.io.IOException;
@@ -49,8 +51,12 @@ public class ModifierServlet extends HttpServlet {
         String cnp0 = request.getParameter("cnp0");
         String cnp1 = request.getParameter("cnp1");
         String cnp2 = request.getParameter("cnp2");
+        String cnp3 = request.getParameter("cnp3");
+        String cnp4 = request.getParameter("cnp4");
 
         Integer type = Integer.parseInt(request.getParameter("type"));
+
+        String genre = request.getParameter("genre");
 
         //pour série
         String complet = request.getParameter("complet");
@@ -58,33 +64,60 @@ public class ModifierServlet extends HttpServlet {
         String seriedesc = request.getParameter("seriedesc");
         String idserie = request.getParameter("idserie");
 
+        //pour membre
+        String idstat = request.getParameter("idstat");
+        String idmembre = request.getParameter("idmembre");
+        
+        //si un identifiant (cote ou titre serie) a changé
+        String chg = request.getParameter("chg");
+        System.out.println(chg);
+
         Boolean b = false;
+        System.out.println("chg");
+        if (!Boolean.parseBoolean(chg)){
+            System.out.println("cest ok");
+        } else {}
+
+
 
         if (type == 0) {
             try {
                 DocumentManager dm = DocumentManagerImpl.getInstance();
-                dm.update(iddoc, titre, cote, etat, serie, numero, desc, comm, img, cnp0, cnp1, cnp2);
-
-                b = true;
+                
+                if (!Boolean.parseBoolean(chg) || dm.exist(cote)==false) {
+                    System.out.println("doc avtupdate");
+                    dm.update(iddoc, titre, cote, etat, serie, numero, desc, comm, img, cnp0, cnp1, cnp2, cnp3, cnp4, genre);
+                    System.out.println("doc okokokk");
+                    b = true;
+                }
             } catch (Exception e) {
             }
-
-            response.setContentType("text/html; charset=UTF-8");
-            response.getWriter().write(b + "");
 
         } else if (type == 1) {
             try {
                 SerieManager sm = SerieManagerImpl.getInstance();
-                sm.update(idserie, seriename, seriedesc, complet);
+                if (!Boolean.parseBoolean(chg) || sm.exist(titre)==false) {
+                    System.out.println("serie avtupdate");
+                    sm.update(idserie, seriename, seriedesc, complet);
 
-                b = true;
+                    b = true;
+                }
+                System.out.println("serie okokokk");
             } catch (Exception e) {
             }
 
-            response.setContentType("text/html; charset=UTF-8");
-            response.getWriter().write(b + "");
-        }
+        } else if (type == 4) {
+            try {
+                MembreManager mm = MembreManagerImpl.getInstance();
+                mm.updateStat(Integer.parseInt(idstat), Integer.parseInt(idmembre));
 
+                b = true;
+            } catch (Exception e) {
+
+            }
+        }
+        response.setContentType("text/html; charset=UTF-8");
+        response.getWriter().write(b + "");
     }
 }
 

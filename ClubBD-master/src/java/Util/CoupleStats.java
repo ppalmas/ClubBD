@@ -9,7 +9,7 @@ package Util;
  *
  * @author centrale
  */
-public class CoupleStats {
+public class CoupleStats implements Comparable{
     
     private String name;
     private int value;
@@ -34,5 +34,19 @@ public class CoupleStats {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        int r;
+        if (o instanceof CoupleStats)
+        {
+            r=((Integer) this.getValue()).compareTo(((CoupleStats) o).getValue());
+        }
+        else
+        {
+            r=0;
+        }
+        return r;
     }
 }

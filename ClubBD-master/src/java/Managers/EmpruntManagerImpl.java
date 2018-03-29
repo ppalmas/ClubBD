@@ -183,5 +183,22 @@ public class EmpruntManagerImpl implements EmpruntManager{
         q.setParameter("id", id);
         List l = q.getResultList();
         return l.isEmpty() ? null : (Emprunt) l.get(0);
-    }    
+    }
+
+
+    /**
+     * Retourne la liste des emprunts/réservations en cours
+     * @return
+     */
+    @Override
+    public ArrayList<Emprunt> findEmprunts() {
+        ArrayList<Emprunt> emp = new ArrayList<>();
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT e FROM Emprunt e WHERE e.dateRetourne IS NULL");
+        List l = q.getResultList();
+        for (Object o : l) {
+            emp.add((Emprunt) o);
+        }
+        return emp;
+    }
 }

@@ -9,6 +9,7 @@ import Database.Createur;
 import Database.Createurdocument;
 import Database.Document;
 import Database.Etat;
+import Database.Genre;
 import Database.Genredocument;
 import Database.Serie;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class DocumentManagerImpl implements DocumentManager {
     public List<Document> findDocumentBy1WordTitle(String mot) {
         EntityManager em = emf.createEntityManager();
         mot = "%" + mot + "%";
-        Query q = em.createQuery("SELECT d FROM Document d WHERE  d.titre LIKE :mot");
+        Query q = em.createQuery("SELECT d FROM Document d WHERE  UPPER(d.titre) LIKE UPPER(:mot)");
         q.setParameter("mot", mot);
         List l = q.getResultList();
         return l;
@@ -65,7 +66,7 @@ public class DocumentManagerImpl implements DocumentManager {
      * @return
      */
     @Override
-    public List<Document> findDocument(ArrayList<String> criteres) {
+    public List<Document> findDocumentCr(ArrayList<String> criteres) {
 
         //recherche un document selon les criteres spécifiés
         EntityManager em = emf.createEntityManager();
@@ -73,41 +74,41 @@ public class DocumentManagerImpl implements DocumentManager {
         Query query;
         //structure de la liste critere : (0)titre (1)serie (2)cote
         if (criteres.get(0) != "" || criteres.get(1) != "" || criteres.get(2) != "") {
-
-            if (criteres.get(1) != "") {
-                query = em.createQuery("SELECT d FROM Document d WHERE d.titre LIKE :titre AND d.idSerie.nomSerie LIKE :serie AND d.cote LIKE :cote ");
-                System.out.println("serie non null");
-            } else {
-                query = em.createQuery("SELECT d FROM Document d WHERE d.titre LIKE :titre AND d.cote LIKE :cote ");
-                System.out.println("serie null");
-            }
-
-            //si titre
-            if (criteres.get(0) != "") {
-                //on recherche un document dont le titre comporte le critère
-
+        
+        if (criteres.get(1) != "") {
+                query = em.createQuery("SELECT d FROM Document d WHERE UPPER(d.titre) LIKE UPPER(:titre) AND UPPER(d.idSerie.nomSerie) LIKE UPPER(:serie) AND UPPER(d.cote) LIKE UPPER(:cote) ");
+        System.out.println("serie non null");
+        } else {
+                query = em.createQuery("SELECT d FROM Document d WHERE UPPER(d.titre) LIKE UPPER(:titre) AND UPPER(d.cote) LIKE UPPER(:cote) ");
+        System.out.println("serie null");
+        }
+        
+        //si titre
+        if (criteres.get(0) != "") {
+        //on recherche un document dont le titre comporte le critère
+        
                 query.setParameter("titre", "%" + criteres.get(0) + "%");
-            } else {
+        } else {
                 query.setParameter("titre", "%");
-            }
-            //si serie
-            if (criteres.get(1) != "") {
+        }
+        //si serie
+        if (criteres.get(1) != "") {
                 query.setParameter("serie", "%" + criteres.get(1) + "%");
-            }
-
-            //si cote
-            if (criteres.get(2) != "") {
+        }
+        
+        //si cote
+        if (criteres.get(2) != "") {
                 query.setParameter("cote", "%" + criteres.get(2) + "%");
-            } else {
+        } else {
                 query.setParameter("cote", "%");
-            }
-
-            try {
-
+        }
+        
+        try {
+        
                 l = query.getResultList();
-            } catch (Exception e) {
+        } catch (Exception e) {
                 System.out.println("erreur syntaxe requete // " + query.toString());
-            }
+        }
 
         }
         return l;
@@ -154,7 +155,7 @@ public class DocumentManagerImpl implements DocumentManager {
      * @param img
      */
     @Override
-    public void insert(String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img, String cnp0, String cnp1, String cnp2) {
+    public void insert(String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img, String cnp0, String cnp1, String cnp2, String cnp3, String cnp4, String genre) {
 
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -191,49 +192,50 @@ public class DocumentManagerImpl implements DocumentManager {
             List l2 = q2.getResultList();
             d.setIdSerie((Serie) l2.get(0));
         }
-        System.out.println(1);
         //Insertion
         em.persist(d);
-        
-        System.out.println(2);
-
-        
-        
 
         //pour les créateurs
         Query q3 = em.createQuery("SELECT c FROM Createur c"); //on recup tous les createurs et on compare avec la concatenation nom-prenom
         List<Createur> l3 = q3.getResultList();
-        System.out.println(3);
         //comparaison
         Boolean endcnp0 = true;
         Boolean endcnp1 = true;
         Boolean endcnp2 = true;
+        Boolean endcnp3 = true;
+        Boolean endcnp4 = true;
 
         for (int i = 0; i < l3.size(); i++) {
-            System.out.println(endcnp0 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp0));
             try {
-                if (endcnp0 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp0)) {
+                if (endcnp0 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp0.split(",")[0])) {
 
                     Createurdocument cd = new Createurdocument();
                     cd.setIdCreateur(l3.get(i));
                     cd.setIdDocument(d);
-                    cd.setPoste("défaut");
+                    try {
+                        cd.setPoste(cnp0.split(",")[1]);
+                    } catch (Exception e) {
+                        cd.setPoste("");
+                    }
                     em.persist(cd);
-                    System.out.println(5);
                     endcnp0 = false;
 
                 }
             } catch (Exception e) {
-                System.out.println("b");
             }
             try {
-                if (endcnp1 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp1)) {
+                if (endcnp1 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp1.split(",")[0])) {
                     Createurdocument cd = new Createurdocument();
                     cd.setIdCreateur(l3.get(i));
                     cd.setIdDocument(d);
-                    cd.setPoste("défaut");
+
+                    //poste
+                    try {
+                        cd.setPoste(cnp1.split(",")[1]);
+                    } catch (Exception e) {
+                        cd.setPoste("");
+                    }
                     em.persist(cd);
-                    System.out.println(6);
 
                     endcnp1 = false;
 
@@ -241,28 +243,110 @@ public class DocumentManagerImpl implements DocumentManager {
             } catch (Exception e) {
             }
             try {
-                if (endcnp2 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp2)) {
+                if (endcnp2 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp2.split(",")[0])) {
                     Createurdocument cd = new Createurdocument();
                     cd.setIdCreateur(l3.get(i));
                     cd.setIdDocument(d);
-                    cd.setPoste("défaut");
+                    try {
+                        cd.setPoste(cnp2.split(",")[1]);
+                    } catch (Exception e) {
+                        cd.setPoste("");
+                    }
                     em.persist(cd);
-                    System.out.println(7);
 
                     endcnp2 = false;
 
                 }
             } catch (Exception e) {
             }
-        }
-        System.out.println(8);
+            try {
+                if (endcnp3 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp3.split(",")[0])) {
+                    Createurdocument cd = new Createurdocument();
+                    cd.setIdCreateur(l3.get(i));
+                    cd.setIdDocument(d);
+                    try {
+                        cd.setPoste(cnp3.split(",")[1]);
+                    } catch (Exception e) {
+                        cd.setPoste("");
+                    }
+                    em.persist(cd);
 
-        
+                    endcnp3 = false;
+
+                }
+            } catch (Exception e) {
+            }
+            try {
+                if (endcnp4 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp4.split(",")[0])) {
+                    Createurdocument cd = new Createurdocument();
+                    cd.setIdCreateur(l3.get(i));
+                    cd.setIdDocument(d);
+                    try {
+                        cd.setPoste(cnp4.split(",")[1]);
+                    } catch (Exception e) {
+                        cd.setPoste("");
+                    }
+                    em.persist(cd);
+
+                    endcnp4 = false;
+
+                }
+            } catch (Exception e) {
+            }
+        }
+
+        //pour genre
+        //on fait une liste en parsant genre
+        genre = genre.replace(" ", "");
+        String[] lgenre = genre.split(",");
+
+        //oncheck si chaque mot existe deja, sinon on le rajoute
+        for (int i = 0; i < lgenre.length; i++) {
+            try {
+                Query q5 = em.createQuery("SELECT g FROM Genre g WHERE g.nomGenre=:nom");
+                q5.setParameter("nom", lgenre[i]);
+
+                //on créé genredoc
+                Genredocument gd = new Genredocument();
+                gd.setIdDocument(d);
+                gd.setIdGenre((Genre) q5.getResultList().get(0));
+                em.persist(gd);
+
+            } catch (Exception e) {//on trouve pas le genre, on le crée
+                Genre g = new Genre();
+                g.setNomGenre(lgenre[i]);
+                em.persist(g);
+
+                //on créé genredoc
+                Genredocument gd = new Genredocument();
+                gd.setIdDocument(d);
+                gd.setIdGenre(g);
+                em.persist(gd);
+
+            }
+
+        }
+
         em.getTransaction().commit();
-        System.out.println(9);
 
     }
 
+    
+    
+    @Override
+    public Boolean exist(String cote){
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT d FROM Document d WHERE UPPER(d.cote) LIKE UPPER(:cote)");
+        q.setParameter("cote", cote);
+        System.out.println("parametre ok");
+        System.out.println(q.getResultList().size());
+        if (q.getResultList().size() != 0){
+            return true;
+        }
+        else {return false;}
+        
+    }
+    
     /**
      * Update des infos d'un livre
      *
@@ -277,7 +361,7 @@ public class DocumentManagerImpl implements DocumentManager {
      * @param img
      */
     @Override
-    public void update(String iddoc, String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img, String cnp0, String cnp1, String cnp2) {
+    public void update(String iddoc, String titre, String cote, String etat, String serie, String numero, String desc, String comm, String img, String cnp0, String cnp1, String cnp2, String cnp3, String cnp4, String genre) {
 
         //on recupere le document avec l'id
         EntityManager em = emf.createEntityManager();
@@ -318,48 +402,58 @@ public class DocumentManagerImpl implements DocumentManager {
             List l2 = q2.getResultList();
             d.setIdSerie((Serie) l2.get(0));
         }
-        
-        
+
         //pour les createurs
         Query q3 = em.createQuery("SELECT c FROM Createur c"); //on recup tous les createurs et on compare avec la concatenation nom-prenom
         List<Createur> l3 = q3.getResultList();
-        System.out.println(3);
+
         //comparaison
         Boolean endcnp0 = true;
         Boolean endcnp1 = true;
         Boolean endcnp2 = true;
-        
+        Boolean endcnp3 = true;
+        Boolean endcnp4 = true;
+
         //solution simple pas tres opti : on remove tous les createursdocument de la collection et on les recreer...
-        List<Createurdocument> lcrea= new ArrayList(d.getCreateurdocumentCollection());
-        for (int j=0; j<lcrea.size();j++){
+        //getcreateurdoccollectionmarche pas visiblement (probleme de persistence ?
+        //solution requete de tous
+        Query q4 = em.createQuery("SELECT cd FROM Createurdocument cd WHERE cd.idDocument=:doc");
+        q4.setParameter("doc", d);
+        List<Createurdocument> lcrea = q4.getResultList();
+
+        for (int j = 0; j < lcrea.size(); j++) {
             em.remove(lcrea.get(j));
         }
-        
+
         for (int i = 0; i < l3.size(); i++) {
-            System.out.println(endcnp0 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp0));
             try {
-                if (endcnp0 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp0)) {
+                if (endcnp0 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp0.split(",")[0])) {
 
                     Createurdocument cd = new Createurdocument();
                     cd.setIdCreateur(l3.get(i));
                     cd.setIdDocument(d);
-                    cd.setPoste("défaut");
+                    try {
+                        cd.setPoste(cnp0.split(",")[1]);
+                    } catch (Exception e) {
+                        cd.setPoste("");
+                    }
                     em.persist(cd);
-                    System.out.println(5);
                     endcnp0 = false;
 
                 }
             } catch (Exception e) {
-                System.out.println("b");
             }
             try {
-                if (endcnp1 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp1)) {
+                if (endcnp1 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp1.split(",")[0])) {
                     Createurdocument cd = new Createurdocument();
                     cd.setIdCreateur(l3.get(i));
                     cd.setIdDocument(d);
-                    cd.setPoste("défaut");
+                    try {
+                        cd.setPoste(cnp1.split(",")[1]);
+                    } catch (Exception e) {
+                        cd.setPoste("");
+                    }
                     em.persist(cd);
-                    System.out.println(6);
 
                     endcnp1 = false;
 
@@ -367,23 +461,97 @@ public class DocumentManagerImpl implements DocumentManager {
             } catch (Exception e) {
             }
             try {
-                if (endcnp2 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp2)) {
+                if (endcnp2 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp2.split(",")[0])) {
                     Createurdocument cd = new Createurdocument();
                     cd.setIdCreateur(l3.get(i));
                     cd.setIdDocument(d);
-                    cd.setPoste("défaut");
+                    try {
+                        cd.setPoste(cnp2.split(",")[1]);
+                    } catch (Exception e) {
+                        cd.setPoste("");
+                    }
                     em.persist(cd);
-                    System.out.println(7);
 
                     endcnp2 = false;
 
                 }
             } catch (Exception e) {
             }
+            try {
+                if (endcnp3 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp3.split(",")[0])) {
+                    Createurdocument cd = new Createurdocument();
+                    cd.setIdCreateur(l3.get(i));
+                    cd.setIdDocument(d);
+                    try {
+                        cd.setPoste(cnp3.split(",")[1]);
+                    } catch (Exception e) {
+                        cd.setPoste("");
+                    }
+                    em.persist(cd);
+
+                    endcnp3 = false;
+
+                }
+            } catch (Exception e) {
+            }
+            try {
+                if (endcnp4 && (l3.get(i).getNomCreateur() + " " + l3.get(i).getPrenomCreateur()).equals(cnp4.split(",")[0])) {
+                    Createurdocument cd = new Createurdocument();
+                    cd.setIdCreateur(l3.get(i));
+                    cd.setIdDocument(d);
+                    try {
+                        cd.setPoste(cnp4.split(",")[1]);
+                    } catch (Exception e) {
+                        cd.setPoste("");
+                    }
+                    em.persist(cd);
+
+                    endcnp4 = false;
+
+                }
+            } catch (Exception e) {
+            }
         }
-        
+
+        //pour genre
+        //on fait une liste en parsant genre
+        genre = genre.replace(" ", "");
+        String[] lgenre = genre.split(",");
+
+        //on suppr tous les genredocuments associés
+        List<Genredocument> lg = new ArrayList(d.getGenredocumentCollection());
+        for (int i = 0; i < lg.size(); i++) {
+            em.remove(lg.get(i));
+        }
+
+        //oncheck si chaque mot existe deja, sinon on le rajoute
+        for (int i = 0; i < lgenre.length; i++) {
+            try {
+                Query q5 = em.createQuery("SELECT g FROM Genre g WHERE g.nomGenre=:nom");
+                q5.setParameter("nom", lgenre[i]);
+
+                //on créé genredoc
+                Genredocument gd = new Genredocument();
+                gd.setIdDocument(d);
+                gd.setIdGenre((Genre) q5.getResultList().get(0));
+                em.persist(gd);
+
+            } catch (Exception e) {//on trouve pas le genre, on le crée
+                Genre g = new Genre();
+                g.setNomGenre(lgenre[i]);
+                em.persist(g);
+
+                //on créé genredoc
+                Genredocument gd = new Genredocument();
+                gd.setIdDocument(d);
+                gd.setIdGenre(g);
+                em.persist(gd);
+
+            }
+        }
 
         em.getTransaction().commit();
+
     }
 
     /**
@@ -461,10 +629,7 @@ public class DocumentManagerImpl implements DocumentManager {
                 Query q = em.createQuery(SQL);
                 q.setParameter("all", "%" + all + "%");
                 l = q.getResultList();
-                System.out.println(SQL);
             } catch (Exception e) {
-                System.out.println("erreur syntaxe requete // " + SQL);
-                System.out.println(e);
                 l = null;
             }
 

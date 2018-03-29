@@ -22,7 +22,32 @@
         <!-- STYLES -->
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/index.css">
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/base.css">
+
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/tableau.css">
+
+        
+        <style>
+            .container {
+                text-align: left;
+            }
+            
+            label {
+                width: 250px;
+            }
+            
+            .radio {
+                
+                display: unset;
+            }
+            
+            h2{
+               cursor: pointer; 
+            }
+            
+            .res{
+                cursor: pointer;
+            }
+        </style>
 
 
         <!-- SCRIPTS -->
@@ -31,6 +56,8 @@
         <script src="Scripts/index.js"></script>
         <script src="Scripts/deconnecter.js"></script>
         <script src="Scripts/gestion_inv.js"></script>
+        <script src="Scripts/get_propositions.js"></script>
+        <script src="Scripts/get_stats.js"></script>
 
 
 
@@ -68,13 +95,13 @@
                 <center><div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="goHomeMember()" id="gestion_compte">Accueil</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('propositions_content', ['stats_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Propositions d'achat</a>
+                    <a class="onglets" href="#" onclick="get_propositions();getNewContent('propositions_content', ['stats_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Propositions d'achat</a>
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getNewContent('gestion_inv_content', ['propositions_content', 'stats_content', 'membres_content', 'retour_emprunt_content'])">Gestion inventaire</a>
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getNewContent('membres_content', ['propositions_content', 'stats_content', 'gestion_inv_content', 'retour_emprunt_content'])">Gestion membres</a>
                     <div class="onglet_separator"></div>
-                    <a class="onglets" href="#" onclick="getNewContent('stats_content', ['propositions_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Statistiques</a>
+                    <a class="onglets" href="#" onclick="get_stats();getNewContent('stats_content', ['propositions_content', 'membres_content', 'gestion_inv_content', 'retour_emprunt_content'])">Statistiques</a>
                     <div class="onglet_separator"></div>
                     <a class="onglets" href="#" onclick="getNewContent('retour_emprunt_content', ['stats_content', 'propositions_content', 'membres_content', 'gestion_inv_content'])">Retour emprunts</a>
                 </center>
@@ -87,7 +114,9 @@
                     <p>Retourner un emprunt</p>
                 </div>
                 <div id ="propositions_content" class="bloc_home" style="display:none">
-                    <p>Propositions d'achat</p>
+                    <h1>Propositions d'achat</h1>
+                    <div id="propositions_resultat" style="position:static">
+                    </div>
                 </div>
 
                 <!-- Bloc gestion inventaire-->
@@ -118,12 +147,18 @@
                             <label for="numeroa">Numéro</label>
                             <input name="numeroa" id="numeroa" type="text" value=""/><br>
 
-                            <label for="createura">Créateurs</label>
+                            <label for="genrea">Genres (séparer par une virgule)</label>
+                            <input id="genrea" name="genrea" type="text" value=""/><br>
+                            <label for="createura">Créateurs,poste (sans espace)</label>
+
                             <input type="text" list="createurcombo" id="createura0" name="createura0">
                             <input type="button" id="addcrea" name="addcrea" onclick="addcrea()" value="+"/>
                             <input type="button" id="rmvcrea" name="rmvcrea" onclick="rmvcrea()" value="-"/><br>
                             <div id="crea1" style="display:none"><input type="text" list="createurcombo" id="createura1" name="createura1" ><br></div>
                             <div id="crea2" style="display:none"><input type="text" list="createurcombo" id="createura2" name="createura2" ><br></div>
+
+                            <div id="crea3" style="display:none"><input type="text" list="createurcombo" id="createura3" name="createura3" ><br></div>
+                            <div id="crea4" style="display:none"><input type="text" list="createurcombo" id="createura4" name="createura4" ><br></div>
                             <datalist id="createurcombo" >
                                 <c:forEach items="${lcrea}" var="crea">
 
@@ -136,15 +171,15 @@
                             <label for="descriptiona">Description</label>
                             <input name="descriptiona" id="descriptiona" type="text" value=""/><br>
 
-                            <label for="neuf">Neuf</label>
+                            <label class="radio" for="neuf">Neuf</label>
                             <input type="radio" id="neuf" name="etat" value="1" checked/>
-                            <label for="tbon">Très bon</label>
+                            <label class="radio" for="tbon">Très bon</label>
                             <input type="radio" id="tbon" name="etat" value="2"/>
-                            <label for="bon">Bon</label>
+                            <label class="radio" for="bon">Bon</label>
                             <input type="radio" id="bon" name="etat" value="3"/>
-                            <label for="abime">Abimé</label>
+                            <label class="radio" for="abime">Abimé</label>
                             <input type="radio" id="abime" name="etat" value="4"/>
-                            <label for="tabime">Très abimé</label>
+                            <label class="radio" for="tabime">Très abimé</label>
                             <input type="radio" id="tabime" name="etat" value="5"/>
                             <br>
 
@@ -201,7 +236,9 @@
 
 
 
+
                             <button onclick="recherche2_serie()">Rechercher série</button></div>
+
 
                     </div>
                     <h2>Résultats</h2>
@@ -230,26 +267,35 @@
                         <label for="numerom">Numéro</label>
                         <input name="numerom" id="numerom" type="text" value=""/><br>
 
-                        <label for="createurm">Créateurs</label>
+                        <label for="genrem">Genres (séparer avec une virgule)</label>
+                        <input name="genrem" id="genrem" type="text" value=""/><br>
+
+                        <label for="createurm">Créateurs,poste (sans espace)</label>
+
                         <input type="text" list="createurcombo" id="createurm0" name="createurm0">
                         <br>
                         <input type="text" list="createurcombo" id="createurm1" name="createurm1" ><br>
                         <input type="text" list="createurcombo" id="createurm2" name="createurm2" >
                         <br>
 
+                        <input type="text" list="createurcombo" id="createurm3" name="createurm3" ><br>
+                        <input type="text" list="createurcombo" id="createurm4" name="createurm4" >
+                        <br>
+
+
 
                         <label for="descriptionm">Description</label>
                         <input name="descriptionm" id="descriptionm" type="text" value=""/><br>
 
-                        <label for="neufm">Neuf</label>
+                        <label class="radio" for="neufm">Neuf</label>
                         <input type="radio" id="neufm" name="etatm" value="1" checked/>
-                        <label for="tbonm">Très bon</label>
+                        <label class="radio" for="tbonm">Très bon</label>
                         <input type="radio" id="tbonm" name="etatm" value="2"/>
-                        <label for="bonmf">Bon</label>
+                        <label class="radio" for="bonmf">Bon</label>
                         <input type="radio" id="bonm" name="etatm" value="3"/>
-                        <label for="abimem">Abimé</label>
+                        <label class="radio" for="abimem">Abimé</label>
                         <input type="radio" id="abimem" name="etatm" value="4"/>
-                        <label for="tabimem">Très abimé</label>
+                        <label class="radio" for="tabimem">Très abimé</label>
                         <input type="radio" id="tabimem" name="etatm" value="5"/>
                         <br>
                         <label for="imagem">Chemin image</label>
@@ -285,27 +331,44 @@
 
                 <!-- Bloc gestion membres-->
                 <div id ="membres_content" class="bloc_home" style="display:none">
-                    <p>Gestion des membres</p>
+                    <h1>Gestion des membres</h1>
+                    <label for="nommembre">Nom</label>
+                    <input type="text" id="nommembre" value=""><br>
+                    <label for="prenommembre">Prénom</label>
+                    <input type="text" id="prenommembre" value=""><br>
+                    <input type="submit" value="Rechercher" onclick="recherche2_membre()"><br>
+
+                    <div id="recherche_resultatm"></div>
+
+                    <br>
+                    <div id="modifm" style="display:none">
+                        <h2>Modification statut</h2>
+                        
+                        <label for="idmm">Id membre</label>
+                        <input type="text" id="idmm" readonly="true" value=""><br>
+                        <label for="nommembrem">Nom</label>
+                        <input type="text" id="nommembrem" readonly="true" value=""><br>
+                        <label for="prenommembrem">Prénom</label>
+                        <input type="text" id="prenommembrem" readonly="true" value=""><br>
+                        <label class="radio" for="membre">Membre</label>
+                            <input type="radio" id="membre" name="idmradio" value="1"/>
+                            <label class="radio" for="staff">Admin</label>
+                            <input type="radio" id="staff" name="idmradio" value="2"/>
+                            <label class="radio" for="admin">Cotisant</label>
+                            <input type="radio" id="admin" name="idmradio" value="3"/><br>
+                            
+                        <input type="submit" value="Modifier" onclick="updatemembre()"><br>
+
+
+                    </div>
+
                 </div>
 
                 <!-- Bloc des stats-->
                 <div id ="stats_content" class="bloc_home" style="display:none">
-                    <h1>Statistiques</h1>
-                    <h2>(nombre d'occurences sur <c:out value="${nb_recherche}"/> recherches)</h2>
-                    <h3>valeur du critère : <c:out value="${crit}"/></h3>
-                    <table>
-                        <tr>
-                            <th>titre/série</th>
-                            <th>nombre d'occurences</th>
-                        </tr>
-
-                        <c:forEach var="i" items="${stats}">
-                            <tr>
-                                <td><c:out value="${i['name']}"/></td>
-                                <td><c:out value="${i['value']}"/></td>
-                            </tr>
-                        </c:forEach> 
-                    </table>
+                    <h1>Statistiques sur les dernières recherches non abouties</h1>
+                    <div id="stats_resultat" style="position:static">
+                    </div>
                 </div>
             </div>
 

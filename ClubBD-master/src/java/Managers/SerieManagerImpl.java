@@ -27,6 +27,22 @@ public class SerieManagerImpl implements SerieManager {
         }
     }
 
+@Override
+    public Boolean exist(String titre){
+        System.out.println("serie avant param");
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT s FROM Serie s WHERE UPPER(s.nomSerie) LIKE UPPER(:titre)");
+        q.setParameter("titre", titre);
+        System.out.println("serie apres param");
+        
+        if (q.getResultList().size() != 0){
+            System.out.println("apres req");
+            return true;
+        }
+        else {return false;}
+        
+    }    
+    
     public static SerieManager getInstance() {
         if (theSerieManager == null) {
             theSerieManager = new SerieManagerImpl();
@@ -61,7 +77,7 @@ public class SerieManagerImpl implements SerieManager {
         List l = null;
 
         try {
-            Query q = em.createQuery("SELECT s FROM Serie s WHERE s.nomSerie LIKE :seriename");
+            Query q = em.createQuery("SELECT s FROM Serie s WHERE UPPER(s.nomSerie) LIKE UPPER(:seriename)");
             q.setParameter("seriename", "%" + seriename + "%");
             l = q.getResultList();
 

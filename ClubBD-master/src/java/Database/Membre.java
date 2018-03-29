@@ -133,8 +133,6 @@ public class Membre implements Serializable {
     public void setIdStatut(Statut idStatut) {
         this.idStatut = idStatut;
     }
-    
-    
 
     @XmlTransient
     public Collection<Emprunt> getEmpruntCollection() {

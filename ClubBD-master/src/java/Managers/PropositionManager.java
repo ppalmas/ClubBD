@@ -5,16 +5,23 @@
  */
 package Managers;
 
+import Database.Proposition;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 /**
  *
- * @author Paola
+ * @author centrale
  */
 public interface PropositionManager {
+
     /**
-     * Méthode pour l'insertion d'une proposition dans la bdd
-     * @param titre
-     * @param commentaire 
+     *
+     * @return
      */
-    public void insert(String titre, String commentaire);
+    public List<Proposition> propositions();
     
+    public void insert(String titre, String commentaire);
+    public int getNb_propositions();
 }
