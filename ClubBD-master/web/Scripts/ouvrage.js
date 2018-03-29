@@ -79,10 +79,8 @@ function reserver2(idco, doc){
     var iddoc = document.getElementById(doc).value;
     if (idco==="0"){
         pop_userNotConnect();
-        alert(idco + " doc: " + iddoc);
     }
     else{
-        alert(idco + " doc: " + iddoc);
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState === 4 && xhttp.status === 200) {
