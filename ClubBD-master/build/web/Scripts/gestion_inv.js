@@ -374,7 +374,7 @@ function selection() {
 
     listelem = document.getElementsByName("etatm");
 
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < 4; i++) {
         if (listelem[i].value == res.resultats[num]['etat']) {
             listelem[i].checked = true;
         } else {
@@ -468,10 +468,10 @@ function selectionmembre() {
 
     // pour statut
     
-        if (res.resultats[num]['idstat']==1){
+        if (res.resultats[num]['idstat']==3){
             document.getElementById("membre").checked=true;
         }
-        if (res.resultats[num]['idstat']==3){
+        if (res.resultats[num]['idstat']==1){
             document.getElementById("staff").checked=true;
         }
         if (res.resultats[num]['idstat']==2){

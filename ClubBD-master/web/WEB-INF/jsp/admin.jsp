@@ -132,7 +132,7 @@
                         <div><h3>Ajout d'un document</h3>
                             <label for="titrea">Titre*</label>
                             <input name="titrea" id="titrea" type="text" value=""/><br>
-                            <label for="cotea">Côte*</label>
+                            <label for="cotea">Cote*</label>
                             <input name="cotea" id="cotea" type="text" value=""/><br>
                             <label for="seriea">Série</label>
                             <input type="text" list="seriecombo" id="seriea" name="seriea">
@@ -171,16 +171,15 @@
                             <label for="descriptiona">Description</label>
                             <input name="descriptiona" id="descriptiona" type="text" value=""/><br>
 
-                            <label class="radio" for="neuf">Neuf</label>
-                            <input type="radio" id="neuf" name="etat" value="1" checked/>
+                            
                             <label class="radio" for="tbon">Très bon</label>
-                            <input type="radio" id="tbon" name="etat" value="2"/>
+                            <input type="radio" id="tbon" name="etat" value="1" checked/>
                             <label class="radio" for="bon">Bon</label>
-                            <input type="radio" id="bon" name="etat" value="3"/>
+                            <input type="radio" id="bon" name="etat" value="2"/>
                             <label class="radio" for="abime">Abimé</label>
-                            <input type="radio" id="abime" name="etat" value="4"/>
+                            <input type="radio" id="abime" name="etat" value="3"/>
                             <label class="radio" for="tabime">Très abimé</label>
-                            <input type="radio" id="tabime" name="etat" value="5"/>
+                            <input type="radio" id="tabime" name="etat" value="4"/>
                             <br>
 
                             <label for="imagea">Chemin image</label>
@@ -225,7 +224,7 @@
                             <input type="text" id="Serie" name="Serie">
                             <br>
 
-                            <label for="Cote">Côte</label>
+                            <label for="Cote">Cote</label>
                             <input type="text" id="Cote" name="Cote"/><br>
                             <button onclick="recherche2_doc()">Rechercher document</button><br><br></div>
 
@@ -254,7 +253,7 @@
 
                         <label for="titrem">Titre*</label>
                         <input name="titrem" id="titrem" type="text" value=""/><br>
-                        <label for="cotem">Côte*</label>
+                        <label for="cotem">Cote*</label>
                         <input name="cotem" id="cotem" type="text" value=""/><br>
                         <label for="seriem">Série</label>
 
@@ -287,16 +286,15 @@
                         <label for="descriptionm">Description</label>
                         <input name="descriptionm" id="descriptionm" type="text" value=""/><br>
 
-                        <label class="radio" for="neufm">Neuf</label>
-                        <input type="radio" id="neufm" name="etatm" value="1" checked/>
+                        
                         <label class="radio" for="tbonm">Très bon</label>
-                        <input type="radio" id="tbonm" name="etatm" value="2"/>
+                        <input type="radio" id="tbonm" name="etatm" value="1" checked/>
                         <label class="radio" for="bonmf">Bon</label>
-                        <input type="radio" id="bonm" name="etatm" value="3"/>
+                        <input type="radio" id="bonm" name="etatm" value="2"/>
                         <label class="radio" for="abimem">Abimé</label>
-                        <input type="radio" id="abimem" name="etatm" value="4"/>
+                        <input type="radio" id="abimem" name="etatm" value="3"/>
                         <label class="radio" for="tabimem">Très abimé</label>
-                        <input type="radio" id="tabimem" name="etatm" value="5"/>
+                        <input type="radio" id="tabimem" name="etatm" value="4"/>
                         <br>
                         <label for="imagem">Chemin image</label>
                         <input name="imagem" id="imagem" type="text" value=""/><br>
@@ -350,12 +348,12 @@
                         <input type="text" id="nommembrem" readonly="true" value=""><br>
                         <label for="prenommembrem">Prénom</label>
                         <input type="text" id="prenommembrem" readonly="true" value=""><br>
-                        <label class="radio" for="membre">Membre</label>
-                            <input type="radio" id="membre" name="idmradio" value="1"/>
-                            <label class="radio" for="staff">Admin</label>
-                            <input type="radio" id="staff" name="idmradio" value="2"/>
-                            <label class="radio" for="admin">Cotisant</label>
-                            <input type="radio" id="admin" name="idmradio" value="3"/><br>
+                        <label class="radio" for="staff">Membre</label>
+                            <input type="radio" id="staff" name="idmradio" value="1"/>
+                            <label class="radio" for="admin">Admin</label>
+                            <input type="radio" id="admin" name="idmradio" value="2"/>
+                            <label class="radio" for="membre">Centralien</label>
+                            <input type="radio" id="membre" name="idmradio" value="3"/><br>
                             
                         <input type="submit" value="Modifier" onclick="updatemembre()"><br>
 

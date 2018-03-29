@@ -70,6 +70,37 @@ function reserver(idco, iddoc){
     }
 }
 
+/**
+ * Méthode pour reserver un ouvrage à partir de la page de suggestions
+ * @param {type} idco 
+ * @param {type} doc
+ */
+function reserver2(idco, doc){
+    var iddoc = document.getElementById(doc).value;
+    if (idco==="0"){
+        pop_userNotConnect();
+    }
+    else{
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState === 4 && xhttp.status === 200) {
+                //Réponse de la servlet
+                var answer = xhttp.responseText;
+                if (answer === "true") {
+                    alert("Vous avez réservé le document");
+                    window.location.reload();
+                } else {
+                    alert("Erreur lors de la réservation.");
+                }
+            }
+        };
+        var data = "idco="+idco+"&"+"iddoc="+iddoc;
+        xhttp.open("POST", "ReserveServlet?"+data);
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+        xhttp.send(data);
+    }
+}
+
 
 /**
  * Méthode pour valider l'emprunt un ouvrage
