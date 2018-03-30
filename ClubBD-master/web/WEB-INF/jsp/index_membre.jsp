@@ -163,23 +163,27 @@
                 <div id ="suggestions_content" class="bloc_home" style="display:none">
                     <div class="row suggestion">
                         <div class="col-sm-2">
-                            <div class="thumbnail">image</div>
+                            <div id="image_ouvrage">
+                                <img class="img_border" id="img_ouvrage1" width="90" src="" alt="L'image n'a pas pu être affichée"/>
+                            </div>
                         </div>
                         <div class="col-sm-10">
-                            <div id="sugg_titre1" class="row book_title" onclick="goToOuvrage2('iddoc1')"></div>
+                            <div id="sugg_titre1" class="row book_title" onclick="goToOuvrage2('iddoc1'.toString())"></div>
                             <div id="sugg_auteur1" class="row book_authors"></div>
                             <div class="row book_available">
                                 <br>
                                 <div class="col-sm-3"
                                      <div id="dispo_color1" style="height: 20px; width: 20px;  padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
                                 </div>
-                                <div class="col-sm-5" href="#" onclick="reserver2('<c:out value="${idco}"/>', 'iddoc1')"><p>Réserver</p></div>
+                                <div class="col-sm-5" href="#" onclick="reserver2('0','iddoc1')"><p>Réserver</p></div>
                             </div>
                         </div>
                     </div>
                     <div class="row suggestion">
                         <div class="col-sm-2">
-                            <div class="thumbnail">image</div>
+                            <div id="image_ouvrage">
+                                <img class="img_border" id="img_ouvrage2" width="90" src="" alt="L'image n'a pas pu être affichée"/>
+                            </div>
                         </div>
                         <div class="col-sm-10">
                             <div id="sugg_titre2" class="row book_title" onclick="goToOuvrage2('iddoc2');"></div>
@@ -189,7 +193,7 @@
                                 <div class="col-sm-3"
                                      <div id="dispo_color2" style="height: 20px; width: 20px; padding-right: 0px; padding-left: 0px; margin-left: 20%;"</div>
                                 </div>
-                                <div class="col-sm-5" href="#" onclick="reserver2('<c:out value="${idco}"/>', 'iddoc2')"><p>Réserver</p></div>
+                                <div class="col-sm-5" href="#" onclick="reserver2('0','iddoc2')"><p>Réserver</p></div>
                             </div>
                         </div>
                     </div>
