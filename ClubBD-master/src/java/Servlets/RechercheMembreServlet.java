@@ -79,7 +79,6 @@ public class RechercheMembreServlet extends HttpServlet {
 
         // Envoi de la réponse
         response.setContentType("text/html; charset=UTF-8");
-        System.out.println((new Gson().toJson(json)));
 
         response.getWriter().write(new Gson().toJson(json)); // Réponse : resultats
 

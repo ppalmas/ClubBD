@@ -89,9 +89,7 @@ public class AjoutServlet extends HttpServlet {
             Boolean b = false;
             try {
                 if (!sm.exist(titre)) {
-                    System.out.println("serie existe pas");
                     sm.insert(seriename, seriedesc);
-System.out.println("serie insérée");
                     b = true;
                 }
             } catch (Exception e) {

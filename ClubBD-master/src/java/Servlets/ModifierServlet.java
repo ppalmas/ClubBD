@@ -72,12 +72,9 @@ public class ModifierServlet extends HttpServlet {
         
         //si un identifiant (cote ou titre serie) a changé
         String chg = request.getParameter("chg");
-        System.out.println(chg);
 
         Boolean b = false;
-        System.out.println("chg");
         if (!Boolean.parseBoolean(chg)){
-            System.out.println("cest ok");
         } else {}
 
 
@@ -87,9 +84,7 @@ public class ModifierServlet extends HttpServlet {
                 DocumentManager dm = DocumentManagerImpl.getInstance();
                 
                 if (!Boolean.parseBoolean(chg) || dm.exist(cote)==false) {
-                    System.out.println("doc avtupdate");
                     dm.update(iddoc, titre, cote, etat, serie, numero, desc, comm, img, cnp0, cnp1, cnp2, cnp3, cnp4, genre);
-                    System.out.println("doc okokokk");
                     b = true;
                 }
             } catch (Exception e) {
@@ -99,12 +94,10 @@ public class ModifierServlet extends HttpServlet {
             try {
                 SerieManager sm = SerieManagerImpl.getInstance();
                 if (!Boolean.parseBoolean(chg) || sm.exist(titre)==false) {
-                    System.out.println("serie avtupdate");
                     sm.update(idserie, seriename, seriedesc, complet);
 
                     b = true;
                 }
-                System.out.println("serie okokokk");
             } catch (Exception e) {
             }
 

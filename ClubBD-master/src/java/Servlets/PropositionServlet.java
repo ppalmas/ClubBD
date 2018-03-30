@@ -10,7 +10,6 @@ package Servlets;
 import Database.Proposition;
 import Managers.PropositionManager;
 import Managers.PropositionManagerImpl;
-
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -59,7 +58,6 @@ public class PropositionServlet extends HttpServlet{
 
         // Envoi de la réponse
         response.setContentType("text/html; charset=UTF-8");
-        System.out.println("{\"resultats\":[" + res.subSequence(0, res.length() - 1).toString() + "],\"nb\":\"" + m + "\"}");
         response.getWriter().write("{\"resultats\":[" + res.subSequence(0, res.length() - 1).toString() + "],\"nb\":\"" + m + "\"}"); // Réponse : resultats
 
     }

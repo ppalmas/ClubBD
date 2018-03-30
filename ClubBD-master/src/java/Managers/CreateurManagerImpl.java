@@ -72,7 +72,6 @@ public class CreateurManagerImpl implements CreateurManager {
         Query q = em.createQuery("SELECT c FROM Createur c");
         
          List<Createur> l = q.getResultList();
-         System.out.println(l.toString());
          return l;
     }
     

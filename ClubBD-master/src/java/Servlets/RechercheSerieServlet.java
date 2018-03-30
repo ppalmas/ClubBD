@@ -54,7 +54,6 @@ public class RechercheSerieServlet extends HttpServlet {
         try {
             l = sm.findSerie(seriename);
             //creation d'un json pour exploiter les reponses dans le js
-            System.out.println(l.size());
             for (int i = 0; i < l.size(); i++) {
                 JsonObject temp = new JsonObject();
                 temp.addProperty("seriename", l.get(i).getNomSerie());
@@ -79,7 +78,6 @@ public class RechercheSerieServlet extends HttpServlet {
 
         // Envoi de la réponse
         response.setContentType("text/html; charset=UTF-8");
-                    System.out.println((new Gson().toJson(json)));
 
         response.getWriter().write(new Gson().toJson(json)); // Réponse : resultats
 

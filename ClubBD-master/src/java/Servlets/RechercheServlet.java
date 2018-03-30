@@ -67,7 +67,6 @@ public class RechercheServlet extends HttpServlet {
         try {
             l = dm.findDocumentCr(criteres);
             //creation d'un json pour exploiter les reponses dans le js
-            System.out.println(criteres);
             for (int i = 0; i < l.size(); i++) {
                 JsonObject temp = new JsonObject();
                 temp.addProperty("titre", l.get(i).getTitre());

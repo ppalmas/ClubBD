@@ -103,7 +103,6 @@ public class AdminController {
 
                 //liste createurs
                 result.addObject("lcrea", lnpc);
-                System.out.println(lnpc.toString());
 
                 return result;
 

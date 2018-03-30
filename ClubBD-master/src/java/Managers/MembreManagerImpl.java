@@ -41,15 +41,11 @@ public class MembreManagerImpl implements MembreManager {
         Query q = em.createQuery("SELECT m FROM Membre m WHERE m.idMembre=:idmembre");
         q.setParameter("idmembre", idmembre);
         Membre m = (Membre) q.getResultList().get(0);
-        System.out.println("apres membre");
         m.setIdStatut(em.find(Statut.class, idstat));
-                System.out.println("apres find statt");
 
         em.merge(m);
-                System.out.println("apres merge");
 
         em.getTransaction().commit();
-                System.out.println("apres commit");
 
         
         

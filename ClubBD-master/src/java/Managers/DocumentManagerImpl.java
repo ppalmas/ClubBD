@@ -22,6 +22,7 @@ import javax.persistence.Query;
 
 /**
  * Gestion des documents
+ *
  * @author Victouf
  */
 public class DocumentManagerImpl implements DocumentManager {
@@ -79,41 +80,38 @@ public class DocumentManagerImpl implements DocumentManager {
         Query query;
         //structure de la liste critere : (0)titre (1)serie (2)cote
         if (criteres.get(0) != "" || criteres.get(1) != "" || criteres.get(2) != "") {
-        
-        if (criteres.get(1) != "") {
+
+            if (criteres.get(1) != "") {
                 query = em.createQuery("SELECT d FROM Document d WHERE UPPER(d.titre) LIKE UPPER(:titre) AND UPPER(d.idSerie.nomSerie) LIKE UPPER(:serie) AND UPPER(d.cote) LIKE UPPER(:cote) ");
-        System.out.println("serie non null");
-        } else {
+            } else {
                 query = em.createQuery("SELECT d FROM Document d WHERE UPPER(d.titre) LIKE UPPER(:titre) AND UPPER(d.cote) LIKE UPPER(:cote) ");
-        System.out.println("serie null");
-        }
-        
-        //si titre
-        if (criteres.get(0) != "") {
-        //on recherche un document dont le titre comporte le critère
-        
+            }
+
+            //si titre
+            if (criteres.get(0) != "") {
+                //on recherche un document dont le titre comporte le critère
+
                 query.setParameter("titre", "%" + criteres.get(0) + "%");
-        } else {
+            } else {
                 query.setParameter("titre", "%");
-        }
-        //si serie
-        if (criteres.get(1) != "") {
+            }
+            //si serie
+            if (criteres.get(1) != "") {
                 query.setParameter("serie", "%" + criteres.get(1) + "%");
-        }
-        
-        //si cote
-        if (criteres.get(2) != "") {
+            }
+
+            //si cote
+            if (criteres.get(2) != "") {
                 query.setParameter("cote", "%" + criteres.get(2) + "%");
-        } else {
+            } else {
                 query.setParameter("cote", "%");
-        }
-        
-        try {
-        
+            }
+
+            try {
+
                 l = query.getResultList();
-        } catch (Exception e) {
-                System.out.println("erreur syntaxe requete // " + query.toString());
-        }
+            } catch (Exception e) {
+            }
 
         }
         return l;
@@ -313,51 +311,50 @@ public class DocumentManagerImpl implements DocumentManager {
 
         //oncheck si chaque mot existe deja, sinon on le rajoute
         for (int i = 0; i < lgenre.length; i++) {
-            try {
-                Query q5 = em.createQuery("SELECT g FROM Genre g WHERE g.nomGenre=:nom");
-                q5.setParameter("nom", lgenre[i]);
+            if (lgenre[i] != "") {
+                try {
+                    Query q5 = em.createQuery("SELECT g FROM Genre g WHERE g.nomGenre=:nom");
+                    q5.setParameter("nom", lgenre[i]);
 
-                //on créé genredoc
-                Genredocument gd = new Genredocument();
-                gd.setIdDocument(d);
-                gd.setIdGenre((Genre) q5.getResultList().get(0));
-                em.persist(gd);
+                    //on créé genredoc
+                    Genredocument gd = new Genredocument();
+                    gd.setIdDocument(d);
+                    gd.setIdGenre((Genre) q5.getResultList().get(0));
+                    em.persist(gd);
 
-            } catch (Exception e) {//on trouve pas le genre, on le crée
-                Genre g = new Genre();
-                g.setNomGenre(lgenre[i]);
-                em.persist(g);
+                } catch (Exception e) {//on trouve pas le genre, on le crée
+                    Genre g = new Genre();
+                    g.setNomGenre(lgenre[i]);
+                    em.persist(g);
 
-                //on créé genredoc
-                Genredocument gd = new Genredocument();
-                gd.setIdDocument(d);
-                gd.setIdGenre(g);
-                em.persist(gd);
+                    //on créé genredoc
+                    Genredocument gd = new Genredocument();
+                    gd.setIdDocument(d);
+                    gd.setIdGenre(g);
+                    em.persist(gd);
 
+                }
             }
-
         }
 
         em.getTransaction().commit();
+        em.refresh(d);
 
     }
 
-    
-    
     @Override
-    public Boolean exist(String cote){
+    public Boolean exist(String cote) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT d FROM Document d WHERE UPPER(d.cote) LIKE UPPER(:cote)");
         q.setParameter("cote", cote);
-        System.out.println("parametre ok");
-        System.out.println(q.getResultList().size());
-        if (q.getResultList().size() != 0){
+        if (q.getResultList().size() != 0) {
             return true;
+        } else {
+            return false;
         }
-        else {return false;}
-        
+
     }
-    
+
     /**
      * Update des infos d'un livre
      *
@@ -439,7 +436,8 @@ public class DocumentManagerImpl implements DocumentManager {
         List<Createurdocument> lcrea = q4.getResultList();
 
         for (int j = 0; j < lcrea.size(); j++) {
-            em.remove(lcrea.get(j));
+            Createurdocument t = em.merge(lcrea.get(j));
+            em.remove(t);
         }
 
         for (int i = 0; i < l3.size(); i++) {
@@ -538,36 +536,42 @@ public class DocumentManagerImpl implements DocumentManager {
         //on suppr tous les genredocuments associés
         List<Genredocument> lg = new ArrayList(d.getGenredocumentCollection());
         for (int i = 0; i < lg.size(); i++) {
-            em.remove(lg.get(i));
+
+            Genredocument t = em.merge(lg.get(i));
+            em.remove(t);
+
         }
 
         //oncheck si chaque mot existe deja, sinon on le rajoute
         for (int i = 0; i < lgenre.length; i++) {
-            try {
-                Query q5 = em.createQuery("SELECT g FROM Genre g WHERE g.nomGenre=:nom");
-                q5.setParameter("nom", lgenre[i]);
+            if (lgenre[i] != "") {
+                try {
+                    Query q5 = em.createQuery("SELECT g FROM Genre g WHERE g.nomGenre=:nom");
+                    q5.setParameter("nom", lgenre[i]);
 
-                //on créé genredoc
-                Genredocument gd = new Genredocument();
-                gd.setIdDocument(d);
-                gd.setIdGenre((Genre) q5.getResultList().get(0));
-                em.persist(gd);
+                    //on créé genredoc
+                    Genredocument gd = new Genredocument();
+                    gd.setIdDocument(d);
+                    gd.setIdGenre((Genre) q5.getResultList().get(0));
+                    em.persist(gd);
 
-            } catch (Exception e) {//on trouve pas le genre, on le crée
-                Genre g = new Genre();
-                g.setNomGenre(lgenre[i]);
-                em.persist(g);
+                } catch (Exception e) {//on trouve pas le genre, on le crée
+                    Genre g = new Genre();
+                    g.setNomGenre(lgenre[i]);
+                    em.persist(g);
 
-                //on créé genredoc
-                Genredocument gd = new Genredocument();
-                gd.setIdDocument(d);
-                gd.setIdGenre(g);
-                em.persist(gd);
+                    //on créé genredoc
+                    Genredocument gd = new Genredocument();
+                    gd.setIdDocument(d);
+                    gd.setIdGenre(g);
+                    em.persist(gd);
 
+                }
             }
         }
 
         em.getTransaction().commit();
+        em.refresh(d);
 
     }
 
@@ -693,10 +697,8 @@ public class DocumentManagerImpl implements DocumentManager {
                 } else if (i == 3) {
                     if (list.length >= 2) {
                         auteur = list[1];
-                        System.out.println("auteur:" + auteur);
                     } else {
                         auteur = "";
-                        System.out.println("auteur:" + auteur);
                     }
                     SQL2 = SQL2
                             + " JOIN Createurdocument cd ON (d.idDocument = cd.idDocument.idDocument)";
@@ -716,15 +718,9 @@ public class DocumentManagerImpl implements DocumentManager {
                 q.setParameter("serie", "%" + serie + "%");
                 q.setParameter("auteur", "%" + auteur + "%");
                 l = q.getResultList();
-                System.out.println(SQL);
-                System.out.println(q);
-                System.out.println("titre = " + titre);
-                System.out.println("serie= " + serie);
-                System.out.println("auteur= " + auteur);
-                System.out.println(l);
+                
             } catch (Exception e) {
-                System.out.println("erreur syntaxe requete 2 // " + SQL);
-                System.out.println(e);
+                
                 l = null;
             }
         } else { //Renvoi de tous les documents de la bdd
@@ -733,13 +729,13 @@ public class DocumentManagerImpl implements DocumentManager {
                 l = q.getResultList();
             } catch (Exception e) {
                 l = null;
-                System.out.println("erreur pour renvoyer TOUS les docs de la bdd//" + SQL);
+                
             }
         }
 
         return l;
     }
-    
+
     /**
      * Retourne la liste des genres associés à un document
      *
@@ -759,5 +755,5 @@ public class DocumentManagerImpl implements DocumentManager {
         }
         return gr;
     }
-    
+
 }

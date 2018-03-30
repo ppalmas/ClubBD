@@ -30,14 +30,11 @@ public class SerieManagerImpl implements SerieManager {
 
 @Override
     public Boolean exist(String titre){
-        System.out.println("serie avant param");
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT s FROM Serie s WHERE UPPER(s.nomSerie) LIKE UPPER(:titre)");
         q.setParameter("titre", titre);
-        System.out.println("serie apres param");
         
         if (q.getResultList().size() != 0){
-            System.out.println("apres req");
             return true;
         }
         else {return false;}
@@ -68,7 +65,6 @@ public class SerieManagerImpl implements SerieManager {
             l = q.getResultList();
 
         } catch (Exception e) {
-            System.out.println("erreur syntaxe requete // ");
         }
 
         return l;
@@ -87,7 +83,6 @@ public class SerieManagerImpl implements SerieManager {
             l = q.getResultList();
 
         } catch (Exception e) {
-            System.out.println("erreur syntaxe requete // ");
         }
 
         return l;

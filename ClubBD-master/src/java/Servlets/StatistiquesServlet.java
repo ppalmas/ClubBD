@@ -7,16 +7,12 @@
  */
 package Servlets;
 
-import Database.Proposition;
-import Managers.PropositionManager;
-import Managers.PropositionManagerImpl;
 import Managers.StatistiquesManager;
 import Managers.StatistiquesManagerImpl;
 import Util.CoupleStats;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -63,7 +59,6 @@ public class StatistiquesServlet extends HttpServlet{
 
         // Envoi de la réponse
         response.setContentType("text/html; charset=UTF-8");
-        System.out.println("{\"resultats\":[" + res.subSequence(0, res.length() - 1).toString() + "],\"nb\":\"" + m + "\"}");
         response.getWriter().write("{\"resultats\":[" + res.subSequence(0, res.length() - 1).toString() + "],\"nb\":\"" + m + "\"}"); // Réponse : resultats
 
     }
