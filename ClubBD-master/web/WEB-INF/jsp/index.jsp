@@ -160,11 +160,13 @@
 
                 </div>
 
-                <!--BLOC DE SUGGESTIONS de lecture-->
+               <!--BLOC DE SUGGESTIONS de lecture-->
                 <div id ="suggestions_content" class="bloc_home" style="display:none">
                     <div class="row suggestion">
                         <div class="col-sm-2">
-                            <div class="thumbnail">image</div>
+                            <div id="image_ouvrage">
+                                <img class="img_border" id="img_ouvrage1" width="90" src="" alt="L'image n'a pas pu être affichée"/>
+                            </div>
                         </div>
                         <div class="col-sm-10">
                             <div id="sugg_titre1" class="row book_title" onclick="goToOuvrage2('iddoc1'.toString())"></div>
@@ -180,7 +182,9 @@
                     </div>
                     <div class="row suggestion">
                         <div class="col-sm-2">
-                            <div class="thumbnail">image</div>
+                            <div id="image_ouvrage">
+                                <img class="img_border" id="img_ouvrage2" width="90" src="" alt="L'image n'a pas pu être affichée"/>
+                            </div>
                         </div>
                         <div class="col-sm-10">
                             <div id="sugg_titre2" class="row book_title" onclick="goToOuvrage2('iddoc2');"></div>
