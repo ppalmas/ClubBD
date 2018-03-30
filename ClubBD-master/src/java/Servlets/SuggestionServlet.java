@@ -52,11 +52,16 @@ public class SuggestionServlet extends HttpServlet {
         //Récupération de l'id max des documents de la bdd
         DocumentManager dm = DocumentManagerImpl.getInstance();
         int n = dm.getMaxId();
+        
 
         //Générer un nombre aléatoire parmi les id existants
         int idOuvrage = ThreadLocalRandom.current().nextInt(1, n);
         int idOuvrage2 = idOuvrage;
-        while (idOuvrage == idOuvrage2) {
+        //Nombre pour arrêter la boucle while si jamais il n'y a qu'un seul document dans la bdd
+        //On choisit d'arrêter la boucle à 400, arbitraite !
+        int number = 0;
+        while ((idOuvrage == idOuvrage2)&&(number<400)) {
+            number = number +1;
             idOuvrage2 = ThreadLocalRandom.current().nextInt(1, n);
         }
         //Trouver les 2 ouvrages  par leur id
@@ -73,6 +78,9 @@ public class SuggestionServlet extends HttpServlet {
         ArrayList<Createurdocument> liste2 = dm.findCreateur(idOuvrage2);
         String auteurs = " ";
         String auteurs2 = " ";
+        String image1 = d.getImageDocument();
+        System.out.println(image1);
+        String image2 = d2.getImageDocument();
         String id1 = String.valueOf(idOuvrage);
         String id2 = String.valueOf(idOuvrage2);
         for (int i = 0; i < liste.size(); i++) {
@@ -82,7 +90,8 @@ public class SuggestionServlet extends HttpServlet {
             auteurs2 += liste2.get(i).getIdCreateur().getNomCreateur() + " " + liste2.get(i).getIdCreateur().getPrenomCreateur() + ";*";           
         }
         
-        res=titre + "*/*" + auteurs + "*/*" + dispo1 + "*/*" + id1 + "*//*" + titre2 + "*/*" + auteurs2 + "*/*" + dispo2 + "*/*" + id2;
+        res=titre + "*/*" + auteurs + "*/*" + dispo1 + "*/*" + id1 + "*/*" + image1 + 
+                "*//*" + titre2 + "*/*" + auteurs2 + "*/*" + dispo2 + "*/*" + id2 + "*/*" + image2;
 
         //Envoi de la réponse : true si les login/mdp correspondent et false sinon
         response.setContentType("text/html; charset=UTF-8");
