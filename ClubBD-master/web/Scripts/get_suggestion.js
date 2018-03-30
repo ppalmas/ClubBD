@@ -20,18 +20,22 @@ function get_suggestion() {
             var titre2 = "";
             var id1 = "";
             var id2 = "";
+            var image1 = "";
+            var image2 = "";
             //Récupération des titres, auteurs, et disponibilité
             var answers = answer.split("*//*");
             var liste1 = parseDoc(answers[0]);
             var liste2 = parseDoc(answers[1]);
-            var titre1 = liste1[0];
-            var auteurs1 = liste1[1];
+            titre1 = liste1[0];
+            auteurs1 = liste1[1];
             var dispo1 = liste1[2];
-            var titre2 = liste2[0];
-            var auteurs2 = liste2[1];
+            titre2 = liste2[0];
+            auteurs2 = liste2[1];
             var dispo2 = liste2[2];
             var id1 = liste1[3];
             var id2 = liste2[3];
+            var image1 = liste1[4];
+            var image2 = liste2[4];
             //Suivant la disponibilité, on affiche en vert ou en orange
             if (dispo1=="true"){
                 document.getElementById("dispo_color1").style.backgroundColor = "green";
@@ -50,6 +54,8 @@ function get_suggestion() {
             document.getElementById("sugg_auteur1").innerHTML = auteurs1;
             document.getElementById("sugg_titre2").innerHTML = titre2;
             document.getElementById("sugg_auteur2").innerHTML = auteurs2;
+            document.getElementById("img_ouvrage1").src = image1;
+            document.getElementById("img_ouvrage2").src = image2;
 
         }
         ;
@@ -67,6 +73,7 @@ function parseDoc(liste) {
     var titre = doc[0];
     var dispo = doc[2];
     var id = doc[3];
+    var image = doc[4];
     var answers_auteurs = doc[1].split(";*");
     var n = answers_auteurs.length - 1;
     var auteurs = " ";
@@ -79,6 +86,7 @@ function parseDoc(liste) {
     result[1] = auteurs;
     result[2] = dispo;
     result[3] = id;
+    result[4] = image;
     return result;
 }
 
